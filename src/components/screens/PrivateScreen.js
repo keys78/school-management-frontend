@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const PrivateScreen = () => {
   const [error, setError] = useState("");
-  const [students, setStudents] = useState([]);
+  const [student, setStudent] = useState({});
   const history = useHistory();
 
   const logoutUser = () => {
@@ -24,7 +24,7 @@ const PrivateScreen = () => {
 
       try {
         const { data } = await axios.get("http://localhost:4000/api/private", config);
-        setStudents(data);
+        setStudent(data);
         console.log(data)
       } catch (error) {
         localStorage.removeItem("authToken");
@@ -35,18 +35,20 @@ const PrivateScreen = () => {
     fetchPrivateDate();
   }, []);
   return error ? (
-    <span className="error-message">{error } <Link to="/login">Login</Link></span>
+    <span className="error-message">{error} <Link to="/login">Login</Link></span>
   ) : (
-    <div>{students && students.map((student, i) => 
-      <div key={i}>
-        <p>{student._id}</p>
-        <p>{student.username}</p>
-        <p>{student.email}</p>
-        <br />
-      </div>
-    )} 
-    <div onClick={logoutUser}>Logout</div>
+    <div>
+      {student &&
+        <div>
+          <p>{student.username}</p>
+          <p>{student.email}</p><br /><br />
+          <p>my faculty { student.faculty }</p>
+          <p>my department { student.department }</p>
+        </div>
+      }
+      <button onClick={logoutUser}>Logout</button>
     </div>
+
   );
 };
 

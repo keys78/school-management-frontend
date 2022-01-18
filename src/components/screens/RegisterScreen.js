@@ -4,6 +4,29 @@ import { Link } from "react-router-dom";
 
 
 const RegisterScreen = ({ history }) => {
+  const [faculty, setFacu] = useState('')
+  const [department, setDep] = useState('')
+
+  const faculties = [
+    {faculty: "science",
+      departments: [
+        {department: 'A'},
+        {department: 'B'},
+        {department: 'C'}
+      ]
+  },
+
+    {faculty: "arts",
+      departments: [
+        {department: 'X'},
+        {department: 'Y'},
+        {department: 'Z'}
+      ]
+  },
+
+]
+
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +57,9 @@ const RegisterScreen = ({ history }) => {
           username,
           email,
           password,
+          faculty: faculty,
+          department : department
+          
         },
         config
       );
@@ -101,6 +127,23 @@ const RegisterScreen = ({ history }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
+
+        <div>
+          <select name="" id="" onChange={(e) => {  const x = e.target.value; setFacu(x)}}>
+            <option value="">Select Faculty</option>
+            {faculties.map(faculty =>  
+              <option value={faculty.faculty}>{faculty.faculty}</option>
+              )}
+          </select>
+
+          <select onChange={(e) => {setDep(e.target.value)}}  >
+          <option value="">Select Department</option>
+            {faculty && faculties.find(y => y.faculty === faculty).departments.map(depts => 
+              <option value={depts.department}>{depts.department}</option>
+              )}
+          </select>
+        </div>
+
         <button type="submit" className="btn btn-primary">
           Register
         </button>
