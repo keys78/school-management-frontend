@@ -42,8 +42,8 @@ const PrivateScreen = () => {
         <div>
           <p>{student.username}</p>
           <p>{student.email}</p><br /><br />
-          <p>my faculty { student.faculty }</p>
-          <p>my department { student.department }</p>
+          <p>faculty: { student.faculty }</p>
+          <p>department: { student.department }</p>
         </div>
       }
       <button onClick={logoutUser}>Logout</button>

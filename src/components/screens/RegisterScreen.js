@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -6,25 +6,144 @@ import { Link } from "react-router-dom";
 const RegisterScreen = ({ history }) => {
   const [faculty, setFacu] = useState('')
   const [department, setDep] = useState('')
+  const [courses, setCourses] = useState('')
 
   const faculties = [
-    {faculty: "science",
+    {
+      faculty: "science",
       departments: [
-        {department: 'A'},
-        {department: 'B'},
-        {department: 'C'}
+        {
+          department: 'Medicine',
+          courses: [
+            { subject: "Med-1" },
+            { subject: "Med-2" }
+          ]
+        },
+        {
+          department: 'Engineering',
+          courses: [
+            { subject: "Eng-1" },
+            { subject: "Eng-2" }
+          ]
+        },
+        {
+          department: 'Pharmacy',
+          courses: [
+            { subject: "Pharm-1" },
+            { subject: "Pharm-2" }
+          ]
+        }
       ]
-  },
+    },
 
-    {faculty: "arts",
+    {
+      faculty: "arts",
       departments: [
-        {department: 'X'},
-        {department: 'Y'},
-        {department: 'Z'}
+        {
+          department: 'Law',
+          courses: [
+            { subject: "Law-1" },
+            { subject: "Law-2" }
+          ]
+        },
+        {
+          department: 'Theater Arts',
+          courses: [
+            { subject: "Theaeter-1" },
+            { subject: "Theaeter-2" }
+          ]
+        },
+        {
+          department: 'Wood Works',
+          courses: [
+            { subject: "Wood-1" },
+            { subject: "Wood-2" }
+          ]
+        },
+        
       ]
-  },
+    },
 
-]
+  ]
+
+  const courseArr = [
+    {
+      department: 'Law',
+      courses: [
+        { subject: "Law-1" },
+        { subject: "Law-2" }
+      ]
+    },
+    {
+      department: 'Theater Arts',
+      courses: [
+        { subject: "Theaeter-1" },
+        { subject: "Theaeter-2" }
+      ]
+    },
+    {
+      department: 'Wood Works',
+      courses: [
+        { subject: "Wood-1" },
+        { subject: "Wood-2" }
+      ]
+    },
+    {
+      department: 'Medicine',
+      courses: [
+        { subject: "Med-1" },
+        { subject: "Med-2" }
+      ]
+    },
+    {
+      department: 'Engineering',
+      courses: [
+        { subject: "Eng-1" },
+        { subject: "Eng-2" }
+      ]
+    },
+    {
+      department: 'Pharmacy',
+      courses: [
+        { subject: "Pharm-1" },
+        { subject: "Pharm-2" }
+      ]
+    }
+  ]
+
+
+  useEffect(() => {
+    const dis = department && courseArr.find(el => el.department === department)
+console.log('dis', dis.courses)
+setCourses(dis.courses)
+
+  }, [department]);
+
+
+
+
+  // const d = faculties.map(el => el.departments)
+  // if(department) {
+  //   const c = d.find(el => el.department === department)
+  // console.log(c.courses)
+  // }
+  // console.log('dept', department)
+
+  // const nb = faculty && faculties.find(y => y.faculty === faculty).departments.map(depts => depts.courses)
+  // const nba = faculty && faculties.find(y => y.faculty === faculty).departments.map(depts => depts.department)
+
+  // const we = faculties.map(xy => xy.departments)
+  // console.log(we)
+  // const dd = department && we.map(el => el.department === department)
+  // console.log('dd', dd)
+
+
+  // const n = department && v.map(y => y === department.courses)
+  // const bt = nb.find()
+
+  // console.log('sub', nb)
+  // console.log('sub', nba)
+
 
 
   const [username, setUsername] = useState("");
@@ -58,14 +177,15 @@ const RegisterScreen = ({ history }) => {
           email,
           password,
           faculty: faculty,
-          department : department
-          
+          department: department,
+          courses: courses,
+
         },
         config
       );
 
       localStorage.setItem("authToken", data.token);
-    console.log(data.token)
+      console.log(data.token)
 
       history.push("/");
     } catch (error) {
@@ -129,18 +249,18 @@ const RegisterScreen = ({ history }) => {
         </div>
 
         <div>
-          <select name="" id="" onChange={(e) => {  const x = e.target.value; setFacu(x)}}>
+          <select name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
             <option value="">Select Faculty</option>
-            {faculties.map(faculty =>  
+            {faculties.map(faculty =>
               <option value={faculty.faculty}>{faculty.faculty}</option>
-              )}
+            )}
           </select>
 
-          <select onChange={(e) => {setDep(e.target.value)}}  >
-          <option value="">Select Department</option>
-            {faculty && faculties.find(y => y.faculty === faculty).departments.map(depts => 
+          <select onChange={(e) => { setDep(e.target.value) }}  >
+            <option value="">Select Department</option>
+            {faculty && faculties.find(y => y.faculty === faculty).departments.map(depts =>
               <option value={depts.department}>{depts.department}</option>
-              )}
+            )}
           </select>
         </div>
 
