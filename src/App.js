@@ -2,6 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 import Home from "./pages/Home";
+import Login from "./pages/auth/Login"
+import Signup from "./pages/auth/Signup"
+import ForgotPassword from "./pages/auth/ForgotPassword"
+import ResetPassword from "./pages/auth/ResetPassword"
+
 // Routing
 // import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -17,6 +22,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+        <Route exact path="/:resetpassword/:resetToken" element={<ResetPassword />} />
         {/* <PrivateRoute exact path="/" component={PrivateScreen} /> */}
         {/* <Route exact path="/login" component={LoginScreen} /> */}
         {/* <Route exact path="/register" component={RegisterScreen} /> */}
