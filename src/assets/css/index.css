@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'circular-std-medium';
+  src: url('../fonts/Circular/CircularStd-Medium.otf');
+}
+@font-face {
+  font-family: 'circular-std-light';
+  src: url('../fonts/Circular/CircularStd-Light.otf');
+}
+
+@font-face {
+  font-family: 'circular-std-bold';
+  src: url('../fonts/Circular/CircularStd-Bold.otf');
+}
+@font-face {
+  font-family: 'circular-std-book';
+  src: url('../fonts/Circular/CircularStd-Book.otf');
+}
+
+
+
+
+
+
+.placeholder-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap:100px 69px;
+}
+
+
+.placeholder-loader {
+  background: #ececec;
+  padding: 0 20px 0 20px;
+  overflow: hidden;
+}
+
+.placeholder-loader > h1 {
+  background: #ffffff;
+  border-radius: 2px;
+  height: 13px;
+  margin-bottom: 17px;
+  margin-top: 19px;
+  width: 75%;
+}
+.placeholder-loader >  h6 {
+  background: #ffffff;
+  border-radius: 2px;
+  height: 10px;
+  margin-top: 71px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 30%;
+}
+.placeholder-loader >  p {
+  background: #ffffff;
+  height: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.placeholder-loader >  p:nth-child(4) {
+  width: 80%;
+}
+
+
+.shimmer {
+  overflow: hidden;
+  position: relative;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+          90deg,
+          rgba(125, 103, 103, 0) 0%,
+          rgba(255, 255, 255, 0.605) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  animation: shimmer 1.3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .placeholder-container{
+  gap: 69px 20px;
+}
+}
+
+@media screen and (max-width: 1024px){
+  .placeholder-container{
+    grid-template-columns: repeat(2, 1fr);
+  gap: 50px 20px;
+}
+}
+@media screen and (max-width: 540px){
+  .placeholder-container{
+  gap: 50px 10px;
+}
+.placeholder-loader >  h6 {
+  margin: 41px auto 10px auto;
+  width: 70%;
+}
+.placeholder-loader {
+  padding: 0 10px 0 10px;
+}
+}
