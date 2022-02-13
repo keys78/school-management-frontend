@@ -11,7 +11,8 @@ const Navbar = () => {
 
 const NavbarWrapper = styled.section`
     height: 80px;
-    background: blue;
+    background: #020227;
+    color: #fff;
 `
 
 export default Navbar

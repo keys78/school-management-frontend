@@ -10,21 +10,18 @@ import moment from "moment"
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const [error, setError] = useState("")
     const navigate = useNavigate();
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
 
     const validate = Yup.object({
         firstName: Yup.string().max(30, 'Must be 30 characters or less').required('firstname is required'),
         lastName: Yup.string().max(30, 'Must be 30 characters or less').required('lastname is require'),
         email: Yup.string().email('Email is invalid').required('email is required'),
-        // phone: Yup.string().max(15, 'phone number is invalid').required('phone number is required'),
         phone: Yup.string().min(10, 'phone number too short').max(15, 'phone number too long').required("phone is required"),
 
         dob: Yup.string()
             .required("DOB is Required")
-            .test("DOB", "Please choose a valid date of birth", (value) => { return moment().diff(moment(value), "years") >= 10; }),
+            .test("DOB", "Please choose a valid date of birth", (value) => { return moment().diff(moment(value), "years") >= 1; }),
         address: Yup.string().required('address is required'),
         soo: Yup.string().required('field cannot be empty'),
 
@@ -48,67 +45,81 @@ const SignUp = () => {
                         address: '',
                         soo: '',
                         password: '',
-                        confirmPassword: ''
                     }}
                     validationSchema={validate}
-                    onSubmit={values => {
-                        axios.post('https://61879aaf057b9b00177f9a1b.mockapi.io/users', values)
-                            .then(res => {
-                                res ? navigate('/dashboard') : setLoading(true)
-                            })
-                            .catch((error) => {
-                                console.log(error)
-                                setError(true)
-                                setLoading(false)
-                            })
+                    onSubmit={async (values) =>  {
+                        // e.preventDefault();
+
+                        const config = {
+                          header: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                    
+                        try {
+                          const { data } = await axios.post("http://localhost:4000/auth/register",
+                          {
+                            ...values
+                          }
+                          
+                          , config);
+                          localStorage.setItem("authToken", data.token);
+                          console.log(data.token)
+                          navigate("/dasboard");
+                          
+                        } catch (error) {
+                          setError(error.response.data.error);
+                          setTimeout(() => {
+                            setError("");
+                          }, 5000);
+                        }
+                            console.log(values)
                     }}
                 >
                     {formik => (
                         <div>
                             {loading && 'Loading...'}
-                            {error && <div>A mighty error has occured...lol </div>}
+                            {error && <span className="error-message">{error}</span>}
                             <h1 className="">Registration Form</h1>
                             <Form>
                                 <FieldsWrapper>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'First Name'} name={'firstName'} type={'text'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Last Name'} name={'lastName'} type={'text'} />
                                     </div>
                                     <div className='col-span-2'>
                                         <TextField label={'Email'} name={'email'} type={'email'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Phone Number'} name={'phone'} type={'text'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Date OF Birth'} name={'dob'} type={'date'} />
                                     </div>
-
-
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Address'} name={'address'} type={'text'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
                                     </div>
 
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Faculty'} name={'password'} type={'password'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Department'} name={'password'} type={'password'} />
                                     </div>
 
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Password'} name={'password'} type={'password'} />
                                     </div>
-                                    <div className=''>
+                                    <div>
                                         <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                                     </div>
 
-                                    <button>Register</button>
+                                    <button type='submit'>Register</button>
 
 
                                 </FieldsWrapper>
@@ -131,16 +142,19 @@ const SignUpWrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #ebedef;
+    height: 100vh;
 `
 
 const SignupContainer = styled.section`
-    margin-top: 70px;
-    padding: 10px;
-    width: 80%;
+    margin-top: -80px;
+    padding:25px 15px 25px 30px;
+    max-width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 6px;
+    background: #fff;
     /* box-shadow:  5px 5px 27px var(--greyLight-2),
     -5px -5px 27px var(--greyLight-2); */
 
@@ -150,6 +164,7 @@ const SignupContainer = styled.section`
         font-size: 30px;
         text-align: center;
         margin-bottom: 30px;
+        color: #3C4B64;
     }
 
 
@@ -171,16 +186,6 @@ const FieldsWrapper = styled.div`
     & > div:nth-child(11)  { grid-column: span 2 / span 4; }
     & > div:nth-child(12)  { grid-column: span 4 / span 4; }
 
-    & > button {
-        width: 100%;
-        padding: 5px 0;
-        color: white;
-        background-color: #1b1b1b;
-        border: 1px solid orange;
-    }
-
-    /* &  div:nth-of-type(1) { grid-column: span 1.5 / span 3; }
-    &  div:nth-of-type(2) { grid-column: span 1.5 / span 3; } */
 `
 
 
