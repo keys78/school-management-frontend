@@ -37,3 +37,13 @@
   font-family: 'Ubuntu Mono', monospace;
   position: absolute;
 }
+
+.active {
+  background: #1a83ff;
+}
+
+.hoi {
+  height: 80px;
+  width: 100%;
+  background: red;
+}

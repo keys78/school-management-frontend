@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import SideNav from "../../components/SideNav";
+import Navbar from "../../components/Navbar";
 
 
 const Dashboard = () => {
@@ -42,7 +43,9 @@ const Dashboard = () => {
         <span className="error-message">{error} <Link to="/login">Login</Link></span>
     ) : (
         <div>
-            <SideNav />
+            
+            {/* <SideNav />
+            <Navbar /> */}
             {user &&
                 <div>
                     <p>{user.firstName}</p>

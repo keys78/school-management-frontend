@@ -15,8 +15,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* <Route exact path='/dashboard/*' element={<PrivateRoute />}>
-          <Route exact path='/dashboard/*' element={<Dashboard />} />
+        {/* <Route exact path='/dashboard' element={<PrivateRoute />}>
+          <Route exact path='/dashboard' element={<Dashboard />} />
         </Route> */}
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/" element={<Home />} />

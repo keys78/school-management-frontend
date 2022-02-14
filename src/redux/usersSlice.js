@@ -3,9 +3,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getUsers = createAsyncThunk(
   "users/getUsers",
   async (dispatch, getState) => {
-    return await fetch("https://front-end-task-dot-result-analytics-dot-fpls-dev.uc.r.appspot.com/api/v1/public/task_templates").then(
-      (res) => res.json()
-    );
+    // return await fetch("http://localhost:4000/private/user").then(
+    //   (res) => res.json()
+    // );
   }
 );
 
