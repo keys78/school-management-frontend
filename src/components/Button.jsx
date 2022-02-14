@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({text}) => {
+const Button = ({text, type}) => {
   return (
     // <ButtonWrapper>{text}</ButtonWrapper>
-    <button>{text}</button>
+    <button type={type}>{text}</button>
   )
 }
 

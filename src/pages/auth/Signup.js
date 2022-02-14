@@ -6,28 +6,19 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import regLogo from "../../assets/images/register-logo.png"
-import moment from "moment"
+import { facultyArr,  courseArr } from '../../utils/data';
+import { validate } from '../../utils/validateForm';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const navigate = useNavigate();
 
-    const validate = Yup.object({
-        firstName: Yup.string().max(30, 'Must be 30 characters or less').required('firstname is required'),
-        lastName: Yup.string().max(30, 'Must be 30 characters or less').required('lastname is require'),
-        email: Yup.string().email('Email is invalid').required('email is required'),
-        phone: Yup.string().min(10, 'phone number too short').max(15, 'phone number too long').required("phone is required"),
+    const [faculty, setFacu] = useState('')
+    const [department, setDep] = useState('')
+    const [courses, setCourses] = useState('')
 
-        dob: Yup.string()
-            .required("DOB is Required")
-            .test("DOB", "Please choose a valid date of birth", (value) => { return moment().diff(moment(value), "years") >= 1; }),
-        address: Yup.string().required('address is required'),
-        soo: Yup.string().required('field cannot be empty'),
-
-        password: Yup.string().min(6, 'Password must be at least 6 charaters').required('password is required'),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('confirm password is required'),
-    })
+   
 
 
     return (
@@ -45,35 +36,38 @@ const SignUp = () => {
                         address: '',
                         soo: '',
                         password: '',
+
                     }}
                     validationSchema={validate}
-                    onSubmit={async (values) =>  {
+                    onSubmit={async (values) => {
                         // e.preventDefault();
 
                         const config = {
-                          header: {
-                            "Content-Type": "application/json",
-                          },
+                            header: {
+                                "Content-Type": "application/json",
+                            },
                         }
-                    
+
                         try {
-                          const { data } = await axios.post("http://localhost:4000/auth/register",
-                          {
-                            ...values
-                          }
-                          
-                          , config);
-                          localStorage.setItem("authToken", data.token);
-                          console.log(data.token)
-                          navigate("/dasboard");
-                          
+                            const { data } = await axios.post("http://localhost:4000/auth/register",
+                                {
+                                    ...values,
+                                    faculty: faculty,
+                                    department: department
+                                }
+
+                                , config);
+                            localStorage.setItem("authToken", data.token);
+                            console.log(data.token)
+                            navigate("/dashboard");
+
                         } catch (error) {
-                          setError(error.response.data.error);
-                          setTimeout(() => {
-                            setError("");
-                          }, 5000);
+                            setError(error.response.data.error);
+                            setTimeout(() => {
+                                setError("");
+                            }, 5000);
                         }
-                            console.log(values)
+                        console.log(values)
                     }}
                 >
                     {formik => (
@@ -106,12 +100,20 @@ const SignUp = () => {
                                     </div>
 
                                     <div>
-                                        <TextField label={'Faculty'} name={'password'} type={'password'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Department'} name={'password'} type={'password'} />
-                                    </div>
+                                        <select name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                            <option value="">Select Faculty</option>
+                                            {facultyArr.map(faculty =>
+                                                <option value={faculty.faculty}>{faculty.faculty}</option>
+                                            )}
+                                        </select>
 
+                                        <select onChange={(e) => { setDep(e.target.value) }}  >
+                                            <option value="">Select Department</option>
+                                            {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
+                                                <option value={depts.department}>{depts.department}</option>
+                                            )}
+                                        </select>
+                                    </div>
                                     <div>
                                         <TextField label={'Password'} name={'password'} type={'password'} />
                                     </div>

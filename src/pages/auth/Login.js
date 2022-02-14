@@ -16,7 +16,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
-      navigate("/dash");
+      navigate("/dashboard");
     }
   }, [navigate]);
 
@@ -45,12 +45,13 @@ const Login = () => {
         
             try {
               const { data } = await axios.post(
-                 "http://localhost:4000/api/auth/login",
-                { values },
+                 "http://localhost:4000/auth/login",
+                {...values },
                 config
               );
         
               localStorage.setItem("authToken", data.token);
+              console.log(data.token)
         
               navigate("/dashboard");
             } catch (error) {
@@ -75,7 +76,7 @@ const Login = () => {
                   <div>
                     <TextField label={'Password'} name={'password'} type={'password'} />
                   </div>
-                  <Button text={'Login'} />
+                  <Button type="submit" text={'Login'} />
                 </FieldsWrapper>
               </Form>
               <div className='text-center'>
