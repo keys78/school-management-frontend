@@ -8,11 +8,11 @@ import styled from "styled-components";
 
 const Dashboard = () => {
     const [error, setError] = useState("");
+    const [greetings, setGreetings] = useState('')
     const [user, setUser] = useState({});
     const history = useHistory();
 
-    // const courses = student && student.courses
-    // console.log(courses.map(sub => sub.subject))
+
 
     const logoutUser = () => {
         localStorage.removeItem("authToken");
@@ -39,6 +39,16 @@ const Dashboard = () => {
         };
 
         fetchPrivateDate();
+
+        const hour = new Date().getHours();
+        const welcomeTypes = ["Good morning", "Good afternoon", "Good evening"];
+        let welcomeText = "";
+
+        if (hour < 12) welcomeText = welcomeTypes[0];
+        else if (hour < 16) welcomeText = welcomeTypes[1];
+        else welcomeText = welcomeTypes[2];
+
+        setGreetings(welcomeText)
     }, []);
 
 
@@ -47,54 +57,57 @@ const Dashboard = () => {
     ) : (
         <DashboardWrapper>
             <DashboardContainer>
-            {user &&
-                <div>
-                    <p>{user.firstName}</p>
-                    <p>{user.lastName}</p>
-                    <p>{user.role}</p>
-                    <p>{user.email}</p><br />
-                    <p>{user.phone}</p><br />
-                    <p>{user.address}</p><br />
-                    <img className="w-20" src={user.profileImg} alt="profile" />
-                    <p>faculty: {user.faculty}</p>
-                    <p>department: {user.department}</p>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                {user &&
+                    <div>
+                        <WelcomeCard>
+                            {greetings} {user.firstName}
+                        </WelcomeCard>
+                        <p>{user.firstName}</p>
+                        <p>{user.lastName}</p>
+                        <p>{user.role}</p>
+                        <p>{user.email}</p><br />
+                        <p>{user.phone}</p><br />
+                        <p>{user.address}</p><br />
+                        <img className="w-20" src={user.profileImg} alt="profile" />
+                        <p>faculty: {user.faculty}</p>
+                        <p>department: {user.department}</p>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
 
 
-                    {/* <div>{student.courses.map((el) => {
+                        {/* <div>{student.courses.map((el) => {
             <p>{el.subject, el.score}</p>
           })}</div> */}
-           <button onClick={logoutUser}>Logout</button>
-                </div>
-            }
-           
+                        <button onClick={logoutUser}>Logout</button>
+                    </div>
+                }
+
             </DashboardContainer>
         </DashboardWrapper>
 
@@ -114,6 +127,11 @@ const DashboardContainer = styled.section`
     width: 90%;
     margin-top: 80px;
     
+`
+const WelcomeCard = styled.div`
+    border: 1px solid black;
+    background: gray;
+    padding: 150px 30px;
 `
 
 export default Dashboard;

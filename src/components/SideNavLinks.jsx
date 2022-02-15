@@ -38,8 +38,8 @@ const SideNavLinks = () => {
             to={navLink.path}
         >
 
-{user.role === 'student' &&  <img src={navLink.icon} alt={navLink.title} />}
-                    {navLink.title}
+            <img src={navLink.icon} alt={navLink.title} />
+            {navLink.title}
         </SingleNav>
     ))
     return (

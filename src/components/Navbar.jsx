@@ -41,9 +41,9 @@ const Navbar = () => {
           </Notif>
           <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
           <Initials>
-            {/* {user && user.firstName}
-            {user && user.lastName} */}
-            EO
+            {user && user.firstName.charAt()}
+            {user && user.lastName.charAt()}
+            {/* EO */}
           </Initials>
         </div>
       </div>
