@@ -16,6 +16,7 @@ const SideNav = () => {
 
 const SideBarWrapper = styled.section`
     background-color: #060b26;
+    z-index: 2;
     position: fixed;
     height: 100vh;
     color: #fff;

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 
 const ConfrmRegNo = () => {
     const [regno, setRegNo] = useState('')
     const [value, setValue] = useState('')
-    const navigate = useNavigate()
+    const history = useHistory()
     const verifyRegNo = () => {
         if(regno.toString() === value) {
-            navigate('/signup')
+            history.push("/dashboard");
         } else {
             alert('Reg No doesnt exist')
-            navigate('/')
+            history.push("/dashboard");
         }
     }
 

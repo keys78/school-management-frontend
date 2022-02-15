@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import TextField from '../../components/TextField';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import loginLogo from "../../assets/images/books.png"
 import Button from '../../components/Button';
@@ -11,14 +11,14 @@ import Button from '../../components/Button';
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const navigate = useNavigate();
+  const history = useHistory();
   
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
-      navigate("/dashboard");
+      history.push("/dashboard");
     }
-  }, [navigate]);
+  }, [history]);
 
 
   const validate = Yup.object({
@@ -53,7 +53,7 @@ const Login = () => {
               localStorage.setItem("authToken", data.token);
               console.log(data.token)
         
-              navigate("/dashboard");
+              history.push("/dashboard");
             } catch (error) {
               setError(error.response.data.error);
               setTimeout(() => {

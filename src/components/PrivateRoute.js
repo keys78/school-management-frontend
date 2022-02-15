@@ -1,45 +1,22 @@
-
-import React from 'react'
-// import { Route, useNavigate } from 'react-router-dom'
-
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//     const navigate = useNavigate()
-
-    // const auth = null; // determine if authorized, from context or however you're doing it
-
-    // // If authorized, return an outlet that will render child elements
-    // // If not, return element that will navigate to login page
-    // return auth ? <Outlet /> : <Navigate to="/login" />;
-
-
-//     return (
-//         <>
-//          {
-//                 localStorage.getItem("authToken") ? (<Component {...rest} />) : navigate('/login')
-//         }  
-//         </>
-//     )
-// }
-
-
-
-import { useNavigate, Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
+import Layout from "../pages/private/Layout";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const navigate = useNavigate()
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        localStorage.getItem("authToken") ? (
-          <Component {...props} />
-        ) : (
-         navigate("/login")
-        )
-      }
-    />
-  );
+    return (
+        <Route
+            {...rest}
+            render={(props) =>
+                localStorage.getItem("authToken") ? (
+                    <>
+                        <Layout />
+                        <Component {...props} />
+                    </>
+                ) : (
+                    <Redirect to="/login" />
+                )
+            }
+        />
+    );
 };
 
 export default PrivateRoute;

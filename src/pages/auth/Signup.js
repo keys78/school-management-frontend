@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import TextField from '../../components/TextField';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import regLogo from "../../assets/images/register-logo.png"
 import { facultyArr,  courseArr } from '../../utils/data';
@@ -12,7 +12,7 @@ import { validate } from '../../utils/validateForm';
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
@@ -59,7 +59,7 @@ const SignUp = () => {
                                 , config);
                             localStorage.setItem("authToken", data.token);
                             console.log(data.token)
-                            navigate("/dashboard");
+                            history.push("/dashboard");
 
                         } catch (error) {
                             setError(error.response.data.error);

@@ -58,9 +58,9 @@ const NavbarWrapper = styled.section`
     position: fixed;
     top:0;
     width: 100%;
-    padding-left: 240px;
+    padding-left: 210px;
     right: 0%;
-    z-index: -1;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,6 +72,7 @@ const NavbarWrapper = styled.section`
       display: flex;
       align-items: center;
       justify-content: space-between;
+      /* border: 1px solid black; */
     }
 
 `
