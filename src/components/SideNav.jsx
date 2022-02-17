@@ -1,15 +1,22 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 import SideNavLinks from './SideNavLinks';
 
 const SideNav = () => {
+    const history =  useHistory()
 
+    const logoutUser = () => {
+        localStorage.removeItem("authToken");
+        history.push("/login");
+    }
     return (
         <SideBarWrapper>
            <div>
                LogoHere
            </div>
             <SideNavLinks />
+            <button onClick={logoutUser}>Logout</button>
         </SideBarWrapper>
     )
 };

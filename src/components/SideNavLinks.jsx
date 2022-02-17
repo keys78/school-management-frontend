@@ -37,7 +37,6 @@ const SideNavLinks = () => {
             activeclassname="active"
             to={navLink.path}
         >
-
             <img src={navLink.icon} alt={navLink.title} />
             {navLink.title}
         </SingleNav>

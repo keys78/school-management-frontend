@@ -7,11 +7,11 @@ const ConfrmRegNo = () => {
     const [value, setValue] = useState('')
     const history = useHistory()
     const verifyRegNo = () => {
-        if(regno.toString() === value) {
-            history.push("/dashboard");
+        if (regno.toString() === value) {
+            history.push("/signup");
         } else {
             alert('Reg No doesnt exist')
-            history.push("/dashboard");
+            history.push("/");
         }
     }
 
@@ -26,18 +26,18 @@ const ConfrmRegNo = () => {
         text += String(Math.random()).slice(12)
         return text.slice();
     }
-    
-  return (
-    <div>
-        <p>Your reg no is: {regno}</p>
-        <form onSubmit={verifyRegNo}>
-        <Input value={value} onChange={(e) => setValue(e.target.value)}/>
-        <button>Proceed</button>
-        </form>
-        
-        <Link to="signup"></Link>
-    </div>
-  )
+
+    return (
+        <div>
+            <p>Your reg no is: {regno}</p>
+            <form onSubmit={verifyRegNo}>
+                <Input value={value} onChange={(e) => setValue(e.target.value)} />
+                <button>Proceed</button>
+            </form>
+
+            <Link to="signup"></Link>
+        </div>
+    )
 }
 
 export default ConfrmRegNo
