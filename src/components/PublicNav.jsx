@@ -2,7 +2,7 @@ import React from 'react'
 
 const PublicNav = () => {
   return (
-    <div className='hoi'>PublicNav</div>
+    <div className='hoi'>School Logo Here &nbsp;  PublicNav</div>
     // localStorage.getItem("authToken") ? <Component {...props} /> : navigate("/login")
   )
 }
