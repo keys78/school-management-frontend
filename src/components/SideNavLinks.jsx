@@ -32,8 +32,9 @@ const SideNavLinks = () => {
     }, []);
 
     const renderNavLinks = navLinks.map((navLink, i) => (
+     
 
-        <SingleNav key={i}
+        navLink.role.includes(user.role) && <SingleNav key={i}
             activeclassname="active"
             to={navLink.path}
         >
