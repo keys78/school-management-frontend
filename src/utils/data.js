@@ -131,7 +131,7 @@ export const navLinks = [
     icon: dashboardIcon,
   },
   {
-    role:['admin', 'teacher'],
+    role:['admin'],
     title: "Lecturers",
     path: "/lecturers",
     icon: dashboardIcon,
