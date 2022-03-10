@@ -3,7 +3,7 @@ import * as IoIcons from 'react-icons/io';
 
 export const facultyArr = [
   {
-    faculty: "science",
+    faculty: "Science",
     departments: [
       {
         department: 'Medicine',
@@ -30,7 +30,7 @@ export const facultyArr = [
   },
 
   {
-    faculty: "arts",
+    faculty: "Arts",
     departments: [
       {
         department: 'Law',
@@ -149,4 +149,8 @@ export const navLinks = [
     icon: dashboardIcon,
   },
   
+]
+
+export const lessons = [
+
 ]

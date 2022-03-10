@@ -19,15 +19,14 @@ const Dashboard = () => {
     console.log(myNews)
 
     const renderNews = myNews && myNews.map((news, i) => (
-        <div>
-            <p>{null ? "No Author" : news.author}</p>
-            <img className="w-40" src={news.urlToImage} />
+        <NewsBox>
+            <h1>{news.author === null ? "Em_codes" : news.author}</h1>
             <h1>{news.publishedAt}</h1>
+            <img className="w-40" src={news.urlToImage} />
             <h1>{news.title}</h1>
-            {/* <h1>{news.url}</h1> */}
-            <a href={news.url}>Link</a>
+            <a href={news.url}>Go</a>
             <h1>{news.content}</h1>
-        </div>
+        </NewsBox>
     ))
 
 
@@ -77,7 +76,6 @@ const Dashboard = () => {
                             <div>
                                 <h1>
                                     {greetings} {user.firstName}
-
                                 </h1>
                             </div>
                             <div>
@@ -87,7 +85,7 @@ const Dashboard = () => {
                             </div>
                         </WelcomeCard>
 
-                        <div>
+                        <UserCard>
                             <div>
                                 <img className="w-28" src={user.profileImg} alt="profile" />
                             </div>
@@ -96,16 +94,15 @@ const Dashboard = () => {
                             </div>
                             <div>
                                 <p>{user.firstName} {user.lastName}</p>
-                                <p>faculty: {user.faculty}</p>
-                                <p>department: {user.department}</p>
+                                <p><span>Faculty:</span> {user.faculty}</p>
+                                <p><span>Department:</span> {user.department}</p>
                             </div>
                             {/* <p>{user.email}</p><br />
                             <p>{user.phone}</p><br />
                             <p>{user.address}</p><br /> */}
-                        </div>
+                        </UserCard>
 
                         <div>
-                            News
                             Calender
                             <div>
                                 <Calendar onChange={onChange} value={value} />
@@ -113,7 +110,6 @@ const Dashboard = () => {
                         </div>
 
                         <div>
-                            Today Scores
                             {isLoading && 'Loading...'}
                             {newsApi ? renderNews : "loading..."}
                         </div>
@@ -144,7 +140,6 @@ const DashboardContainer = styled.section`
 `
 const WelcomeCard = styled.div`
     background-color: #436583;
-    background-image: url('');
     overflow: hidden !important;
     color: #fff;
     & > img { position: absolute; top:90px; left:0; opacity: 0.5}
@@ -154,18 +149,28 @@ const WelcomeCard = styled.div`
     }
     & > div:nth-of-type(1) { margin-top: 20px; }
     & > div:nth-of-type(2) { margin-top: 40px;}
-
     & p:nth-of-type(2) { margin-top: 10px; float: right;}
-
 `
+
+const UserCard = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    & > div:nth-last-of-type(3) > p { text-transform: uppercase; }
+    span { font-weight: bold;}
+
+    
+`
+
 const DisplayPattern = styled.div`
     display: grid;
-    grid-template-columns: 30% 45% 25%;
+    grid-template-columns: 30% 40% 30%;
     gap: 20px;
+    padding-right: 40px;
     
     & > div:nth-of-type(1) {
-        /* background: #FFFFFF;
-        box-shadow: 0px 1px 4px rgba(46, 41, 78, 0.02), 0px 8px 12px rgba(46, 41, 78, 0.08); */
+        height: 350px;
+        /* box-shadow: 0px 1px 4px rgba(46, 41, 78, 0.02), 0px 8px 12px rgba(46, 41, 78, 0.08);  */
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;
         padding: 12px;
@@ -175,6 +180,7 @@ const DisplayPattern = styled.div`
         padding: 12px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;    
+
     }
 
     & > div:nth-of-type(3) {
@@ -189,10 +195,17 @@ const DisplayPattern = styled.div`
         border-radius: 8px;        
         grid-column: span 2 / span 3;
         padding:12px;
-        /* max-width: 100%; */
-        /* border:0.2px solid gray; */
-}
+        height: 250px;
+        overflow-y: scroll;
+    }
 `
+
+const NewsBox = styled.div`
+        max-width: 600px;
+        border: 1px solid red;
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+    `
 
 export default Dashboard;
 
