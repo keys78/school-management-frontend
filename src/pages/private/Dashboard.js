@@ -5,6 +5,7 @@ import styled from "styled-components";
 import useAxiosFetch from "../../utils/useAxiosFetch";
 import wmap from "../../assets/images/wmap.png"
 import Calendar from 'react-calendar';
+import { lessons } from "../../utils/data";
 
 const Dashboard = () => {
     const [error, setError] = useState("");
@@ -19,7 +20,7 @@ const Dashboard = () => {
     console.log(myNews)
 
     const renderNews = myNews && myNews.map((news, i) => (
-        <NewsBox>
+        <NewsBox key={i}>
             <h1>Author: {news.author === null ? "Em_codes" : news.author}</h1>
             <h1>{news.publishedAt}</h1>
             <h1>{news.title}</h1>
@@ -27,6 +28,13 @@ const Dashboard = () => {
             <img className="w-40" src={news.urlToImage} />
             <a target="_blank" href={news.url}>Read more...</a>
         </NewsBox>
+    ))
+
+    const renderLessons = lessons.map((lesson, i) => (
+        <LessonBox key={i}>
+            <h1>{ lesson.time }</h1>
+            <h1>{ lesson.lesson }</h1>
+        </LessonBox>
     ))
 
 
@@ -108,9 +116,10 @@ const Dashboard = () => {
                                 <Calendar onChange={onChange} value={value} />
                             </div>
 
-                            <div>
-                                {/* <TextEditor /> */}
-                            </div>
+                            <LessonBoxContainer>
+                                <h1>My Classes Today</h1>
+                                { renderLessons }
+                            </LessonBoxContainer>
                         </div>
 
                         <NewsBoxContainer>
@@ -215,28 +224,52 @@ const DisplayPattern = styled.div`
 `
 
 const NewsBox = styled.div`
-        max-width: 100%;
-        padding: 12px;
-        display: grid;
-        grid-template-columns: 30% 40% 30%;
-        margin-bottom: 15px;
-        border-radius:7px ;
-        border:0.2px solid #cccccc;
-        gap:5px;
-        box-shadow: rgba(46, 41, 78, 0.08) 0px 1px 4px;
+    max-width: 100%;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    margin-bottom: 15px;
+    border-radius:7px ;
+    border:0.2px solid #f1f1f1;
+    gap:5px;
+    box-shadow: rgba(46, 41, 78, 0.08) 0px 1px 4px;
 
-        & > h1:nth-of-type(1) { grid-column: span 2 / span 4; }
-        & > h1:nth-of-type(2) { grid-column: span 2 / span 4; text-align: left;}
-        & > h1:nth-of-type(3) { grid-column: span 3 / span 4; font-weight: 600; padding-top:6px; color: #faaca8; }
-        & > a { grid-column: span 4 / span 4; }
-        & > h1:nth-of-type(4) { grid-column: span 2 / span 4;  margin:16px 0;}
-        & > img { grid-column: span 2 / span 4;  margin:16px 0;}
+    & > h1:nth-of-type(1) { grid-column: span 2 / span 4; }
+    & > h1:nth-of-type(2) { grid-column: span 2 / span 4; text-align: left;}
+    & > h1:nth-of-type(3) { grid-column: span 3 / span 4; font-weight: 600; padding-top:6px; color: #faaca8; }
+    & > a { grid-column: span 4 / span 4; }
+    & > h1:nth-of-type(4) { grid-column: span 2 / span 4;  margin:16px 0;}
+    & > img { grid-column: span 2 / span 4;  margin:16px 0; background:#cccccc; }
 `
 
 const NewsBoxContainer = styled.div`
-        & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
-        /* & > div:nth-of-type(odd) { background: #f6f4fd; }
-        & > div:nth-of-type(even) { background: #ffc5c2; } */
+    & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
+`
+
+const LessonBoxContainer = styled.div`
+    margin-top: 40px;
+    height: 250px;
+    /* border: 1px solid red; */
+    overflow-y: scroll;
+
+    ::-webkit-scrollbar-track { background: red;  }
+    ::-webkit-scrollbar-thumb {  background: red;  }
+    ::-webkit-scrollbar-thumb:hover { background: #555;  }
+    & > h1 { font-weight: 500; font-size: 18px; padding:0 0 5px 0;}
+    & > div:nth-of-type(odd) { background: #fff1ff; }
+
+    
+`
+
+const LessonBox = styled.div`
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border:0.2px solid #f1f1f1;
+    box-shadow: rgba(46, 41, 78, 0.08) 0px 1px 4px;
+    padding: 12px 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    
 `
 
 export default Dashboard;

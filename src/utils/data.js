@@ -163,5 +163,13 @@ export const lessons = [
   {
     time: '9:00 AM',
     lesson: 'MTH 110'
-  }
+  },
+  {
+    time: '9:00 AM',
+    lesson: 'CHM 120'
+  },
+  {
+    time: '9:00 AM',
+    lesson: 'MTH 110'
+  },
 ]
