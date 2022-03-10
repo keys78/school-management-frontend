@@ -20,12 +20,12 @@ const Dashboard = () => {
 
     const renderNews = myNews && myNews.map((news, i) => (
         <NewsBox>
-            <h1>{news.author === null ? "Em_codes" : news.author}</h1>
+            <h1>Author: {news.author === null ? "Em_codes" : news.author}</h1>
             <h1>{news.publishedAt}</h1>
-            <img className="w-40" src={news.urlToImage} />
             <h1>{news.title}</h1>
-            <a href={news.url}>Go</a>
             <h1>{news.content}</h1>
+            <img className="w-40" src={news.urlToImage} />
+            <a target="_blank" href={news.url}>Read more...</a>
         </NewsBox>
     ))
 
@@ -103,16 +103,21 @@ const Dashboard = () => {
                         </UserCard>
 
                         <div>
-                            Calender
+                            <h1>Calender</h1>
                             <div>
                                 <Calendar onChange={onChange} value={value} />
                             </div>
+
+                            <div>
+                                {/* <TextEditor /> */}
+                            </div>
                         </div>
 
-                        <div>
+                        <NewsBoxContainer>
+                            <h1>News Today</h1>
                             {isLoading && 'Loading...'}
                             {newsApi ? renderNews : "loading..."}
-                        </div>
+                        </NewsBoxContainer>
                     </DisplayPattern>
                 }
 
@@ -197,18 +202,45 @@ const DisplayPattern = styled.div`
         padding:12px;
         height: 250px;
         overflow-y: scroll;
+        max-width: 100%;
+
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+    
+        ::-webkit-scrollbar-track { background: #f1f1f1;  }
+        ::-webkit-scrollbar-thumb {  background: #888;  }
+        ::-webkit-scrollbar-thumb:hover { background: #555;  }
     }
 `
 
 const NewsBox = styled.div`
-        max-width: 600px;
-        border: 1px solid red;
+        max-width: 100%;
+        padding: 12px;
         display: grid;
         grid-template-columns: 30% 40% 30%;
-    `
+        margin-bottom: 15px;
+        border-radius:7px ;
+        border:0.2px solid #cccccc;
+        gap:5px;
+        box-shadow: rgba(46, 41, 78, 0.08) 0px 1px 4px;
+
+        & > h1:nth-of-type(1) { grid-column: span 2 / span 4; }
+        & > h1:nth-of-type(2) { grid-column: span 2 / span 4; text-align: left;}
+        & > h1:nth-of-type(3) { grid-column: span 3 / span 4; font-weight: 600; padding-top:6px; color: #faaca8; }
+        & > a { grid-column: span 4 / span 4; }
+        & > h1:nth-of-type(4) { grid-column: span 2 / span 4;  margin:16px 0;}
+        & > img { grid-column: span 2 / span 4;  margin:16px 0;}
+`
+
+const NewsBoxContainer = styled.div`
+        & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
+        /* & > div:nth-of-type(odd) { background: #f6f4fd; }
+        & > div:nth-of-type(even) { background: #ffc5c2; } */
+`
 
 export default Dashboard;
 
 {/* <div>{student.courses.map((el) => {
-            <p>{el.subject, el.score}</p>
-          })}</div> */}
+  <p>{el.subject, el.score}</p>
+})}</div> */}
