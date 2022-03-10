@@ -1,17 +1,37 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import SideNav from "../../components/SideNav";
-import Navbar from "../../components/Navbar";
 import styled from "styled-components";
-
+import useAxiosFetch from "../../utils/useAxiosFetch";
+import wmap from "../../assets/images/wmap.png"
+import Calendar from 'react-calendar';
 
 const Dashboard = () => {
     const [error, setError] = useState("");
     const [greetings, setGreetings] = useState('')
     const [user, setUser] = useState({});
     const history = useHistory();
+    const [value, onChange] = useState(new Date());
+    const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
+    const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
 
+    const myNews = newsApi?.articles
+    console.log(myNews)
+
+    const renderNews = myNews && myNews.map((news, i) => (
+        <div>
+            <p>{null ? "No Author" : news.author}</p>
+            <img className="w-40" src={news.urlToImage} />
+            <h1>{news.publishedAt}</h1>
+            <h1>{news.title}</h1>
+            {/* <h1>{news.url}</h1> */}
+            <a href={news.url}>Link</a>
+            <h1>{news.content}</h1>
+        </div>
+    ))
+
+
+    console.log(renderNews)
 
     useEffect(() => {
         const fetchPrivateDate = async () => {
@@ -54,27 +74,48 @@ const Dashboard = () => {
                 {user &&
                     <DisplayPattern>
                         <WelcomeCard>
-                            {greetings} {user.firstName}
+                            <div>
+                                <h1>
+                                    {greetings} {user.firstName}
+
+                                </h1>
+                            </div>
+                            <div>
+                                <p>❝{newQuote.content}❞ </p>
+                                <p>~ {newQuote.author} </p>
+                                <img src={wmap} />
+                            </div>
                         </WelcomeCard>
 
                         <div>
-                            <p>{user.firstName}</p>
-                            <p>{user.lastName}</p>
-                            <p>{user.level}</p>
-                            <p>{user.email}</p><br />
+                            <div>
+                                <img className="w-28" src={user.profileImg} alt="profile" />
+                            </div>
+                            <div>
+                                <p>Level: {user.level}</p>
+                            </div>
+                            <div>
+                                <p>{user.firstName} {user.lastName}</p>
+                                <p>faculty: {user.faculty}</p>
+                                <p>department: {user.department}</p>
+                            </div>
+                            {/* <p>{user.email}</p><br />
                             <p>{user.phone}</p><br />
-                            <p>{user.address}</p><br />
-                            <img className="w-20" src={user.profileImg} alt="profile" />
-                            <p>faculty: {user.faculty}</p>
-                            <p>department: {user.department}</p>
+                            <p>{user.address}</p><br /> */}
                         </div>
 
                         <div>
                             News
+                            Calender
+                            <div>
+                                <Calendar onChange={onChange} value={value} />
+                            </div>
                         </div>
 
                         <div>
                             Today Scores
+                            {isLoading && 'Loading...'}
+                            {newsApi ? renderNews : "loading..."}
                         </div>
                     </DisplayPattern>
                 }
@@ -84,6 +125,7 @@ const Dashboard = () => {
 
     );
 };
+
 
 const DashboardWrapper = styled.section`
     /* border: 1px solid red; */
@@ -101,14 +143,25 @@ const DashboardContainer = styled.section`
     
 `
 const WelcomeCard = styled.div`
-    /* padding: 150px 30px; */
+    background-color: #436583;
+    background-image: url('');
+    overflow: hidden !important;
+    color: #fff;
+    & > img { position: absolute; top:90px; left:0; opacity: 0.5}
+    h1 {
+        font-size: 24px;
+        font-family: 'Fredoka', sans-serif;
+    }
+    & > div:nth-of-type(1) { margin-top: 20px; }
+    & > div:nth-of-type(2) { margin-top: 40px;}
+
+    & p:nth-of-type(2) { margin-top: 10px; float: right;}
+
 `
 const DisplayPattern = styled.div`
     display: grid;
     grid-template-columns: 30% 45% 25%;
     gap: 20px;
-    /* grid-template-columns: repeat(3, 1fr); */
-
     
     & > div:nth-of-type(1) {
         /* background: #FFFFFF;
@@ -135,7 +188,8 @@ const DisplayPattern = styled.div`
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;        
         grid-column: span 2 / span 3;
-        padding: 120px 12px;
+        padding:12px;
+        /* max-width: 100%; */
         /* border:0.2px solid gray; */
 }
 `
