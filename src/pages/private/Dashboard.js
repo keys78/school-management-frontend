@@ -17,8 +17,6 @@ const Dashboard = () => {
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
 
     const myNews = newsApi?.articles
-    console.log(myNews)
-
     const renderNews = myNews && myNews.map((news, i) => (
         <NewsBox key={i}>
             <h1>Author: {news.author === null ? "Em_codes" : news.author}</h1>
@@ -32,8 +30,8 @@ const Dashboard = () => {
 
     const renderLessons = lessons.map((lesson, i) => (
         <LessonBox key={i}>
-            <h1>{ lesson.time }</h1>
-            <h1>{ lesson.lesson }</h1>
+            <h1>{lesson.time}</h1>
+            <h1>{lesson.lesson}</h1>
         </LessonBox>
     ))
 
@@ -104,6 +102,8 @@ const Dashboard = () => {
                                 <p>{user.firstName} {user.lastName}</p>
                                 <p><span>Faculty:</span> {user.faculty}</p>
                                 <p><span>Department:</span> {user.department}</p>
+
+                                <button onClick={() => history.push('/profile')}>view profile</button>
                             </div>
                             {/* <p>{user.email}</p><br />
                             <p>{user.phone}</p><br />
@@ -111,19 +111,21 @@ const Dashboard = () => {
                         </UserCard>
 
                         <div>
-                            <h1>Calender</h1>
-                            <div>
-                                <Calendar onChange={onChange} value={value} />
-                            </div>
+                            <CalendarBox>
+                                <h1>Calender</h1>
+                                <div>
+                                    <Calendar onChange={onChange} value={value} />
+                                </div>
+                            </CalendarBox>
 
                             <LessonBoxContainer>
                                 <h1>My Classes Today</h1>
-                                { renderLessons }
+                                <div> {renderLessons} </div>
                             </LessonBoxContainer>
                         </div>
 
                         <NewsBoxContainer>
-                            <h1>News Today</h1>
+                            <h1>News</h1>
                             {isLoading && 'Loading...'}
                             {newsApi ? renderNews : "loading..."}
                         </NewsBoxContainer>
@@ -213,10 +215,7 @@ const DisplayPattern = styled.div`
         overflow-y: scroll;
         max-width: 100%;
 
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-    
+        ::-webkit-scrollbar { width: 1px !important; }
         ::-webkit-scrollbar-track { background: #f1f1f1;  }
         ::-webkit-scrollbar-thumb {  background: #888;  }
         ::-webkit-scrollbar-thumb:hover { background: #555;  }
@@ -248,17 +247,14 @@ const NewsBoxContainer = styled.div`
 
 const LessonBoxContainer = styled.div`
     margin-top: 40px;
-    height: 250px;
-    /* border: 1px solid red; */
-    overflow-y: scroll;
-
-    ::-webkit-scrollbar-track { background: red;  }
-    ::-webkit-scrollbar-thumb {  background: red;  }
-    ::-webkit-scrollbar-thumb:hover { background: #555;  }
+    & > div {  height: 250px; overflow-y: scroll;
+        ::-webkit-scrollbar { width: 1px !important; }
+        ::-webkit-scrollbar-track { background: #f1f1f1;  }
+        ::-webkit-scrollbar-thumb {  background: #888;  }
+        ::-webkit-scrollbar-thumb:hover { background: #555;  }
+    }
     & > h1 { font-weight: 500; font-size: 18px; padding:0 0 5px 0;}
-    & > div:nth-of-type(odd) { background: #fff1ff; }
-
-    
+    & > div > div:nth-of-type(odd) { background: #fff1ff; }
 `
 
 const LessonBox = styled.div`
@@ -269,7 +265,11 @@ const LessonBox = styled.div`
     padding: 12px 20px;
     display: grid;
     grid-template-columns: 1fr 3fr;
+    column-gap: 16px;
     
+`
+const CalendarBox = styled.div`
+    & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
 `
 
 export default Dashboard;
