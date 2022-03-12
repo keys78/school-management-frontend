@@ -57,7 +57,6 @@ const SignUp = () => {
 
                                 , config);
                             localStorage.setItem("authToken", data.token);
-                            console.log(data.token)
                             history.push("/dashboard");
 
                         } catch (error) {

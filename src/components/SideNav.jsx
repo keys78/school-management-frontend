@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 import SideNavLinks from './SideNavLinks';
 
-const SideNav = () => {
+const SideNav = ({ user }) => {
     const history =  useHistory()
 
     const logoutUser = () => {
@@ -15,7 +15,7 @@ const SideNav = () => {
            <div>
                LogoHere
            </div>
-            <SideNavLinks />
+            <SideNavLinks user={user}/>
             <button onClick={logoutUser}>Logout</button>
         </SideBarWrapper>
     )

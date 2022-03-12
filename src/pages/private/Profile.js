@@ -6,7 +6,6 @@ import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import useAxiosFetch from '../../utils/useAxiosFetch';
 
 
 const Profile = ({ user, setError, error }) => {
@@ -20,10 +19,10 @@ const Profile = ({ user, setError, error }) => {
               firstName: user.firstName,
               lastName: user.lastName,
               email: user.email,
-              dob: '',
-              phone: '',
-              address: '',
-              soo: '',
+              dob: user.dob,
+              phone: user.phone,
+              address: user.address,
+              soo: user.soo,
 
             }}
             validationSchema={validate}
@@ -58,6 +57,18 @@ const Profile = ({ user, setError, error }) => {
                   <div>
                     <TextField label={'Email'} name={'email'} type={'email'} disabled />
                   </div>
+                  <div>
+                    <TextField label={'Phone Number'} name={'phone'} type={'text'} />
+                  </div>
+                  <div>
+                    <TextField label={'Date OF Birth'} name={'dob'} type={'date'} />
+                  </div>
+                  <div>
+                    <TextField label={'Address'} name={'address'} type={'text'} />
+                  </div>
+                  <div>
+                    <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
+                  </div>
                   <button type='submit'>Updatei</button>
                 </Form>
 
@@ -73,6 +84,7 @@ const Profile = ({ user, setError, error }) => {
 const ProfileBox = styled.div`
   padding:12px;
   height: 400px;
+  max-width: 500px;
 `
 
 export default Profile;

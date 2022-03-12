@@ -18,7 +18,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             try {
                 const { data } = await axios.get("http://localhost:4000/private/user", config);
                 setUser(data);
-                // console.log(data)
+                // console.log(user)
             } catch (error) {
                 localStorage.removeItem("authToken");
                 setError(`session expired please `);
@@ -34,7 +34,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             render={(props) =>
                 localStorage.getItem("authToken") ? (
                     <>
-                        <Layout />
+                        <Layout user={ user }/>
                         <Component user={user} error={error} setError={setError} {...props} />
                     </>
                 ) : (

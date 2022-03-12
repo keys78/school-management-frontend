@@ -5,35 +5,8 @@ import { navLinks } from '../utils/data'
 import { NavLink as LinkerNav } from 'react-router-dom';
 
 
-const SideNavLinks = () => {
-
-    const [user, setUser] = useState({})
-
-
-    useEffect(() => {
-        const fetchPrivateDate = async () => {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                },
-            };
-
-            try {
-                const { data } = await axios.get("http://localhost:4000/private/user", config);
-                setUser(data);
-                console.log(data)
-            } catch (error) {
-                localStorage.removeItem("authToken");
-            }
-        };
-
-        fetchPrivateDate();
-    }, []);
-
+const SideNavLinks = ({ user }) => {
     const renderNavLinks = navLinks.map((navLink, i) => (
-     
-
         navLink.role.includes(user.role) && <SingleNav key={i}
             activeclassname="active"
             to={navLink.path}

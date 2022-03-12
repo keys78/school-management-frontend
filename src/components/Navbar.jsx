@@ -5,30 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../redux/usersSlice';
 import bell from '../assets/images/ic-notification.png'
 
-const Navbar = () => {
-  const [user, setUser] = useState({})
-
-
-  useEffect(() => {
-    const fetchPrivateDate = async () => {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      };
-
-      try {
-        const { data } = await axios.get("http://localhost:4000/private/user", config);
-        setUser(data);
-        console.log(data)
-      } catch (error) {
-        localStorage.removeItem("authToken");
-      }
-    };
-
-    fetchPrivateDate();
-  }, []);
+const Navbar = ({ user }) => {
 
   return (
     <NavbarWrapper>
@@ -41,8 +18,8 @@ const Navbar = () => {
           </Notif>
           <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
           <Initials>
-            {/* {user && user.firstName.charAt()}
-            {user && user.lastName.charAt()} */}
+            {/* {user ? user.firstName.charAt() : "-"}
+            {user ? user.lastName.charAt() : "-"} */}
             EO
           </Initials>
         </div>

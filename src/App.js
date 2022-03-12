@@ -10,6 +10,7 @@ import ConfrmRegNo from "./pages/auth/ConfrmRegNo";
 import Dashboard from "./pages/private/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/private/Profile";
+import Courses from "./pages/private/Courses";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Switch>
         <PrivateRoute exact path="/dashboard" component={Dashboard } />
         <PrivateRoute exact path="/profile" component={Profile } />
+        <PrivateRoute exact path="/courses" component={Courses } />
 
         <Route exact path="/" component={Home } />
         <Route exact path="/login" component={Login } />
