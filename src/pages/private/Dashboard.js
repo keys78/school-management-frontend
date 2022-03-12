@@ -1,20 +1,36 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import useAxiosFetch from "../../utils/useAxiosFetch";
 import wmap from "../../assets/images/wmap.png"
 import Calendar from 'react-calendar';
 import { lessons } from "../../utils/data";
+import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 
-const Dashboard = () => {
-    const [error, setError] = useState("");
+
+const Dashboard = ({ user, error }) => {
+
+    // const [error, setError] = useState("");
     const [greetings, setGreetings] = useState('')
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
     const history = useHistory();
     const [value, onChange] = useState(new Date());
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
+
+
+    useEffect(() => {
+        const hour = new Date().getHours();
+        const welcomeTypes = ["Good morning", "Good afternoon", "Good evening"];
+        let welcomeText = "";
+
+        if (hour < 12) welcomeText = welcomeTypes[0];
+        else if (hour < 16) welcomeText = welcomeTypes[1];
+        else welcomeText = welcomeTypes[2];
+
+        setGreetings(welcomeText)
+    }, []);
+
 
     const myNews = newsApi?.articles
     const renderNews = myNews && myNews.map((news, i) => (
@@ -36,46 +52,13 @@ const Dashboard = () => {
     ))
 
 
-    console.log(renderNews)
-
-    useEffect(() => {
-        const fetchPrivateDate = async () => {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                },
-            };
-
-            try {
-                const { data } = await axios.get("http://localhost:4000/private/user", config);
-                setUser(data);
-                console.log(data)
-            } catch (error) {
-                localStorage.removeItem("authToken");
-                setError(`session expired please `);
-            }
-        };
-
-        fetchPrivateDate();
-
-        const hour = new Date().getHours();
-        const welcomeTypes = ["Good morning", "Good afternoon", "Good evening"];
-        let welcomeText = "";
-
-        if (hour < 12) welcomeText = welcomeTypes[0];
-        else if (hour < 16) welcomeText = welcomeTypes[1];
-        else welcomeText = welcomeTypes[2];
-
-        setGreetings(welcomeText)
-    }, []);
 
 
     return error ? (
         <span className="error-message">{error} <Link to="/login">Login</Link></span>
     ) : (
-        <DashboardWrapper>
-            <DashboardContainer>
+        <ContentWrapper>
+            <ContentContainer>
                 {user &&
                     <DisplayPattern>
                         <WelcomeCard>
@@ -132,28 +115,14 @@ const Dashboard = () => {
                     </DisplayPattern>
                 }
 
-            </DashboardContainer>
-        </DashboardWrapper>
+            </ContentContainer>
+        </ContentWrapper>
 
     );
 };
 
 
-const DashboardWrapper = styled.section`
-    /* border: 1px solid red; */
-    padding-left: 210px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
 
-const DashboardContainer = styled.section`
-    /* border: 2px solid green; */
-    width: 90%;
-    margin-top: 90px;
-    margin-bottom: 10px;
-    
-`
 const WelcomeCard = styled.div`
     background-color: #436583;
     overflow: hidden !important;
@@ -174,8 +143,6 @@ const UserCard = styled.div`
     align-items: center;
     & > div:nth-last-of-type(3) > p { text-transform: uppercase; }
     span { font-weight: bold;}
-
-    
 `
 
 const DisplayPattern = styled.div`

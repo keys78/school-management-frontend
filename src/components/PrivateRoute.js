@@ -1,7 +1,33 @@
+import { useState, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import Layout from "../pages/private/Layout";
+import axios from "axios";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+    const [user, setUser] = useState({})
+    const [error, setError] = useState('')
+    useEffect(() => {
+        const fetchPrivateData = async () => {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+            };
+
+            try {
+                const { data } = await axios.get("http://localhost:4000/private/user", config);
+                setUser(data);
+                // console.log(data)
+            } catch (error) {
+                localStorage.removeItem("authToken");
+                setError(`session expired please `);
+            }
+        };
+
+        fetchPrivateData();
+    }, [user]);
+
     return (
         <Route
             {...rest}
@@ -9,7 +35,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 localStorage.getItem("authToken") ? (
                     <>
                         <Layout />
-                        <Component {...props} />
+                        <Component user={user} error={error} setError={setError} {...props} />
                     </>
                 ) : (
                     <Redirect to="/login" />

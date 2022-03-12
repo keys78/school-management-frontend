@@ -1,9 +1,78 @@
 import React from 'react'
+import styled from 'styled-components';
+import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
+import TextField from '../../components/TextField';
+import { Formik, Form } from 'formik';
+import { validate } from '../../utils/validateForm';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import useAxiosFetch from '../../utils/useAxiosFetch';
 
-const Profile = () => {
+
+const Profile = ({ user, setError, error }) => {
+  const history = useHistory()
   return (
-    <div>Profile Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, modi cum, ad doloremque nihil enim sit obcaecati magni provident quos, mollitia sapiente consectetur? Vero voluptate esse laborum cum quis unde debitis, corrupti neque, consequuntur quisquam ut? Consequuntur laboriosam doloremque sapiente veritatis perspiciatis, dolorum quasi praesentium enim ducimus delectus magnam voluptatibus fugiat nulla quis ut. Maxime architecto laudantium optio aperiam id voluptatum nisi nam. Alias fugit eligendi placeat rerum? Architecto fugit consectetur nam. Facere, tempora doloremque culpa ipsum delectus id sapiente possimus necessitatibus nesciunt asperiores dolore quod at, repudiandae impedit? Inventore, sequi sapiente repudiandae odio cupiditate necessitatibus vitae doloribus minus mollitia suscipit laboriosam, tempore dignissimos, corporis eos a voluptatum autem maiores quaerat consequatur eligendi blanditiis. Vitae quos beatae rerum itaque, nam quo quod perferendis distinctio? Obcaecati nam id soluta vel? Molestiae repellendus veniam consectetur aspernatur nesciunt dolor, laboriosam, debitis ullam autem sequi temporibus non eligendi facilis delectus incidunt. Accusamus unde accusantium atque alias architecto sapiente excepturi, eius, numquam, laboriosam officiis quas. Facere eius doloribus praesentium culpa cum voluptatum soluta enim obcaecati rem voluptatem corporis voluptatibus adipisci asperiores unde aperiam, nulla molestias ipsum beatae? Quae, vero debitis repellendus illum nostrum nisi, quod cum magni sapiente asperiores odit reiciendis voluptates in tenetur. Eius recusandae nisi omnis dicta explicabo tempore, fugiat porro sint optio delectus nobis hic deserunt cumque alias nemo pariatur animi error perferendis incidunt voluptatibus voluptatem corrupti enim deleniti. Necessitatibus adipisci, autem blanditiis velit, magnam commodi tenetur officiis deleniti perspiciatis error ut reprehenderit aliquam corrupti molestiae fugiat tempore quam molestias vitae totam, quasi optio? Nesciunt nam vel necessitatibus consequatur dolor soluta, id architecto distinctio maxime officia magni voluptatem voluptates labore quia! Molestiae nam dolor repudiandae amet at molestias fugiat, quibusdam ipsam, minima illo aliquam est. Et sunt similique nemo dolorem inventore ipsum sapiente, ullam debitis. Obcaecati, nam ex cum dolores, nesciunt, quia corrupti facilis provident dolorum dignissimos maiores. Accusantium assumenda saepe reiciendis ducimus nemo amet asperiores, maxime sequi qui! Cupiditate sed enim, nostrum odit delectus libero quam dolorum repellat, minus voluptas maxime. Delectus illo error officia eius sunt voluptates inventore consequuntur ipsum. Tenetur soluta voluptas exercitationem ex aperiam neque maiores libero iste recusandae accusamus, magnam ab? Minus ipsa, mollitia totam error recusandae voluptas aperiam ut quam amet perferendis explicabo odit vitae dolores iste nisi veniam sit! Explicabo qui quod neque tempora odio reprehenderit maiores aut unde sit, facilis sint voluptate architecto, rem at ipsam dignissimos harum autem suscipit ipsa voluptatum. Debitis quae, voluptatibus vero incidunt esse sunt. Aspernatur quo, voluptatibus laudantium perspiciatis provident sunt consequatur distinctio sequi nobis repellendus aut, ipsam omnis porro expedita odio corporis, blanditiis itaque illum suscipit quasi pariatur? Temporibus iusto exercitationem sit quidem fugiat corrupti eos voluptas praesentium ab, consequuntur doloremque dolor minima assumenda adipisci, accusantium delectus in numquam explicabo provident quam, ut odit? Possimus, quod inventore? Veniam optio quasi beatae consectetur amet aperiam harum, adipisci voluptas cumque a iste sunt nisi enim ad eius consequuntur nulla! Est impedit, culpa dicta tempore accusantium fugit quod autem distinctio veritatis, quis consectetur enim nesciunt, voluptates voluptatibus! Rerum consectetur ullam ipsum minima enim omnis, rem iusto atque esse sequi nostrum repellendus cumque aliquid modi illum blanditiis iure exercitationem labore? Sunt suscipit, veritatis laborum dolorem soluta atque esse aperiam harum minus magnam dignissimos dolorum asperiores inventore labore neque necessitatibus sequi. Aliquid eius consequatur dicta vel obcaecati totam corrupti quos iste eaque, omnis molestias hic? Facere placeat numquam quaerat ut, nobis harum unde, odio vitae similique sed totam fugiat rerum quasi repellat officiis deleniti soluta quibusdam eligendi deserunt. Similique maxime eaque vel, error repellendus dolores tempore recusandae distinctio neque nobis! Voluptatem exercitationem, vel iure aspernatur ab eius odit quidem dicta, sunt natus cum atque, error culpa assumenda. Quas asperiores architecto similique officiis! Nihil libero perferendis modi autem odit officiis quibusdam pariatur reprehenderit neque nemo fugiat magni facilis, at blanditiis quis dolore quo omnis asperiores eos sunt ducimus repudiandae voluptate nesciunt maiores. Saepe, minima eius sunt libero exercitationem amet nostrum accusamus impedit repudiandae sapiente reprehenderit veniam labore unde, repellendus temporibus iste fugit. Expedita molestias, aperiam id labore at nostrum enim dolorum nesciunt obcaecati corrupti eum, cumque perspiciatis, soluta nihil aspernatur. Distinctio minus molestiae repellat sapiente sequi ea, id eligendi, voluptas architecto ad quaerat voluptatem atque similique. Nostrum corporis quod sunt reiciendis maxime. Officia dicta tempore natus quaerat voluptates ab dolor laudantium animi vel sit harum velit culpa, maiores atque itaque a, eos unde beatae? Mollitia esse debitis dolor, delectus incidunt suscipit eligendi quidem magni non amet laudantium temporibus sequi et dolorum expedita laborum porro! Exercitationem, ducimus. Ea porro fuga minus velit quaerat, eum illum quis quibusdam tenetur ullam tempora eveniet corporis consectetur magnam repellendus dolore nulla et est asperiores sunt tempore! Consectetur, maiores libero? Nulla hic provident, corporis voluptatem laboriosam natus cumque tenetur quo voluptatum. Alias, neque mollitia. Nostrum facilis omnis consequatur veniam sint maxime, autem magnam nemo doloribus. Explicabo rem sed ab ex fugit nostrum, culpa libero architecto odio sint aliquid voluptate id accusantium dolores animi veniam. Consequuntur quam debitis officia repudiandae amet necessitatibus eos iusto culpa officiis! Ex earum recusandae nihil tempora perspiciatis. Beatae harum expedita fuga commodi illum inventore, quas voluptatem debitis amet explicabo delectus earum repudiandae nemo pariatur quibusdam sint, facilis ipsa accusantium! Tenetur reiciendis totam animi saepe, repudiandae dicta corporis et recusandae, dolor tempora veniam aliquam nobis hic repellat beatae, nemo distinctio suscipit fugiat id vitae fugit. Ipsa nisi neque expedita dolores ad! Hic ipsum provident officiis tempora, quis aliquid ratione possimus quasi numquam eveniet totam delectus laudantium vero qui velit, tempore nulla facilis itaque, consequatur consequuntur sequi. Itaque, sapiente officiis illum omnis eum necessitatibus ut, optio eaque, repellat molestiae quasi iusto id aliquam nostrum. Eos reiciendis minus accusamus asperiores optio omnis ab sit, facere quidem sunt tempora rem illum quia cupiditate deleniti quibusdam explicabo. Blanditiis cupiditate, nam ad laborum exercitationem velit, repellendus molestiae nulla quos repudiandae soluta quia est impedit rerum minus voluptate voluptatem qui recusandae, odio suscipit saepe a ab? Nemo iste expedita, ad velit, reiciendis amet doloribus dolorum nobis sequi vel omnis, magni animi exercitationem quos atque obcaecati harum labore veritatis voluptate voluptas sint a dicta?</div>
+    <ContentWrapper>
+      <ContentContainer>
+        <ProfileBox>
+          <Formik
+            initialValues={{
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              dob: '',
+              phone: '',
+              address: '',
+              soo: '',
+
+            }}
+            validationSchema={validate}
+            onSubmit={async (values) => {
+
+              const config = {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+              };
+
+              try {
+                await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
+                alert('user has been updatd')
+              } catch (error) {
+                console.log(error)
+              }
+            }}
+          >
+            {formik => (
+              <div>
+                {error && <span className="error-message">{error}</span>}
+                <h1 className="">My Profile</h1>
+                <Form>
+                  <div>
+                    <TextField label={'First Name'} name={'firstName'} type={'text'} />
+                  </div>
+                  <div>
+                    <TextField label={'Last Name'} name={'lastName'} type={'text'} />
+                  </div>
+                  <div>
+                    <TextField label={'Email'} name={'email'} type={'email'} disabled />
+                  </div>
+                  <button type='submit'>Updatei</button>
+                </Form>
+
+              </div>
+            )}
+          </Formik>
+        </ProfileBox>
+      </ContentContainer>
+    </ContentWrapper>
   )
 }
 
-export default Profile
+const ProfileBox = styled.div`
+  padding:12px;
+  height: 400px;
+`
+
+export default Profile;

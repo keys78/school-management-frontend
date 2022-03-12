@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import TextField from '../../components/TextField';
-import * as Yup from 'yup';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
