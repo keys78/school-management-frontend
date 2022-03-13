@@ -8,22 +8,22 @@ export const facultyArr = [
       {
         department: 'Medicine',
         courses: [
-          { subject: "Med-1" },
-          { subject: "Med-2" }
+          { code:'MED101', subject: "Med-1", score:0, units: 5 },
+          { code:'MED102', subject: "Med-2", score:0, units: 5 }
         ]
       },
       {
         department: 'Engineering',
         courses: [
-          { subject: "Eng-1" },
-          { subject: "Eng-2" }
+          { code:'ENG101', subject: "Eng-1", score:0, units: 5 },
+          { code:'ENG102', subject: "Eng-2", score:0, units: 5 }
         ]
       },
       {
         department: 'Pharmacy',
         courses: [
-          { subject: "Pharm-1" },
-          { subject: "Pharm-2" }
+          { code:'PHRM-101', subject: "Pharm-1", score:0, units: 5 },
+          { code:'PHRM-102', subject: "Pharm-2", score:0, units: 5 }
         ]
       }
     ]
@@ -61,47 +61,47 @@ export const facultyArr = [
 
 export const courseArr = [
   {
-    department: 'Law',
-    courses: [
-      { subject: "Law-1" },
-      { subject: "Law-2" }
-    ]
-  },
-  {
-    department: 'Theater Arts',
-    courses: [
-      { subject: "Theaeter-1" },
-      { subject: "Theaeter-2" }
-    ]
-  },
-  {
-    department: 'Wood Works',
-    courses: [
-      { subject: "Wood-1" },
-      { subject: "Wood-2" }
-    ]
-  },
-  {
     department: 'Medicine',
     courses: [
-      { subject: "Med-1" },
-      { subject: "Med-2" }
+      { code:'MED101', title: "Med-1", score:0, units: 5 },
+      { code:'MED102', title: "Med-2", score:0, units: 5 }
     ]
   },
   {
     department: 'Engineering',
     courses: [
-      { subject: "Eng-1" },
-      { subject: "Eng-2" }
+      { code:'ENG101', title: "Eng-1", score:0, units: 5 },
+      { code:'ENG102', title: "Eng-2", score:0, units: 5 }
     ]
   },
   {
     department: 'Pharmacy',
     courses: [
-      { subject: "Pharm-1" },
-      { subject: "Pharm-2" }
+      { code:'PHRM-101', title: "Pharm-1", score:0, units: 5 },
+      { code:'PHRM-102', title: "Pharm-2", score:0, units: 5 }
     ]
-  }
+  },
+  {
+    department: 'Law',
+    courses: [
+      { code:'LAW-101', title: "Law-1", score:0, units: 5 },
+      { code:'LAW-102', title: "Law-2", score:0, units: 5 }
+    ]
+  },
+  {
+    department: 'Accounts',
+    courses: [
+      { code:'ACC-101', title: "Accounts-1", score:0, units: 5 },
+      { code:'ACC-102', title: "Accounts-2", score:0, units: 5 }
+    ]
+  },
+  {
+    department: 'Theater Arts',
+    courses: [
+      { code:'TRT-101', title: "Theater-1", score:0, units: 5 },
+      { code:'TRT-102', title: "Theater-2", score:0, units: 5 }
+    ]
+  },
 ]
 
 

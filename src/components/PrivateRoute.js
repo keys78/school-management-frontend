@@ -4,7 +4,7 @@ import Layout from "../pages/private/Layout";
 import axios from "axios";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState('')
     const [error, setError] = useState('')
     useEffect(() => {
         const fetchPrivateData = async () => {
@@ -18,7 +18,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             try {
                 const { data } = await axios.get("http://localhost:4000/private/user", config);
                 setUser(data);
-                // console.log(user)
             } catch (error) {
                 localStorage.removeItem("authToken");
                 setError(`session expired please `);
@@ -26,7 +25,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         };
 
         fetchPrivateData();
-    }, [user]);
+    }, [user.role]);
 
     return (
         <Route
