@@ -119,7 +119,7 @@ export const navLinks = [
     icon: dashboardIcon,
   },
   {
-    role:['admin', 'teacher', 'student'],
+    role:['student'],
     title: "Courses",
     path: "/courses",
     icon: dashboardIcon,
@@ -142,13 +142,6 @@ export const navLinks = [
     path: "/settings",
     icon: dashboardIcon,
   },
-  {
-    role:['admin', 'teacher', 'student'],
-    title: "Support",
-    path: "/support",
-    icon: dashboardIcon,
-  },
-  
 ]
 
 export const lessons = [

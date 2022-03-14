@@ -4,7 +4,8 @@ import Layout from "../pages/private/Layout";
 import axios from "axios";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState({})
+
     const [error, setError] = useState('')
     useEffect(() => {
         const fetchPrivateData = async () => {
@@ -25,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         };
 
         fetchPrivateData();
-    }, [user.role]);
+    }, []);
 
     return (
         <Route
