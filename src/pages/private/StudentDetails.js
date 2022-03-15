@@ -40,12 +40,22 @@ const StudentDetails = () => {
         fetchAllStudents();
     }, []);
 
-    const renderAcadRecords = studentDetails && studentDetails.courses.map((course, i) => (
+
+    
+    const renderProfile = (
+        <div>
+            <button onClick={() => history.goBack()}>Back</button>
+            <p>{studentDetails.firstName}</p>
+            <p>{studentDetails.lastName}</p>
+        </div>
+    )
+
+    const renderAcademicRecords = studentDetails && studentDetails.courses.map((course, i) => (
         <div key={i}>
             <span>{course.title}</span>
             <Formik
                 initialValues={{
-                   score:course.score
+                    score: course.score
                 }}
                 validationSchema={validateScore}
                 onSubmit={async (values) => {
@@ -65,48 +75,34 @@ const StudentDetails = () => {
                     }
                 }}>
                 {formik => (
-                        <Form>
-                            <div>
-                                <TextField label={''} name={'score'} type={'number'} />
-                            </div>
-                            <button type='submit'>Update Score</button>
-                            
-                        </Form>
+                    <Form>
+                        <div>
+                            <TextField label={''} name={'score'} type={'number'} />
+                        </div>
+                        <button type='submit'>Update Score</button>
+
+                    </Form>
 
                 )}
             </Formik>
-            
+
         </div>
     ))
 
     const tabContent = [
         {
-            title: 'New York cITY',
-            content: 'Hello World'
+            title: 'Profile',
+            content: renderProfile
         },
         {
-            title: 'Fuck 2',
-            content: 'fdbNG ngfmfhnm gLorem50'
-        },
-        {
-            title: 'Rihe',
-            content: 'Lorem5davsbgfndgzfanz gfn 0'
-        },
+            title: 'Academic Records',
+            content: renderAcademicRecords
+        }
     ]
 
     return (
         <ContentWrapper>
             <ContentContainer>
-                <div>
-                    <button onClick={() => history.goBack()}>Back</button>
-                    <p>{studentDetails.firstName}</p>
-                    <p>{studentDetails.lastName}</p>
-                </div>
-                <div>
-                    Academics <br />
-
-                    {renderAcadRecords}
-                </div>
                 <div>
                     <Tabs active={1}>
                         {tabContent.map((tab, idx) => (
@@ -115,7 +111,6 @@ const StudentDetails = () => {
                             </Tabs.TabPane>
                         ))}
                     </Tabs>
-
                 </div>
             </ContentContainer>
         </ContentWrapper>

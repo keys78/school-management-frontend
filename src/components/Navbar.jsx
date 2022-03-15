@@ -10,7 +10,7 @@ const Navbar = ({ user }) => {
   return (
     <NavbarWrapper>
       <div>
-        <RoleTag>{user.role}</RoleTag>
+        <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
         <div className='flex items-center gap-5'>
           <Notif>
             <span>0</span>

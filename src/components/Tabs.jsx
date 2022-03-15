@@ -19,25 +19,24 @@ const Tabs = ({ children, active = 0 }) => {
     }, [children])
 
     return (
-        <div>
-            <ul>
+        <div className='custom-tab'>
+            <ul className='flex items-center gap-8'>
                 {
                     tabsData.map(({ tab }, idx) => (
-                        <li>
-                            <a className={`nav-link ${idx === activeTab ? "active" : ""}`} href="#"
+                        <li >
+                            <button className={`nav-link ${idx === activeTab ? "active" : ""}`}
                                 onClick={() => setActiveTab(idx)}
                             >
                                 {tab}
-                            </a>
+                            </button>
                         </li>
                     ))
                 }
             </ul>
 
-            <div>
+            <div className='tab-content'>
                 {tabsData[activeTab] && tabsData[activeTab].children}
             </div>
-
         </div>
     )
 }
