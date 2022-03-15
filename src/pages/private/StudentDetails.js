@@ -6,6 +6,7 @@ import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
 import { validate, validateScore } from '../../utils/validateForm';
 import axios from 'axios';
+import Tabs from '../../components/Tabs';
 
 
 
@@ -78,6 +79,21 @@ const StudentDetails = () => {
         </div>
     ))
 
+    const tabContent = [
+        {
+            title: 'New York cITY',
+            content: 'Hello World'
+        },
+        {
+            title: 'Fuck 2',
+            content: 'fdbNG ngfmfhnm gLorem50'
+        },
+        {
+            title: 'Rihe',
+            content: 'Lorem5davsbgfndgzfanz gfn 0'
+        },
+    ]
+
     return (
         <ContentWrapper>
             <ContentContainer>
@@ -90,6 +106,16 @@ const StudentDetails = () => {
                     Academics <br />
 
                     {renderAcadRecords}
+                </div>
+                <div>
+                    <Tabs active={1}>
+                        {tabContent.map((tab, idx) => (
+                            <Tabs.TabPane key={`Tab ${idx}`} tab={tab.title} >
+                                {tab.content}
+                            </Tabs.TabPane>
+                        ))}
+                    </Tabs>
+
                 </div>
             </ContentContainer>
         </ContentWrapper>
