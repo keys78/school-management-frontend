@@ -4,15 +4,17 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, courseArr } from '../../utils/data';
 import useAxiosFetch from '../../utils/useAxiosFetch'
 
 
 
-const Students = () => {
+const Students = ({ error }) => {
+    const history = useHistory()
     const [allStuds, setAllStuds] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         const fetchAllStudents = async () => {
@@ -26,7 +28,6 @@ const Students = () => {
             try {
                 const { data } = await axios.get("http://localhost:4000/private/students", config);
                 setAllStuds(data);
-                console.log(data)
             } catch (error) {
                 console.log(error)
             }
@@ -35,19 +36,30 @@ const Students = () => {
         fetchAllStudents();
     }, []);
 
+    const moreDetails = (value) => {
+        console.log(value._id)
+        history.push(`students/student/${value._id}`)
+    }
 
-  const renderAllStudents = allStuds && allStuds.map((all_s, i) => (
-    <div key={i}>
-        <p>{ all_s.firstName }</p>
-    </div>
-  ))
-    
 
-    return (
+    const renderAllStudents = allStuds && allStuds.map((val, i) => (
+        <div key={i}>
+            <p>{val.firstName} {val.lastName} <button onClick={() => moreDetails(val)}> more details </button></p>
+        </div>
+    ))
+
+
+    return error ? (
+        <span className="error-message">{error} <Link to="/login">Login</Link></span>
+    ) : (
         <ContentWrapper>
             <ContentContainer>
                 <div>
-                  { renderAllStudents }
+                    {renderAllStudents}
+
+                    <div>
+                        Student details
+                    </div>
                 </div>
             </ContentContainer>
         </ContentWrapper>

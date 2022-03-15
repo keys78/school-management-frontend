@@ -17,3 +17,12 @@ export const validate = Yup.object({
     // password: Yup.string().min(6, 'Password must be at least 6 charaters').required('password is required'),
     // confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('confirm password is required'),
 })
+
+export const validateScore = Yup.object({
+        // score: Yup.string().min(1, 'invalid score ').lessThan(100, "Commission should not be more than 2 digits").required("score is required"),
+       score: Yup.number()
+      .required()
+      .moreThan(0, 'commision should not be zero or less than zero')
+      .lessThan(101, "Commission should not be more than 2 digits"),
+
+})

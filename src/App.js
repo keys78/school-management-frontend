@@ -14,6 +14,7 @@ import Courses from "./pages/private/Courses";
 import Students from "./pages/private/Students";
 import Teachers from "./pages/private/Teachers";
 import Settings from "./pages/private/Settings";
+import StudentDetails from "./pages/private/StudentDetails";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
         <PrivateRoute exact path="/profile" component={Profile } />
         <PrivateRoute exact path="/courses" component={Courses } />
         <PrivateRoute exact path="/students" component={Students } />
+        <PrivateRoute path="/students/student/:id" component={ StudentDetails } />
         <PrivateRoute exact path="/lecturers" component={ Teachers } />
         <PrivateRoute exact path="/settings" component={ Settings } />
 

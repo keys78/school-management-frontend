@@ -4,13 +4,16 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 
 
 const Profile = ({ user, setError, error }) => {
   const history = useHistory()
-  return (
+
+  return error ? (
+    <span className="error-message">{error} <Link to="/login">Login</Link></span>
+  ) : (
     <ContentWrapper>
       <ContentContainer>
         <ProfileBox>
@@ -45,7 +48,6 @@ const Profile = ({ user, setError, error }) => {
           >
             {formik => (
               <div>
-                {error && <span className="error-message">{error}</span>}
                 <h1 className="">My Profile</h1>
                 <Form>
                   <div>

@@ -13,6 +13,16 @@ import { facultyArr, courseArr } from '../../utils/data';
 const Courses = ({ user }) => {
     const x = user?.courses
 
+    const renderAll = x && x.map((mycourse, i) => (
+        <div>
+            { i + 1 } &nbsp;
+            { mycourse.code } &nbsp;
+            { mycourse.title } &nbsp;
+            { mycourse.score } &nbsp;
+            { mycourse.units }
+        </div>
+    ))
+
     const [buttonStatus, setButtonStatus] = useState('Addd')
 
     const getFaculty = facultyArr && facultyArr.find(val => val.faculty === user.faculty)
@@ -83,7 +93,7 @@ const Courses = ({ user }) => {
                         {renderSubjects}
                         <button> Done </button>
                     </FormBox>
-                    {/* {renderAll} */}
+                    {renderAll}
                 </div>
             </ContentContainer>
         </ContentWrapper>
