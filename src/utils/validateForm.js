@@ -26,3 +26,8 @@ export const validateScore = Yup.object({
       .lessThan(101, "Commission should not be more than 2 digits"),
 
 })
+
+export const validateChangePassword = Yup.object({
+    newPassword: Yup.string().min(6, 'Password must be at least 6 charaters').required('password is required'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'Password must match').required('confirm password is required'),
+})
