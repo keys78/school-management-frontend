@@ -48,13 +48,13 @@ const Settings = ({ user, error, setError }) => {
                     <Form>
                         {/* <FieldsWrapper> */}
                         <div>
-                            <TextField label={'New Password'} name={'newPassword'} type={'password'} />
+                            <TextField label={'Old password'} name={'password'} type={'password'} />
                         </div>
                         <div>
-                            <TextField label={'Old Password'} name={'password'} type={'password'} />
+                            <TextField label={'New password'} name={'newPassword'} type={'password'} />
                         </div>
                         <div>
-                            <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
+                            <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
                         </div>
 
                         <button type='submit'>Register</button>
@@ -64,8 +64,15 @@ const Settings = ({ user, error, setError }) => {
             )}
         </Formik>
     ]
-    const notificationsTab = ['notfi']
-    const supportTab = ['ssupppoty']
+    const notificationsTab = ['you have no new notifications']
+    const supportTab = [
+        <div>
+            <h1>Having Troubles ..?</h1>
+            <p>Contact us at <a href="mailto: rahzy24@gmail.com">rahzy24@gmail.com</a>&nbsp;or place a call to <a href="tel:08108243267">08108243267</a>
+            </p>
+        </div>
+
+    ]
 
     const tabContent = [
         { title: 'Security', content: securityTab },

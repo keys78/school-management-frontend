@@ -1,16 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({text, type}) => {
-  return (
-    // <ButtonWrapper>{text}</ButtonWrapper>
-    <button type={type}>{text}</button>
-  )
+const Button = ({ onClick, text, flexUp, width, padding, margin, color}) => {
+    return (
+        <ButtonWrapper onClick={onClick} className={`glow-on-hover ${flexUp} ${ width} ${margin} ${padding} ${color}`}>
+            <span>{text}</span>
+        </ButtonWrapper>
+    )
 }
 
-// const ButtonWrapper = styled`
-//     background-color: rgb(0,66,130);
-//     color: #fff;
-// `
+const ButtonWrapper = styled.button`
+  width: 100%;
+  background: #04131D;
+  color: #fff;
+  border-radius: 6px;
+`
 
 export default Button

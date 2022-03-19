@@ -19,9 +19,9 @@ const Input = ({name, value, onChange, placeholder, label, type, required}) => {
 }
 
 const InputBox = styled.input`
-    padding: 13px 0 14px 32px;
-    border: 0.5px solid #423f3f;
-    border-radius: 2px;
+    color: #768192;
+    padding: 8px 7px;
+    border-radius: 5px;
     width: 100%;
     border: none;
     

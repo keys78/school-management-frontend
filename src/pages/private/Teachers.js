@@ -41,10 +41,6 @@ const Teachers = () => {
         fetchAllTeachers();
     }, []);
 
-    // const registerTecacher = () => {
-
-    // }
-
 
     const renderAllTeachers = allTeachers && allTeachers.map((val, i) => (
         <div key={i}>

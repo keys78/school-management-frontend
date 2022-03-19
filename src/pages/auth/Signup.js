@@ -5,136 +5,131 @@ import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import regLogo from "../../assets/images/register-logo.png"
-import { facultyArr,  courseArr } from '../../utils/data';
+import { facultyArr, } from '../../utils/data';
 import { validate } from '../../utils/validateForm';
+import { AuthContainer, AuthWrapper, ItemsWrapper, CustomSelect } from '../../assets/css/GlobalStyled';
+import Button from '../../components/Button';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const history = useHistory();
-
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
-    const [courses, setCourses] = useState('')
 
-   
 
 
     return (
-        <SignUpWrapper>
+        <AuthWrapper>
+            <div>
+                <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+                <AuthContainer large>
+                    <Formik
+                        initialValues={{
+                            firstName: '',
+                            lastName: '',
+                            dob: '',
+                            email: '',
+                            phone: '',
+                            address: '',
+                            soo: '',
+                            password: '',
 
-            <SignupContainer>
+                        }}
+                        validationSchema={validate}
+                        onSubmit={async (values) => {
 
-                <Formik
-                    initialValues={{
-                        firstName: '',
-                        lastName: '',
-                        dob: '',
-                        email: '',
-                        phone: '',
-                        address: '',
-                        soo: '',
-                        password: '',
+                            const config = {
+                                header: {
+                                    "Content-Type": "application/json",
+                                },
+                            }
 
-                    }}
-                    validationSchema={validate}
-                    onSubmit={async (values) => {
-                        // e.preventDefault();
+                            try {
+                                const { data } = await axios.post("http://localhost:4000/auth/register",
+                                    {
+                                        ...values,
+                                        faculty: faculty,
+                                        department: department
+                                    }
 
-                        const config = {
-                            header: {
-                                "Content-Type": "application/json",
-                            },
-                        }
+                                    , config);
+                                localStorage.setItem("authToken", data.token);
+                                history.push("/dashboard");
 
-                        try {
-                            const { data } = await axios.post("http://localhost:4000/auth/register",
-                                {
-                                    ...values,
-                                    faculty: faculty,
-                                    department: department
-                                }
+                            } catch (error) {
+                                setError(error.response.data.error);
+                                setTimeout(() => {
+                                    setError("");
+                                }, 5000);
+                            }
+                            console.log(values)
+                        }}
+                    >
+                        {formik => (
+                            <ItemsWrapper>
+                                {loading && 'Loading...'}
+                                {error && <span className="error-message">{error}</span>}
+                                <h1 className="">Registration Form</h1>
+                                <Form>
+                                    <FieldsWrapper>
+                                        <div>
+                                            <TextField label={'First Name'} name={'firstName'} type={'text'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'Last Name'} name={'lastName'} type={'text'} />
+                                        </div>
+                                        <div className='col-span-2'>
+                                            <TextField label={'Email'} name={'email'} type={'email'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'Phone Number'} name={'phone'} type={'text'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'Date OF Birth'} name={'dob'} type={'date'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'Address'} name={'address'} type={'text'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
+                                        </div>
 
-                                , config);
-                            localStorage.setItem("authToken", data.token);
-                            history.push("/dashboard");
+                                        <div>
+                                            <CustomSelect name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                                <option value="">Select Faculty</option>
+                                                {facultyArr.map(faculty =>
+                                                    <option value={faculty.faculty}>{faculty.faculty}</option>
+                                                )}
+                                            </CustomSelect>
 
-                        } catch (error) {
-                            setError(error.response.data.error);
-                            setTimeout(() => {
-                                setError("");
-                            }, 5000);
-                        }
-                        console.log(values)
-                    }}
-                >
-                    {formik => (
-                        <div>
-                            {loading && 'Loading...'}
-                            {error && <span className="error-message">{error}</span>}
-                            <h1 className="">Registration Form</h1>
-                            <Form>
-                                <FieldsWrapper>
-                                    <div>
-                                        <TextField label={'First Name'} name={'firstName'} type={'text'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Last Name'} name={'lastName'} type={'text'} />
-                                    </div>
-                                    <div className='col-span-2'>
-                                        <TextField label={'Email'} name={'email'} type={'email'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Phone Number'} name={'phone'} type={'text'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Date OF Birth'} name={'dob'} type={'date'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Address'} name={'address'} type={'text'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
-                                    </div>
+                                            <CustomSelect onChange={(e) => { setDep(e.target.value) }}  >
+                                                <option value="">Select Department</option>
+                                                {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
+                                                    <option value={depts.department}>{depts.department}</option>
+                                                )}
+                                            </CustomSelect>
+                                        </div>
+                                        <div>
+                                            <TextField label={'Password'} name={'password'} type={'password'} />
+                                        </div>
+                                        <div>
+                                            <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
+                                        </div>
 
-                                    <div>
-                                        <select name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
-                                            <option value="">Select Faculty</option>
-                                            {facultyArr.map(faculty =>
-                                                <option value={faculty.faculty}>{faculty.faculty}</option>
-                                            )}
-                                        </select>
+                                        <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} />
 
-                                        <select onChange={(e) => { setDep(e.target.value) }}  >
-                                            <option value="">Select Department</option>
-                                            {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
-                                                <option value={depts.department}>{depts.department}</option>
-                                            )}
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <TextField label={'Password'} name={'password'} type={'password'} />
-                                    </div>
-                                    <div>
-                                        <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
-                                    </div>
-
-                                    <button type='submit'>Register</button>
-
-
-                                </FieldsWrapper>
-                            </Form>
-                            <div className='text-center'>
-                                Are you a returning student? <Link to="/login">Log In</Link>
-                            </div>
-                        </div>
-                    )}
-                </Formik>
-                <div className='w-6/12 flex items-center justify-evenly'>
-                    <img className="md:w-8/12 w-11/12" src={regLogo} alt="banner" />
-                </div>
-            </SignupContainer>
-        </SignUpWrapper>
+                                    </FieldsWrapper>
+                                </Form>
+                                <div onClick={() => history.push('/login')} className='text-center text-gray-200'>
+                                    Are you a returning student? <span>Log In</span>
+                                </div>
+                            </ItemsWrapper>
+                        )}
+                    </Formik>
+                </AuthContainer>
+            </div>
+        </AuthWrapper>
     )
 }
 

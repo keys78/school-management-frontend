@@ -12,8 +12,8 @@ const SideNav = ({ user }) => {
     }
     return (
         <SideBarWrapper>
-           <div>
-               LogoHere
+           <div className='mb-24'>
+               <img className='w-40' src="e-school.png" alt="School Logo" />
            </div>
             <SideNavLinks user={user}/>
             <button onClick={logoutUser}>Logout</button>

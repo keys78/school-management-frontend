@@ -21,14 +21,15 @@ const TextField = ({ label, ...props }) => {
 const Label = styled.label`
    font-size: 14px;
    display:block;
-   color: #768192;
+   color: #96A0AE;
    font-weight: 400;
+   margin-bottom: 4px;
 `
 const Input = styled.input`
   background: #ffffff;
   border: 1px solid #d8dbe0;
   color: #768192;
-  padding: 5px 7px;
+  padding: 6px 7px;
   border-radius: 5px;
   width: 100%;
   outline: none;

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
+import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
+import Button from '../../components/Button';
 
-const ConfrmRegNo = () => {
-    const [regno, setRegNo] = useState('')
-    const [value, setValue] = useState('')
+
+const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
     const history = useHistory()
     const verifyRegNo = () => {
         if (regno.toString() === value) {
@@ -28,15 +29,22 @@ const ConfrmRegNo = () => {
     }
 
     return (
-        <div>
-            <p>Your reg no is: {regno}</p>
-            <form onSubmit={verifyRegNo}>
-                <Input value={value} onChange={(e) => setValue(e.target.value)} />
-                <button>Proceed</button>
-            </form>
+        <AuthWrapper>
+            <div>
+                <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+                <AuthContainer>
+                    <ItemsWrapper>
+                        <p className='text-white mb-6 mt-4'>Your reg no is: <span className='text-2xl'>{regno}</span></p> 
+                        <form onSubmit={verifyRegNo}>
+                            <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
+                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} />
+                        </form>
+                        <Link to="signup"></Link>
+                    </ItemsWrapper>
+                </AuthContainer>
+            </div>
+        </AuthWrapper>
 
-            <Link to="signup"></Link>
-        </div>
     )
 }
 

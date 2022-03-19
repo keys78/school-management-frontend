@@ -4,15 +4,14 @@ import TextField from '../../components/TextField';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import loginLogo from "../../assets/images/books.png"
+import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const history = useHistory();
-  
+
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -28,101 +27,68 @@ const Login = () => {
 
 
   return (
-    <LoginWrapper>
-      <LoginContainer>
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-          }}
-          validationSchema={validate}
-          onSubmit={ async (values) => {
-            const config = {
-              header: {
-                "Content-Type": "application/json",
-              },
-            };
-        
-            try {
-              const { data } = await axios.post(
-                 "http://localhost:4000/auth/login",
-                {...values },
-                config
-              );
-        
-              localStorage.setItem("authToken", data.token);
-              history.push("/dashboard");
-            } catch (error) {
-              setError(error.response.data.error);
-              setTimeout(() => {
-                setError("");
-              }, 5000);
-            }
-          }}
-        >
-          {formik => (
-            <div>
-              {loading && 'Loading...'}
-              {error && <span className="error-message">{error}</span>}
-              <h1>Login</h1>
-              <p>Sign In to your account</p>
-              <Form>
-                <FieldsWrapper>
-                  <div >
+    <AuthWrapper>
+      <div>
+        <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+        <AuthContainer>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+            }}
+            validationSchema={validate}
+            onSubmit={async (values) => {
+              const config = {
+                header: {
+                  "Content-Type": "application/json",
+                },
+              };
+
+              try {
+                const { data } = await axios.post(
+                  "http://localhost:4000/auth/login",
+                  { ...values },
+                  config
+                );
+
+                localStorage.setItem("authToken", data.token);
+                history.push("/dashboard");
+              } catch (error) {
+                setError(error.response.data.error);
+                setTimeout(() => {
+                  setError("");
+                }, 5000);
+              }
+            }}
+          >
+            {formik => (
+              <ItemsWrapper>
+                {loading && 'Loading...'}
+                {error && <span className="error-message">{error}</span>}
+                <h1>Login</h1>
+                <Form>
+                  <div>
                     <TextField label={'Email'} name={'email'} type={'email'} />
                   </div>
-                  <div>
+                  <div className='relative'>
                     <TextField label={'Password'} name={'password'} type={'password'} />
+                    <div className='absolute top-0 right-0  text-gray-200 text-sm'>Forgot Password</div>
                   </div>
-                  <Button type="submit" text={'Login'} />
-                </FieldsWrapper>
-              </Form>
-              <div className='text-center'>
-                Are you a new student? <Link to="/confirm-regno">Register Here</Link>
-              </div>
-            </div>
-          )}
-        </Formik>
-        <div className='w-5/12 flex items-center justify-evenly'>
-          <img className="md:w-8/12 w-11/12" src={loginLogo} alt="banner" />
-        </div>
-      </LoginContainer>
-    </LoginWrapper>
+                  <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} />
+                </Form>
+                <div onClick={() => history.push('/confirm-regno')} className='text-center text-gray-200'>
+                  Are you a new student? <span>Register Here</span>
+                </div>
+              </ItemsWrapper>
+            )}
+          </Formik>
+        </AuthContainer>
+      </div>
+    </AuthWrapper>
   )
 }
 
-const LoginWrapper = styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ebedef;
-    height: 100vh;
-`
 
-const LoginContainer = styled.section`
-    margin-top: -80px;
-    padding:25px 15px 25px 30px;
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px;
-    background: #fff;
-
-    box-shadow: var(--greyLight-2) 0px 1px 4px;
-
-    h1 {
-        font-size: 30px;
-        color: #3C4B64;
-    }
-
-    p{
-      margin-bottom: 30px;
-    }
-`
-const FieldsWrapper = styled.div`
-
-`
 
 
 export default Login;
