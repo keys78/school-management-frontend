@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 
 const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
     const history = useHistory()
-    const verifyRegNo = () => {
+    const verifyRegNo = (e) => {
         if (regno.toString() === value) {
             history.push("/signup");
         } else {
@@ -17,6 +17,7 @@ const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
     }
 
     useEffect(() => {
+        setValue('')
         setRegNo(makeRandomString())
     }, [])
 
@@ -35,9 +36,9 @@ const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
                 <AuthContainer>
                     <ItemsWrapper>
                         <p className='text-white mb-6 mt-4'>Your reg no is: <span className='text-2xl'>{regno}</span></p> 
-                        <form onSubmit={verifyRegNo}>
+                        <form onSubmit={(e) => verifyRegNo(e)}>
                             <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
-                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} />
+                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'}/>
                         </form>
                         <Link to="signup"></Link>
                     </ItemsWrapper>

@@ -95,7 +95,7 @@ const SignUp = () => {
                                             <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
                                         </div>
 
-                                        <div>
+                                        <div className='flex gap-8'>
                                             <CustomSelect name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
                                                 <option value="">Select Faculty</option>
                                                 {facultyArr.map(faculty =>
@@ -116,12 +116,15 @@ const SignUp = () => {
                                         <div>
                                             <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                                         </div>
-
-                                        <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} />
+                                        
+                                        <Button
+                                        type="reset"  onClick={ e => formik.resetForm()}
+                                        reset text={'Reset'} padding={'py-0'}  margin={'mb-4'} background={'bg-red-500'} />
+                                        <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} margin={'mb-4'} color={'text-white'}/>
 
                                     </FieldsWrapper>
                                 </Form>
-                                <div onClick={() => history.push('/login')} className='text-center text-gray-200'>
+                                <div onClick={() => history.push('/login')} className='text-center text-gray-200 text-sm'>
                                     Are you a returning student? <span>Log In</span>
                                 </div>
                             </ItemsWrapper>
@@ -133,39 +136,7 @@ const SignUp = () => {
     )
 }
 
-const SignUpWrapper = styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ebedef;
-    height: 100vh;
-`
 
-const SignupContainer = styled.section`
-    margin-top: -80px;
-    padding:25px 15px 25px 30px;
-    max-width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px;
-    background: #fff;
-    /* box-shadow:  5px 5px 27px var(--greyLight-2),
-    -5px -5px 27px var(--greyLight-2); */
-
-    box-shadow: var(--greyLight-2) 0px 1px 4px;
-
-    h1 {
-        font-size: 30px;
-        text-align: center;
-        margin-bottom: 30px;
-        color: #3C4B64;
-    }
-
-
-    /* box-shadow:  5px 5px 27px var(--greyLight-2),
-    -5px -5px 27px var(--greyLight-2); */
-`
 const FieldsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -175,11 +146,12 @@ const FieldsWrapper = styled.div`
     & > div:nth-child(2)  { grid-column: span 2 / span 4; }
     & > div:nth-child(6)  { grid-column: span 3 / span 4; }
     & > div:nth-child(7)  { grid-column: span 1 / span 4; }
-    & > div:nth-child(8)  { grid-column: span 2 / span 4; }
+    & > div:nth-child(8)  { grid-column: span 4 / span 4; }
     & > div:nth-child(9)  { grid-column: span 2 / span 4; }
     & > div:nth-child(10)  { grid-column: span 2 / span 4; }
     & > div:nth-child(11)  { grid-column: span 2 / span 4; }
     & > div:nth-child(12)  { grid-column: span 4 / span 4; }
+    & > button  { grid-column: span 2 / span 4; }
 
 `
 

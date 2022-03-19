@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import TextField from '../../components/TextField';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
 
@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <AuthWrapper>
       <div>
-        <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+        <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
         <AuthContainer>
           <Formik
             initialValues={{
@@ -72,12 +72,12 @@ const Login = () => {
                   </div>
                   <div className='relative'>
                     <TextField label={'Password'} name={'password'} type={'password'} />
-                    <div className='absolute top-0 right-0  text-gray-200 text-sm'>Forgot Password</div>
+                    <span onClick={() => history.push('/forgotpassword')} className='absolute top-0 right-0  text-gray-200 text-sm underline cursor-pointer '>Forgot Password</span>
                   </div>
-                  <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} />
+                  <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} color={'text-white'} />
                 </Form>
-                <div onClick={() => history.push('/confirm-regno')} className='text-center text-gray-200'>
-                  Are you a new student? <span>Register Here</span>
+                <div  className='text-center text-gray-200 text-sm'>
+                  Are you a new student? <span onClick={() => history.push('/confirm-regno')}>Register Here</span>
                 </div>
               </ItemsWrapper>
             )}

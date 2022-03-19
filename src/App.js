@@ -20,7 +20,7 @@ import StudentDetails from "./pages/private/StudentDetails";
 
 
 const App = () => {
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(undefined)
   const [regno, setRegNo] = useState('')
 
   return (

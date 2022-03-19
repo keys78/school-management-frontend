@@ -21,7 +21,7 @@ const Settings = ({ user, error, setError }) => {
 
             }}
             validationSchema={validateChangePassword}
-            onSubmit={async (values) => {
+            onSubmit={async (values, { resetForm }) => {
 
                 const config = {
                     header: {
@@ -38,7 +38,7 @@ const Settings = ({ user, error, setError }) => {
                         setError("");
                     }, 5000);
                 }
-                console.log(values)
+                resetForm();
             }}
         >
             {formik => (
