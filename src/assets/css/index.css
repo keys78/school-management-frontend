@@ -33,6 +33,10 @@
 }
 
 
+body {
+  background-color: #F9FBFD;;
+}
+
 .error {
   color: #f33838;
   font-size: 10px;

@@ -74,7 +74,7 @@ const Login = () => {
                     <TextField label={'Password'} name={'password'} type={'password'} />
                     <span onClick={() => history.push('/forgotpassword')} className='absolute top-0 right-0  text-gray-200 text-sm underline cursor-pointer '>Forgot Password</span>
                   </div>
-                  <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} color={'text-white'} />
+                  <Button type="submit" text={'Login'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'}/>
                 </Form>
                 <div  className='text-center text-gray-200 text-sm'>
                   Are you a new student? <span onClick={() => history.push('/confirm-regno')}>Register Here</span>

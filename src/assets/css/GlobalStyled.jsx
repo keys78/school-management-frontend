@@ -12,6 +12,7 @@ export const ContentContainer = styled.section`
     margin-top: 90px;
     margin-bottom: 10px;
     
+    
 `
 
 export const AuthWrapper = styled.section`
