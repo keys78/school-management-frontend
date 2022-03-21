@@ -166,3 +166,22 @@ export const lessons = [
     lesson: 'MTH 110'
   },
 ]
+
+
+export const tableHeading = [
+  {
+      title: "S/N"
+  },
+  {
+      title: "First Name"
+  },
+  {
+      title: "Last Name"
+  },
+  {
+      title: "Email"
+  },
+  {
+      title: "Actions"
+  }
+]

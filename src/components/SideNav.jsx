@@ -22,7 +22,8 @@ const SideNav = ({ user }) => {
 };
 
 const SideBarWrapper = styled.section`
-    background-color: #060b26;
+    /* background-color: #060b26; */
+    background: #04131D;
     z-index: 2;
     position: fixed;
     height: 100vh;

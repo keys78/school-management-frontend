@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import { validate, validateScore } from '../../utils/validateForm';
 import axios from 'axios';
 import Tabs from '../../components/Tabs';
+import DataTable from '../../components/DataTable';
 
 
 
@@ -43,8 +44,8 @@ const StudentDetails = () => {
 
     
     const renderProfile = (
+        
         <div>
-            <button onClick={() => history.goBack()}>Back</button>
             <p>{studentDetails.firstName}</p>
             <p>{studentDetails.lastName}</p>
         </div>
@@ -104,7 +105,8 @@ const StudentDetails = () => {
         <ContentWrapper>
             <ContentContainer>
                 <div>
-                    <Tabs active={1}>
+                <button onClick={() => history.goBack()}>Back</button>
+                    <Tabs active={0}>
                         {tabContent.map((tab, idx) => (
                             <Tabs.TabPane key={`Tab ${idx}`} tab={tab.title} >
                                 {tab.content}
