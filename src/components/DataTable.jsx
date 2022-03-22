@@ -1,35 +1,41 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import SearchBar from './SearchBar';
+import axios from 'axios';
 
 
-const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setAllStuds, allStuds }) => {
+const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url}) => {
+    const fetchAllStudents = async () => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+        };
+
+        try {
+            const { data } = await axios.get(url, config);
+            setData(data);
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
     useEffect(() => {
         if (searchTerm !== '') {
             const searchFilter = tableData && tableData.filter((user) =>
                 user.firstName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
                 user.lastName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
                 user.email.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-                )
-            setAllStuds(searchFilter)
-        } 
-        else {
-            setAllStuds(allStuds)
+            )
+             setData(searchFilter)
+        } else {
+
+            fetchAllStudents();
         }
     }, [searchTerm])
 
-
-
-    // useEffect(() => {
-    //     const searchFilter = data?.data.filter((user) =>
-    //         user.firstName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-    //         user.lastName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-    //         user.email.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
-    //         user.lastLogin.toLowerCase().includes(searchTerm.toLocaleLowerCase()))
-
-    //     setListItem(searchFilter)
-    // }, [data, searchTerm])
 
 
     const history = useHistory();
@@ -59,7 +65,7 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setAllS
         <TableWrapper>
             <div className='flex justify-between items-center p-2'>
                 <div className='flex'>
-                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                     <h1>Students</h1>
                 </div>
                 Sort
@@ -67,9 +73,9 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setAllS
             <CustomTable>
                 <CustomTableHead >
                     <tr>
-                    {renderTableHeading}
+                        {renderTableHeading}
                     </tr>
-                   
+
                 </CustomTableHead>
                 <tbody className='w-full'>
                     {renderAllStudents}
@@ -82,7 +88,7 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setAllS
 
 const TableWrapper = styled.section`
     border-radius: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     background-color: #fff;
     padding-bottom: 40px;
 `

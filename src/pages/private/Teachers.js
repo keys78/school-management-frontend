@@ -12,9 +12,9 @@ import DataTable from '../../components/DataTable';
 
 
 
-const Teachers = () => {
+const Teachers = ({ searchTerm, setSearchTerm}) => {
     const history = useHistory()
-    const [allTeachers, setAllTeachers] = useState('')
+    const [data, setData] = useState([].sort((a, b) => a.name.localeCompare(b.name)))
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
     const [loading, setLoading] = useState(false)
@@ -23,7 +23,7 @@ const Teachers = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
-        const fetchAllTeachers = async () => {
+        const fetchData = async () => {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -33,24 +33,15 @@ const Teachers = () => {
 
             try {
                 const { data } = await axios.get("http://localhost:4000/private/admin/teachers", config);
-                setAllTeachers(data);
+                setData(data);
             } catch (error) {
                 console.log(error)
             }
         };
 
-        fetchAllTeachers();
+        fetchData();
     }, []);
 
-
-    // const renderAllTeachers = allTeachers && allTeachers.map((val, i) => (
-    //     <div key={i}>
-    //         <p>{val.firstName}
-    //             {val.lastName
-    //             } {val.email}
-    //         </p>
-    //     </div>
-    // ))
 
 
     return error ? (
@@ -149,8 +140,18 @@ const Teachers = () => {
 
                     <br />
                     <br />
-                    {allTeachers.length !== 0 ? (<DataTable tableData={allTeachers} tableHeading={tableHeading}/>) : (
-                        <div> 'You have no new teacher on grrannd'</div>
+                    {data.length !== 0 ? (
+                        <DataTable
+                            tableData={data}
+                            tableHeading={tableHeading}
+                            url={"http://localhost:4000/private/admin/teachers"}
+                            searchTerm={searchTerm}
+                            setSearchTerm={setSearchTerm}
+                            data={data}
+                            setData={setData}
+                        />
+                    ) : (
+                        <div> 'You have no new teachers'</div>
                     )}
                 </div>
             </ContentContainer>

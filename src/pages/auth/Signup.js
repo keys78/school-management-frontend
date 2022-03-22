@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import TextField from '../../components/TextField';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
@@ -34,6 +34,7 @@ const SignUp = () => {
                             address: '',
                             soo: '',
                             password: '',
+                            gender:'',
 
                         }}
                         validationSchema={validate}
@@ -95,8 +96,13 @@ const SignUp = () => {
                                             <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
                                         </div>
 
+                                        <Field component="select" name="gender" placeholder={'Select Options'}>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </Field>
+
                                         <div className='flex gap-8'>
-                                            <CustomSelect name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                            <CustomSelect onChange={(e) => { const x = e.target.value; setFacu(x) }}>
                                                 <option value="">Select Faculty</option>
                                                 {facultyArr.map(faculty =>
                                                     <option value={faculty.faculty}>{faculty.faculty}</option>
@@ -116,11 +122,11 @@ const SignUp = () => {
                                         <div>
                                             <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                                         </div>
-                                        
+
                                         <Button
-                                        type="reset"  onClick={ e => formik.resetForm()}
-                                        reset text={'Reset'} padding={'py-0'}  margin={'mb-4'} background={'bg-red-500'} />
-                                        <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} margin={'mb-4'} color={'text-white'}/>
+                                            type="reset" onClick={e => formik.resetForm()}
+                                            reset text={'Reset'} padding={'py-0'} margin={'mb-4'} background={'bg-red-500'} />
+                                        <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} margin={'mb-4'} color={'text-white'} />
 
                                     </FieldsWrapper>
                                 </Form>
