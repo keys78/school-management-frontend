@@ -1,9 +1,37 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import SearchBar from './SearchBar';
 
 
-const DataTable = ({ tableHeadingg, tableData }) => {
+const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setAllStuds, allStuds }) => {
+    useEffect(() => {
+        if (searchTerm !== '') {
+            const searchFilter = tableData && tableData.filter((user) =>
+                user.firstName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+                user.lastName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+                user.email.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+                )
+            setAllStuds(searchFilter)
+        } 
+        else {
+            setAllStuds(allStuds)
+        }
+    }, [searchTerm])
+
+
+
+    // useEffect(() => {
+    //     const searchFilter = data?.data.filter((user) =>
+    //         user.firstName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+    //         user.lastName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+    //         user.email.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
+    //         user.lastLogin.toLowerCase().includes(searchTerm.toLocaleLowerCase()))
+
+    //     setListItem(searchFilter)
+    // }, [data, searchTerm])
+
+
     const history = useHistory();
 
     const moreDetails = (value) => {
@@ -12,17 +40,16 @@ const DataTable = ({ tableHeadingg, tableData }) => {
     }
 
 
-    const renderTableHeading = tableHeadingg.map((table, i) => (
+    const renderTableHeading = tableHeading.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
 
     const renderAllStudents = tableData && tableData.map((val, i) => (
         <CustomTableRow key={i}>
             <TableData> {1 + i} </TableData>
-            <TableData> {val} </TableData>
-            {/* <TableData> {val.firstName} </TableData> */}
-            {/* <TableData> {val.lastName}  </TableData> */}
-            {/* <TableData> {val.email}  </TableData> */}
+            <TableData> {val.firstName} </TableData>
+            <TableData> {val.lastName}  </TableData>
+            <TableData> {val.email}  </TableData>
             <TableData><button onClick={() => moreDetails(val)}> more </button></TableData>
         </CustomTableRow>
 
@@ -32,14 +59,17 @@ const DataTable = ({ tableHeadingg, tableData }) => {
         <TableWrapper>
             <div className='flex justify-between items-center p-2'>
                 <div className='flex'>
-                    Search
+                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                     <h1>Students</h1>
                 </div>
                 Sort
             </div>
             <CustomTable>
                 <CustomTableHead >
+                    <tr>
                     {renderTableHeading}
+                    </tr>
+                   
                 </CustomTableHead>
                 <tbody className='w-full'>
                     {renderAllStudents}

@@ -6,6 +6,7 @@ import axios from "axios";
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const [user, setUser] = useState({})
     const [error, setError] = useState('')
+    const [searchTerm, setSearchTerm] = useState('')
     
     useEffect(() => {
         const fetchPrivateData = async () => {
@@ -28,6 +29,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         fetchPrivateData();
     }, []);
 
+   
+
     return (
         <Route
             {...rest}
@@ -35,7 +38,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 localStorage.getItem("authToken") ? (
                     <>
                         <Layout user={ user }/>
-                        <Component user={user} error={error} setError={setError} {...props} />
+                        <Component user={user} searchTerm={searchTerm} setSearchTerm={setSearchTerm} error={error} setError={setError} {...props} />
                     </>
                 ) : (
                     <Redirect to="/login" />

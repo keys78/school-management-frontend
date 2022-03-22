@@ -20,7 +20,7 @@ const Input = ({name, value, onChange, placeholder, label, type, required}) => {
 
 const InputBox = styled.input`
     color: #768192;
-    padding: 8px 7px;
+    padding: 6px 7px;
     border-radius: 5px;
     width: 100%;
     border: none;

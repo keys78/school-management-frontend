@@ -12,9 +12,9 @@ import DataTable from '../../components/DataTable';
 
 
 
-const Students = ({ error }) => {
+const Students = ({ error, searchTerm, setSearchTerm }) => {
     const history = useHistory()
-    const [allStuds, setAllStuds] = useState('')
+    const [allStuds, setAllStuds] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
@@ -37,26 +37,10 @@ const Students = ({ error }) => {
         fetchAllStudents();
     }, []);
 
-    // const moreDetails = (value) => {
-    //     console.log(value._id)
-    //     history.push(`students/student/${value._id}`)
-    // }
-
-
-    // const renderTableHeading = tableHeading.map((table, i) => (
-    //     <TableHeads key={i}>{table.title}</TableHeads>
-    // ))
-
-    // const renderAllStudents = allStuds && allStuds.map((val, i) => (
-    //     <CustomTableRow key={i}>
-    //         <TableData> {1 + i} </TableData>
-    //         <TableData> {val.firstName} </TableData>
-    //         <TableData> {val.lastName}  </TableData>
-    //         <TableData> {val.email}  </TableData>
-    //         <TableData><button onClick={() => moreDetails(val)}> more </button></TableData>
-    //     </CustomTableRow>
-
-    // ))
+    useEffect(() => {
+        setAllStuds(allStuds)
+        // dispatch(getTemplates())
+    }, [allStuds])
 
 
 
@@ -65,58 +49,11 @@ const Students = ({ error }) => {
     ) : (
         <ContentWrapper>
             <ContentContainer>
-                {/* <TableWrapper>
-                    <div className='flex justify-between items-center p-2'>
-                        <div className='flex'>
-                            Search
-                            <h1>Students</h1>
-                        </div>
-                        Sort
-                    </div>
-                    <CustomTable>
-                        <CustomTableHead >
-                            {renderTableHeading}
-                        </CustomTableHead>
-                        <tbody className='w-full'>
-                            {renderAllStudents}
-                        </tbody>
-                    </CustomTable>
-                </TableWrapper> */}
-
-                <DataTable tableHeadingg={tableHeading} tableData={allStuds} />
-
+                <DataTable tableHeading={tableHeading} tableData={allStuds} searchTerm={searchTerm} setSearchTerm={setSearchTerm} allStuds={allStuds}  setAllStuds={setAllStuds}/>
             </ContentContainer>
         </ContentWrapper>
     )
 };
-
-// const TableWrapper = styled.section`
-//     border-radius: 10px;
-//     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-//     background-color: #fff;
-//     padding-bottom: 40px;
-// `
-// const CustomTable = styled.table`
-//     width: 100%;
-// `
-// const CustomTableHead = styled.thead`
-//     background: #3C3D3E;
-// `
-
-// const CustomTableRow = styled.tr`
-//     width: 100%;
-//     border-bottom: 0.5px solid #95999B;
-// `
-// const TableHeads = styled.th`
-//     text-align: left;
-//     padding:8px 12px;
-//     font-size: 18px;
-//     color:#fff;
-// `
-// const TableData = styled.td`
-//     padding:8px 12px;
-//     font-size: 15px;
-// `
 
 export default Students;
 

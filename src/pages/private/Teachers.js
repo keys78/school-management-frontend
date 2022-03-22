@@ -6,8 +6,9 @@ import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-import { facultyArr, courseArr } from '../../utils/data';
+import { facultyArr, courseArr, tableHeading } from '../../utils/data';
 import useAxiosFetch from '../../utils/useAxiosFetch'
+import DataTable from '../../components/DataTable';
 
 
 
@@ -42,14 +43,14 @@ const Teachers = () => {
     }, []);
 
 
-    const renderAllTeachers = allTeachers && allTeachers.map((val, i) => (
-        <div key={i}>
-            <p>{val.firstName}
-                {val.lastName
-                } {val.email}
-            </p>
-        </div>
-    ))
+    // const renderAllTeachers = allTeachers && allTeachers.map((val, i) => (
+    //     <div key={i}>
+    //         <p>{val.firstName}
+    //             {val.lastName
+    //             } {val.email}
+    //         </p>
+    //     </div>
+    // ))
 
 
     return error ? (
@@ -146,16 +147,9 @@ const Teachers = () => {
                         </Formik>
                     </div>
 
-
                     <br />
                     <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    {renderAllTeachers.length !== 0 ? (renderAllTeachers) : (
+                    {allTeachers.length !== 0 ? (<DataTable tableData={allTeachers} tableHeading={tableHeading}/>) : (
                         <div> 'You have no new teacher on grrannd'</div>
                     )}
                 </div>
