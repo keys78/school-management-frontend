@@ -8,7 +8,7 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, courseArr, tableHeading } from '../../utils/data';
 import useAxiosFetch from '../../utils/useAxiosFetch'
-import DataTable from '../../components/DataTable';
+import { DataTable } from '../../components/DataTable';
 
 
 

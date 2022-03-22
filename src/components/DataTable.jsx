@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import SearchBar from './SearchBar';
 import axios from 'axios';
+import SortByOrder from './SortByOrder';
 
 
-const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url}) => {
+export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url }) => {
+    const history = useHistory();
     const fetchAllStudents = async () => {
         const config = {
             headers: {
@@ -29,7 +31,7 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData
                 user.lastName.toLowerCase().includes(searchTerm.toLocaleLowerCase()) ||
                 user.email.toLowerCase().includes(searchTerm.toLocaleLowerCase())
             )
-             setData(searchFilter)
+            setData(searchFilter)
         } else {
 
             fetchAllStudents();
@@ -38,7 +40,7 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData
 
 
 
-    const history = useHistory();
+
 
     const moreDetails = (value) => {
         console.log(value._id)
@@ -55,6 +57,7 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData
             <TableData> {1 + i} </TableData>
             <TableData> {val.firstName} </TableData>
             <TableData> {val.lastName}  </TableData>
+            <TableData> {val.gender}  </TableData>
             <TableData> {val.email}  </TableData>
             <TableData><button onClick={() => moreDetails(val)}> more </button></TableData>
         </CustomTableRow>
@@ -66,9 +69,8 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData
             <div className='flex justify-between items-center p-2'>
                 <div className='flex'>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                    <h1>Students</h1>
                 </div>
-                Sort
+                <SortByOrder tableData={tableData} setData={setData} url={url} />
             </div>
             <CustomTable>
                 <CustomTableHead >
@@ -84,6 +86,74 @@ const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData
         </TableWrapper>
     )
 }
+
+
+export const DataTableAcademics = ({ tableData, tableHeading}) => {
+
+    const renderTableHeading = tableHeading.map((table, i) => (
+        <TableHeads key={i}>{table.title}</TableHeads>
+    ))
+
+    const renderAllStudents = tableData && tableData.courses.map((course, i) => (
+        <CustomTableRow key={i}>
+            <TableData>{course.code}</TableData>
+            <TableData>{course.title}</TableData>
+            <TableData>
+                <Formik
+                    initialValues={{
+                        score: course.score
+                    }}
+                    validationSchema={validateScore}
+                    onSubmit={async (values) => {
+
+                        const config = {
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                            },
+                        };
+
+                        try {
+                            await axios.put(`http://localhost:4000/private/update-score/${course._id}`, { ...values }, config);
+                            alert('score has been updatd')
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }}>
+                    {formik => (
+                        <Form>
+                            <div>
+                                <TextField label={''} name={'score'} type={'number'} />
+                            </div>
+                            <button type='submit'>Update Score</button>
+
+                        </Form>
+
+                    )}
+                </Formik>
+            </TableData>
+
+        </CustomTableRow>
+
+    ))
+
+    return (
+        <TableWrapper>
+            <CustomTable>
+                <CustomTableHead >
+                    <tr>
+                        {renderTableHeading}
+                    </tr>
+
+                </CustomTableHead>
+                <tbody className='w-full'>
+                    {renderAllStudents}
+                </tbody>
+            </CustomTable>
+        </TableWrapper>
+    )
+}
+
 
 
 const TableWrapper = styled.section`
@@ -114,5 +184,3 @@ const TableData = styled.td`
     font-size: 15px;
 `
 
-
-export default DataTable;

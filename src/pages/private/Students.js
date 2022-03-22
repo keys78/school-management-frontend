@@ -7,13 +7,12 @@ import { validate } from '../../utils/validateForm';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, courseArr, tableHeading } from '../../utils/data';
-import useAxiosFetch from '../../utils/useAxiosFetch'
-import DataTable from '../../components/DataTable';
+import { DataTable } from '../../components/DataTable';
 
 
 
 const Students = ({ error, searchTerm, setSearchTerm }) => {
-    const [data, setData] = useState([].sort((a, b) => a.name.localeCompare(b.name)))
+    const [data, setData] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
