@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom'
 import SearchBar from './SearchBar';
 import axios from 'axios';
 import SortByOrder from './SortByOrder';
+import TextField from './TextField';
+import { Formik, Form } from 'formik';
+import { validateScore } from '../utils/validateForm';
 
 
 export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url }) => {
@@ -43,8 +46,8 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
 
     const moreDetails = (value) => {
-        console.log(value._id)
-        history.push(`students/student/${value._id}`)
+        value.role === 'student' &&  history.push(`students/student/${value._id}`)
+        value.role === 'teacher' &&  history.push(`lecturers/lecturer/${value._id}`)
     }
 
 
@@ -53,13 +56,13 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
     ))
 
     const renderAllStudents = tableData && tableData.map((val, i) => (
-        <CustomTableRow key={i}>
+        <CustomTableRow  onClick={() => moreDetails(val)} key={i}>
             <TableData> {1 + i} </TableData>
             <TableData> {val.firstName} </TableData>
             <TableData> {val.lastName}  </TableData>
             <TableData> {val.gender}  </TableData>
             <TableData> {val.email}  </TableData>
-            <TableData><button onClick={() => moreDetails(val)}> more </button></TableData>
+            <TableData><button> more </button></TableData>
         </CustomTableRow>
 
     ))
@@ -88,14 +91,16 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 }
 
 
-export const DataTableAcademics = ({ tableData, tableHeading}) => {
 
+
+export const DataTableAcademics = ({ tableData, tableHeading}) => {
     const renderTableHeading = tableHeading.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
 
-    const renderAllStudents = tableData && tableData.courses.map((course, i) => (
+    const renderAllScores = tableData && tableData.courses.map((course, i) => (
         <CustomTableRow key={i}>
+            <TableData> {1 + i} </TableData>
             <TableData>{course.code}</TableData>
             <TableData>{course.title}</TableData>
             <TableData>
@@ -122,16 +127,20 @@ export const DataTableAcademics = ({ tableData, tableHeading}) => {
                     }}>
                     {formik => (
                         <Form>
-                            <div>
+                            <div className='flex items-center justify-between'>
+                                {/* <div className='border border-black'> */}
                                 <TextField label={''} name={'score'} type={'number'} />
-                            </div>
+                                {/* </div> */}
+                                
                             <button type='submit'>Update Score</button>
+                            </div>
 
                         </Form>
 
                     )}
                 </Formik>
             </TableData>
+            <TableData>{course.units}</TableData>
 
         </CustomTableRow>
 
@@ -147,7 +156,7 @@ export const DataTableAcademics = ({ tableData, tableHeading}) => {
 
                 </CustomTableHead>
                 <tbody className='w-full'>
-                    {renderAllStudents}
+                    {renderAllScores}
                 </tbody>
             </CustomTable>
         </TableWrapper>
@@ -175,12 +184,12 @@ const CustomTableRow = styled.tr`
 `
 const TableHeads = styled.th`
     text-align: left;
-    padding:8px 12px;
+    padding:8px 16px;
     font-size: 18px;
     color:#fff;
 `
 const TableData = styled.td`
-    padding:8px 12px;
+    padding:8px 16px;
     font-size: 15px;
 `
 

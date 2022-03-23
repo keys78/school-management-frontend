@@ -38,7 +38,7 @@ const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
                         <p className='text-white mb-6 mt-4'>Your reg no is: <span className='text-2xl'>{regno}</span></p> 
                         <form onSubmit={(e) => verifyRegNo(e)}>
                             <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
-                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'}/>
+                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'}/>
                         </form>
                         <Link to="signup"></Link>
                     </ItemsWrapper>

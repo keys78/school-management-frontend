@@ -15,7 +15,7 @@ import Courses from "./pages/private/Courses";
 import Students from "./pages/private/Students";
 import Teachers from "./pages/private/Teachers";
 import Settings from "./pages/private/Settings";
-import StudentDetails from "./pages/private/StudentDetails";
+import UserDetails from "./pages/private/UserDetails";
 
 
 
@@ -30,8 +30,9 @@ const App = () => {
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/courses" component={Courses} />
         <PrivateRoute exact path="/students" component={Students} />
-        <PrivateRoute path="/students/student/:id" component={StudentDetails} />
+        <PrivateRoute path="/students/student/:id" component={UserDetails} />
         <PrivateRoute exact path="/lecturers" component={Teachers} />
+        <PrivateRoute path="/lecturers/lecturer/:id" component={UserDetails} />
         <PrivateRoute exact path="/settings" component={Settings} />
 
         <Route exact path="/" component={Home} />

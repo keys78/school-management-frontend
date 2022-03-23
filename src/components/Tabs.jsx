@@ -24,7 +24,7 @@ const Tabs = ({ children, active = 0 }) => {
             <ul className='flex items-center gap-6 border-b-2 border-gray-300 -mb-1'>
                 {
                     tabsData.map(({ tab }, idx) => (
-                        <TabsList className=''>
+                        <TabsList key={idx}>
                             <button className={`nav-link ${idx === activeTab ? "active" : ""}`}
                                 onClick={() => setActiveTab(idx)}
                             >

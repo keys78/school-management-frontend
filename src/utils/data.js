@@ -204,6 +204,6 @@ export const tableAcademics = [
     title: "Score"
   },
   {
-    title: "Action"
-  },
+    title: "Units"
+  }
 ]

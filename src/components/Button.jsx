@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({ onClick, text, flexUp, width, padding, margin, color, background, reset }) => {
+const Button = ({ onClick, text, flexUp, width, padding, margin, color, background, reset, type }) => {
   return (
     <ButtonWrapper
+    type={type}
       reset={reset}
       onClick={onClick}
       className={`glow-on-hover ${flexUp} ${background} ${width} ${margin} ${padding} ${color}`}>

@@ -4,7 +4,6 @@ import TextField from '../../components/TextField';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import regLogo from "../../assets/images/register-logo.png"
 import { facultyArr, } from '../../utils/data';
 import { validate } from '../../utils/validateForm';
 import { AuthContainer, AuthWrapper, ItemsWrapper, CustomSelect } from '../../assets/css/GlobalStyled';
@@ -162,4 +161,4 @@ const FieldsWrapper = styled.div`
 `
 
 
-export default SignUp
+export default SignUp;
