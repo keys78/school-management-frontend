@@ -27,13 +27,13 @@ const App = () => {
   const [value, setValue] = useState(undefined)
   const [regno, setRegNo] = useState('')
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     offset: 200, // offset (in px) from the original trigger point
-  //     delay: 0, // values from 0 to 3000, with step 50ms
-  //     duration: 1000 // values from 0 to 3000, with step 50ms
-  //   })
-  // })
+  useEffect(() => {
+    AOS.init({
+      offset: 200, // offset (in px) from the original trigger point
+      delay: 0, // values from 0 to 3000, with step 50ms
+      duration: 1000 // values from 0 to 3000, with step 50ms
+    })
+  })
 
   return (
     <Router>

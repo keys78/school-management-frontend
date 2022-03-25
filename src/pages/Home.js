@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import PublicNav from '../components/PublicNav'
 
@@ -9,6 +10,7 @@ const Home = () => {
     <div>
         <PublicNav />
         <Hero />
+        <Footer />
         
     </div>
   )

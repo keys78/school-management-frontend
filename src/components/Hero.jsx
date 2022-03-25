@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link } from 'react-router-dom';
-import AOS from 'aos'
+import { Link, useHistory } from 'react-router-dom';
 
 
 import "swiper/css";
@@ -13,149 +12,111 @@ import "swiper/css/free-mode";
 // import required modules
 import { FreMode, Autoplay, Pagination, Navigation, FreeMode } from "swiper";
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const Hero = () => {
+    const [activeSlide, setActiveSlide] = useState(0)
+    const history = useHistory();
+    const [slides] = useState([
+        {
+            logo: true,
+            text: 'Welcome To E-School',
+            subText: 'Where great minds achieve wonders',
+            img:'https://images.pexels.com/photos/7683897/pexels-photo-7683897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        },
+        {
+            text:'Explore the power of knowledge',
+            img:'https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        },
+        {
+            text:'We believe in excellence',
+            img:'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        },
+        {
+            text: 'E-School is what you make it',
+            subText: 'Explore our undergraduate prospectus for 2023 admission',
+            link: true,
+            img:'https://images.pexels.com/photos/137618/pexels-photo-137618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        },
+    ])
 
-    function removeCC () {
-        const cardo = document.querySelector('.card')
-        cardo.hide(0);
-        cardo.removeClass('aos-init').removeClass('aos-animate');
-         AOS.init();
-    }
+    const runChange = (value) => { setActiveSlide(value.realIndex) }
 
-    // function startCC () {
-    //         document.querySelector('.card').show(0);
-    //         AOS.init();
-    // }
-
-    // AOS.init({
-    //     duration: 600,
-    //     once: true
-    // });
     return (
-        <>
-            <SlidesContainer>
-                <Swiper
-                    spaceBetween={30}
-                    centeredSlides={true}
-                    freeMode
-                    pagination={{
-                        type: "progressbar",
-                    }}
-                    speed={3000}
-                    autoplay={{
-                        delay: 2500,
-                        disableOnInteraction: false
-                    }}
-                    slideChangeTransitionStart={ removeCC() }
-                    // slideChangeTransitionEnd={startCC()}
-                    modules={[Autoplay, Pagination, Navigation, FreeMode]}
-                    className="mySwiper"
-                >
-                    <SwiperSlide>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
+        <SlidesContainer>
+            <Swiper
+                spaceBetween={10}
+                centeredSlides={true}
+                pagination={{
+                    type: "progressbar",
+                }}
+                speed={3000}
+                loop={true}
+                autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false
+                }}
+                onSlideChange={(e) => runChange(e)}
+                modules={[Autoplay, Pagination, Navigation, FreeMode]}
+                className="mySwiper"
+            >
+                 {(slides.map((slide, i) => (
+                    <SwiperSlide key={i}>
+                        <SliderContainer>
+                            <img src={slide.img} />
+                            <Content className={i === activeSlide ? 'new-anime' : 'bg-red-500'}>
+                                <div>
+                                    <h1>{slide.text}</h1>
+                                    <h2>{slide.subText}</h2>
+                                    <h6>{slide.link && <ElButtono onClick={() => history.push('/login')}>Login</ElButtono>}</h6>
+                                </div>
                             </Content>
                         </SliderContainer>
                     </SwiperSlide>
-                    <SwiperSlide>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <SliderContainer data-aos="fade-right">
-                            <img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" />
-                            <Content className='card' data-aos="fade-right">
-                                <h1>Welcome To e-school</h1>
-                                {/* <Link to="/login">Login</Link> */}
-                            </Content>
-                        </SliderContainer>
-                    </SwiperSlide>
-                    {/* <SwiperSlide><img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" /></SwiperSlide>
-                    <SwiperSlide><img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" /></SwiperSlide>
-                    <SwiperSlide><img src="https://images.pexels.com/photos/2305203/pexels-photo-2305203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="alt-2" /></SwiperSlide> */}
-                </Swiper>
-            </SlidesContainer>
+                 )))}
+            </Swiper>
+        
 
-        </>
+        </SlidesContainer>
     );
 }
 
 const SlidesContainer = styled.div`
     background: #000;
+    height: calc(100vh - 90px);
 `
 
 const SliderContainer = styled.div`
     position: relative;
     width:100%;
     overflow:hidden;
-
-  
-
-
 `
 const Content = styled.div`
-    background: #00000067;
+    background: #00000047;
     position: absolute;
     width: 100%;
     height: 100%;
-
-    animation: 4s slide-slow;
     top: 0;
     z-index: 999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    & > div {
+        width: 100%;
+        height: 100%;
+        text-align: center;
 
-    @keyframes slide-slow {
-     from {
-       margin-left: 100%;
-       width: 300%;
-     }
-
-     to {
-       margin-slow: 0%;
-       width: 100%;
-     }
-   }
-
+        & > h1 { font-size: 50px; font-weight:900; color: #fff; padding-top:200px; }
+        & > h2 { font-size: 20px; font-weight:400; color: #fff; }
+    }
     & > h1 { color: #fff; }
 `
+
+const ElButtono = styled.button`
+    padding:5px 20px; background: linear-gradient(to right, #c31432, #240b36);; color: #fff; margin-top: 20px;
+`
+
 export default Hero;
 
 // var swiper = new Swiper('.swiper-container', {

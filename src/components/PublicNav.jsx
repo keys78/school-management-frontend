@@ -23,7 +23,7 @@ const PublicNav = () => {
 
 const PublicNavContainer = styled.div`
     width: 100%;
-    background: #031A3F;
+    background: #021532;
 
     & > div:nth-of-type(1) > div:nth-of-type(1) { padding: 13px 0; }
 `
