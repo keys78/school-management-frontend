@@ -7,6 +7,7 @@ import SortByOrder from './SortByOrder';
 import TextField from './TextField';
 import { Formik, Form } from 'formik';
 import { validateScore } from '../utils/validateForm';
+import { useState } from 'react';
 
 
 export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url }) => {
@@ -46,8 +47,8 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
 
     const moreDetails = (value) => {
-        value.role === 'student' &&  history.push(`students/student/${value._id}`)
-        value.role === 'teacher' &&  history.push(`lecturers/lecturer/${value._id}`)
+        value.role === 'student' && history.push(`students/student/${value._id}`)
+        value.role === 'teacher' && history.push(`lecturers/lecturer/${value._id}`)
     }
 
 
@@ -56,7 +57,7 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
     ))
 
     const renderAllStudents = tableData && tableData.map((val, i) => (
-        <CustomTableRow  onClick={() => moreDetails(val)} key={i}>
+        <CustomTableRow onClick={() => moreDetails(val)} key={i}>
             <TableData> {1 + i} </TableData>
             <TableData> {val.firstName} </TableData>
             <TableData> {val.lastName}  </TableData>
@@ -93,7 +94,7 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
 
 
-export const DataTableAcademics = ({ tableData, tableHeading}) => {
+export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
     const renderTableHeading = tableHeading.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
@@ -131,8 +132,8 @@ export const DataTableAcademics = ({ tableData, tableHeading}) => {
                                 {/* <div className='border border-black'> */}
                                 <TextField label={''} name={'score'} type={'number'} />
                                 {/* </div> */}
-                                
-                            <button type='submit'>Update Score</button>
+
+                                {showBtn && <button type='submit'>Update Score</button>}
                             </div>
 
                         </Form>
@@ -162,6 +163,7 @@ export const DataTableAcademics = ({ tableData, tableHeading}) => {
         </TableWrapper>
     )
 }
+
 
 
 

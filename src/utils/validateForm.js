@@ -22,8 +22,8 @@ export const validateScore = Yup.object({
         // score: Yup.string().min(1, 'invalid score ').lessThan(100, "Commission should not be more than 2 digits").required("score is required"),
        score: Yup.number()
       .required()
-      .moreThan(0, 'commision should not be zero or less than zero')
-      .lessThan(101, "Commission should not be more than 2 digits"),
+      .moreThan(0, 'score should not be zero or less than zero')
+      .lessThan(101, "invalid score range"),
 
 })
 

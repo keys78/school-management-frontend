@@ -30,19 +30,19 @@ const UserDetails = () => {
                 let endpoints = [
                     "http://localhost:4000/private/students",
                     "http://localhost:4000/private/admin/teachers"
-                  ];
-                  
+                ];
+
                 axios.all(endpoints.map((endpoint) => axios.get(endpoint, config))).then(
                     (data) => {
                         let students = (data[0].data)
                         let lecturers = (data[1].data)
 
                         const allUsers = students.concat(lecturers);
-                          const getUserById = allUsers.find(val => val._id === id)
+                        const getUserById = allUsers.find(val => val._id === id)
                         setUserDetails(getUserById)
-                        
-                    } 
-                  );
+
+                    }
+                );
             } catch (error) {
                 console.log(error)
             }
@@ -81,14 +81,14 @@ const UserDetails = () => {
 
     const renderAcademicRecords = [
         <AcadsBox>
-            <DataTableAcademics tableHeading={tableAcademics} tableData={userDetails} />
+            <DataTableAcademics showBtn={true} tableHeading={tableAcademics} tableData={userDetails} />
         </AcadsBox>
 
     ]
 
     const tabContent = [
         { title: 'Profile', content: renderProfile },
-        (userDetails.role === 'student'&& { title: 'Academic Records',  content:  renderAcademicRecords})
+        (userDetails.role === 'student' && { title: 'Academic Records', content: renderAcademicRecords })
     ]
 
 
@@ -100,13 +100,13 @@ const UserDetails = () => {
             },
         };
 
-        try { 
+        try {
             const { data } = await axios.delete(`http://localhost:4000/private/admin/delete-user/${userDetails._id}`, config);
-            if(data.success === true) {
+            if (data.success === true) {
                 alert(data.data)
                 history.goBack();
             }
-           
+
         } catch (error) {
             console.log(error)
         }
@@ -123,14 +123,14 @@ const UserDetails = () => {
 
                     {isModalOpen &&
                         <DeleteUserModal>
-                        <DeleteUserModalContainer>
-                            <h1> Are you sure you want to delete <span>{userDetails.firstName} {userDetails.lastName}</span> ?</h1>
-                            <div>
-                                <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
-                                <button onClick={deleteUser}>Delete</button>
-                            </div>
-                        </DeleteUserModalContainer>
-                    </DeleteUserModal>
+                            <DeleteUserModalContainer>
+                                <h1> Are you sure you want to delete <span>{userDetails.firstName} {userDetails.lastName}</span> ?</h1>
+                                <div>
+                                    <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
+                                    <button onClick={deleteUser}>Delete</button>
+                                </div>
+                            </DeleteUserModalContainer>
+                        </DeleteUserModal>
                     }
 
                     <Tabs active={0}>

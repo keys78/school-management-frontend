@@ -5,55 +5,18 @@ export const facultyArr = [
   {
     faculty: "Science",
     departments: [
-      {
-        department: 'Medicine',
-        courses: [
-          { code: 'MED101', subject: "Med-1", score: 0, units: 5 },
-          { code: 'MED102', subject: "Med-2", score: 0, units: 5 }
-        ]
-      },
-      {
-        department: 'Engineering',
-        courses: [
-          { code: 'ENG101', subject: "Eng-1", score: 0, units: 5 },
-          { code: 'ENG102', subject: "Eng-2", score: 0, units: 5 }
-        ]
-      },
-      {
-        department: 'Pharmacy',
-        courses: [
-          { code: 'PHRM-101', subject: "Pharm-1", score: 0, units: 5 },
-          { code: 'PHRM-102', subject: "Pharm-2", score: 0, units: 5 }
-        ]
-      }
+      { department: 'Medicine', },
+      { department: 'Engineering', },
+      { department: 'Pharmacy', }
     ]
   },
 
   {
     faculty: "Arts",
     departments: [
-      {
-        department: 'Law',
-        courses: [
-          { subject: "Law-1" },
-          { subject: "Law-2" }
-        ]
-      },
-      {
-        department: 'Theater Arts',
-        courses: [
-          { subject: "Theaeter-1" },
-          { subject: "Theaeter-2" }
-        ]
-      },
-      {
-        department: 'Wood Works',
-        courses: [
-          { subject: "Wood-1" },
-          { subject: "Wood-2" }
-        ]
-      },
-
+      { department: 'Law', },
+      { department: 'Theater Arts', },
+      { department: 'Wood Works', },
     ]
   },
 
@@ -70,7 +33,7 @@ export const courseArr = [
   {
     department: 'Engineering',
     courses: [
-      { code: 'ENG101', title: "Eng-1", score: 0, units: 5 },
+      { code: 'ENG101', title: "Introduction To English Oliophogsis and Satuaraton", score: 0, units: 5 },
       { code: 'ENG102', title: "Eng-2", score: 0, units: 5 }
     ]
   },
@@ -169,41 +132,26 @@ export const lessons = [
 
 
 export const tableHeading = [
-  {
-    title: "S/N"
-  },
-  {
-    title: "First Name"
-  },
-  {
-    title: "Last Name"
-  },
-  {
-    title: "Gender"
-  },
-  {
-    title: "Email"
-  },
-
-  {
-    title: "Actions"
-  }
+  { title: "S/N" },
+  { title: "First Name" },
+  { title: "Last Name" },
+  { title: "Gender" },
+  { title: "Email" },
+  { title: "Actions" }
 ]
 
 export const tableAcademics = [
-  {
-    title: "S/N"
-  },
-  {
-    title: "Code"
-  },
-  {
-    title: "Title"
-  },
-  {
-    title: "Score"
-  },
-  {
-    title: "Units"
-  }
+  { title: "S/N" },
+  { title: "Code" },
+  { title: "Title" },
+  { title: "Score", show: false, },
+  { title: "Units" }
+]
+
+export const tableRegisterCourses = [
+  { title: "S/N" },
+  { title: "Code" },
+  { title: "Title" },
+  { title: "Units" },
+  { title: "Action" }
 ]

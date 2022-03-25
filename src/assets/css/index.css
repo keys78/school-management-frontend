@@ -47,25 +47,52 @@ body {
   position: absolute;
 }
 
-.active {
-  background: #1a83ff;
-  /* color: var(--testio);
-  background: #fff; */
-}
-
-.hoi {
-  height: 80px;
-  width: 100%;
-  background: red;
-}
-
-.nav-link {
-  color: rgb(10, 16, 49);
-  background: none;
-}
+.active { background: #1a83ff; }
+.align-pad {padding: 0 100px;}
+.nav-link { color: rgb(10, 16, 49); background: none;}
 .active { border-bottom: 2px solid #010124;}
 
-.test {
-  background: #00000076;
 
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.swiper-container-horizontal>.swiper-pagination-progressbar {
+  width: 20%;
+  height: 4px;
+left: 48%;
+top: 95%;
+  background-color: rgba(232, 227, 227, 0.2);
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  width: 100%;
+  background-color: #f06a44;
+}
+
+.swiper-horizontal>.swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal, .swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite, .swiper-vertical>.swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
+  background: grey;
+}
+.swiper-pagination-progressbar-fill  { background: linear-gradient(to right, #000, #00d4ff) !important;}
+.text { background: #00000067; }
+
+@keyframes slide-slow {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+  }
+
+  to {
+    margin-slow: 0%;
+    width: 100%;
+  }
 }

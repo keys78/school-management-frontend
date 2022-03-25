@@ -56,4 +56,6 @@ const TabsList = styled.li`
     }
 `
 
+
+
 export default Tabs;

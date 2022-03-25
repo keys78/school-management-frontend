@@ -14,59 +14,61 @@ import Tabs from '../../components/Tabs';
 const Settings = ({ user, error, setError }) => {
 
     const securityTab = [
-        <Formik
-            initialValues={{
-                password: '',
-                newPassword: '',
+        <ChangePasswordWrapper>
+            <Formik
+                initialValues={{
+                    password: '',
+                    newPassword: '',
 
-            }}
-            validationSchema={validateChangePassword}
-            onSubmit={async (values, { resetForm }) => {
+                }}
+                validationSchema={validateChangePassword}
+                onSubmit={async (values, { resetForm }) => {
 
-                const config = {
-                    header: {
-                        "Content-Type": "application/json",
-                    },
-                }
+                    const config = {
+                        header: {
+                            "Content-Type": "application/json",
+                        },
+                    }
 
-                try {
-                    await axios.post(`http://localhost:4000/auth/changepassword/${user._id} `, { ...values, }, config);
-                    alert(`password is updated`)
-                } catch (error) {
-                    setError(error.response.data.error);
-                    setTimeout(() => {
-                        setError("");
-                    }, 5000);
-                }
-                resetForm();
-            }}
-        >
-            {formik => (
-                <div>
-                    {error && <span className="error-message">{error}</span>}
+                    try {
+                        await axios.post(`http://localhost:4000/auth/changepassword/${user._id} `, { ...values, }, config);
+                        alert(`password is updated`)
+                    } catch (error) {
+                        setError(error.response.data.error);
+                        setTimeout(() => {
+                            setError("");
+                        }, 5000);
+                    }
+                    resetForm();
+                }}
+            >
+                {formik => (
+                    <div>
+                        {error && <span className="error-message">{error}</span>}
 
-                    <Form>
-                        {/* <FieldsWrapper> */}
-                        <div>
-                            <TextField label={'Old password'} name={'password'} type={'password'} />
-                        </div>
-                        <div>
-                            <TextField label={'New password'} name={'newPassword'} type={'password'} />
-                        </div>
-                        <div>
-                            <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
-                        </div>
+                        <Form>
+                            <div>
+                                <TextField label={'Old password'} name={'password'} type={'password'} />
+                            </div>
+                            <div>
+                                <TextField label={'New password'} name={'newPassword'} type={'password'} />
+                            </div>
+                            <div>
+                                <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
+                            </div>
+                            <div>
+                                <button type='submit'>Change Password</button>
+                            </div>
 
-                        <button type='submit'>Register</button>
-                        {/* </FieldsWrapper> */}
-                    </Form>
-                </div>
-            )}
-        </Formik>
+                        </Form>
+                    </div>
+                )}
+            </Formik>
+        </ChangePasswordWrapper>
     ]
-    const notificationsTab = ['you have no new notifications']
+    const notificationsTab = [<div className='mt-6'>You have no new notifications</div>]
     const supportTab = [
-        <div>
+        <div className='mt-6'>
             <h1>Having Troubles ..?</h1>
             <p>Contact us at <a href="mailto: rahzy24@gmail.com">rahzy24@gmail.com</a>&nbsp;or place a call to <a href="tel:08108243267">08108243267</a>
             </p>
@@ -84,10 +86,14 @@ const Settings = ({ user, error, setError }) => {
         <ContentWrapper>
             <ContentContainer>
                 <div>
+                    <h1>Settings</h1>
                     <Tabs>
                         {tabContent.map((tab, idx) => (
                             <Tabs.TabPane key={`Tab ${idx}`} tab={tab.title} >
+                                <div className='bg-white mt-4 pt-2 pb-40 px-2 rounded-2xl'>
                                 {tab.content}
+                                </div>
+                               
                             </Tabs.TabPane>
                         ))}
                     </Tabs>
@@ -97,5 +103,16 @@ const Settings = ({ user, error, setError }) => {
     )
 };
 
+
+const ChangePasswordWrapper = styled.div`
+    background: #19262F;
+    max-width: 500px;
+    padding: 25px 20px;
+    border-radius: 8px;
+    /* margin-top: 30px; */
+
+    & form > div:nth-of-type(4) { text-align: right; }
+    & form > div > button { color: red; color: white; border-radius: 6px; background: red; padding: 5px 10px;  text-align: right; }
+`
 
 export default Settings;
