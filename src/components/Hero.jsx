@@ -22,7 +22,7 @@ const Hero = () => {
             logo: true,
             text: 'Welcome To E-School',
             subText: 'Where great minds achieve wonders',
-            img:'https://images.pexels.com/photos/7683897/pexels-photo-7683897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            img:'https://images.pexels.com/photos/137618/pexels-photo-137618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
         },
         {
             text:'Explore the power of knowledge',
@@ -36,7 +36,9 @@ const Hero = () => {
             text: 'E-School is what you make it',
             subText: 'Explore our undergraduate prospectus for 2023 admission',
             link: true,
-            img:'https://images.pexels.com/photos/137618/pexels-photo-137618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            img:'https://images.pexels.com/photos/7683897/pexels-photo-7683897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+
+            
         },
     ])
 

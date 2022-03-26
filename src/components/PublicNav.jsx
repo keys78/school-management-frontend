@@ -7,7 +7,7 @@ const PublicNav = () => {
   return (
     <PublicNavContainer >
       <div className='align-pad'>
-        <div className='flex justify-between items-center align-pad'>
+        <div className='flex justify-between items-center'>
           <img className='w-40' src="e-school.png" alt="School Logo" />
           <div className='text-white flex gap-4'>
             <h1>Home</h1>
