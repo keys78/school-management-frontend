@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../redux/usersSlice';
+// import axios from 'axios';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getUsers } from '../redux/usersSlice';
 import bell from '../assets/images/ic-notification.png'
 
 const Navbar = ({ user }) => {

@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 
 
 
-const Courses = ({ user }) => {
+const Courses = ({ user, setUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [buttonStatus, setButtonStatus] = useState('Add')
     const allCourses = user?.courses
@@ -100,9 +100,10 @@ const Courses = ({ user }) => {
             };
 
             try {
-                const { data } = await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
+                await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
+                const { data } = await axios.get(`http://localhost:4000/private/user`, config);
                 alert('course has been registered')
-                console.log(data)
+                setUser(data)
 
             } catch (error) {
                 console.log(error)

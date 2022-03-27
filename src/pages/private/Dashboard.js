@@ -88,9 +88,6 @@ const Dashboard = ({ user, error }) => {
 
                                 <button onClick={() => history.push('/profile')}>view profile</button>
                             </div>
-                            {/* <p>{user.email}</p><br />
-                            <p>{user.phone}</p><br />
-                            <p>{user.address}</p><br /> */}
                         </UserCard>
 
                         <div>

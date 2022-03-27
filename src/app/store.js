@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import usersReducer from "../redux/usersSlice"
+import { usersApi } from "../redux/usersApi";
+
 
 export const store = configureStore({
   reducer: {
-    users: usersReducer,
+    [usersApi.reducerPath]: usersApi.reducer,
   },
+  middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(usersApi.middleware)
 });
 
-  setupListeners(store.dispatch)
+setupListeners(store.dispatch)

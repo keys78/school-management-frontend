@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 
 
 
-const Teachers = ({ searchTerm, setSearchTerm }) => {
+const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
     const history = useHistory()
     const [data, setData] = useState([])
     const [faculty, setFacu] = useState('')
@@ -39,8 +39,10 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
             }
         };
 
+        
+
         fetchData();
-    }, []);
+    }, [data.length]);
 
 
 
@@ -83,9 +85,12 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                                         }
 
                                         , config);
+                                        const { data_new } = await axios.get(`http://localhost:4000/private/user`, config);
+                                  
                                   
                                        if(data.success === true) {
                                         alert(`${data?.data} is now a teacher`)
+                                        setUser(data_new)
                                         setIsOpen(false)
                                        } 
                                    

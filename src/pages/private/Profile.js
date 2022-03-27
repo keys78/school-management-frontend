@@ -8,11 +8,13 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../components/Button';
 import { PencilSimpleLine } from "phosphor-react";
+import { useGetUserQuery } from '../../redux/usersApi';
 
 
 
-const Profile = ({ user, setError, error }) => {
+const Profile = ({ user, setUser, setError, error }) => {
   const history = useHistory()
+  const { refetch } = useGetUserQuery();
 
   return error ? (
     <span className="error-message">{error} <Link to="/login">Login</Link></span>
@@ -43,7 +45,9 @@ const Profile = ({ user, setError, error }) => {
 
               try {
                 await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
+                const { data } = await axios.get("http://localhost:4000/private/user", config);
                 alert('user has been updatd')
+                setUser([user, data])
               } catch (error) {
                 console.log(error)
               }
@@ -61,7 +65,8 @@ const Profile = ({ user, setError, error }) => {
                           <img className='rounded-full w-28' src={user.profileImg} />
                           <p>Upload</p>
                         </div>
-                        <button>Update</button>
+                        <button >Update</button>
+                        {/* <button onClick={(e) => window.location.reload(e)}>Update</button> */}
                       </section>
                       <FieldsWrapper>
                         <div>
