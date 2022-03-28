@@ -15,28 +15,16 @@
   --testio: #6D603B;
 }
 
-@font-face {
-  font-family: 'circular-std-medium';
-  src: url('../fonts/Circular/CircularStd-Medium.otf');
-}
-@font-face {
-  font-family: 'circular-std-light';
-  src: url('../fonts/Circular/CircularStd-Light.otf');
-}
 
 @font-face {
-  font-family: 'circular-std-bold';
-  src: url('../fonts/Circular/CircularStd-Bold.otf');
-}
-@font-face {
-  font-family: 'circular-std-book';
-  src: url('../fonts/Circular/CircularStd-Book.otf');
+  font-family: 'Statoshi-regular';
+  src: url('../fonts/statoshi/Satoshi-Regular.ttf');
 }
 
 
 body {
   background-color: #EFF4F8;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Statoshi-regular';
   /* font-family: 'circular-std-light'; */
 }
 

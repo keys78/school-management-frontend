@@ -31,7 +31,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     useEffect(() => {
         fetchPrivateData();
-    }, [user._id]);
+    }, []);
 
     
 

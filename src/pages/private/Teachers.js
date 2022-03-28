@@ -39,10 +39,9 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
             }
         };
 
-        
 
         fetchData();
-    }, [data.length]);
+    }, []);
 
 
 
@@ -72,6 +71,7 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                 const config = {
                                     header: {
                                         "Content-Type": "application/json",
+                                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                                     },
                                 }
 
@@ -85,17 +85,17 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                         }
 
                                         , config);
-                                        const { data_new } = await axios.get(`http://localhost:4000/private/user`, config);
-                                  
-                                  
-                                       if(data.success === true) {
-                                        alert(`${data?.data} is now a teacher`)
-                                        setUser(data_new)
-                                        setIsOpen(false)
-                                       } 
-                                   
+                                        // const { data: data_1 } = await axios.get(`http://localhost:4000/private/admin/teachers`, config);
                                     
-                                    console.log(data)
+
+
+                                    if (data.success === true) {
+                                        alert(`${data?.data} is now a teacher`)
+                                        setIsOpen(false)
+                                        
+                                    }
+                                   
+                                    // setUser(data_1)
 
                                 } catch (error) {
                                     setError(error.response.data.error);
@@ -108,11 +108,11 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                         >
                             {formik => (
                                 <div>
-                                   
+
 
                                     {isOpen &&
                                         <AddTeacherModal>
-                                             {error && <span className="error-message">{error}</span>}
+                                            {error && <span className="error-message">{error}</span>}
                                             <Form>
                                                 <FieldsWrapper>
                                                     <div>
