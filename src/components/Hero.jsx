@@ -83,15 +83,24 @@ const Hero = () => {
     );
 }
 
-const SlidesContainer = styled.div`
-    background: #000;
-    height: calc(100vh - 90px);
+const SlidesContainer = styled.section`
+        background: #000;
+    /* height: calc(100vh - 90px); */
+    max-height: calc(100vh - 90px);
+
+    & > img { width:100%;  height: 100%; }
+    @media screen and (min-width: 1600px){
+        height: 700px ;
+    }
 `
 
 const SliderContainer = styled.div`
+
     position: relative;
     width:100%;
     overflow:hidden;
+
+   
 `
 const Content = styled.div`
     background: #00000047;

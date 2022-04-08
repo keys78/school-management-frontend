@@ -101,3 +101,8 @@ top: 95%;
   }
 }
 
+@media screen and (max-width: 1280px) {
+  .align-pad {
+    padding: 0px 30px;
+  }
+}

@@ -48,7 +48,7 @@ const Footer = () => {
                         <h4> E-school University Images</h4>
                     </div>
                 </div>
-                <div class="py-4 text-gray-300">
+                <div className="py-4 text-gray-300">
                    Copyright &copy;<span> {new Date().getFullYear()} </span> E-School® &nbsp; All rights reserved.
                 </div>
             </FooterWrapper>
@@ -62,7 +62,7 @@ const FooterContainer = styled.div`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     & h1 { opacity: 0.7; font-size: 20px; line-height: 40px;}
-    & h4 { opacity: 0.4; line-height: 35px; cursor: pointer; transition: 0ms.4s; font-size: 14px;
+    & h4 { opacity: 0.4; line-height: 35px; cursor: pointer; transition: 0.4s; font-size: 14px;
         &:hover {
             opacity: 1; transition: 0.4s;
         }
@@ -72,4 +72,4 @@ const FooterWrapper = styled.div`
     
 `
 
-export default Footer
+export default Footer;

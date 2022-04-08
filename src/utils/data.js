@@ -1,5 +1,5 @@
 import dashboardIcon from '../assets/images/ic-dashboard.png'
-import * as IoIcons from 'react-icons/io';
+import { Books, Timer, Binoculars, TreeEvergreen } from 'phosphor-react'
 
 export const facultyArr = [
   {
@@ -154,4 +154,27 @@ export const tableRegisterCourses = [
   { title: "Title" },
   { title: "Units" },
   { title: "Action" }
+]
+
+export const homeContentData = [
+  {
+    title:'Our Culture',
+    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    icon: <Books size={30} color="#163bd0"/>,
+  },
+  {
+    title:'Our History',
+    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    icon: <Timer size={30} color="#ff3838" />,
+  },
+  {
+    title:'Foresight',
+    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    icon: <Binoculars size={30} color="#e0d01f" weight="bold" />,
+  },
+  {
+    title:'Our Core Values',
+    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    icon: <TreeEvergreen size={30} color="#1ea207" weight="bold" />,
+  },
 ]

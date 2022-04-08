@@ -22,23 +22,25 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                },
-            };
-
-            try {
-                const { data } = await axios.get("http://localhost:4000/private/admin/teachers", config);
-                return setData(data);
-            } catch (error) {
-                console.log(error)
-            }
+    const fetchData = async () => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
         };
 
+        try {
+            const { data } = await axios.get("http://localhost:4000/private/admin/teachers", config);
+            return setData(data);
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+
+    useEffect(() => {
+       
 
         fetchData();
     }, []);
@@ -85,11 +87,13 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                         }
 
                                         , config);
-                                        // const { data: data_1 } = await axios.get(`http://localhost:4000/private/admin/teachers`, config);
+                                        fetchData();
+                                        
                                     
 
 
                                     if (data.success === true) {
+                                        // const { data: data_1 } = await axios.get(`http://localhost:4000/private/admin/teachers`, config);
                                         alert(`${data?.data} is now a teacher`)
                                         setIsOpen(false)
                                         
