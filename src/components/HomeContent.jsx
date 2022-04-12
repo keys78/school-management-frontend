@@ -22,7 +22,7 @@ const HomeContent = () => {
                 {renderContent}
             </div>
             <div className='align-pad'>
-                <div className='flex items=center justify-between'>
+                <CountersBox>
                     <div>
                         <img src="" />
                         <h1><CountUp end={5000} duration={5} />+</h1>
@@ -44,7 +44,7 @@ const HomeContent = () => {
                         <h1><CountUp end={7} duration={5} /></h1>
                         <h2>WORLD AWARDS</h2>
                     </div>
-                </div>
+                </CountersBox>
             </div>
             <div className='align-pad'>
                 <h1>We Love To Have You With Us!</h1>
@@ -54,7 +54,13 @@ const HomeContent = () => {
 }
 
 const HomeContentWrapper = styled.section`
-    & > div:nth-of-type(1) { display: grid; grid-template-columns: repeat(2, 1fr); padding-top: 50px; padding-bottom: 50px; row-gap: 40px;  column-gap: 67p;
+    & > div:nth-of-type(1) { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        padding-top: 50px; 
+        padding-bottom: 50px; 
+        row-gap: 40px;  
+        column-gap: 67p;
         
         @media screen and (max-width: 1280px) {
             grid-template-columns: 1fr;
@@ -64,8 +70,8 @@ const HomeContentWrapper = styled.section`
 
 
     & > div:nth-of-type(2) { text-align: center;  background: #E7F1FF; padding-top: 150px; padding-bottom: 150px;
-        & > div > div > h1 { font-size:70px;  font-weight: 100;  }
-        & > div > div > h2 { font-size:20px;  font-weight: 600;  }
+        & > div > div > h1 { font-size:70px; opacity:0.7;  font-weight: 100; font-family: 'Abril Fatface', cursive;  }
+        & > div > div > h2 { font-size:20px; opacity:0.7;  font-weight: 600;  }
     }
 
     & > div:nth-of-type(3) { text-align: center;  padding-top: 150px; padding-bottom: 150px;
@@ -78,5 +84,17 @@ const ContentSingleBox = styled.div`
     align-items:center ;
     
     & > div:nth-of-type(2) > h1 {font-size: 24px; font-weight: 600; }
+`
+
+const CountersBox = styled.div`
+    display:grid ;
+    grid-template-columns: repeat(4, 1fr) ;
+
+    @media screen and (max-width: 1280px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
 `
 export default HomeContent
