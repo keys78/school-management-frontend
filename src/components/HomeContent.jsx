@@ -84,6 +84,9 @@ const ContentSingleBox = styled.div`
     align-items:center ;
     
     & > div:nth-of-type(2) > h1 {font-size: 24px; font-weight: 600; }
+    @media screen and (max-width: 650px) {
+        grid-template-columns: 100%;
+    }
 `
 
 const CountersBox = styled.div`

@@ -86,12 +86,15 @@ const Hero = () => {
 const SlidesContainer = styled.section`
         background: #000;
     /* height: calc(100vh - 90px); */
-    max-height: calc(100vh - 90px);
+    /* max-height: calc(100vh - 90px); */
 
     & > img { width:100%;  height: 100%; }
     @media screen and (min-width: 1600px){
-        height: 700px ;
+        /* height: 700px ; */
     }
+    /* @media screen and (max-width: 1024px){
+        height: 100%;
+    } */
 `
 
 const SliderContainer = styled.div`

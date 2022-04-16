@@ -16,7 +16,7 @@ const Footer = () => {
                         <a href='https://www.linkedin.com/in/tochi-emma-904b71220/' target={'_blank'} referrerPolicy={'no-referrer'}><LinkedinLogo size={22} color="#ededed" weight="bold" /></a>
                     </div>
                 </div>
-                <div className='flex gap-20 border-t border-b border-gray-200 py-4'>
+                <div className='flex flex-wrap md:gap-20 gap-8 border-t border-b border-gray-200 py-4'>
                     <div>
                         <h1>INFORMATION ABOUT</h1>
                         <h4> E-School</h4>
