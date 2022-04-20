@@ -36,29 +36,31 @@ const App = () => {
   })
 
   return (
-    <Router>
-      <Switch>
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/profile" component={Profile} />
-        <PrivateRoute exact path="/courses" component={Courses} />
-        <PrivateRoute exact path="/students" component={Students} />
-        <PrivateRoute path="/students/student/:id" component={UserDetails} />
-        <PrivateRoute exact path="/lecturers" component={Teachers} />
-        <PrivateRoute path="/lecturers/lecturer/:id" component={UserDetails} />
-        <PrivateRoute exact path="/settings" component={Settings} />
+    <div className="gen-con">
+      <Router>
+        <Switch>
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/courses" component={Courses} />
+          <PrivateRoute exact path="/students" component={Students} />
+          <PrivateRoute path="/students/student/:id" component={UserDetails} />
+          <PrivateRoute exact path="/lecturers" component={Teachers} />
+          <PrivateRoute path="/lecturers/lecturer/:id" component={UserDetails} />
+          <PrivateRoute exact path="/settings" component={Settings} />
 
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/confirm-regno" >
-          <ConfrmRegNo value={value} regno={regno} setRegNo={setRegNo} setValue={setValue} />
-        </Route>
-        {regno === value && <Route exact path="/signup" component={Signup} />}
-        <Route exact path="/forgotpassword" component={ForgotPassword} />
-        <Route exact path="/:resetpassword/:resetToken" component={ResetPassword} />
-        <Redirect from="*" to="/" />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/confirm-regno" >
+            <ConfrmRegNo value={value} regno={regno} setRegNo={setRegNo} setValue={setValue} />
+          </Route>
+          {regno === value && <Route exact path="/signup" component={Signup} />}
+          <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route exact path="/:resetpassword/:resetToken" component={ResetPassword} />
+          <Redirect from="*" to="/" />
 
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </div>
   );
 };
 
