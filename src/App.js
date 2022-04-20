@@ -36,7 +36,7 @@ const App = () => {
   })
 
   return (
-    <div className="gen-con">
+    <div className="gen-container">
       <Router>
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

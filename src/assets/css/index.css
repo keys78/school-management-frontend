@@ -29,11 +29,12 @@ body {
   /* font-family: 'circular-std-light'; */
 }
 
-.gen-con {
+/* .gen-con {
   border:2px solid red;
   max-width: 1600px;
   margin: 0 auto;
-}
+  padding:0 20px;
+} */
 
 .error {
   color: #f33838;

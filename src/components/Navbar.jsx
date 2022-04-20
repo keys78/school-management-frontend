@@ -4,28 +4,44 @@ import styled from 'styled-components'
 // import { useDispatch, useSelector } from 'react-redux';
 // import { getUsers } from '../redux/usersSlice';
 import bell from '../assets/images/ic-notification.png'
+import { List } from 'phosphor-react'
 
 const Navbar = ({ user }) => {
+  const [isNavOpen, setIsNavOpen] = useState(false)
+
+  const handleResize = () => {
+    window.innerWidth < 1280 ? setIsNavOpen(false) : setIsNavOpen(true)
+  }
+
+  useEffect(() => {
+    window.innerWidth > 1280 && setIsNavOpen(true)
+    window.addEventListener("resize", handleResize)
+  })
 
   return (
-    <NavbarWrapper>
-      <div>
-        <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
-        <div className='flex items-center gap-5'>
-          <Notif>
-            <span>0</span>
-            <img src={bell} alt="notif-icon" />
-          </Notif>
-          <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
-          <Initials>
-            {/* {user ? user.firstName.charAt() : "-"}
-            {user ? user.lastName.charAt() : "-"} */}
-            EO
-          </Initials>
+    (
+      isNavOpen &&
+      <NavbarWrapper>
+        <div>
+          <HamburgerToggle>
+            <List size={30} onClick={() => setIsNavOpen(!isNavOpen)} color="#696D8C" weight="bold" />
+          </HamburgerToggle>
+          <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
+          <div className='flex items-center gap-5'>
+            <Notif>
+              <span>0</span>
+              <img src={bell} alt="notif-icon" />
+            </Notif>
+            <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
+            <Initials>
+              {/* {user ? user.firstName.charAt() : "-"}
+              {user ? user.lastName.charAt() : "-"} */}
+              EO
+            </Initials>
+          </div>
         </div>
-      </div>
-
-    </NavbarWrapper>
+      </NavbarWrapper>
+    )
   )
 }
 
@@ -84,5 +100,17 @@ const RoleTag = styled.div`
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: #ffffff;
 `
+
+const HamburgerToggle = styled.div`
+    display:none ;
+    position: relative ;
+    cursor: pointer;
+
+    
+    @media screen and (max-width: 1280px){
+        display: block;
+    }
+`
+
 
 export default Navbar
