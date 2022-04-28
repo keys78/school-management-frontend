@@ -5,7 +5,7 @@ import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/Globa
 import Button from '../../components/Button';
 
 
-const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
+const ConfrmRegNo = ({ value, regno, setRegNo, setValue }) => {
     const history = useHistory()
     const verifyRegNo = (e) => {
         if (regno.toString() === value) {
@@ -32,13 +32,13 @@ const ConfrmRegNo = ({value, regno, setRegNo, setValue}) => {
     return (
         <AuthWrapper>
             <div>
-                <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+                <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
                 <AuthContainer>
                     <ItemsWrapper>
-                        <p className='text-white mb-6 mt-4'>Your reg no is: <span className='text-2xl'>{regno}</span></p> 
+                        <p className='text-white mb-6 mt-4'>Your reg no is: <span className='text-2xl'>{regno}</span></p>
                         <form onSubmit={(e) => verifyRegNo(e)}>
                             <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
-                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'}/>
+                            <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'} />
                         </form>
                         <Link to="signup"></Link>
                     </ItemsWrapper>

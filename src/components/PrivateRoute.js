@@ -11,6 +11,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     const [searchTerm, setSearchTerm] = useState('')
     
 
+    const [isNavOpen, setIsNavOpen] = useState(true)
+
+    const handleResize = () => {
+      window.innerWidth < 1280 ? setIsNavOpen(false) : setIsNavOpen(true)
+    }
+  
+    useEffect(() => {
+      window.innerWidth > 1280 && setIsNavOpen(true)
+      window.addEventListener("resize", handleResize)
+    })
 
     const fetchPrivateData = async () => {
         const config = {
@@ -42,7 +52,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 localStorage.getItem("authToken") ? (
                     <>
                         <Layout user={ user }/>
-                        <Component user={ user } setUser={setUser} searchTerm={searchTerm} setSearchTerm={setSearchTerm} error={error} setError={setError} {...props} />
+                        <Component user={ user } 
+                        setUser={setUser} 
+                        searchTerm={searchTerm} 
+                        setSearchTerm={setSearchTerm} 
+                        error={error} 
+                        setError={setError} 
+                        isNavOpen={isNavOpen}
+                        setIsNavOpen={setIsNavOpen}
+                        {...props} />
                     </>
                 ) : (
                     <Redirect to="/login" />

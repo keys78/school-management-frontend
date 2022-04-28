@@ -84,24 +84,17 @@ const Hero = () => {
 }
 
 const SlidesContainer = styled.section`
-        background: #000;
-        /* height: calc(100vh - 90px) ; */
+    /* margin-top:90px ; */
+    background: #000;
+    height:100% ;
 
-        & > img { width: 100%; height: 100%; }
-    /* height: calc(100vh - 90px); */
-    /* max-height: calc(100vh - 90px); */
-
-    /* & > img { width:100%;  height: 100%; }
-    @media screen and (min-width: 1600px){
-        /* height: 700px ; */
-    /* }  */
-    /* @media screen and (max-width: 1024px){
-        height: 100%;
-    } */
+    & > img { width: 100%; height: 100%; }
+    @media screen and (min-width: 1024px){
+      height: calc(100vh - 90px) ;
+    }
 `
 
 const SliderContainer = styled.div`
-
     position: relative;
     width:100%;
     overflow:hidden;
@@ -124,8 +117,22 @@ const Content = styled.div`
         height: 100%;
         text-align: center;
 
-        & > h1 { font-size: 50px; font-weight:900; color: #fff; padding-top:200px; }
-        & > h2 { font-size: 20px; font-weight:400; color: #fff; }
+        & > h1 { font-size: 50px; font-weight:900; color: #fff; padding-top:200px;
+            @media screen and (max-width: 767px) {
+            font-size:32px ;  padding-top:100px;
+             }
+            @media screen and (max-width: 480px) {
+            font-size:25px ;  padding-top:50px;
+             }
+        }
+        & > h2 { font-size: 20px; font-weight:400; color: #fff;
+            @media screen and (max-width: 767px) {
+            font-size:18px ;
+             }
+            @media screen and (max-width: 480px) {
+            font-size:16px ; 
+             }
+        }
     }
     & > h1 { color: #fff; }
 `
@@ -135,27 +142,3 @@ const ElButtono = styled.button`
 `
 
 export default Hero;
-
-// var swiper = new Swiper('.swiper-container', {
-//     navigation: {
-//       nextEl: '.swiper-button-next',
-//       prevEl: '.swiper-button-prev',
-//     },
-//     pagination: {
-//       el: '.swiper-pagination',
-//     },
-//     on: {
-//       slideChangeTransitionStart: function () {
-//         document.querySelector('.card').hide(0);
-//         document.querySelector('.card').removeClass('aos-init').removeClass('aos-animate');
-//       },
-//       slideChangeTransitionEnd: function () {
-//         document.querySelector('.card').show(0);
-//         AOS.init();
-//       },
-//     } 
-  
-  
-//   }); 
-  
-//   AOS.init();

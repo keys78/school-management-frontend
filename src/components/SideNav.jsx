@@ -3,21 +3,27 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 import SideNavLinks from './SideNavLinks';
 
-const SideNav = ({ user }) => {
-    const history =  useHistory()
+const SideNav = ({ user, isNavOpen }) => {
+    const history = useHistory()
 
     const logoutUser = () => {
         localStorage.removeItem("authToken");
         history.push("/login");
     }
+
+
     return (
-        <SideBarWrapper>
-           <div className='mb-24'>
-               <img className='w-40' src="e-school.png" alt="School Logo" />
-           </div>
-            <SideNavLinks user={user}/>
-            <button onClick={logoutUser}>Logout</button>
-        </SideBarWrapper>
+        <>
+            {isNavOpen &&
+                <SideBarWrapper>
+                    <div className='mb-24'>
+                        <img className='w-40' src="e-school.png" alt="School Logo" />
+                    </div>
+                    <SideNavLinks user={user} />
+                    <button onClick={logoutUser}>Logout</button>
+                </SideBarWrapper>
+            }
+        </>
     )
 };
 

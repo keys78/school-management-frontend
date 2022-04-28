@@ -6,21 +6,10 @@ import styled from 'styled-components'
 import bell from '../assets/images/ic-notification.png'
 import { List } from 'phosphor-react'
 
-const Navbar = ({ user }) => {
-  const [isNavOpen, setIsNavOpen] = useState(false)
+const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
 
-  const handleResize = () => {
-    window.innerWidth < 1280 ? setIsNavOpen(false) : setIsNavOpen(true)
-  }
-
-  useEffect(() => {
-    window.innerWidth > 1280 && setIsNavOpen(true)
-    window.addEventListener("resize", handleResize)
-  })
 
   return (
-    (
-      isNavOpen &&
       <NavbarWrapper>
         <div>
           <HamburgerToggle>
@@ -41,7 +30,6 @@ const Navbar = ({ user }) => {
           </div>
         </div>
       </NavbarWrapper>
-    )
   )
 }
 
