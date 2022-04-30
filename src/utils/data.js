@@ -1,5 +1,7 @@
 import dashboardIcon from '../assets/images/ic-dashboard.png'
-import { Books, Timer, Binoculars, TreeEvergreen } from 'phosphor-react'
+import { Books, Timer, Binoculars, TreeEvergreen,
+        User, Student, Book, Users, Gear, ChalkboardSimple, SignOut
+} from 'phosphor-react'
 
 export const facultyArr = [
   {
@@ -73,37 +75,43 @@ export const navLinks = [
     role: ['admin', 'teacher', 'student'],
     title: "Dashboard",
     path: '/dashboard',
-    icon: dashboardIcon,
+    icon: <ChalkboardSimple />,
   },
   {
     role: ['admin', 'teacher', 'student'],
     title: "My Profile",
     path: "/profile",
-    icon: dashboardIcon,
+    icon: <User/>,
   },
   {
     role: ['student'],
     title: "Courses",
     path: "/courses",
-    icon: dashboardIcon,
+    icon: <Book />,
   },
   {
     role: ['admin', 'teacher'],
     title: "Students",
     path: "/students",
-    icon: dashboardIcon,
+    icon: <Student />,
   },
   {
     role: ['admin'],
     title: "Lecturers",
     path: "/lecturers",
-    icon: dashboardIcon,
+    icon: <Users />,
   },
   {
     role: ['admin', 'teacher', 'student'],
     title: "Settings",
     path: "/settings",
-    icon: dashboardIcon,
+    icon: <Gear />,
+  },
+  {
+    role: ['admin', 'teacher', 'student'],
+    title: "Logout",
+    path: "/login",
+    icon: <SignOut />,
   },
 ]
 

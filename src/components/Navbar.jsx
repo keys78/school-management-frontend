@@ -1,37 +1,44 @@
 import React from 'react'
 import styled from 'styled-components'
 import bell from '../assets/images/ic-notification.png'
+import { useHistory } from 'react-router-dom'
 // import { Hamburger, List } from 'phosphor-react'
 
 const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
-
+  const history = useHistory();
 
   return (
-    <div className='navbar-adjust'>
-      <NavbarWrapper>
-        <div>
-          {/* <HamburgerToggle>
-            <List size={30} onClick={() => setIsNavOpen(!isNavOpen)} color="#696D8C" weight="bold" />
-          </HamburgerToggle> */}
-          <HamburgerToggle onClick={() => setIsNavOpen(!isNavOpen)} >
-            Close
-          </HamburgerToggle>
+    <NavbarWrapper>
+      <div>
+        <NavbarRedo>
+          <img onClick={() => history.push('/')} className='sm:w-40 w-28 cursor-pointer' src={'e-school.png'} alt="logo" />
+
           <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
-          <div className='flex items-center gap-5'>
-            <Notif>
-              <span>0</span>
-              <img src={bell} alt="notif-icon" />
-            </Notif>
-            <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
-            <Initials>
-              {/* {user ? user.firstName.charAt() : "-"}
-              {user ? user.lastName.charAt() : "-"} */}
-              EO
-            </Initials>
+
+          <div className='flex space-x-2 items-center'>
+            <Initials> E0 </Initials>
+            <HamburgerToggle onClick={() => setIsNavOpen(!isNavOpen)} >
+              Close
+            </HamburgerToggle>
+
           </div>
+
+        </NavbarRedo>
+        <RoleTag className="private">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
+        <div className='flex items-center gap-5 private'>
+          <Notif>
+            <span>0</span>
+            <img src={bell} alt="notif-icon" />
+          </Notif>
+          <img className='rounded-full w-10' src={user.profileImg} alt="profile-icon" />
+          <Initials>
+            {/* {user ? user.firstName.charAt() : "-"}
+              {user ? user.lastName.charAt() : "-"} */}
+            EO
+          </Initials>
         </div>
-      </NavbarWrapper>
       </div>
+    </NavbarWrapper>
   )
 }
 
@@ -48,6 +55,12 @@ const NavbarWrapper = styled.section`
     align-items: center;
     justify-content: center;
 
+    @media screen and (max-width: 1280px){
+      padding-left: 0;
+      display:block ;
+      background:#04131D ;
+    }
+
     & > div {
       width: 90%;
       margin: 0 auto;
@@ -56,7 +69,27 @@ const NavbarWrapper = styled.section`
       align-items: center;
       justify-content: space-between;
       max-width:1250px ;
+
+      @media screen and (max-width: 1280px) {
+       display: block;
+      }
+
+      @media screen and (max-width: 767px){
+      width:96% ;
+     }
     }
+
+`
+
+const NavbarRedo = styled.div`
+  display:none ;
+  align-items: center;
+  justify-content: space-between;
+  width:100% ;
+
+  @media screen and (max-width: 1280px) {
+    display: flex;
+  }
 
 `
 
@@ -81,6 +114,8 @@ const Initials = styled.div`
   font-size: 16px;
   font-weight: 500p;
   padding: 5px;
+  text-align:center ;
+  min-width:34px ;
   border-radius: 5px;
 `
 const RoleTag = styled.div`
@@ -93,6 +128,7 @@ const RoleTag = styled.div`
 
 const HamburgerToggle = styled.div`
     display:none ;
+    color: #fff;
     position: relative ;
     cursor: pointer;
 

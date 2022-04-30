@@ -5,12 +5,20 @@ export const ContentWrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 1280px){
+      padding-left: 0;
+    }
 `
 
 export const ContentContainer = styled.section`
     width: 90%;
     margin-top: 90px;
     margin-bottom: 10px;
+
+    @media screen and (max-width: 767px){
+      width:97% ;
+    }
     
     
 `

@@ -122,6 +122,9 @@ const WelcomeCard = styled.div`
     overflow: hidden !important;
     color: #fff;
     min-width:300px ;
+    @media screen and (max-width: 1280px){
+      min-width:200px ;
+    }
     & > img { position: absolute; top:90px; left:0; opacity: 0.5}
     h1 {
         font-size: 24px;
@@ -133,11 +136,13 @@ const WelcomeCard = styled.div`
 `
 
 const UserCard = styled.div`
-    border:2px solid red;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     min-width:300px ;
+    @media screen and (max-width: 1280px){
+      min-width:200px ;
+    }
     & > div:nth-last-of-type(3) > p { text-transform: uppercase; }
     span { font-weight: bold;}
 `
@@ -146,6 +151,7 @@ const DisplayPattern = styled.div`
     display: grid;
     grid-template-columns: 30% 40% 30%;
     gap: 20px;
+    background-color:#fff ;
     padding-right: 40px;
     
     & > div:nth-of-type(1) {
@@ -157,7 +163,8 @@ const DisplayPattern = styled.div`
 
     }
     & > div:nth-of-type(2) {
-        padding: 12px;
+        max-height: 350px;
+        padding: 0 12px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;    
 
@@ -175,7 +182,7 @@ const DisplayPattern = styled.div`
         border-radius: 8px;        
         grid-column: span 2 / span 3;
         padding:12px;
-        height: 250px;
+        min-height: 280px;
         overflow-y: scroll;
         max-width: 100%;
 

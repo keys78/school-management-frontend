@@ -17,10 +17,9 @@ const SideNav = ({ user, isNavOpen }) => {
             {isNavOpen &&
                 <SideBarWrapper>
                     <div className='mb-24'>
-                        <img className='w-40' src="e-school.png" alt="School Logo" />
+                        <img className='w-40 private' src="e-school.png" alt="School Logo" />
                     </div>
                     <SideNavLinks user={user} />
-                    <button onClick={logoutUser}>Logout</button>
                 </SideBarWrapper>
             }
         </>
@@ -28,7 +27,6 @@ const SideNav = ({ user, isNavOpen }) => {
 };
 
 const SideBarWrapper = styled.section`
-    /* background-color: #060b26; */
     background: #04131D;
     z-index: 2;
     position: fixed;
@@ -37,10 +35,18 @@ const SideBarWrapper = styled.section`
     padding: 25px 15px 25px 60px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    
+    @media screen and (max-width: 1280px) {
+        background:#fff; ;
+    }
+    @media screen and (max-width: 767px) {
+        padding: 25px 15px 25px 15px;
+    }
 
     & > div {
         margin-bottom: 70px;
     }
+
 `
 
 export default SideNav;

@@ -24,7 +24,7 @@
 
 
 body {
-  background-color: #EFF4F8;
+  /* background-color: #EFF4F8; */
   font-family: 'Statoshi-regular';
   /* font-family: 'circular-std-light'; */
 }
@@ -39,35 +39,10 @@ body {
 .active { background: #1a83ff; }
 .align-pad {padding: 0 100px;}
 .nav-link { color: rgb(10, 16, 49); background: none;}
-.active { border-bottom: 2px solid #010124;}
+/* .active { border-bottom: 2px solid #010124;} */
 
 
-.navbar-adjust {
-  /* border:2px solid red; */
-  margin:0 auto;
-  /* max-width: 1600px; */
-}
-
-
-/* TWELVE */
-
-#hamburger-12.is-active .line:nth-child(1){
-  opacity: 0;
-  -webkit-transform: translateX(-100%);
-  -ms-transform: translateX(-100%);
-  -o-transform: translateX(-100%);
-  transform: translateX(-100%);
-}
-
-#hamburger-12.is-active .line:nth-child(3){
-  opacity: 0;
-  -webkit-transform: translateX(100%);
-  -ms-transform: translateX(100%);
-  -o-transform: translateX(100%);
-  transform: translateX(100%);
-}
-
-
+.private { display: block;}
 
 
 
@@ -160,9 +135,9 @@ top: 95%;
 }
 
 @media screen and (max-width: 1280px) {
-  .align-pad {
-    padding: 0px 30px;
-  }
+  .align-pad {padding: 0px 30px;  }
+  .private { display: none !important;}
+  .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
 }
 
 @media screen and (max-width: 480px) {

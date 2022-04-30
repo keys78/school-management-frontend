@@ -3,15 +3,42 @@ import axios from 'axios';
 import styled from 'styled-components'
 import { navLinks } from '../utils/data'
 import { NavLink as LinkerNav } from 'react-router-dom';
+import { IconContext } from "phosphor-react";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const SideNavLinks = ({ user }) => {
+    const history = useHistory();
+    const [activeNavLink, setActiveNavLinks] = useState(0);
+    const altIcon = ({ navLink, i }) => (
+        <IconContext.Provider
+            value={{
+                color: (i === activeNavLink ? '#696D8C' : '#6aeef5'),
+                size: 20, weight:"bold",
+            }}
+        >
+            {<span>{navLink.icon}</span>}
+        </IconContext.Provider>
+    )
+
+    const navClick = ({navLink,i}) => {
+        setActiveNavLinks(i)
+        if(navLink.title === 'Logout') {
+            localStorage.removeItem("authToken");
+            history.push("/login");
+        }
+    }
+
+
     const renderNavLinks = navLinks.map((navLink, i) => (
-        navLink.role.includes(user.role) && <SingleNav key={i}
+        navLink.role.includes(user.role)
+         && 
+        <SingleNav key={i}
+            onClick={() => navClick({navLink,i})}
             activeclassname="active"
             to={navLink.path}
         >
-            <img src={navLink.icon} alt={navLink.title} />
+            {altIcon ({navLink, i})}
             {navLink.title}
         </SingleNav>
     ))
@@ -30,22 +57,15 @@ const SingleNav = styled(LinkerNav)`
     padding: 5px 60px 5px 20px;
     color: #ffffff;
     border-radius: 5px;
-    /* border-top-left-radius:5px; */
-    /* border-bottom-left-radius:5px; */
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 20px;
     cursor: pointer;
 
-    &:hover {
-        background: #1a83ff;
-        /* color: var(--testio);
-  background: #fff; */
-        
+    @media screen and (max-width: 1280px) {
+        color:#696D8C;
     }
-
-    
-    
+  
 `
 
 export default SideNavLinks
