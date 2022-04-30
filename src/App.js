@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/auth/Login"
@@ -36,7 +35,6 @@ const App = () => {
   })
 
   return (
-    <div className="gen-container">
       <Router>
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -60,7 +58,6 @@ const App = () => {
 
         </Switch>
       </Router>
-    </div>
   );
 };
 

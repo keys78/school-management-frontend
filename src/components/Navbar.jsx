@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-// import axios from 'axios';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getUsers } from '../redux/usersSlice';
 import bell from '../assets/images/ic-notification.png'
-import { List } from 'phosphor-react'
+// import { Hamburger, List } from 'phosphor-react'
 
 const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
 
 
   return (
+    <div className='navbar-adjust'>
       <NavbarWrapper>
         <div>
-          <HamburgerToggle>
+          {/* <HamburgerToggle>
             <List size={30} onClick={() => setIsNavOpen(!isNavOpen)} color="#696D8C" weight="bold" />
+          </HamburgerToggle> */}
+          <HamburgerToggle onClick={() => setIsNavOpen(!isNavOpen)} >
+            Close
           </HamburgerToggle>
           <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
           <div className='flex items-center gap-5'>
@@ -30,6 +31,7 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
           </div>
         </div>
       </NavbarWrapper>
+      </div>
   )
 }
 
@@ -53,7 +55,7 @@ const NavbarWrapper = styled.section`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* border: 1px solid black; */
+      max-width:1250px ;
     }
 
 `

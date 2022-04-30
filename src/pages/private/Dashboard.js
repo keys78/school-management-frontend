@@ -9,10 +9,7 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 
 
 const Dashboard = ({ user, error }) => {
-
-    // const [error, setError] = useState("");
     const [greetings, setGreetings] = useState('')
-    // const [user, setUser] = useState({});
     const history = useHistory();
     const [value, onChange] = useState(new Date());
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
@@ -124,6 +121,7 @@ const WelcomeCard = styled.div`
     background-color: #436583;
     overflow: hidden !important;
     color: #fff;
+    min-width:300px ;
     & > img { position: absolute; top:90px; left:0; opacity: 0.5}
     h1 {
         font-size: 24px;
@@ -135,9 +133,11 @@ const WelcomeCard = styled.div`
 `
 
 const UserCard = styled.div`
+    border:2px solid red;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    min-width:300px ;
     & > div:nth-last-of-type(3) > p { text-transform: uppercase; }
     span { font-weight: bold;}
 `
@@ -149,7 +149,7 @@ const DisplayPattern = styled.div`
     padding-right: 40px;
     
     & > div:nth-of-type(1) {
-        height: 350px;
+        max-height: 350px;
         /* box-shadow: 0px 1px 4px rgba(46, 41, 78, 0.02), 0px 8px 12px rgba(46, 41, 78, 0.08);  */
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;
