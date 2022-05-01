@@ -25,6 +25,10 @@
     "swiper": "^8.0.7",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"
+    
+  },
+   "resolutions": {
+    "mini-css-extract-plugin": "2.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
