@@ -8,6 +8,11 @@ export const ContentWrapper = styled.section`
 
     @media screen and (max-width: 1280px){
       padding-left: 0;
+      /* margin-left: 0; */
+    }
+
+    @media screen and (max-width: 500px){
+      margin-left: -2px;
     }
 `
 
@@ -17,10 +22,8 @@ export const ContentContainer = styled.section`
     margin-bottom: 10px;
 
     @media screen and (max-width: 767px){
-      width:97% ;
+      width:95% ;
     }
-    
-    
 `
 
 export const AuthWrapper = styled.section`

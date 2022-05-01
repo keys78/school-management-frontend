@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import styled from 'styled-components'
 import { navLinks } from '../utils/data'
 import { NavLink as LinkerNav } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { IconContext } from "phosphor-react";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-const SideNavLinks = ({ user }) => {
+const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
     const history = useHistory();
     const [activeNavLink, setActiveNavLinks] = useState(0);
     const altIcon = ({ navLink, i }) => (
@@ -23,6 +22,8 @@ const SideNavLinks = ({ user }) => {
 
     const navClick = ({navLink,i}) => {
         setActiveNavLinks(i)
+        window.innerWidth < 1280 && setIsNavOpen(!isNavOpen)
+        
         if(navLink.title === 'Logout') {
             localStorage.removeItem("authToken");
             history.push("/login");

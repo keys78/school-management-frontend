@@ -6,6 +6,7 @@ import wmap from "../../assets/images/wmap.png"
 import Calendar from 'react-calendar';
 import { lessons } from "../../utils/data";
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
+import { Ghost } from "phosphor-react";
 
 
 const Dashboard = ({ user, error }) => {
@@ -56,6 +57,9 @@ const Dashboard = ({ user, error }) => {
     ) : (
         <ContentWrapper>
             <ContentContainer>
+                <GreetingsMobile>
+                <Ghost size={20} color="#d51a1a"/>&nbsp;{greetings} {user.firstName}
+                </GreetingsMobile>
                 {user &&
                     <DisplayPattern>
                         <WelcomeCard>
@@ -91,7 +95,7 @@ const Dashboard = ({ user, error }) => {
                             <CalendarBox>
                                 <h1>Calender</h1>
                                 <div>
-                                    <Calendar onChange={onChange} value={value} />
+                                    <Calendar className="w-full" onChange={onChange} value={value} />
                                 </div>
                             </CalendarBox>
 
@@ -122,17 +126,41 @@ const WelcomeCard = styled.div`
     overflow: hidden !important;
     color: #fff;
     min-width:300px ;
+
     @media screen and (max-width: 1280px){
       min-width:200px ;
     }
+    @media screen and (max-width: 500px){
+      min-width:140px ;
+    }
+
     & > img { position: absolute; top:90px; left:0; opacity: 0.5}
     h1 {
         font-size: 24px;
         font-family: 'Fredoka', sans-serif;
+
+        @media screen and (max-width: 1024px){
+            display:none;
+        }
     }
-    & > div:nth-of-type(1) { margin-top: 20px; }
-    & > div:nth-of-type(2) { margin-top: 40px;}
-    & p:nth-of-type(2) { margin-top: 10px; float: right;}
+    & > div:nth-of-type(1) { margin-top: 20px; 
+        @media screen and (max-width: 1280px){
+            margin-top:0 ;
+        }
+    }
+
+    & > div:nth-of-type(2) { margin-top: 40px;
+        @media screen and (max-width: 1280px){
+            margin-top:12px ;
+        }
+    }
+
+    p {
+        @media screen and (max-width: 500px){
+            font-size:13px ;
+        }
+    }
+    & p:nth-of-type(2) { margin-top: 10px; float: right; }
 `
 
 const UserCard = styled.div`
@@ -140,11 +168,41 @@ const UserCard = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: center;
     min-width:300px ;
+
     @media screen and (max-width: 1280px){
       min-width:200px ;
     }
+
+    @media screen and (max-width: 500px){
+      min-width:192px ;
+    }
+
+    @media screen and (max-width: 400px){
+      /* padding:12px 0 ; */
+      margin:20px 0 ;
+    }
+
     & > div:nth-last-of-type(3) > p { text-transform: uppercase; }
+    & > div:nth-last-of-type(1)  { grid-column: span 2 / span 2; }
     span { font-weight: bold;}
+`
+
+const GreetingsMobile = styled.div`
+    margin:30px 0 -25px 0;
+    font-size: 25px;
+    display:none ;
+
+    @media screen and (max-width: 1024px){
+      display:flex ;
+      align-items:center ;
+    }
+    @media screen and (max-width: 600px){
+      font-size:18px ;
+      margin:10px 0 -25px 0;
+    }
+    @media screen and (max-width: 480px){
+      margin:-10px 0 -25px 0;
+    }
 `
 
 const DisplayPattern = styled.div`
@@ -152,15 +210,37 @@ const DisplayPattern = styled.div`
     grid-template-columns: 30% 40% 30%;
     gap: 20px;
     background-color:#fff ;
-    padding-right: 40px;
+    padding-right:40px ;
+
+    @media screen and (max-width: 1280px){
+      padding-right:25px ;
+      margin-top:30px ;
+    }
+
+    @media screen and (max-width: 1024px){
+        grid-template-columns: 50% 50%;
+    }
+    @media screen and (max-width: 600px){
+        padding-right:0px ;
+        column-gap:5px ;
+        row-gap:10px ;
+    }
+    @media screen and (max-width: 400px){
+        display:block ;
+    }
     
     & > div:nth-of-type(1) {
         max-height: 350px;
-        /* box-shadow: 0px 1px 4px rgba(46, 41, 78, 0.02), 0px 8px 12px rgba(46, 41, 78, 0.08);  */
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;
         padding: 12px;
 
+        @media screen and (max-width: 1024px){
+            max-height: 250px;
+        }
+        @media screen and (max-width: 500px){
+            max-height: 180px;
+        }
     }
     & > div:nth-of-type(2) {
         max-height: 350px;
@@ -168,13 +248,61 @@ const DisplayPattern = styled.div`
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;    
 
+        @media screen and (max-width: 1024px){
+            max-height: 250px;
+        }
+        @media screen and (max-width: 500px){
+            font-size:14px ;
+            max-height:180px ;
+
+            & > div:nth-of-type(1) > img { width:4rem !important;}
+        }
+
+        @media screen and (max-width: 400px){
+            padding:12px;
+        }
     }
 
     & > div:nth-of-type(3) {
         padding: 12px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;        
-        grid-row: span 2 / span 2;	
+        grid-row: span 2 / span 2;
+
+        & > div:nth-of-type(2) {
+                cursor: all-scroll;
+        }
+        
+        @media screen and (max-width: 600px) {
+                font-size:14px !important ;
+            }
+        
+
+        @media screen and (max-width: 1024px) {
+            grid-row: span 1 / span 1 ;
+            grid-column: span 2 / span 2;
+        
+            display:flex ; align-items: baseline ; justify-content:space-between ; gap:20px ;
+
+            @media screen and (max-width: 600px) {
+                flex-direction: column-reverse ;
+            }
+
+            & > div:nth-of-type(1) {
+                max-height:312px ;
+                padding-top:-20px ;
+            }
+            & > div:nth-of-type(2) {
+                width:130% ;
+                max-height:312px ;
+                padding-top:-20px ;
+                cursor: all-scroll;
+                
+                @media screen and (max-width: 600px) {
+                width:100% ;
+            }
+            }
+        }
     }
 
     & > div:nth-of-type(4) {
@@ -190,6 +318,10 @@ const DisplayPattern = styled.div`
         ::-webkit-scrollbar-track { background: #f1f1f1;  }
         ::-webkit-scrollbar-thumb {  background: #888;  }
         ::-webkit-scrollbar-thumb:hover { background: #555;  }
+
+        @media screen and (max-width: 400px){
+            margin-top:10px ;
+        }
     }
 `
 
@@ -200,7 +332,7 @@ const NewsBox = styled.div`
     grid-template-columns: 30% 40% 30%;
     margin-bottom: 15px;
     border-radius:7px ;
-    border:0.2px solid #f1f1f1;
+    border: 1px solid #f1f1f1;
     gap:5px;
     box-shadow: rgba(46, 41, 78, 0.08) 0px 1px 4px;
 
@@ -218,7 +350,7 @@ const NewsBoxContainer = styled.div`
 
 const LessonBoxContainer = styled.div`
     margin-top: 40px;
-    & > div {  height: 250px; overflow-y: scroll;
+    & > div {  height: 270px; overflow-y: scroll;
         ::-webkit-scrollbar { width: 1px !important; }
         ::-webkit-scrollbar-track { background: #f1f1f1;  }
         ::-webkit-scrollbar-thumb {  background: #888;  }
@@ -244,7 +376,3 @@ const CalendarBox = styled.div`
 `
 
 export default Dashboard;
-
-{/* <div>{student.courses.map((el) => {
-  <p>{el.subject, el.score}</p>
-})}</div> */}

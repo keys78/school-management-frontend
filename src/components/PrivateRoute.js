@@ -42,10 +42,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             render={(props) =>
                 localStorage.getItem("authToken") ? (
                     <>
-                        <Layout user={ user }  
-                        // isNavOpen={isNavOpen}
-                        // setIsNavOpen={setIsNavOpen}
-                        />
+                        <Layout user={ user } />
 
                         <Component user={ user } 
                         setUser={setUser} 
@@ -53,8 +50,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                         setSearchTerm={setSearchTerm} 
                         error={error} 
                         setError={setError} 
-                        // isNavOpen={isNavOpen}
-                        // setIsNavOpen={setIsNavOpen}
                         {...props} />
                     </>
                 ) : (

@@ -43,10 +43,37 @@ body {
 
 
 .private { display: block;}
+.react-calendar { width: 100% !important; font-family: inherit !important; max-width: 100% !important;}
 
 
 
 
+.hamburger .line{
+  width: 35px;
+  height: 3px;
+  background-color: #ecf0f1;
+  display: block;
+  margin: 6px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#hamburger-12.is-active .line:nth-child(1){
+  opacity: 0;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+#hamburger-12.is-active .line:nth-child(3){
+  opacity: 0;
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+}
 
 
 
@@ -138,10 +165,10 @@ top: 95%;
   .align-pad {padding: 0px 30px;  }
   .private { display: none !important;}
   .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
+  .react-calendar { border: 1px solid rgba(106, 106, 106, 0.464) !important;}
 }
 
 @media screen and (max-width: 480px) {
-  .align-pad {
-    padding: 0px 15px;
-  }
+  .align-pad { padding: 0px 15px; }
+  .private-two { display: none;}
 }

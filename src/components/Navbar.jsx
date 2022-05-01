@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import bell from '../assets/images/ic-notification.png'
 import { useHistory } from 'react-router-dom'
-// import { Hamburger, List } from 'phosphor-react'
+import CustomHamburger from './CustomHamburger'
+
 
 const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
   const history = useHistory();
@@ -13,14 +14,12 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
         <NavbarRedo>
           <img onClick={() => history.push('/')} className='sm:w-40 w-28 cursor-pointer' src={'e-school.png'} alt="logo" />
 
-          <RoleTag>{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
+          <RoleTag className="private-two">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
 
-          <div className='flex space-x-2 items-center'>
-            <Initials> E0 </Initials>
-            <HamburgerToggle onClick={() => setIsNavOpen(!isNavOpen)} >
-              Close
-            </HamburgerToggle>
-
+          <div className='flex space-x-3 items-center'>
+            {/* <HamburgerToggle onClick={() => setIsNavOpen(!isNavOpen)} > */}
+              <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen}/>
+            {/* </HamburgerToggle> */}
           </div>
 
         </NavbarRedo>
@@ -59,6 +58,7 @@ const NavbarWrapper = styled.section`
       padding-left: 0;
       display:block ;
       background:#04131D ;
+      box-shadow: none;
     }
 
     & > div {
@@ -76,6 +76,9 @@ const NavbarWrapper = styled.section`
 
       @media screen and (max-width: 767px){
       width:96% ;
+     }
+      @media screen and (max-width: 480px){
+        padding:9px 0;
      }
     }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import CustomHamburger from './CustomHamburger'
 
 const PublicNav = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
@@ -18,8 +19,8 @@ const PublicNav = () => {
               <h1 className='cursor-pointer' onClick={() => history.push('/login')}>Login</h1>
               <h1 className='cursor-pointer' onClick={() => history.push('/confirm-regno')}>Sign Up</h1>
             </NavItems>
-            <Hamburger onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
-              Close
+            <Hamburger>
+              <CustomHamburger isActiveBurger={isMobileNavOpen} setIsActiveBurger={setIsMobileNavOpen} />
             </Hamburger>
           </div>
         </div>
@@ -75,7 +76,6 @@ const MobileNav = styled.div`
 
 const Hamburger = styled.div`
     display:none ;
-    color: #fff;
     @media screen and (max-width: 767px) {
     display: block ;
   }
