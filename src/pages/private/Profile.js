@@ -7,7 +7,7 @@ import { validate } from '../../utils/validateForm';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../components/Button';
-import { PencilSimpleLine } from "phosphor-react";
+import { HandPointing } from "phosphor-react";
 import { useGetUserQuery } from '../../redux/usersApi';
 
 
@@ -55,14 +55,14 @@ const Profile = ({ user, setUser, setError, error }) => {
           >
             {formik => (
               <div>
-                <h1 className="">My Profile</h1>
-                <Divide />
+                <h1 className="profile-header">My Profile</h1>
+                {/* <Divide /> */}
                 <UpdateProfile>
                   <div>
                     <Form>
-                      <section className='flex items-center justify-between mb-6'>
+                      <section className='flex items-center justify-between sm:mb-6 mb-2'>
                         <div className='flex flex-col items-center'>
-                          <img className='rounded-full w-28' src={user.profileImg} />
+                          <img className='rounded-full s:w-28 w-20' src={user.profileImg} />
                           <p>Upload</p>
                         </div>
                         <button >Update</button>
@@ -70,25 +70,25 @@ const Profile = ({ user, setUser, setError, error }) => {
                       </section>
                       <FieldsWrapper>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'First Name'} name={'firstName'} type={'text'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'First Name'} name={'firstName'} type={'text'} />
                         </div>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'Last Name'} name={'lastName'} type={'text'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Last Name'} name={'lastName'} type={'text'} />
                         </div>
                         <div>
                           <TextField label={'Email'} name={'email'} type={'email'} disabled />
                         </div>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'Phone Number'} name={'phone'} type={'text'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Phone Number'} name={'phone'} type={'text'} />
                         </div>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'Date OF Birth'} name={'dob'} type={'date'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Date OF Birth'} name={'dob'} type={'date'} />
                         </div>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'State OF Origin'} name={'soo'} type={'text'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'State OF Origin'} name={'soo'} type={'text'} />
                         </div>
                         <div>
-                          <TextField profile editIcon={<PencilSimpleLine size={20} color="#08546d" />} label={'Address'} name={'address'} type={'text'} />
+                          <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Address'} name={'address'} type={'text'} />
                         </div>
                       </FieldsWrapper>
                       {/* <ButtonHolder className='w-100 mx-auto text-right border'>
@@ -107,8 +107,8 @@ const Profile = ({ user, setUser, setError, error }) => {
 }
 
 const ProfileBox = styled.div`
-  padding:12px;
-  height: 400px;
+  /* padding:12px; */
+  /* height: 400px; */
 `
 
 const UpdateProfile = styled.div`
@@ -118,7 +118,11 @@ const UpdateProfile = styled.div`
    width: 100%;
    margin: 0 auto;
 
-   & > div { width: 60%; }
+   & > div { width: 60%; 
+    @media screen and (max-width: 1024px){
+      width: 100%;
+    }
+   }
 `
 const FieldsWrapper = styled.div`
     display: grid;
@@ -130,12 +134,18 @@ const FieldsWrapper = styled.div`
     border-radius: 6px;
     & > div:nth-child(7)  { grid-column: span 2 / span 2; }
 
+    @media screen and (max-width: 480px){
+      display:block ;
+      padding:12px;
+      margin-bottom: 10px ;
+    }
+
 `
 
-const Divide = styled.hr`
-  margin: 6px 0 12px 0;
-  padding:3px;
-`
+// const Divide = styled.hr`
+//   margin: 6px 0 12px 0;
+//   padding:3px;
+// `
 
 
 export default Profile;

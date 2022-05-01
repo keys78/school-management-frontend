@@ -87,6 +87,7 @@ const SlidesContainer = styled.section`
     /* margin-top:90px ; */
     background: #000;
     height:100% ;
+    
 
     & > img { width: 100%; height: 100%; }
     @media screen and (min-width: 1024px){
@@ -98,6 +99,7 @@ const SliderContainer = styled.div`
     position: relative;
     width:100%;
     overflow:hidden;
+   
 
    
 `
@@ -111,6 +113,7 @@ const Content = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
    
     & > div {
         width: 100%;
@@ -118,12 +121,8 @@ const Content = styled.div`
         text-align: center;
 
         & > h1 { font-size: 50px; font-weight:900; color: #fff; padding-top:200px;
-            @media screen and (max-width: 767px) {
-            font-size:32px ;  padding-top:100px;
-             }
-            @media screen and (max-width: 480px) {
-            font-size:25px ;  padding-top:50px;
-             }
+            @media screen and (max-width: 767px) { font-size:32px ;  padding-top:100px; }
+            @media screen and (max-width: 480px) { font-size:25px ; padding-top:80px; }
         }
         & > h2 { font-size: 20px; font-weight:400; color: #fff;
             @media screen and (max-width: 767px) {

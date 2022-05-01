@@ -44,10 +44,10 @@ body {
 
 .private { display: block;}
 .react-calendar { width: 100% !important; font-family: inherit !important; max-width: 100% !important;}
+.profile-header { font-size: 20px;}
 
 
-
-
+.hamburger { cursor: pointer;}
 .hamburger .line{
   width: 35px;
   height: 3px;
@@ -166,6 +166,19 @@ top: 95%;
   .private { display: none !important;}
   .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
   .react-calendar { border: 1px solid rgba(106, 106, 106, 0.464) !important;}
+  .profile-header {  margin:30px 0 0 0 }
+}
+
+
+@media screen and (max-width: 1024px) {
+  .profile-header {  margin: 30px 0 30px 0 }
+}
+
+@media screen and (max-width: 600px) {
+  .profile-header {  margin: 12px 0 30px 0 }
+}
+@media screen and (max-width: 480px) {
+  .profile-header {  margin: -12px 0 20px 0 }
 }
 
 @media screen and (max-width: 480px) {

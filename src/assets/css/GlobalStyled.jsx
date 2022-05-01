@@ -8,7 +8,6 @@ export const ContentWrapper = styled.section`
 
     @media screen and (max-width: 1280px){
       padding-left: 0;
-      /* margin-left: 0; */
     }
 
     @media screen and (max-width: 500px){
