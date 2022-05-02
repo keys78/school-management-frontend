@@ -23,6 +23,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         try {
             const { data } = await axios.get("http://localhost:4000/private/user",  config);
             setUser(data);
+            console.log(data)
         } catch (error) {
             localStorage.removeItem("authToken");
             setError(`session expired please `);

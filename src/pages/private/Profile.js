@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
@@ -14,7 +14,28 @@ import { useGetUserQuery } from '../../redux/usersApi';
 
 const Profile = ({ user, setUser, setError, error }) => {
   const history = useHistory()
-  const { refetch } = useGetUserQuery();
+  //   const [singleFile, setSingleFile] = useState('');
+  //   const [singleProgress, setSingleProgress] = useState(0);
+
+  //   const SingleFileChange = (e) => {
+  //     setSingleFile(e.target.files[0]);
+  //     setSingleProgress(0);
+  // }
+
+  // const singleFileOptions = {
+  //   onUploadProgress: (progressEvent) => {
+  //       const {loaded, total} = progressEvent;
+  //       const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
+  //       setSingleProgress(percentage);
+  //   }
+  // }
+
+  // const uploadSingleFile = async () => {
+  //   const formData = new FormData();
+  //   formData.append('file', singleFile);
+  //   // await singleFileUpload(formData, singleFileOptions);
+  //   // props.getsingle();
+  // }
 
   return error ? (
     <span className="error-message">{error} <Link to="/login">Login</Link></span>
@@ -59,14 +80,23 @@ const Profile = ({ user, setUser, setError, error }) => {
                 {/* <Divide /> */}
                 <UpdateProfile>
                   <div>
+                    {/* <section className='flex items-center justify-between sm:mb-6 mb-2'>
+                      <div className='flex flex-col items-center'>
+                        <img className='rounded-full s:w-28 w-20' src={user.profileImg} />
+                        <input type="file" onChange={(e) => SingleFileChange(e)} />
+                        <button type="button" className="btn btn-danger" onClick={() => uploadSingleFile()} >Upload</button>
+                      </div>
+                      <button >Update</button>
+                    </section> */}
                     <Form>
                       <section className='flex items-center justify-between sm:mb-6 mb-2'>
                         <div className='flex flex-col items-center'>
-                          <img className='rounded-full s:w-28 w-20' src={user.profileImg} />
-                          <p>Upload</p>
+                          <img className='rounded-full s:w-28 w-20' src={user.pic} />
+                          {/* <img className='rounded-full s:w-28 w-20' src={'public/uploads/2022-05-02T18-21-45.860Z-e-logo-school.png'} /> */}
+                          {/* <input type="file" onChange={(e) => SingleFileChange(e)} /> */}
+                          {/* <button type="button" className="btn btn-danger" onClick={() => uploadSingleFile()} >Upload</button> */}
                         </div>
                         <button >Update</button>
-                        {/* <button onClick={(e) => window.location.reload(e)}>Update</button> */}
                       </section>
                       <FieldsWrapper>
                         <div>
