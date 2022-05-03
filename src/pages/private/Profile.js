@@ -8,34 +8,12 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../components/Button';
 import { HandPointing } from "phosphor-react";
-import { useGetUserQuery } from '../../redux/usersApi';
+import PhotoTest from '../../components/Phototest';
 
 
 
 const Profile = ({ user, setUser, setError, error }) => {
   const history = useHistory()
-  //   const [singleFile, setSingleFile] = useState('');
-  //   const [singleProgress, setSingleProgress] = useState(0);
-
-  //   const SingleFileChange = (e) => {
-  //     setSingleFile(e.target.files[0]);
-  //     setSingleProgress(0);
-  // }
-
-  // const singleFileOptions = {
-  //   onUploadProgress: (progressEvent) => {
-  //       const {loaded, total} = progressEvent;
-  //       const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
-  //       setSingleProgress(percentage);
-  //   }
-  // }
-
-  // const uploadSingleFile = async () => {
-  //   const formData = new FormData();
-  //   formData.append('file', singleFile);
-  //   // await singleFileUpload(formData, singleFileOptions);
-  //   // props.getsingle();
-  // }
 
   return error ? (
     <span className="error-message">{error} <Link to="/login">Login</Link></span>
@@ -43,12 +21,15 @@ const Profile = ({ user, setUser, setError, error }) => {
     <ContentWrapper>
       <ContentContainer>
         <ProfileBox>
+
+
           <Formik
             initialValues={{
               firstName: user.firstName,
               lastName: user.lastName,
               email: user.email,
               dob: user.dob,
+              gender: user.gender,
               phone: user.phone,
               address: user.address,
               soo: user.soo,
@@ -80,24 +61,12 @@ const Profile = ({ user, setUser, setError, error }) => {
                 {/* <Divide /> */}
                 <UpdateProfile>
                   <div>
-                    {/* <section className='flex items-center justify-between sm:mb-6 mb-2'>
-                      <div className='flex flex-col items-center'>
-                        <img className='rounded-full s:w-28 w-20' src={user.profileImg} />
-                        <input type="file" onChange={(e) => SingleFileChange(e)} />
-                        <button type="button" className="btn btn-danger" onClick={() => uploadSingleFile()} >Upload</button>
-                      </div>
-                      <button >Update</button>
-                    </section> */}
+
                     <Form>
-                      <section className='flex items-center justify-between sm:mb-6 mb-2'>
-                        <div className='flex flex-col items-center'>
-                          <img className='rounded-full s:w-28 w-20' src={user.pic} />
-                          {/* <img className='rounded-full s:w-28 w-20' src={'public/uploads/2022-05-02T18-21-45.860Z-e-logo-school.png'} /> */}
-                          {/* <input type="file" onChange={(e) => SingleFileChange(e)} /> */}
-                          {/* <button type="button" className="btn btn-danger" onClick={() => uploadSingleFile()} >Upload</button> */}
-                        </div>
-                        <button >Update</button>
-                      </section>
+                      <div className='flex items-center justify-between'>
+                        <PhotoTest user={user} setUser={setUser} />
+                        <button type='submit'>Update</button>
+                      </div>
                       <FieldsWrapper>
                         <div>
                           <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'First Name'} name={'firstName'} type={'text'} />
@@ -107,6 +76,9 @@ const Profile = ({ user, setUser, setError, error }) => {
                         </div>
                         <div>
                           <TextField label={'Email'} name={'email'} type={'email'} disabled />
+                        </div>
+                        <div>
+                          <TextField label={'Gender'} name={'gender'} type={'text'} disabled />
                         </div>
                         <div>
                           <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Phone Number'} name={'phone'} type={'text'} />

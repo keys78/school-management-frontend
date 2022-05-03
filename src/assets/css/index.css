@@ -80,7 +80,31 @@ body {
 
 
 
+.file {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.file > input[type='file'] {
+  display: none
+}
+
+.file > label {
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  border-color:   hsl(204, 86%, 53%);
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 1px;
+  background-color: hsl(195, 100%, 96%);
+  color: hsl(0, 0%, 29%);
+  padding: 4px;
+}
+
+.pswp__zoom-wrap { all: unset; max-width: auto !important; max-height: auto !important; width: auto !important; height: auto !important;}
 
 
 

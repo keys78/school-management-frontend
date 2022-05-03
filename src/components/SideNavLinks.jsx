@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { navLinks } from '../utils/data'
 import { NavLink as LinkerNav } from 'react-router-dom';
 import { IconContext } from "phosphor-react";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { motion } from 'framer-motion'
 
 
 const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
@@ -13,18 +14,18 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         <IconContext.Provider
             value={{
                 color: (i === activeNavLink ? '#696D8C' : '#6aeef5'),
-                size: 20, weight:"bold",
+                size: 20, weight: "bold",
             }}
         >
             {<span>{navLink.icon}</span>}
         </IconContext.Provider>
     )
 
-    const navClick = ({navLink,i}) => {
+    const navClick = ({ navLink, i }) => {
         setActiveNavLinks(i)
         window.innerWidth < 1280 && setIsNavOpen(!isNavOpen)
-        
-        if(navLink.title === 'Logout') {
+
+        if (navLink.title === 'Logout') {
             localStorage.removeItem("authToken");
             history.push("/login");
         }
@@ -33,15 +34,22 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
 
     const renderNavLinks = navLinks.map((navLink, i) => (
         navLink.role.includes(user.role)
-         && 
-        <SingleNav key={i}
-            onClick={() => navClick({navLink,i})}
-            activeclassname="active"
-            to={navLink.path}
+        &&
+        <motion.div key={i}
+            initial={{ opacity: 0, translateY: -50 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 0.2, delay: i * 0.3 }}
         >
-            {altIcon ({navLink, i})}
-            {navLink.title}
-        </SingleNav>
+            <SingleNav
+                onClick={() => navClick({ navLink, i })}
+                activeclassname="active"
+                to={navLink.path}
+            >
+                {altIcon({ navLink, i })}
+                {navLink.title}
+            </SingleNav>
+        </motion.div>
+
     ))
     return (
         <div>

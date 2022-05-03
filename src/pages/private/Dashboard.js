@@ -77,7 +77,7 @@ const Dashboard = ({ user, error }) => {
 
                         <UserCard>
                             <div>
-                                <img className="w-28" src={user.profileImg} alt="profile" />
+                                <img className="w-28" src={user.pic} alt="profile" />
                             </div>
                             <div>
                                 <p>Level: {user.level}</p>

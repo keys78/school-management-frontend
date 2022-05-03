@@ -2,36 +2,45 @@ import React from 'react'
 import styled from 'styled-components'
 import SideNavLinks from './SideNavLinks';
 import bell from '../assets/images/ic-notification.png'
+import { AnimatePresence, motion } from 'framer-motion'
+import { modalVariants } from '../utils/Animations';
 
 const SideNav = ({ user, isNavOpen, setIsNavOpen }) => {
 
     return (
         <>
-            {isNavOpen &&
-                <SideBarWrapper>
-                    <div>
+            <AnimatePresence>
+                {isNavOpen &&
+                    <SideBarWrapper
+                        variants={modalVariants}
+                        initial="initial"
+                        animate="final"
+                        exit="exit"
+                    >
                         <div>
-                            <h1>e-school</h1>
-                            <h6>{user.email}</h6>
+                            <div>
+                                <h1>e-school</h1>
+                                <h6>{user.email}</h6>
+                            </div>
+                            <div className='absolute top-4 right-4'>
+                                <Notif>
+                                    <span>0</span>
+                                    <img src={bell} alt="notif-icon" />
+                                </Notif>
+                            </div>
                         </div>
-                        <div className='absolute top-4 right-4'>
-                        <Notif>
-                            <span>0</span>
-                            <img src={bell} alt="notif-icon" />
-                        </Notif>
+                        <div className='mb-24'>
+                            <img className='w-40 private' src="e-school.png" alt="School Logo" />
                         </div>
-                    </div>
-                    <div className='mb-24'>
-                        <img className='w-40 private' src="e-school.png" alt="School Logo" />
-                    </div>
-                    <SideNavLinks user={user} isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-                </SideBarWrapper>
-            }
+                        <SideNavLinks user={user} isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+                    </SideBarWrapper>
+                }
+            </AnimatePresence>
         </>
     )
 };
 
-const SideBarWrapper = styled.section`
+const SideBarWrapper = styled(motion.section)`
     background: #04131D;
     z-index: 2;
     position: fixed;

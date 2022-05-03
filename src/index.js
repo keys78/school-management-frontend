@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './assets/css/index.css'
 import './assets/css/tailwind.css'
 import { Provider } from 'react-redux';
-import { store  } from './app/store'
+import { store } from './app/store'
 import App from './App';
 import 'react-calendar/dist/Calendar.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
-</React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
