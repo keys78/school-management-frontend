@@ -76,5 +76,4 @@ const SingleNav = styled(LinkerNav)`
     }
   
 `
-
 export default SideNavLinks

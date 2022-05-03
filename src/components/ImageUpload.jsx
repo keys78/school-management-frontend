@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { zoomOutVariants } from '../utils/Animations';
 
 
-const Phototest = ({ user, setUser }) => {
+const ImageUpload = ({ user, setUser }) => {
     const [profileImg, setProfileImg] = useState(user.pic)
     const [singleFile, setSingleFile] = useState('');
     const [isZoomed, setIsZoomed] = useState(false)
@@ -116,9 +116,16 @@ const Close = styled.div`
 `
 const ImageBox = styled(motion.div)`
   max-width:960px ;
-  height:auto ;
+  height:750px ;
+  ;
+
+  @media screen and (max-width: 1024px){
+    height:auto 
+    }
+
+  & > img { width:100%; height:100%;}
 `
 
 
 
-export default Phototest
+export default ImageUpload;

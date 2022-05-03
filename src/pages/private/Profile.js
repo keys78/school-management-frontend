@@ -8,7 +8,7 @@ import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../components/Button';
 import { HandPointing } from "phosphor-react";
-import PhotoTest from '../../components/Phototest';
+import ImageUpload from '../../components/ImageUpload';
 
 
 
@@ -64,7 +64,7 @@ const Profile = ({ user, setUser, setError, error }) => {
 
                     <Form>
                       <div className='flex items-center justify-between'>
-                        <PhotoTest user={user} setUser={setUser} />
+                        <ImageUpload user={user} setUser={setUser} />
                         <button type='submit'>Update</button>
                       </div>
                       <FieldsWrapper>
