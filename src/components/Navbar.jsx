@@ -17,7 +17,7 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
           <RoleTag className="private-two">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
 
           <div>
-              <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen}/>
+            <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen} />
           </div>
 
         </NavbarRedo>
@@ -29,11 +29,8 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
           </Notif>
           <img className='rounded-full w-10 h-10' src={user.pic} alt="profile-icon" />
           <Initials>
-            {user &&
-            user.firstName.chartAt()
-            
-            }
-            {/* EO */}
+            {user.firstName && user.firstName.charAt()}
+            {user.lastName && user.lastName.charAt()}
           </Initials>
         </div>
       </div>
