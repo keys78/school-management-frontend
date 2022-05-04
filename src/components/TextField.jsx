@@ -47,6 +47,7 @@ const Input = styled.input`
   color: #646F81;
   /* font-size:${({ profile }) => (profile ? '16px' : '18px')}; */
   padding: 6px 7px;
+  -webkit-appearance: none;
   border-radius: 5px;
   width: 100%;
   outline: none;

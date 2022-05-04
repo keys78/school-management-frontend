@@ -85,6 +85,7 @@ export const CustomSelect = styled.select`
   width: 100%;
   outline: none;
   margin-bottom: 6px;
+  -webkit-appearance: none;
   /* height: ; */
   /* all:unset ; */
 
