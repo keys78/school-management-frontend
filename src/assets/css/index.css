@@ -47,6 +47,31 @@ body {
 .profile-header { font-size: 20px; font-weight: bold;}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .hamburger { cursor: pointer;}
 .hamburger .line{
   width: 35px;
@@ -74,8 +99,6 @@ body {
   -o-transform: translateX(100%);
   transform: translateX(100%);
 }
-
-
 
 
 
@@ -197,6 +220,15 @@ top: 95%;
 
 @media screen and (max-width: 600px) {
   .profile-header {  margin: 12px 0 30px 0 }
+  .signup-adjust { height: 100% !important; padding:30px 15px 20px 15px;}
+
+
+  .fields-wrapper {
+    grid-template-columns: repeat(2, 1fr)  !important;
+  }
+
+ 
+
 }
 @media screen and (max-width: 480px) {
   .profile-header {  margin: -12px 0 20px 0; }

@@ -41,12 +41,19 @@ export const AuthContainer = styled.section`
     background: #19262F;
     h1 { font-size: 30px; margin-bottom:10px; color: #fff; text-align: center;}
 
-    @media screen and (max-width: 480px){
-      width: ${({large}) => (large ? '800px' : '360px')} ;
-      /* margin-top:-50px ; */
+    @media screen and (max-width: 900px){
+      width: ${({large}) => (large ? '600px' : '400px')} ;
     }
+    @media screen and (max-width: 600px){
+      width: ${({large}) => (large ? '450px' : '400px')} ;
+    }
+
+    @media screen and (max-width: 480px){
+      width: ${({large}) => (large ? '100%' : '360px')} ;
+    }
+
     @media screen and (max-width: 375px){
-      width: ${({large}) => (large ? '800px' : '340px')} ;
+      width: ${({large}) => (large ? '100%' : '340px')} ;
     }
 `
 

@@ -19,7 +19,7 @@ const SignUp = () => {
 
 
     return (
-        <AuthWrapper>
+        <AuthWrapper className="signup-adjust">
             <div>
                 <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
                 <AuthContainer large>
@@ -157,6 +157,25 @@ const FieldsWrapper = styled.div`
     & > div:nth-child(11)  { grid-column: span 2 / span 4; }
     & > div:nth-child(12)  { grid-column: span 4 / span 4; }
     & > button  { grid-column: span 2 / span 4; }
+
+    @media screen and (max-width: 600px){
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+
+        & > div:nth-child(1)  { grid-column: span 1 / span 2; }
+        & > div:nth-child(2)  { grid-column: span 1 / span 2; }
+
+        & > div:nth-child(6)  { grid-column: span 1 / span 2; }
+        & > div:nth-child(7)  { grid-column: span 1 / span 2; }
+        & > div:nth-child(8)  { grid-column: span 1 / span 2; }
+        & > div:nth-child(9)  { grid-column: span 2 / span 2; }
+        & > div:nth-child(10) { grid-column: span 2 /span 2; }
+        & > div:nth-child(11) { grid-column: span 2 / span 2; }
+        & > div:nth-child(12) { grid-column: span 2 / span 2; }
+        & > button  { grid-column: span 1 / span 2; }
+        }
+
+      
 
 `
 
