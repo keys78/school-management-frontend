@@ -70,8 +70,8 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
     return (
         <TableWrapper>
-            <h1 className='ml-2 py-3 sm:text-xl text-lg' >{tableTitle}</h1>
-            <div className='flex justify-between items-center p-2'>
+            <TableTitle className='' >{tableTitle}</TableTitle>
+            <div className='flex justify-between items-center sm:p-2 p-0 py-2'>
                 <div className='flex'>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 </div>
@@ -156,7 +156,6 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
                     <tr>
                         {renderTableHeading}
                     </tr>
-
                 </CustomTableHead>
                 <tbody className='w-full'>
                     {renderAllScores}
@@ -174,7 +173,28 @@ const TableWrapper = styled.section`
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     background-color: #fff;
     padding-bottom: 40px;
+
+    @media screen and (max-width: 1280px){
+        margin-top:40px ;
+    }
+    @media screen and (max-width: 640px){
+        box-shadow: none;
+        /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+        margin-top:10px ;
+    }
+    @media screen and (max-width: 480px){
+        margin-top:-18px ;
+    }
+   
 `
+const TableTitle = styled.h1`
+    margin-left:8px ;
+    font-size:20px ;
+    font-weight:bold;
+    padding:8px 0;
+    @media screen and (max-width: 1024px) {font-size: 16px;}
+`
+
 const TableAdjustMobile = styled.div`
      overflow-x:auto ;
 `

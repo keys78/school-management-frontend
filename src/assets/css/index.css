@@ -44,7 +44,7 @@ body {
 
 .private { display: block;}
 .react-calendar { width: 100% !important; font-family: inherit !important; max-width: 100% !important;}
-.profile-header { font-size: 20px;}
+.profile-header { font-size: 20px; font-weight: bold;}
 
 
 .hamburger { cursor: pointer;}
