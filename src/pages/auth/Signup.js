@@ -91,29 +91,35 @@ const SignUp = () => {
                                         <div>
                                             <TextField label={'Address'} name={'address'} type={'text'} />
                                         </div>
-                                        <div>
+                                        <div className='soo-adjust'>
                                             <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
                                         </div>
-
-                                        <Field component="select" name="gender" placeholder={'Select Options'}>
+                                        <section className="gender-class-s"> 
+                                            <label className='gender-label' htmlFor="gender">Gender</label>
+                                        <Field label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </Field>
+                                        </section>
 
-                                        <div className='flex gap-8'>
-                                            <CustomSelect onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                        <div className='faculdep flex sm:gap-8 gap-4'>
+                                            <label className='select-label' htmlFor="faculty">Faculty
+                                            <CustomSelect name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
                                                 <option value="">Select Faculty</option>
                                                 {facultyArr.map(faculty =>
                                                     <option value={faculty.faculty}>{faculty.faculty}</option>
                                                 )}
                                             </CustomSelect>
-
-                                            <CustomSelect onChange={(e) => { setDep(e.target.value) }}  >
+                                            </label>
+                                            
+                                            <label className='select-label' htmlFor="dept">Department
+                                            <CustomSelect name="dept" onChange={(e) => { setDep(e.target.value) }}  >
                                                 <option value="">Select Department</option>
                                                 {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
                                                     <option value={depts.department}>{depts.department}</option>
                                                 )}
                                             </CustomSelect>
+                                            </label>
                                         </div>
                                         <div>
                                             <TextField label={'Password'} name={'password'} type={'password'} />
@@ -121,15 +127,13 @@ const SignUp = () => {
                                         <div>
                                             <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                                         </div>
-
-                                        <Button
-                                            type="reset" onClick={e => formik.resetForm()}
-                                            reset text={'Reset'} padding={'py-0'} margin={'mb-4'} background={'bg-red-500'} />
-                                        <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} margin={'mb-4'} color={'text-white'} />
+                                        
+                                        <input type="reset" className='reset-btn' />
+                                        <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} color={'text-white'} />
 
                                     </FieldsWrapper>
                                 </Form>
-                                <div onClick={() => history.push('/login')} className='text-center text-gray-200 text-sm'>
+                                <div onClick={() => history.push('/login')} className='text-center text-gray-200 text-sm pt-2 pb-2'>
                                     Are you a returning student? <span>Log In</span>
                                 </div>
                             </ItemsWrapper>
@@ -146,6 +150,7 @@ const FieldsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px 30px;
+    align-items: center;
 
     & > div:nth-child(1)  { grid-column: span 2 / span 4; }
     & > div:nth-child(2)  { grid-column: span 2 / span 4; }
@@ -157,15 +162,16 @@ const FieldsWrapper = styled.div`
     & > div:nth-child(11)  { grid-column: span 2 / span 4; }
     & > div:nth-child(12)  { grid-column: span 4 / span 4; }
     & > button  { grid-column: span 2 / span 4; }
+    & > input  { grid-column: span 2 / span 4; }
 
     @media screen and (max-width: 600px){
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 0 10px;
 
         & > div:nth-child(1)  { grid-column: span 1 / span 2; }
         & > div:nth-child(2)  { grid-column: span 1 / span 2; }
 
-        & > div:nth-child(6)  { grid-column: span 1 / span 2; }
+        & > div:nth-child(6)  { grid-column: span 2 / span 2; }
         & > div:nth-child(7)  { grid-column: span 1 / span 2; }
         & > div:nth-child(8)  { grid-column: span 1 / span 2; }
         & > div:nth-child(9)  { grid-column: span 2 / span 2; }
@@ -173,6 +179,7 @@ const FieldsWrapper = styled.div`
         & > div:nth-child(11) { grid-column: span 2 / span 2; }
         & > div:nth-child(12) { grid-column: span 2 / span 2; }
         & > button  { grid-column: span 1 / span 2; }
+        & > input  { grid-column: span 1 / span 2; }
         }
 
       

@@ -47,19 +47,51 @@ body {
 .profile-header { font-size: 20px; font-weight: bold;}
 
 
+.gender-class-s {
+  display: grid;
+  grid-column: span 2 / span 2;
+}
+
+.gender-class {
+  color: #646F81;
+  padding: 8px 7px;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  margin-bottom: 6px;
+}
 
 
+.gender-class::-webkit-outer-spin-button,
+.gender-class::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.gender-label {
+  font-size: 14px;
+   display:block;
+   color: #96A0AE;
+   font-weight: 400;
+   margin-bottom: 4px;
+}
+
+.select-label {
+  font-size: 14px;
+   display:block;
+   color: #96A0AE;
+   font-weight: 400;
+   line-height: 25px;
+}
 
 
+.reset-btn {
+  all: unset;
+  width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px;
+  border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;
+}
 
-
-
-
-
-
-
-
-
+[type='reset'] { background: rgb(103, 41, 225) !important;}
 
 
 
@@ -210,7 +242,7 @@ top: 95%;
   .private { display: none !important;}
   .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
   .react-calendar { border: 1px solid rgba(106, 106, 106, 0.464) !important;}
-  .profile-header {  margin:30px 0 0 0; font-size: 18px;}
+  .profile-header {  margin:30px 0 0 0; font-size: 18px; }
 }
 
 
@@ -221,12 +253,13 @@ top: 95%;
 @media screen and (max-width: 600px) {
   .profile-header {  margin: 12px 0 30px 0 }
   .signup-adjust { height: 100% !important; padding:30px 15px 20px 15px;}
+  .faculdep { padding:10px 0}
+  .gender-class-s { grid-column: span 1 / span 1;}
+  .select-label { line-height: 22px; }
 
 
-  .fields-wrapper {
-    grid-template-columns: repeat(2, 1fr)  !important;
-  }
-
+  .gender-label { margin-bottom: 0; }
+  .soo-adjust { margin-top: 7px;}
  
 
 }

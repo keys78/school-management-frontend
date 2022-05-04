@@ -38,7 +38,7 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         <motion.div key={i}
             initial={{ opacity: 0, translateY: -50 }}
             animate={{ opacity: 1, translateY: 0 }}
-            transition={{ duration: 0.2, delay: i * 0.3 }}
+            transition={{ duration: 0.1, delay: i * 0.2 }}
         >
             <SingleNav
                 onClick={() => navClick({ navLink, i })}

@@ -69,13 +69,29 @@ export const ItemsWrapper = styled.div`
 `
 
 export const CustomSelect = styled.select`
-  background: #E2E6ED;
-  border: 1px solid #d8dbe0;
+  /* background: #E2E6ED; */
+  /* border: 1px solid #d8dbe0; */
+  /* color: #646F81; */
+  /* padding: 6px 7px; */
+  /* border-radius: 5px; */
+  /* width: 100%; */
+  /* outline: none; */
+  /* margin-bottom: 6px; */
+  /* margin-top: 6px; */
+
   color: #646F81;
-  padding: 6px 7px;
+  padding: 8px 7px;
   border-radius: 5px;
   width: 100%;
   outline: none;
   margin-bottom: 6px;
-  margin-top: 6px;
+  /* height: ; */
+  /* all:unset ; */
+
+
+::-webkit-outer-spin-button,
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 `
