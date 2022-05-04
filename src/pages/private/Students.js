@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
+// import { testi } from '../../utils/data';
 
 
 
@@ -42,6 +43,7 @@ const Students = ({ error, searchTerm, setSearchTerm }) => {
                     data={data}
                     setData={setData}
                     url={"http://localhost:4000/private/students"}
+                    tableTitle={'Students'}
                 />
             </ContentContainer>
         </ContentWrapper>

@@ -24,6 +24,7 @@ const InputBox = styled.input`
     border-radius: 5px;
     width: 100%;
     border: none;
+    font-family: 'Statoshi-regular';
     
     &:focus {
         outline: none;

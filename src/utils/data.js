@@ -1,6 +1,7 @@
 import dashboardIcon from '../assets/images/ic-dashboard.png'
-import { Books, Timer, Binoculars, TreeEvergreen,
-        User, Student, Book, Users, Gear, ChalkboardSimple, SignOut
+import {
+  Books, Timer, Binoculars, TreeEvergreen,
+  User, Student, Book, Users, Gear, ChalkboardSimple, SignOut
 } from 'phosphor-react'
 
 export const facultyArr = [
@@ -81,7 +82,7 @@ export const navLinks = [
     role: ['admin', 'teacher', 'student'],
     title: "My Profile",
     path: "/profile",
-    icon: <User/>,
+    icon: <User />,
   },
   {
     role: ['student'],
@@ -166,23 +167,59 @@ export const tableRegisterCourses = [
 
 export const homeContentData = [
   {
-    title:'Our Culture',
-    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
-    icon: <Books size={30} color="#163bd0"/>,
+    title: 'Our Culture',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    icon: <Books size={30} color="#163bd0" />,
   },
   {
-    title:'Our History',
-    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    title: 'Our History',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
     icon: <Timer size={30} color="#ff3838" />,
   },
   {
-    title:'Foresight',
-    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    title: 'Foresight',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
     icon: <Binoculars size={30} color="#e0d01f" weight="bold" />,
   },
   {
-    title:'Our Core Values',
-    text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
+    title: 'Our Core Values',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident quaerat quae tempore quibusdam repudiandae illo, aliquid animi consectetur porro reiciendis, fuga mollitia facere cupiditate sit consequuntur voluptatibus voluptates a totam? Quod reiciendis dolores eaque adipisci sunt quam debitis aperiam, modi a sit doloremque omnis numquam facere, praesentium, officiis expedita.',
     icon: <TreeEvergreen size={30} color="#1ea207" weight="bold" />,
   },
+]
+
+
+export const testi = [
+  {
+    role: "student",
+    level: "student",
+    firstName: "Onyeyaforoooo",
+    lastName: "Emmanuelelele",
+    email: "admin@schcsasool.com",
+    phone: "08108243267",
+    address: "Port Harcourt",
+    dob: "2022-03-18",
+    soo: "Imo",
+    profileImg: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    courses: [],
+    department: "",
+    faculty: "",
+    pic: "uploads/2022-05-02T20-37-45.124Z-IMG_20180530_172544.jpg"
+},
+  {
+    role: "student",
+    level: "student",
+    firstName: "koro",
+    lastName: "bb",
+    email: "admin@schofaacol.com",
+    phone: "08108243267",
+    address: "Port Harcourt",
+    dob: "2022-03-18",
+    soo: "Imo",
+    profileImg: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    courses: [],
+    department: "",
+    faculty: "",
+    pic: "uploads/2022-05-02T20-37-45.124Z-IMG_20180530_172544.jpg"
+}
 ]

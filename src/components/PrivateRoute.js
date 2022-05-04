@@ -10,8 +10,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     const [searchTerm, setSearchTerm] = useState('')
     
 
-    
-
     const fetchPrivateData = async () => {
         const config = {
             headers: {

@@ -91,6 +91,10 @@ const ImageUploadWrapper = styled.div`
 const DisplayImage = styled.div`
     width:120px; height:128px; vertical-align: middle;
     & > img  { width:100% ; border-radius:50%; height:100%; vertical-align: middle; cursor: zoom-in;}
+
+    @media screen and (max-width: 600px){
+        width:80px; height:80px;
+    }
 `
 const FullDisplay = styled.div`
     position:fixed ;
@@ -125,7 +129,5 @@ const ImageBox = styled(motion.div)`
 
   & > img { width:100%; height:100%;}
 `
-
-
 
 export default ImageUpload;

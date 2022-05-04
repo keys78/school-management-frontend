@@ -7,10 +7,10 @@ import SortByOrder from './SortByOrder';
 import TextField from './TextField';
 import { Formik, Form } from 'formik';
 import { validateScore } from '../utils/validateForm';
-import { useState } from 'react';
+import { DotsThreeOutlineVertical } from 'phosphor-react'
 
 
-export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url }) => {
+export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
     const history = useHistory();
     const fetchAllStudents = async () => {
         const config = {
@@ -63,30 +63,32 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
             <TableData> {val.lastName}  </TableData>
             <TableData> {val.gender}  </TableData>
             <TableData> {val.email}  </TableData>
-            <TableData><button> more </button></TableData>
+            <TableData><button> <DotsThreeOutlineVertical size={20} color="#494949dc" weight="bold" /> </button></TableData>
         </CustomTableRow>
 
     ))
 
     return (
         <TableWrapper>
+            <h1 className='ml-2 py-3 sm:text-xl text-lg' >{tableTitle}</h1>
             <div className='flex justify-between items-center p-2'>
                 <div className='flex'>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 </div>
                 <SortByOrder tableData={tableData} setData={setData} url={url} />
             </div>
-            <CustomTable>
-                <CustomTableHead >
-                    <tr>
-                        {renderTableHeading}
-                    </tr>
-
-                </CustomTableHead>
-                <tbody className='w-full'>
-                    {renderAllStudents}
-                </tbody>
-            </CustomTable>
+            <TableAdjustMobile>
+                <CustomTable>
+                    <CustomTableHead >
+                        <tr>
+                            {renderTableHeading}
+                        </tr>
+                    </CustomTableHead>
+                    <tbody className='w-full'>
+                        {renderAllStudents}
+                    </tbody>
+                </CustomTable>
+            </TableAdjustMobile>
         </TableWrapper>
     )
 }
@@ -169,29 +171,34 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
 
 const TableWrapper = styled.section`
     border-radius: 10px;
-    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     background-color: #fff;
     padding-bottom: 40px;
 `
+const TableAdjustMobile = styled.div`
+     overflow-x:auto ;
+`
 const CustomTable = styled.table`
     width: 100%;
+    tr:nth-of-type(even) {
+        background:#f4f4f4 ;
+    }
 `
 const CustomTableHead = styled.thead`
-    background: #3C3D3E;
+    background: #072038;
+   
 `
-
 const CustomTableRow = styled.tr`
-    width: 100%;
-    border-bottom: 0.5px solid #95999B;
+    width: 100%; cursor:pointer ; border-bottom: 1px solid #95999b74;
+
 `
 const TableHeads = styled.th`
     text-align: left;
     padding:8px 16px;
-    font-size: 18px;
+    font-size: 16px;
     color:#fff;
 `
 const TableData = styled.td`
     padding:8px 16px;
     font-size: 15px;
 `
-

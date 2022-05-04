@@ -104,9 +104,6 @@ body {
   padding: 4px;
 }
 
-.pswp__zoom-wrap { all: unset; max-width: auto !important; max-height: auto !important; width: auto !important; height: auto !important;}
-
-
 
 
 
@@ -190,19 +187,19 @@ top: 95%;
   .private { display: none !important;}
   .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
   .react-calendar { border: 1px solid rgba(106, 106, 106, 0.464) !important;}
-  .profile-header {  margin:30px 0 0 0 }
+  .profile-header {  margin:30px 0 0 0; font-size: 18px;}
 }
 
 
 @media screen and (max-width: 1024px) {
-  .profile-header {  margin: 30px 0 30px 0 }
+  .profile-header {  margin: 30px 0 30px 0; font-size: 16px;}
 }
 
 @media screen and (max-width: 600px) {
   .profile-header {  margin: 12px 0 30px 0 }
 }
 @media screen and (max-width: 480px) {
-  .profile-header {  margin: -12px 0 20px 0 }
+  .profile-header {  margin: -12px 0 20px 0; }
 }
 
 @media screen and (max-width: 480px) {

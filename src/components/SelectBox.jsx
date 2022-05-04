@@ -25,7 +25,7 @@ const SelectBox = ({ options, newSelected, label, onClick }) => {
             <Label>{label}</Label>
             <SelectBoxContainer onClick={() => setIsDropped(!isDropped)}>
                 <h5>{selected}</h5>
-                <CaretDown size={20} color="#08546d" />
+                <CaretDown size={18} color="#08546d" />
             </SelectBoxContainer>
 
             {isDropped && <Dropdown>
@@ -39,6 +39,7 @@ const SelectBox = ({ options, newSelected, label, onClick }) => {
 const SelectBoxWrapper = styled.div`
     position: relative;
     width: 160px;
+    font-family: Statoshi-regular !important;
 
     @media screen and (max-width: 640px){
        width: 140px;
@@ -58,7 +59,7 @@ const SelectBoxContainer = styled.div`
     border: 0.5px solid #C4C4C4;
     padding: 5px 8px 6px 13px;
     display: flex;
-    border-radius: 2px;
+    border-radius: 5px;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
@@ -76,7 +77,7 @@ const Label = styled.label`
     top:-7px;
     left: 22px;
     padding: 0 2px;
-    font-family: circular-std-light;   
+    font-family: Statoshi-regular;   
     font-size: 11px;
     line-height: 13px;
     letter-spacing: 0.01em;
@@ -94,6 +95,7 @@ const Dropdown = styled.div`
     position: absolute;
     width: 100%;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    font-family: Statoshi-regular;
 
     h5 {
         padding:5px 15px 6px 23px;
@@ -101,6 +103,7 @@ const Dropdown = styled.div`
         transition: all .2s ease-in-out;
         font-family: circular-std-book !important;
         color: #000 !important;
+        font-family: Statoshi-regular;
 
         &:hover{
             cursor: pointer;

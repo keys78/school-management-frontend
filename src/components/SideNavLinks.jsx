@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 
 const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
     const history = useHistory();
-    const [activeNavLink, setActiveNavLinks] = useState(0);
+    const [activeNavLink, setActiveNavLinks] = useState('');
     const altIcon = ({ navLink, i }) => (
         <IconContext.Provider
             value={{
