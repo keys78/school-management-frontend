@@ -40,6 +40,14 @@ export const AuthContainer = styled.section`
     border-radius: 6px;
     background: #19262F;
     h1 { font-size: 30px; margin-bottom:10px; color: #fff; text-align: center;}
+
+    @media screen and (max-width: 480px){
+      width: ${({large}) => (large ? '800px' : '360px')} ;
+      /* margin-top:-50px ; */
+    }
+    @media screen and (max-width: 375px){
+      width: ${({large}) => (large ? '800px' : '340px')} ;
+    }
 `
 
 
