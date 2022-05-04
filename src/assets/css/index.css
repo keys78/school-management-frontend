@@ -205,4 +205,5 @@ top: 95%;
 @media screen and (max-width: 480px) {
   .align-pad { padding: 0px 15px; }
   .private-two { display: none;}
+  .auth-page-adjust { margin-top: -80px;}
 }

@@ -28,7 +28,7 @@ const Login = () => {
 
   return (
     <AuthWrapper>
-      <div>
+      <div className='auth-page-adjust'>
         <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
         <AuthContainer>
           <Formik
