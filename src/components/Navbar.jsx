@@ -13,14 +13,10 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
       <div>
         <NavbarRedo>
           <img onClick={() => history.push('/')} className='sm:w-40 w-28 cursor-pointer' src={'e-school.png'} alt="logo" />
-
           <RoleTag className="private-two">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
-
-          <div>
-            <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen} />
-          </div>
-
+          <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen} />
         </NavbarRedo>
+
         <RoleTag className="private">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
         <div className='flex items-center gap-5 private'>
           <Notif>

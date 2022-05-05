@@ -35,6 +35,26 @@ export const scrollTopVariants = {
   }
 };
 
+export const publicNav_Variants = {
+    
+  initial: {
+    opactity: 0,
+    height: "0",
+  },
+  final: {
+    opactity: 1,
+    height:'auto',
+    transition: {duration: 0.4}
+  },
+  exit: {
+    opactity: 0,
+    height: 0,
+    transition: {duration: 0.2},
+  }
+};
+
+
+
 export const zoomOutVariants = {
     
   initial: {

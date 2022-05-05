@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import CustomHamburger from './CustomHamburger'
+import { AnimatePresence, motion } from 'framer-motion'
+import { publicNav_Variants } from '../utils/Animations'
 
 const PublicNav = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
@@ -25,14 +27,21 @@ const PublicNav = () => {
           </div>
         </div>
       </PublicNavContainer>
-     {isMobileNavOpen && 
-     <MobileNav>
-        <h1>Home</h1>
-        <h1>About</h1>
-        <h1 className='cursor-pointer' onClick={() => history.push('/login')}>Login</h1>
-        <h1 className='cursor-pointer' onClick={() => history.push('/confirm-regno')}>Sign Up</h1>
-      </MobileNav>
-     }
+      <AnimatePresence>
+        {isMobileNavOpen &&
+          <MobileNav
+            variants={publicNav_Variants}
+            initial="initial"
+            animate="final"
+            exit="exit"
+          >
+            <h1>Home</h1>
+            <h1>About</h1>
+            <h1 className='cursor-pointer' onClick={() => history.push('/login')}>Login</h1>
+            <h1 className='cursor-pointer' onClick={() => history.push('/confirm-regno')}>Sign Up</h1>
+          </MobileNav>
+        }
+      </AnimatePresence>
     </>
   )
 }
@@ -60,17 +69,22 @@ const NavItems = styled.div`
 
 `
 
-const MobileNav = styled.div`
+const MobileNav = styled(motion.div)`
   display:none ;
   background: #021532;
   text-align:center ;
   color: #fff;
   padding:20px 0;
-  position:sticky ;
+  position:absolute ;
+  width:100% ;
   top:70px;
   z-index:99 ;
+  /* margin-top:18px ; */
+
+
   @media screen and (max-width: 767px) {
     display: block ;
+    line-height:40px ;
   }
 `
 

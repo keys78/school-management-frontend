@@ -86,18 +86,22 @@ body {
 }
 
 
-.reset-btn {
-  all: unset;
-  width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px;
-  border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;
-}
-
+.reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 [type='reset'] { background: rgb(103, 41, 225) !important;}
 
+/* .glow {
+  animation: fadein 1.5s linear;
+  transition: 0.5s;
+  color:red;
+}
+.no-glow {
+  opacity: 0;
+}
 
-
-
-
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+} */
 
 
 

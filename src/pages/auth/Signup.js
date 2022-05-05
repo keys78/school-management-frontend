@@ -133,8 +133,8 @@ const SignUp = () => {
 
                                     </FieldsWrapper>
                                 </Form>
-                                <div onClick={() => history.push('/login')} className='text-center text-gray-200 text-sm pt-2 pb-2'>
-                                    Are you a returning student? <span>Log In</span>
+                                <div className='text-center text-gray-200 text-sm pt-2 pb-2'>
+                                    Are you a returning student? <span onClick={() => history.push('/login')}>Log In</span>
                                 </div>
                             </ItemsWrapper>
                         )}
