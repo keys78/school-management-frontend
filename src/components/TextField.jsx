@@ -41,15 +41,13 @@ const Label = styled.label`
 `
 const Input = styled.input`
   background:${({ profile }) => (!profile ? '' : '#E2E6ED')};
-  border: ${({ profile }) => (!profile ? '1px solid transparent' : '1px solid #d8dbe0;')};
-  /* text-transform: ${({ capitalize }) => (capitalize ? 'none' : 'capitalize')};  */
-  /* border: 2px solid; */
+  border: ${({ profile }) => (!profile ? '1px solid #d8dbe0' : '1px solid #d8dbe0;')};
   color: #646F81;
-  /* font-size:${({ profile }) => (profile ? '16px' : '18px')}; */
   padding: 6px 7px;
   -webkit-appearance: none;
   border-radius: 5px;
   width: 100%;
+  min-width:60px ;
   outline: none;
   margin-bottom: 6px;
 

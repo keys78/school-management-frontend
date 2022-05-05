@@ -12,7 +12,7 @@ import ImageUpload from '../../components/ImageUpload';
 
 
 
-const Profile = ({ user, setUser, setError, error }) => {
+const Profile = ({ user, setUser, setError, error}) => {
   const history = useHistory()
 
   return error ? (
@@ -49,7 +49,8 @@ const Profile = ({ user, setUser, setError, error }) => {
                 await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
                 const { data } = await axios.get("http://localhost:4000/private/user", config);
                 alert('user has been updatd')
-                setUser([user, data])
+                // setUser([user, data])
+                setUser(data)
               } catch (error) {
                 console.log(error)
               }
@@ -58,7 +59,6 @@ const Profile = ({ user, setUser, setError, error }) => {
             {formik => (
               <div>
                 <h1 className="profile-header">My Profile</h1>
-                {/* <Divide /> */}
                 <UpdateProfile>
                   <div>
 
@@ -75,10 +75,10 @@ const Profile = ({ user, setUser, setError, error }) => {
                           <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Last Name'} name={'lastName'} type={'text'} />
                         </div>
                         <div>
-                          <TextField label={'Email'} name={'email'} type={'email'} disabled />
+                          <TextField label={'Email'} editIcon={<HandPointing className='invisible' size={20} color="#08546d" />} name={'email'} type={'email'} disabled />
                         </div>
                         <div>
-                          <TextField label={'Gender'} name={'gender'} type={'text'} disabled />
+                          <TextField label={'Gender'} editIcon={<HandPointing className='invisible' size={20} color="#08546d" />} name={'gender'} type={'text'} disabled />
                         </div>
                         <div>
                           <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Phone Number'} name={'phone'} type={'text'} />
@@ -134,7 +134,7 @@ const FieldsWrapper = styled.div`
     background-color: #fff;
     padding:26px 20px;
     border-radius: 6px;
-    & > div:nth-child(7)  { grid-column: span 2 / span 2; }
+    & > div:nth-child(7)  { grid-column: span 1 / span 2; }
 
     @media screen and (max-width: 480px){
       display:block ;
@@ -143,11 +143,5 @@ const FieldsWrapper = styled.div`
     }
 
 `
-
-// const Divide = styled.hr`
-//   margin: 6px 0 12px 0;
-//   padding:3px;
-// `
-
 
 export default Profile;

@@ -25,7 +25,7 @@ const Tabs = ({ children, active = 0 }) => {
                 {
                     tabsData.map(({ tab }, idx) => (
                         <TabsList key={idx}>
-                            <button className={`nav-link ${idx === activeTab ? "active" : ""}`}
+                            <button className={`nav-link ${idx === activeTab ? "active-tab-s" : ""}`}
                                 onClick={() => setActiveTab(idx)}
                             >
                                 {tab}

@@ -4,9 +4,10 @@ import { CloudArrowUp, X } from 'phosphor-react';
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import { zoomOutVariants } from '../utils/Animations';
+import { FullDisplay, ImageBox, Close } from '../assets/css/GlobalStyled';
 
 
-const ImageUpload = ({ user, setUser }) => {
+const ImageUpload = ({ user, setUser, saveProfile }) => {
     const [profileImg, setProfileImg] = useState(user.pic)
     const [singleFile, setSingleFile] = useState('');
     const [isZoomed, setIsZoomed] = useState(false)
@@ -37,6 +38,7 @@ const ImageUpload = ({ user, setUser }) => {
 
         try {
             await axios.post(`http://localhost:4000/private/upload-photo/${user._id}`, data, config);
+            axios.get("http://localhost:4000/private/user", config).then((res) => { setUser(res.data) })
             alert('photo upadted')
         } catch (error) {
             console.log(error)
@@ -95,39 +97,6 @@ const DisplayImage = styled.div`
     @media screen and (max-width: 600px){
         width:80px; height:80px;
     }
-`
-const FullDisplay = styled.div`
-    position:fixed ;
-    display:flex ;
-    align-items:center ;
-    justify-content:center ;
-    top:0 ;
-    left:0 ;
-    height:100% ;
-    width:100% ;
-    z-index:9999 ;
-    background:#00000092 ;
-
-    @media screen and (max-width: 991px){
-      padding:0 20px ;
-    }
-`
-const Close = styled.div`
-   position:absolute ;
-   top:20px;
-   right:20px; 
-   cursor: pointer;
-`
-const ImageBox = styled(motion.div)`
-  max-width:960px ;
-  height:750px ;
-  ;
-
-  @media screen and (max-width: 1024px){
-    height:auto 
-    }
-
-  & > img { width:100%; height:100%;}
 `
 
 export default ImageUpload;

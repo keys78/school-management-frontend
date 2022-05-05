@@ -21,7 +21,7 @@ const SignUp = () => {
     return (
         <AuthWrapper className="signup-adjust">
             <div>
-                <img className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
+                <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
                 <AuthContainer large>
                     <Formik
                         initialValues={{
@@ -33,7 +33,7 @@ const SignUp = () => {
                             address: '',
                             soo: '',
                             password: '',
-                            gender:'',
+                            gender: '',
 
                         }}
                         validationSchema={validate}
@@ -94,31 +94,31 @@ const SignUp = () => {
                                         <div className='soo-adjust'>
                                             <TextField label={'State OF Origin'} name={'soo'} type={'text'} />
                                         </div>
-                                        <section className="gender-class-s"> 
+                                        <section className="gender-class-s">
                                             <label className='gender-label' htmlFor="gender">Gender</label>
-                                        <Field label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </Field>
+                                            <Field label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Field>
                                         </section>
 
                                         <div className='faculdep flex sm:gap-8 gap-4'>
                                             <label className='select-label' htmlFor="faculty">Faculty
-                                            <CustomSelect name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
-                                                <option value="">Select Faculty</option>
-                                                {facultyArr.map(faculty =>
-                                                    <option value={faculty.faculty}>{faculty.faculty}</option>
-                                                )}
-                                            </CustomSelect>
+                                                <CustomSelect name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                                    <option value="">Select Faculty</option>
+                                                    {facultyArr.map(faculty =>
+                                                        <option value={faculty.faculty}>{faculty.faculty}</option>
+                                                    )}
+                                                </CustomSelect>
                                             </label>
-                                            
+
                                             <label className='select-label' htmlFor="dept">Department
-                                            <CustomSelect name="dept" onChange={(e) => { setDep(e.target.value) }}  >
-                                                <option value="">Select Department</option>
-                                                {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
-                                                    <option value={depts.department}>{depts.department}</option>
-                                                )}
-                                            </CustomSelect>
+                                                <CustomSelect name="dept" onChange={(e) => { setDep(e.target.value) }}  >
+                                                    <option value="">Select Department</option>
+                                                    {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
+                                                        <option value={depts.department}>{depts.department}</option>
+                                                    )}
+                                                </CustomSelect>
                                             </label>
                                         </div>
                                         <div>
@@ -127,7 +127,7 @@ const SignUp = () => {
                                         <div>
                                             <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                                         </div>
-                                        
+
                                         <input type="reset" className='reset-btn' />
                                         <Button type="submit" text={'Register'} background={'#04131D'} padding={'py-2'} color={'text-white'} />
 
@@ -161,8 +161,8 @@ const FieldsWrapper = styled.div`
     & > div:nth-child(10)  { grid-column: span 2 / span 4; }
     & > div:nth-child(11)  { grid-column: span 2 / span 4; }
     & > div:nth-child(12)  { grid-column: span 4 / span 4; }
-    & > button  { grid-column: span 2 / span 4; }
-    & > input  { grid-column: span 2 / span 4; }
+    & > button  { grid-column: span 2 / span 4; margin-top:10px; }
+    & > input  { grid-column: span 2 / span 4; margin-top:10px }
 
     @media screen and (max-width: 600px){
         grid-template-columns: repeat(2, 1fr);

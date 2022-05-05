@@ -43,9 +43,6 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
     }, [searchTerm])
 
 
-
-
-
     const moreDetails = (value) => {
         value.role === 'student' && history.push(`students/student/${value._id}`)
         value.role === 'teacher' && history.push(`lecturers/lecturer/${value._id}`)
@@ -102,7 +99,7 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
     ))
 
     const renderAllScores = tableData && tableData.courses.map((course, i) => (
-        <CustomTableRow key={i}>
+        <CustomTableRow key={i} className='no-pointer'>
             <TableData> {1 + i} </TableData>
             <TableData>{course.code}</TableData>
             <TableData>{course.title}</TableData>
@@ -131,11 +128,8 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
                     {formik => (
                         <Form>
                             <div className='flex items-center justify-between'>
-                                {/* <div className='border border-black'> */}
                                 <TextField label={''} name={'score'} type={'number'} />
-                                {/* </div> */}
-
-                                {showBtn && <button type='submit'>Update Score</button>}
+                                {showBtn && <button className='score-btn-s' type='submit'>update score</button>}
                             </div>
 
                         </Form>
@@ -151,16 +145,18 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
 
     return (
         <TableWrapper>
-            <CustomTable>
-                <CustomTableHead >
-                    <tr>
-                        {renderTableHeading}
-                    </tr>
-                </CustomTableHead>
-                <tbody className='w-full'>
-                    {renderAllScores}
-                </tbody>
-            </CustomTable>
+            <TableAdjustMobile>
+                <CustomTable>
+                    <CustomTableHead >
+                        <tr>
+                            {renderTableHeading}
+                        </tr>
+                    </CustomTableHead>
+                    <tbody className='w-full'>
+                        {renderAllScores}
+                    </tbody>
+                </CustomTable>
+            </TableAdjustMobile>
         </TableWrapper>
     )
 }
@@ -209,7 +205,7 @@ const CustomTableHead = styled.thead`
    
 `
 const CustomTableRow = styled.tr`
-    width: 100%; cursor:pointer ; border-bottom: 1px solid #95999b74;
+    width: 100%; cursor:pointer ; border-bottom: 1px solid #95999b3c;
 
 `
 const TableHeads = styled.th`

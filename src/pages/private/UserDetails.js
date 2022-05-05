@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components';
-import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
+import { ContentContainer, ContentWrapper, FullDisplay, Close, ImageBox } from "../../assets/css/GlobalStyled";
 import { useParams, useHistory } from "react-router-dom";
 import axios from 'axios';
 import Tabs from '../../components/Tabs';
 import { DataTableAcademics } from '../../components/DataTable';
-import { ArrowLeft } from "phosphor-react";
+import { ArrowLeft, X } from "phosphor-react";
+import  {AnimatePresence } from 'framer-motion'
 import { tableAcademics } from '../../utils/data';
+import { zoomOutVariants } from '../../utils/Animations';
 
 
 
@@ -14,6 +16,8 @@ import { tableAcademics } from '../../utils/data';
 const UserDetails = () => {
     const [userDetails, setUserDetails] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isZoomed, setIsZoomed] = useState(false)
+    const imageBoxRef = useRef()
     const { id } = useParams();
     const history = useHistory();
 
@@ -51,12 +55,16 @@ const UserDetails = () => {
         fetchAllStudents();
     }, []);
 
+    useEffect(() => { document.body.addEventListener('mousedown', handleClickOutside) })
+    const handleClickOutside = (event) => {
+        imageBoxRef.current && !imageBoxRef.current.contains(event.target) && setIsZoomed(false)
+    };
 
 
     const renderProfile = (
         <ProfileBox>
             <div>
-                <img className='w-20 rounded-full' src={userDetails.profileImg} />
+                <img className='w-20 h-20 rounded-full zoom-in' src={userDetails.pic} alt="Profile Image" onClick={() => setIsZoomed(!isZoomed)} />
                 <div>
                     <p><span>Department: </span> {userDetails.department}</p>
                     <p><span>Faculty: </span> {userDetails.faculty}</p>
@@ -116,9 +124,9 @@ const UserDetails = () => {
         <ContentWrapper>
             <ContentContainer>
                 <div>
-                    <div className='flex items-center justify-between'>
+                    <div className='flex items-center justify-between py-3'>
                         <button onClick={() => history.goBack()}><ArrowLeft size={20} color="#08546d" weight="bold" /></button>
-                        <button onClick={() => setIsModalOpen(!isModalOpen)}>Delete</button>
+                        <button className='danger-btn' onClick={() => setIsModalOpen(!isModalOpen)}>Delete</button>
                     </div>
 
                     {isModalOpen &&
@@ -142,6 +150,23 @@ const UserDetails = () => {
                     </Tabs>
                 </div>
             </ContentContainer>
+            <AnimatePresence>
+                {isZoomed &&
+                    <FullDisplay >
+                        <Close>
+                            <X size={30} color="#e8eaed" weight="bold" onClick={() => setIsZoomed(!isZoomed)} />
+                        </Close>
+                        <ImageBox
+                            variants={zoomOutVariants}
+                            initial="initial"
+                            animate="final"
+                            exit="exit"
+                            ref={imageBoxRef}>
+                            <img src={userDetails.pic} alt="Profile Image" />
+                        </ImageBox>
+                    </FullDisplay>
+                }
+            </AnimatePresence>
         </ContentWrapper>
     )
 };
@@ -166,6 +191,18 @@ const ProfileBox = styled.div`
  & div > p { line-height: 40px;}
  & div > p > span {  font-weight: 900;}
  & > div { display: grid; grid-template-columns:  repeat(2, 1fr);}
+
+ @media screen and (max-width: 480px){
+    & > div { grid-template-columns: 1fr;}
+    & > div:nth-of-type(2) { margin-top: 10px; padding:0 8px;}
+    & div > p { line-height: 33px; font-size:14px;}
+
+    & > div:nth-of-type(1) {
+        display: grid; grid-template-columns:  repeat(2, 1fr); align-items:center ;
+        & > div > p { font-size:14px; white-space: nowrap;}
+        padding:10px;
+ }
+}
 `
 
 const AcadsBox = styled.div`
