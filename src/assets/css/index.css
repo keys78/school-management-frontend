@@ -86,14 +86,20 @@ body {
    line-height: 25px;
 }
 
-.score-btn-s {all: unset; background: #6729e1; color:#fff; font-size: 12px; white-space: nowrap; padding:3px 8px; border-radius: 5px;}
+.cursor-copy { cursor: copy;}
+
+/* .score-btn-s {all: unset; } */
 .danger-btn { all:unset; background:#df4759; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
 .reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 [type='reset'] { background: #6729e1 !important;}
 
+.score-btn {color:#fff; font-size: 13px; white-space: nowrap; padding:4px 10px; border-radius: 5px; cursor: pointer;}
+.score-waiting { background:#6729e1 !important ;}
+.score-success { background: #06c729 !important;}
+.score-btn[disabled]{ background-color: #cccccc !important; color: #666666; cursor: progress;}
 
 
-
+.title-field { min-width: 300px !important;}
 
 
 

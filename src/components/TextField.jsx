@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 
-const TextField = ({ label, profile, editIcon, ...props }) => {
+const TextField = ({ label, profile, editIcon, scoreInput, ...props }) => {
   const [field, meta] = useField(props);
   const [showEdit, setShowEdit] = useState(false)
 
@@ -17,6 +17,7 @@ const TextField = ({ label, profile, editIcon, ...props }) => {
           profile={showEdit === true ? profile : undefined}
           className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid'}`}
           {...field} {...props}
+          scoreInput
           autoComplete="on"
           autoCapitalize="words"
         />
@@ -41,7 +42,7 @@ const Label = styled.label`
 `
 const Input = styled.input`
   background:${({ profile }) => (!profile ? '' : '#E2E6ED')};
-  border: ${({ profile }) => (!profile ? '1px solid #d8dbe0' : '1px solid #d8dbe0;')};
+  border: ${({ profile }) => (!profile ? '1px solid #d8e0d8d0' : '1px solid #d8dbe0;')};
   color: #646F81;
   padding: 6px 7px;
   -webkit-appearance: none;
@@ -49,7 +50,7 @@ const Input = styled.input`
   width: 100%;
   min-width:60px ;
   outline: none;
-  margin-bottom: 6px;
+  margin-bottom: ${({ scoreInput }) => (!scoreInput ? '6px' : '0;')};
 
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import SearchBar from './SearchBar';
@@ -8,6 +8,7 @@ import TextField from './TextField';
 import { Formik, Form } from 'formik';
 import { validateScore } from '../utils/validateForm';
 import { DotsThreeOutlineVertical } from 'phosphor-react'
+import Scorebtn from './Scorebtn';
 
 
 export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
@@ -102,7 +103,7 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
         <CustomTableRow key={i} className='no-pointer'>
             <TableData> {1 + i} </TableData>
             <TableData>{course.code}</TableData>
-            <TableData>{course.title}</TableData>
+            <TableData className="title-field">{course.title}</TableData>
             <TableData>
                 <Formik
                     initialValues={{
@@ -120,16 +121,15 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
 
                         try {
                             await axios.put(`http://localhost:4000/private/update-score/${course._id}`, { ...values }, config);
-                            alert('score has been updatd')
                         } catch (error) {
                             console.log(error)
                         }
                     }}>
                     {formik => (
                         <Form>
-                            <div className='flex items-center justify-between'>
-                                <TextField label={''} name={'score'} type={'number'} />
-                                {showBtn && <button className='score-btn-s' type='submit'>update score</button>}
+                            <div className='koro flex items-center space-x-2'>
+                                <TextField scoreInput={false} label={''} name={'score'} type={'number'} />
+                                {showBtn && <Scorebtn />}
                             </div>
 
                         </Form>

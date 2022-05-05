@@ -60,7 +60,7 @@ const ConfrmRegNo = ({ value, regno, setRegNo, setValue }) => {
                     <ItemsWrapper>
                         <div className='flex items-center justify-between'>
                             <p className='text-white mb-3 mt-2'>Your reg no is: <span className='text-xl'>{regno}</span></p>
-                            <button onClick={copyLink}> {copyRegNo}  </button>
+                            <button className='cursor-copy' onClick={copyLink}> {copyRegNo}  </button>
                         </div>
                         <form onSubmit={(e) => verifyRegNo(e)}>
                             <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
