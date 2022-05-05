@@ -13,7 +13,7 @@ import { zoomOutVariants } from '../../utils/Animations';
 
 
 
-const UserDetails = () => {
+const UserDetails = ({user, setUser}) => {
     const [userDetails, setUserDetails] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isZoomed, setIsZoomed] = useState(false)
@@ -22,38 +22,40 @@ const UserDetails = () => {
     const history = useHistory();
 
     useEffect(() => {
-        const fetchAllStudents = async () => {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                },
-            };
-
-            try {
-                let endpoints = [
-                    "http://localhost:4000/private/students",
-                    "http://localhost:4000/private/admin/teachers"
-                ];
-
-                axios.all(endpoints.map((endpoint) => axios.get(endpoint, config))).then(
-                    (data) => {
-                        let students = (data[0].data)
-                        let lecturers = (data[1].data)
-
-                        const allUsers = students.concat(lecturers);
-                        const getUserById = allUsers.find(val => val._id === id)
-                        setUserDetails(getUserById)
-
-                    }
-                );
-            } catch (error) {
-                console.log(error)
-            }
-        };
-
+       
         fetchAllStudents();
     }, []);
+
+    const fetchAllStudents = async () => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+        };
+
+        try {
+            let endpoints = [
+                "http://localhost:4000/private/students",
+                "http://localhost:4000/private/admin/teachers"
+            ];
+
+            axios.all(endpoints.map((endpoint) => axios.get(endpoint, config))).then(
+                (data) => {
+                    let students = (data[0].data)
+                    let lecturers = (data[1].data)
+
+                    const allUsers = students.concat(lecturers);
+                    const getUserById = allUsers.find(val => val._id === id)
+                    setUserDetails(getUserById)
+
+                }
+            );
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
 
     useEffect(() => { document.body.addEventListener('mousedown', handleClickOutside) })
     const handleClickOutside = (event) => {
@@ -89,7 +91,7 @@ const UserDetails = () => {
 
     const renderAcademicRecords = [
         <AcadsBox>
-            <DataTableAcademics showBtn={true} tableHeading={tableAcademics} tableData={userDetails} />
+            <DataTableAcademics fetchAllStudents={fetchAllStudents} setUser={setUser} showBtn={true} tableHeading={tableAcademics} tableData={userDetails} />
         </AcadsBox>
 
     ]

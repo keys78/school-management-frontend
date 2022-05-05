@@ -88,7 +88,6 @@ body {
 
 .cursor-copy { cursor: copy;}
 
-/* .score-btn-s {all: unset; } */
 .danger-btn { all:unset; background:#df4759; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
 .reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 [type='reset'] { background: #6729e1 !important;}
@@ -101,7 +100,9 @@ body {
 
 .title-field { min-width: 300px !important;}
 
-
+.score-red { color: red !important;}
+.score-green { color: #42e629 !important;}
+.score-blue { color: #1316e8 !important;}
 
 .hamburger { cursor: pointer;}
 .hamburger .line{

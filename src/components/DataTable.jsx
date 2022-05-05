@@ -94,7 +94,8 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
 
 
-export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
+export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, showBtn }) => {
+    const [status, setStatus] = useState(false)
     const renderTableHeading = tableHeading.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
@@ -120,7 +121,10 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
                         };
 
                         try {
-                            await axios.put(`http://localhost:4000/private/update-score/${course._id}`, { ...values }, config);
+                            const { data } = await axios.put(`http://localhost:4000/private/update-score/${course._id}`, { ...values }, config);
+                            fetchAllStudents();
+                            data.status && setStatus(value => !value)
+
                         } catch (error) {
                             console.log(error)
                         }
@@ -128,8 +132,13 @@ export const DataTableAcademics = ({ tableData, tableHeading, showBtn }) => {
                     {formik => (
                         <Form>
                             <div className='koro flex items-center space-x-2'>
-                                <TextField scoreInput={false} label={''} name={'score'} type={'number'} />
-                                {showBtn && <Scorebtn />}
+                                <TextField
+                                    className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}
+                                    label={''}
+                                    name={'score'}
+                                    type={'number'}
+                                />
+                                {showBtn && <Scorebtn status={status} />}
                             </div>
 
                         </Form>

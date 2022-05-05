@@ -12,7 +12,7 @@ import ImageUpload from '../../components/ImageUpload';
 
 
 
-const Profile = ({ user, setUser, setError, error}) => {
+const Profile = ({ user, setUser, setError, error }) => {
   const history = useHistory()
 
   return error ? (
@@ -49,7 +49,6 @@ const Profile = ({ user, setUser, setError, error}) => {
                 await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
                 const { data } = await axios.get("http://localhost:4000/private/user", config);
                 alert('user has been updatd')
-                // setUser([user, data])
                 setUser(data)
               } catch (error) {
                 console.log(error)
