@@ -91,7 +91,7 @@ const ImageUploadWrapper = styled.div`
     & > div:nth-of-type(2)  { position: absolute; bottom:22px; right:0;}
 `
 const DisplayImage = styled.div`
-    width:120px; height:128px; vertical-align: middle;
+    width:120px; height:120px; vertical-align: middle;
     & > img  { width:100% ; border-radius:50%; height:100%; vertical-align: middle; cursor: zoom-in;}
 
     @media screen and (max-width: 600px){

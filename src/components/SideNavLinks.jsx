@@ -2,14 +2,25 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { navLinks } from '../utils/data'
 import { NavLink as LinkerNav } from 'react-router-dom';
-import { IconContext } from "phosphor-react";
+import { IconContext, X, Prohibit } from "phosphor-react";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { modalVariants } from '../utils/Animations';
 
 
 const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
-    const history = useHistory();
     const [activeNavLink, setActiveNavLinks] = useState('');
+    const [accessDenied, setAccessDenied] = useState(false);
+    const emptyDetails = (
+        user.address === "" ||
+        user.phone === "" ||
+        user.dob === "" ||
+        user.soo === "" ||
+        user.pic === "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+    )
+
+
+    const history = useHistory();
     const altIcon = ({ navLink, i }) => (
         <IconContext.Provider
             value={{
@@ -21,13 +32,57 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         </IconContext.Provider>
     )
 
+    const accessDeniedModal = [
+        <AnimatePresence>
+            <AccessDeniedModal>
+                <motion.div
+                    variants={modalVariants}
+                    initial="initial"
+                    animate="final"
+                    exit="exit"
+                >
+                    <Close>
+                        <X size={16} color="#000000c9" weight="bold" onClick={() => setAccessDenied(!accessDenied)} />
+                    </Close>
+                    <div>
+                        <Prohibit size={30} color="#e52e2e" weight="bold" />
+                        <h1>Access Denied</h1>
+                    </div>
+                    <span>Hi {user.firstName}, </span><br /> {`You need to update your profile first.`}
+                </motion.div>
+            </AccessDeniedModal>
+        </AnimatePresence>
+
+    ]
+
+
     const navClick = ({ navLink, i }) => {
+
+        if (emptyDetails && navLink.title === 'Students' && user.role === 'teacher') {
+            setAccessDenied(!accessDenied)
+
+            // setTimeout(() => {
+            //     setAccessDenied(false)
+            // }, 15000)
+        }
+
         setActiveNavLinks(i)
         window.innerWidth < 1280 && setIsNavOpen(!isNavOpen)
 
         if (navLink.title === 'Logout') {
             localStorage.removeItem("authToken");
             history.push("/login");
+        }
+    }
+
+
+
+
+    function validateTeacherRouteAccess(navLink) {
+        if (emptyDetails && navLink.title === 'Students' && user.role === 'teacher') {
+            return '/profile'
+        } else {
+            return navLink.path
         }
     }
 
@@ -41,9 +96,10 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
             transition={{ duration: 0.1, delay: i * 0.2 }}
         >
             <SingleNav
+                to={validateTeacherRouteAccess(navLink)}
                 onClick={() => navClick({ navLink, i })}
-                activeclassname="active"
-                to={navLink.path}
+                activeclassname={`${user.role === 'teacher' && navLink.title === 'Student' ? '' : 'active'} `}
+
             >
                 {altIcon({ navLink, i })}
                 {navLink.title}
@@ -54,6 +110,9 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
     return (
         <div>
             {renderNavLinks}
+            {accessDenied &&
+                accessDeniedModal
+            }
         </div>
     )
 };
@@ -75,5 +134,40 @@ const SingleNav = styled(LinkerNav)`
         color:#696D8C;
     }
   
+`
+
+
+const AccessDeniedModal = styled.div`
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    background: #00000076;
+    width: 100%;
+    height: 100vh;
+    z-index: 9;
+    margin:5px ;
+
+    & > div:nth-of-type(1) {
+        max-width:100%;
+        background: #fff;
+        color: #000000;
+        border-radius:5px ;
+        font-size:15px ;
+        padding: 12px 20px 12px 20px;
+        line-height:18px ;
+        span { color: #000000 !important; font-weight: bold; line-height:30px;}
+
+        & > div { color: #e52e2e; display: flex; align-items:center; justify-content: center; gap:10px; padding:13px 0 ; margin-top:6px ;
+            h1 { font-size: 18px; font-weight: bold;}
+        }
+    }
+    
+`
+
+const Close = styled.div`
+   position:absolute ;
+   top:-7px;
+   right:5px; 
+   cursor: pointer;
 `
 export default SideNavLinks

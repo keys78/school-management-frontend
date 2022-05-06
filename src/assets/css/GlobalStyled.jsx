@@ -20,9 +20,19 @@ export const ContentContainer = styled.section`
     width: 90%;
     margin-top: 90px;
     margin-bottom: 10px;
+    border:2px solid red;
 
+    @media screen and (max-width: 1280px){
+      margin-top: 115px;
+    }
     @media screen and (max-width: 767px){
       width:95% ;
+    }
+    @media screen and (max-width: 640px){
+      margin-top: 95px;
+    }
+    @media screen and (max-width: 480px){
+      margin-top: 66px;
     }
 `
 
@@ -86,7 +96,7 @@ export const CustomSelect = styled.select`
   width: 100%;
   outline: none;
   margin-bottom: 6px;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   /* height: ; */
   /* all:unset ; */
 

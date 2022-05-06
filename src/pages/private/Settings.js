@@ -66,15 +66,16 @@ const Settings = ({ user, error, setError }) => {
             </Formik>
         </ChangePasswordWrapper>
     ]
-    const notificationsTab = [<div className='mt-6'>You have no new notifications</div>]
+
+    const notificationsTab = [<div>You have no new notifications</div>]
     const supportTab = [
-        <div className='mt-6'>
+        <div>
             <h1>Having Troubles ..?</h1>
-            <p>Contact us at <a href="mailto: rahzy24@gmail.com">rahzy24@gmail.com</a>&nbsp;or place a call to <a href="tel:08108243267">08108243267</a>
+            <p className='settings-links'>Contact us at <a href="mailto: rahzy24@gmail.com">rahzy24@gmail.com</a>&nbsp;or place a call to <a href="tel:08108243267">08108243267</a>
             </p>
         </div>
-
     ]
+
 
     const tabContent = [
         { title: 'Security', content: securityTab },
@@ -86,14 +87,14 @@ const Settings = ({ user, error, setError }) => {
         <ContentWrapper>
             <ContentContainer>
                 <div>
-                    <h1>Settings</h1>
+                    <h1 className="profile-header">Settings</h1>
                     <Tabs>
                         {tabContent.map((tab, idx) => (
                             <Tabs.TabPane key={`Tab ${idx}`} tab={tab.title} >
-                                <div className='bg-white mt-4 pt-2 pb-40 px-2 rounded-2xl'>
-                                {tab.content}
+                                <div className='bg-white mt-4 pt-2 sm:pb-40 pb-8 sm:px-2 px-0 rounded-2xl'>
+                                    {tab.content}
                                 </div>
-                               
+
                             </Tabs.TabPane>
                         ))}
                     </Tabs>

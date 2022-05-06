@@ -179,18 +179,11 @@ const TableWrapper = styled.section`
     background-color: #fff;
     padding-bottom: 40px;
 
-    @media screen and (max-width: 1280px){
-        margin-top:40px ;
-    }
     @media screen and (max-width: 640px){
         box-shadow: none;
         /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
-        margin-top:10px ;
     }
-    @media screen and (max-width: 480px){
-        margin-top:-18px ;
-    }
-   
+
 `
 const TableTitle = styled.h1`
     margin-left:8px ;
@@ -222,6 +215,7 @@ const TableHeads = styled.th`
     padding:8px 16px;
     font-size: 16px;
     color:#fff;
+    white-space:nowrap ;
 `
 const TableData = styled.td`
     padding:8px 16px;

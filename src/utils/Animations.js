@@ -16,6 +16,24 @@ export const modalVariants = {
   }
 };
 
+export const modalVariantsVertical = {
+    
+  initial: {
+    opactity: 0,
+    x: "-100vh",
+  },
+  final: {
+    opactity: 1,
+    x: 0,
+    transition: {duration: 0.4}
+  },
+  exit: {
+    opactity: 0,
+    x: "-100vh",
+    transition: {duration: 0.2},
+  }
+};
+
 
 export const scrollTopVariants = {
     

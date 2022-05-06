@@ -6,14 +6,14 @@ import axios from 'axios';
 import Tabs from '../../components/Tabs';
 import { DataTableAcademics } from '../../components/DataTable';
 import { ArrowLeft, X } from "phosphor-react";
-import  {AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { tableAcademics } from '../../utils/data';
 import { zoomOutVariants } from '../../utils/Animations';
 
 
 
 
-const UserDetails = ({user, setUser}) => {
+const UserDetails = ({ user, setUser }) => {
     const [userDetails, setUserDetails] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isZoomed, setIsZoomed] = useState(false)
@@ -22,7 +22,7 @@ const UserDetails = ({user, setUser}) => {
     const history = useHistory();
 
     useEffect(() => {
-       
+
         fetchAllStudents();
     }, []);
 
@@ -83,7 +83,8 @@ const UserDetails = ({user, setUser}) => {
                 <p><span>Current Address: </span> {userDetails.address}</p>
                 <p><span>D.O.B: </span> {userDetails.dob}</p>
                 <p><span>State Of Origin: </span> {userDetails.soo}</p>
-                <p><span>Number Of Courses Registered: </span> {userDetails && userDetails.courses.length}</p>
+                {userDetails.role == 'student' && <p><span>Number Of Courses Registered: </span> {userDetails && userDetails.courses.length}</p>}
+                {userDetails.role == 'teacher' && <p><span>{`Lecturer ${userDetails.firstName}'s Courses`}: </span> {`${userDetails.department}`} </p>}
             </div>
 
         </ProfileBox>
@@ -125,23 +126,30 @@ const UserDetails = ({user, setUser}) => {
     return (
         <ContentWrapper>
             <ContentContainer>
-                <div>
+                <div className='details-adjust'>
                     <div className='flex items-center justify-between py-3'>
                         <button onClick={() => history.goBack()}><ArrowLeft size={20} color="#08546d" weight="bold" /></button>
                         <button className='danger-btn' onClick={() => setIsModalOpen(!isModalOpen)}>Delete</button>
                     </div>
 
-                    {isModalOpen &&
-                        <DeleteUserModal>
-                            <DeleteUserModalContainer>
-                                <h1> Are you sure you want to delete <span>{userDetails.firstName} {userDetails.lastName}</span> ?</h1>
-                                <div>
-                                    <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
-                                    <button onClick={deleteUser}>Delete</button>
-                                </div>
-                            </DeleteUserModalContainer>
-                        </DeleteUserModal>
-                    }
+                    <AnimatePresence>
+                        {isModalOpen &&
+                            <DeleteUserModal>
+                                <DeleteUserModalContainer
+                                    variants={zoomOutVariants}
+                                    initial="initial"
+                                    animate="final"
+                                    exit="exit"
+                                >
+                                    <h1> Are you sure you want to delete <span>{userDetails.firstName} {userDetails.lastName}</span> ?. This action cannot be undone!</h1>
+                                    <div>
+                                        <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
+                                        <button onClick={deleteUser}>Delete</button>
+                                    </div>
+                                </DeleteUserModalContainer>
+                            </DeleteUserModal>
+                        }
+                    </AnimatePresence>
 
                     <Tabs active={0}>
                         {tabContent.map((tab, idx) => (
@@ -152,6 +160,7 @@ const UserDetails = ({user, setUser}) => {
                     </Tabs>
                 </div>
             </ContentContainer>
+            
             <AnimatePresence>
                 {isZoomed &&
                     <FullDisplay >
@@ -222,19 +231,25 @@ const DeleteUserModal = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 210px;
-    z-index: 9;
+    z-index: 999;
 
     & > h1 > span { color: cyan; }
     
 `
 
-const DeleteUserModalContainer = styled.div`
+const DeleteUserModalContainer = styled(motion.div)`
     background: #19262F;
     max-width: 350px;
     padding:20px;
     border-radius: 6px;
     color:#fff;
+
+    @media screen and (max-width: 380px){
+        font-size: 13px;
+    }
+    @media screen and (max-width: 380px){
+        margin:0 15px ;
+    }
    
     & > div {  margin-top:25px; display: flex; align-items: center; justify-content: space-between;}
     & > div > button { padding:3px 10px; border-radius: 6px; }

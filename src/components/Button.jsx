@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({ onClick, text, flexUp, width, padding, margin, color, background, reset, type }) => {
+const Button = ({ onClick, text, flexUp, width, margin, color, padding, background, reset, type }) => {
   return (
     <ButtonWrapper
     type={type}

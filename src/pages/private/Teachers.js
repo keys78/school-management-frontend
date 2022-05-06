@@ -4,6 +4,8 @@ import { ContentContainer, ContentWrapper, CustomSelect } from "../../assets/css
 import TextField from '../../components/TextField';
 import { Formik, Form, Field } from 'formik';
 import { validate } from '../../utils/validateForm';
+import { modalVariantsVertical } from '../../utils/Animations';
+import { AnimatePresence, motion } from 'framer-motion'
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, tableHeading } from '../../utils/data';
@@ -40,7 +42,7 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
 
 
     useEffect(() => {
-       
+
 
         fetchData();
     }, []);
@@ -53,9 +55,9 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
         <ContentWrapper>
             <ContentContainer>
                 <div>
-                    <div className='flex items-center justify-between'>
-                        <h1>Lecturers</h1>
-                        <button onClick={() => setIsOpen(!isOpen)}>Register Lecturer</button>
+                    <div className='flex items-center justify-end'>
+                        <button ></button>
+                        <Button type="submit" text={'Register Lecturer'} background={'#04131D'} padding={'p-2'} color={'text-white'} onClick={() => setIsOpen(!isOpen)} />
                     </div>
                     <div>
                         <Formik
@@ -65,6 +67,11 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                 email: '',
                                 password: '',
                                 gender: '',
+
+                                phone:'',
+                                address:'',
+                                soo:'',
+                                dob:'',
 
                             }}
                             validationSchema={validate}
@@ -87,18 +94,18 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                         }
 
                                         , config);
-                                        fetchData();
-                                        
-                                    
+                                    fetchData();
+
+
 
 
                                     if (data.success === true) {
                                         // const { data: data_1 } = await axios.get(`http://localhost:4000/private/admin/teachers`, config);
-                                        alert(`${data?.data} is now a teacher`)
+                                        alert(`${data?.data} is now a staff`)
                                         setIsOpen(false)
-                                        
+
                                     }
-                                   
+
                                     // setUser(data_1)
 
                                 } catch (error) {
@@ -112,66 +119,79 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                         >
                             {formik => (
                                 <div>
+                                    <AnimatePresence>
+                                        {isOpen &&
+                                            <AddTeacherModal>
+                                                {error && <span className="error-message">{error}</span>}
+                                                <Form>
+                                                    <FieldsWrapper
+                                                        variants={modalVariantsVertical}
+                                                        initial="initial"
+                                                        animate="final"
+                                                        exit="exit"
+                                                    >
+                                                        <div>
+                                                            <TextField label={'First Name'} name={'firstName'} type={'text'} />
+                                                        </div>
+                                                        <div>
+                                                            <TextField label={'Last Name'} name={'lastName'} type={'text'} />
+                                                        </div>
+                                                        <div className='col-span-2'>
+                                                            <TextField label={'Email'} name={'email'} type={'email'} />
+                                                        </div>
 
+                                                        <div className='faculdep flex gap-8'>
+                                                            <section className="gender-class-s -mb-6">
+                                                                <label className='gender-label' htmlFor="gender">Gender</label>
+                                                                <Field label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
+                                                                    <option disabled value="">Select gender</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </Field>
+                                                            </section>
 
-                                    {isOpen &&
-                                        <AddTeacherModal>
-                                            {error && <span className="error-message">{error}</span>}
-                                            <Form>
-                                                <FieldsWrapper>
-                                                    <div>
-                                                        <TextField label={'First Name'} name={'firstName'} type={'text'} />
-                                                    </div>
-                                                    <div>
-                                                        <TextField label={'Last Name'} name={'lastName'} type={'text'} />
-                                                    </div>
-                                                    <div className='col-span-2'>
-                                                        <TextField label={'Email'} name={'email'} type={'email'} />
-                                                    </div>
+                                                            <label className='select-label' htmlFor="faculty">Faculty
+                                                                <CustomSelect name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                                                    <option disabled value="">Select Faculty</option>
+                                                                    {facultyArr.map(faculty =>
+                                                                        <option value={faculty.faculty}>{faculty.faculty}</option>
+                                                                    )}
+                                                                </CustomSelect>
+                                                            </label>
 
-                                                    <Field component="select" name="gender" placeholder={'Select Options'}>
-                                                        <option value="" disabled>Select Gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                    </Field>
+                                                            <div className='dept-teacher-adjust'>
+                                                                <label className='select-label' htmlFor="dept">Department
+                                                                    <CustomSelect name="dept" onChange={(e) => { setDep(e.target.value) }}  >
+                                                                        <option disabled value="">Select Department</option>
+                                                                        {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
+                                                                            <option value={depts.department}>{depts.department}</option>
+                                                                        )}
+                                                                    </CustomSelect>
+                                                                </label>
+                                                            </div>
 
-                                                    <div className='flex items-center py-4'>
-                                                        <CustomSelect name="" id="" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
-                                                            <option value="">Select Faculty</option>
-                                                            {facultyArr.map(faculty =>
-                                                                <option value={faculty.faculty}>{faculty.faculty}</option>
-                                                            )}
-                                                        </CustomSelect>
+                                                        </div>
 
-                                                        <CustomSelect onChange={(e) => { setDep(e.target.value) }}  >
-                                                            <option value="">Select Department</option>
-                                                            {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
-                                                                <option value={depts.department}>{depts.department}</option>
-                                                            )}
-                                                        </CustomSelect>
-                                                    </div>
-                                                    <div>
-                                                        <TextField label={'Password'} name={'password'} type={'password'} />
-                                                    </div>
-                                                    <div>
-                                                        <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
-                                                    </div>
+                                                        <div>
+                                                            <TextField label={'Password'} name={'password'} type={'password'} />
+                                                        </div>
+                                                        <div>
+                                                            <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
+                                                        </div>
 
-                                                    {/* <button type='submit'>Register</button> */}
-                                                    <Button type="reset" onClick={() => setIsOpen(false)} reset text={'Cancel'} width={'w-full'} background={'bg-red-500'} />
-                                                    <Button type={'submit'} text={'Register Lecturer'} width={'w-full'} color='text-white' padding={'py-2'} />
-                                                </FieldsWrapper>
-                                            </Form>
-                                        </AddTeacherModal>
+                                                        <button type='reset' onClick={() => setIsOpen(false)} className='cancel-btn'>Cancel</button>
+                                                        <Button type={'submit'} text={'Register Lecturer'} width={'w-full'} color='text-white' padding={'py-2'} />
+                                                    </FieldsWrapper>
+                                                </Form>
+                                            </AddTeacherModal>
+                                        }
 
-                                    }
+                                    </AnimatePresence>
                                 </div>
                             )}
                         </Formik>
                     </div>
 
-                    <br />
-                    <br />
                     <DataTable
                         tableData={data}
                         tableHeading={tableHeading}
@@ -180,6 +200,7 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                         setSearchTerm={setSearchTerm}
                         data={data}
                         setData={setData}
+                        tableTitle={'Lecturers'}
                     />
                 </div>
             </ContentContainer>
@@ -196,24 +217,30 @@ const AddTeacherModal = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 210px;
     z-index: 9;
+
+  
     
 `
 
-const FieldsWrapper = styled.div`
+const FieldsWrapper = styled(motion.div)`
     background: #19262F;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    min-width: 450px;
+    align-items:center ;
     padding:20px;
     border-radius: 6px;
     gap: 6px;
 
-    & > div:nth-child(4)  { grid-column: span 2 / span 2; gap:10px; }
-    /* & > button {grid-column: span 2 / span 2; gap:10px; }  */
-     /* background: linear-gradient(to right, #44a08d, #093637); */
+    @media screen and (max-width: 600px) {
+        margin:0 15px ;
+        padding:14px;
+    }
+
+    & > div:nth-child(4)  { grid-column: span 2 / span 2; display:grid; grid-template-columns: repeat(3, 1fr !important)}
+    & > div:nth-child(5) { grid-column: span 2 / span 2; }
+    & > div:nth-child(6) { grid-column: span 2 / span 2; }
+    & > button { margin-top:10px; }
     
 `
 

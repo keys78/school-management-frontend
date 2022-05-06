@@ -181,10 +181,6 @@ const FieldsWrapper = styled.div`
         & > button  { grid-column: span 1 / span 2; }
         & > input  { grid-column: span 1 / span 2; }
         }
-
-      
-
 `
-
 
 export default SignUp;

@@ -6,7 +6,6 @@ import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-import Button from '../../components/Button';
 import { HandPointing } from "phosphor-react";
 import ImageUpload from '../../components/ImageUpload';
 

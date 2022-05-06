@@ -188,38 +188,3 @@ export const homeContentData = [
   },
 ]
 
-
-export const testi = [
-  {
-    role: "student",
-    level: "student",
-    firstName: "Onyeyaforoooo",
-    lastName: "Emmanuelelele",
-    email: "admin@schcsasool.com",
-    phone: "08108243267",
-    address: "Port Harcourt",
-    dob: "2022-03-18",
-    soo: "Imo",
-    profileImg: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-    courses: [],
-    department: "",
-    faculty: "",
-    pic: "uploads/2022-05-02T20-37-45.124Z-IMG_20180530_172544.jpg"
-},
-  {
-    role: "student",
-    level: "student",
-    firstName: "koro",
-    lastName: "bb",
-    email: "admin@schofaacol.com",
-    phone: "08108243267",
-    address: "Port Harcourt",
-    dob: "2022-03-18",
-    soo: "Imo",
-    profileImg: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-    courses: [],
-    department: "",
-    faculty: "",
-    pic: "uploads/2022-05-02T20-37-45.124Z-IMG_20180530_172544.jpg"
-}
-]

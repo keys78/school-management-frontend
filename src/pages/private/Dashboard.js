@@ -188,20 +188,16 @@ const UserCard = styled.div`
 `
 
 const GreetingsMobile = styled.div`
-    margin:30px 0 -25px 0;
     font-size: 25px;
     display:none ;
 
     @media screen and (max-width: 1024px){
       display:flex ;
       align-items:center ;
+      padding:6px 0;
     }
     @media screen and (max-width: 600px){
       font-size:18px ;
-      margin:10px 0 -25px 0;
-    }
-    @media screen and (max-width: 480px){
-      margin:-10px 0 -25px 0;
     }
 `
 
@@ -214,7 +210,6 @@ const DisplayPattern = styled.div`
 
     @media screen and (max-width: 1280px){
       padding-right:25px ;
-      margin-top:30px ;
     }
 
     @media screen and (max-width: 1024px){

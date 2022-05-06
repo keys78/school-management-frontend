@@ -46,7 +46,7 @@ body {
 
 .private { display: block;}
 .react-calendar { width: 100% !important; font-family: inherit !important; max-width: 100% !important;}
-.profile-header { font-size: 20px; font-weight: bold;}
+.profile-header { font-size: 20px; font-weight: bold; padding-bottom: 16px;}
 .zoom-in {cursor: zoom-in;}
 
 .gender-class-s {
@@ -87,22 +87,30 @@ body {
 }
 
 .cursor-copy { cursor: copy;}
+.settings-links > a { color: blue;}
 
-.danger-btn { all:unset; background:#df4759; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
-.reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: rgb(103, 41, 225);  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
-[type='reset'] { background: #6729e1 !important;}
+
+
+
+.danger-btn { all:unset; background:#df4759 !important; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
+.reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: #6729e1 !important;  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+.cancel-btn { all: unset; width: 100%; text-align: center; padding: 6px 0; background:#fa0b0b !important;  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+/* [type='reset'] { background: #6729e1 !important;} */
 
 .score-btn {color:#fff; font-size: 13px; white-space: nowrap; padding:4px 10px; border-radius: 5px; cursor: pointer;}
 .score-waiting { background:#6729e1 !important ;}
 .score-success { background: #06c729 !important;}
 .score-btn[disabled]{ background-color: #cccccc !important; color: #666666; cursor: progress;}
 
-
 .title-field { min-width: 300px !important;}
-
 .score-red { color: red !important;}
 .score-green { color: #42e629 !important;}
 .score-blue { color: #1316e8 !important;}
+
+
+
+
+
 
 .hamburger { cursor: pointer;}
 .hamburger .line{
@@ -242,16 +250,23 @@ top: 95%;
   .private { display: none !important;}
   .active { background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.469);}
   .react-calendar { border: 1px solid rgba(106, 106, 106, 0.464) !important;}
-  .profile-header {  margin:30px 0 0 0; font-size: 18px; }
+  .profile-header {
+     /* margin:30px 0 0 0; */
+     font-size: 18px;
+     }
+
+  /* .details-adjust { margin-top: 20px;} */
 }
 
 
 @media screen and (max-width: 1024px) {
-  .profile-header {  margin: 30px 0 30px 0; font-size: 16px;}
+  .profile-header {  
+    /* margin: 30px 0 30px 0; */
+    font-size: 16px;}
 }
 
 @media screen and (max-width: 600px) {
-  .profile-header {  margin: 12px 0 30px 0 }
+  /* .profile-header {  margin: 12px 0 30px 0 } */
   .signup-adjust { height: 100% !important; padding:30px 15px 20px 15px;}
   .faculdep { padding:10px 0}
   .gender-class-s { grid-column: span 1 / span 1;}
@@ -260,11 +275,12 @@ top: 95%;
   .danger-btn { padding:4px 16px; color:#fff; cursor: pointer;}
   .gender-label { margin-bottom: 0; }
   .soo-adjust { margin-top: 7px;}
+  .dept-teacher-adjust { margin-top: -20px;}
  
 
 }
 @media screen and (max-width: 480px) {
-  .profile-header {  margin: -12px 0 20px 0; }
+  /* .profile-header {  margin: -12px 0 20px 0; } */
 }
 
 @media screen and (max-width: 480px) {

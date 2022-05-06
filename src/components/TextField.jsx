@@ -23,7 +23,7 @@ const TextField = ({ label, profile, editIcon, scoreInput, ...props }) => {
         />
         <p className='cursor-pointer' onClick={() => setShowEdit(!showEdit)}>{editIcon}</p>
       </div>
-      <ErrorMessage component="p" name={field.name} className="error" />
+      <ErrorMessage component="p" name={field.name} className="error mt-1" />
     </div>
   )
 
