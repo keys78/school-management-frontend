@@ -9,7 +9,7 @@ import { User } from 'phosphor-react';
 
 
 
-const Students = ({ error, searchTerm, setSearchTerm }) => {
+const Students = ({user, error, searchTerm, setSearchTerm }) => {
     const [data, setData] = useState([])
 
     // var json_pre = '[{"Id":1,"UserName":"Sam Smith"},{"Id":2,"UserName":"Fred Frankly"},{"Id":1,"UserName":"Zachary Zupers"}]';
@@ -38,8 +38,8 @@ const Students = ({ error, searchTerm, setSearchTerm }) => {
 
             try {
                 const { data } = await axios.get("http://localhost:4000/private/students", config);
-                if(User.role === 'teacher') {
-                    const x = data.find(val => val.department === User.department)
+                if(user.role === 'teacher') {
+                    const x = data.find(val => val.department === user.department)
                     setData(x);
                 }
                 
