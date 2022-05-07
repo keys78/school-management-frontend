@@ -9,9 +9,11 @@ import { Formik, Form } from 'formik';
 import { validateScore } from '../utils/validateForm';
 import { DotsThreeOutlineVertical } from 'phosphor-react'
 import Scorebtn from './Scorebtn';
+import { CSVLink } from 'react-csv'
 
 
-export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
+export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
+    const csvLink = { data: tableData, filename:"e-school.file.csv" }
     const history = useHistory();
     const fetchAllStudents = async () => {
         const config = {
@@ -23,7 +25,12 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
         try {
             const { data } = await axios.get(url, config);
-            setData(data);
+            if(user.role === 'teacher') {
+                const studentsToTeacher = data.filter(val => val.department === user.department)
+                setData(studentsToTeacher)
+            } else {
+                setData(data)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -66,14 +73,21 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
 
     ))
 
+       
+
     return (
         <TableWrapper>
             <TableTitle className='' >{tableTitle}</TableTitle>
             <div className='flex justify-between items-center sm:p-2 p-0 py-2'>
                 <div className='flex'>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                    
                 </div>
-                <SortByOrder tableData={tableData} setData={setData} url={url} />
+                <div className='flex sm:space-x-4 space-x-2'>
+                    <button className='export-csv'><CSVLink {...csvLink}><span className='hide-export'>Export to </span>CSV</CSVLink></button>
+                    <SortByOrder tableData={tableData} setData={setData} url={url} />
+                </div>
+                
             </div>
             <TableAdjustMobile>
                 <CustomTable>
@@ -83,7 +97,7 @@ export const DataTable = ({ tableHeading, tableData, searchTerm, setSearchTerm, 
                         </tr>
                     </CustomTableHead>
                     <tbody className='w-full'>
-                        {renderAllStudents}
+                        {tableData.length === 0 ?  <span className='text-center  pl-1'>No data available</span> : renderAllStudents}
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>

@@ -4,28 +4,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
-import { User } from 'phosphor-react';
-// import { testi } from '../../utils/data';
+
 
 
 
 const Students = ({user, error, searchTerm, setSearchTerm }) => {
     const [data, setData] = useState([])
-
-    // var json_pre = '[{"Id":1,"UserName":"Sam Smith"},{"Id":2,"UserName":"Fred Frankly"},{"Id":1,"UserName":"Zachary Zupers"}]';
-    // var json = $.parseJSON(json_pre);
-    
-    // var csv = JSON2CSV(json);
-    // var downloadLink = document.createElement("a");
-    // var blob = new Blob(["\ufeff", csv]);
-    // var url = URL.createObjectURL(blob);
-    // downloadLink.href = url;
-    // downloadLink.download = "data.csv";
-    
-    // document.body.appendChild(downloadLink);
-    // downloadLink.click();
-    // document.body.removeChild(downloadLink);
-    // }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,9 +23,13 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
             try {
                 const { data } = await axios.get("http://localhost:4000/private/students", config);
                 if(user.role === 'teacher') {
-                    const x = data.find(val => val.department === user.department)
-                    setData(x);
+                    const studentsToTeacher = data.filter(val => val.department === user.department)
+                    setData(studentsToTeacher)
+                } else {
+                    setData(data)
                 }
+                
+               
                 
             } catch (error) {
                 console.log(error)
@@ -58,6 +46,7 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
         <ContentWrapper>
             <ContentContainer>
                 <DataTable tableHeading={tableHeading}
+                    user={user}
                     tableData={data}
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}

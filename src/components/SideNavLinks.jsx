@@ -97,6 +97,7 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         >
             <SingleNav
                 to={validateTeacherRouteAccess(navLink)}
+                // to={navLink.path}
                 onClick={() => navClick({ navLink, i })}
                 activeclassname={`${user.role === 'teacher' && navLink.title === 'Student' ? '' : 'active'} `}
 

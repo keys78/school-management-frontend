@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 
 
 
-const Courses = ({ user, setUser}) => {
+const Courses = ({ user, setUser }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [buttonStatus, setButtonStatus] = useState('Add')
     const allCourses = user?.courses
@@ -30,32 +30,19 @@ const Courses = ({ user, setUser}) => {
         <CustomTableRow key={i}>
             <TableData>{i + 1}</TableData>
             <TableData>{course.code}</TableData>
-            <TableData>{course.title}</TableData>
-            <TableData>{course.score}</TableData>
+            <TableData className="title-field">{course.title}</TableData>
+            <TableData className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}>{course.score}</TableData>
             <TableData>{course.units}</TableData>
         </CustomTableRow>
     ))
 
+    // console.log(allCourses.reduce((n, {score}) => n + Number(score), 0))
 
 
     const getFaculty = facultyArr && facultyArr.find(val => val.faculty === user.faculty)
     const getDept = getFaculty && getFaculty.departments.map(depts => depts.department)
     const myCourses = getDept && courseArr.find(el => el.department === user.department).courses
 
-    useEffect(() => { }, [])
-
-    // const c1 = allCourses.map(e => e.code)
-    // const c2 = myCourses.map(e => e.code)
-
-    // const diff = c2.filter(e => c1.includes(e))
-    // console.log('ppp', diff)
-
-    // const checkButtonStatus = () => myCourses.find(el => {
-    //     // console.log('ddd', c1.includes(el.code))
-    //    return c1.includes(el.code)
-    // })
-
-    // // console.log('ddd', checkButtonStatus)
 
     const renderTableHeading = tableRegisterCourses.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
@@ -65,7 +52,7 @@ const Courses = ({ user, setUser}) => {
         <CustomTableRow key={i}>
             <TableData>{i + 1}</TableData>
             <TableData>{course.code}</TableData>
-            <TableData>{course.title}</TableData>
+            <TableData className="title-field">{course.title}</TableData>
             <TableData>{course.units}</TableData>
             <TableData>
                 <div onClick={() => registerCourse(course)}> {buttonStatus}</div>
@@ -110,16 +97,6 @@ const Courses = ({ user, setUser}) => {
             }
         }
 
-        // value. setButtonStatus('Reg No')
-
-        // const getApiCode = allCourses && allCourses.find(mycourse => mycourse.code)
-        // const getApiStatus = allCourses && allCourses.map(mycourse => mycourse.status === true)
-        // const getLocalCode = myCourses && myCourses.map(course => course.code)
-
-        // if (getApiCode === getLocalCode && getApiStatus) {
-        //     setButtonStatus('Registered')
-        // }
-        // window.location.reload(false);
     }
 
     const confirmCourseReg = () => {
@@ -143,18 +120,20 @@ const Courses = ({ user, setUser}) => {
                         <E_Modal>
                             <FormBox>
                                 <TableWrapper>
-                                    <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
-                                    <CustomTable>
-                                        <CustomTableHead >
-                                            <tr>
-                                                {renderTableHeading}
-                                            </tr>
+                                    <TableAdjustMobile>
+                                        <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
+                                        <CustomTable>
+                                            <CustomTableHead >
+                                                <tr>
+                                                    {renderTableHeading}
+                                                </tr>
 
-                                        </CustomTableHead>
-                                        <tbody className='w-full'>
-                                            {renderSubjects}
-                                        </tbody>
-                                    </CustomTable>
+                                            </CustomTableHead>
+                                            <tbody className='w-full'>
+                                                {renderSubjects}
+                                            </tbody>
+                                        </CustomTable>
+                                    </TableAdjustMobile>
                                 </TableWrapper>
                                 <div>
                                     <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
@@ -164,16 +143,18 @@ const Courses = ({ user, setUser}) => {
                         </E_Modal>
                     }
                     <TableWrapper>
-                        <CustomTable>
-                            <CustomTableHead >
-                                <tr>
-                                    {renderRegCoursesHeading}
-                                </tr>
-                            </CustomTableHead>
-                            <tbody className='w-full'>
-                                {renderRegSubjects}
-                            </tbody>
-                        </CustomTable>
+                        <TableAdjustMobile>
+                            <CustomTable>
+                                <CustomTableHead >
+                                    <tr>
+                                        {renderRegCoursesHeading}
+                                    </tr>
+                                </CustomTableHead>
+                                <tbody className='w-full'>
+                                    {renderRegSubjects}
+                                </tbody>
+                            </CustomTable>
+                        </TableAdjustMobile>
                     </TableWrapper>
                 </div>
             </ContentContainer>
@@ -242,5 +223,9 @@ const TableHeads = styled.th`
 const TableData = styled.td`
     padding:8px 16px;
     font-size: 15px;
+`
+
+const TableAdjustMobile = styled.div`
+     overflow-x:auto ;
 `
 export default Courses;

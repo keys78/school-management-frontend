@@ -93,9 +93,10 @@ body {
 
 
 .danger-btn { all:unset; background:#df4759 !important; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
-.reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: #6729e1 !important;  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
-.cancel-btn { all: unset; width: 100%; text-align: center; padding: 6px 0; background:#fa0b0b !important;  font-size: 16px; border-radius: 6px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
-/* [type='reset'] { background: #6729e1 !important;} */
+.reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: #6729e1 !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+.cancel-btn { all: unset; width: 100%; text-align: center; padding: 6px 0; background:#fa0b0b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+.export-csv { all: unset; width: 100%; text-align: center; padding: 6px 10px; background:#11ea4b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+
 
 .score-btn {color:#fff; font-size: 13px; white-space: nowrap; padding:4px 10px; border-radius: 5px; cursor: pointer;}
 .score-waiting { background:#6729e1 !important ;}
@@ -276,15 +277,14 @@ top: 95%;
   .gender-label { margin-bottom: 0; }
   .soo-adjust { margin-top: 7px;}
   .dept-teacher-adjust { margin-top: -20px;}
+  .export-csv { font-size: 13px; padding: 6px;}
  
 
-}
-@media screen and (max-width: 480px) {
-  /* .profile-header {  margin: -12px 0 20px 0; } */
 }
 
 @media screen and (max-width: 480px) {
   .align-pad { padding: 0px 15px; }
   .private-two { display: none;}
   .auth-page-adjust { margin-top: -80px;}
+  .hide-export { display: none;}
 }
