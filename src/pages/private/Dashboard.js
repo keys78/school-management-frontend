@@ -6,7 +6,8 @@ import wmap from "../../assets/images/wmap.png"
 import Calendar from 'react-calendar';
 import { lessons } from "../../utils/data";
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
-import { Ghost } from "phosphor-react";
+import { Ghost, Student, UserSwitch, UsersThree } from "phosphor-react";
+import TextEditor from "../../components/TextEditor";
 
 
 const Dashboard = ({ user, error }) => {
@@ -27,7 +28,38 @@ const Dashboard = ({ user, error }) => {
         else welcomeText = welcomeTypes[2];
 
         setGreetings(welcomeText)
+
+
+
     }, []);
+
+
+        
+    function runTheClock() {
+        const HOURHAND = document.getElementById("hour");
+    const MINUTEHAND = document.getElementById("minute");
+    const SECONDHAND = document.getElementById("second");
+    
+      var date = new Date();
+    
+      let hr = date.getHours();
+      let min = date.getMinutes();
+      let sec = date.getSeconds();
+    
+      let hrPosition = (hr*360/12)+(min*(360/60)/12);
+      let minPosition = (min*360/60)+(sec*(360/60)/60);
+      let secPosition = sec*360/60;
+
+      hrPosition = hrPosition+(3/360);
+      minPosition = minPosition+(6/60);
+      secPosition = secPosition+6;
+    
+      HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
+      MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
+      SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
+    }
+    
+    var interval = setInterval(runTheClock,1000);
 
 
     const myNews = newsApi?.articles
@@ -49,6 +81,35 @@ const Dashboard = ({ user, error }) => {
         </LessonBox>
     ))
 
+    const clockAnalog = [
+        <main className="main">
+        <div className="clockbox">
+            <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 600 600">
+                <g id="face">
+                    <circle className="circle" cx="300" cy="300" r="253.9" />
+                    <path className="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6" />
+                    <circle className="mid-circle" cx="300" cy="300" r="16.2" />
+                </g>
+                <g id="hour">
+                    <path className="hour-arm" d="M300.5 298V142" strokeLinecap="round" />
+                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+                </g>
+                <g id="minute">
+                    <path className="minute-arm" d="M300.5 298V67" strokeLinecap="round" />
+                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+                </g>
+                <g id="second">
+                    <path className="second-arm" d="M300.5 350V55" strokeLinecap="round" />
+                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+                </g>
+            </svg>
+        </div>
+    </main>
+    ]
+
+
+  
+
 
 
 
@@ -57,69 +118,124 @@ const Dashboard = ({ user, error }) => {
     ) : (
         <ContentWrapper>
             <ContentContainer>
-                <GreetingsMobile>
-                <Ghost size={20} color="#d51a1a"/>&nbsp;{greetings} {user.firstName}
-                </GreetingsMobile>
-                {user &&
-                    <DisplayPattern>
-                        <WelcomeCard>
-                            <div>
-                                <h1>
-                                    {greetings} {user.firstName}
-                                </h1>
-                            </div>
-                            <div>
-                                <p>❝{newQuote.content}❞ </p>
-                                <p>~ {newQuote.author} </p>
-                                <img src={wmap} />
-                            </div>
-                        </WelcomeCard>
+                {user.role !== 'admin' ? (
+                    <>
+                        <GreetingsMobile>
+                            <Ghost size={20} color="#d51a1a" />&nbsp;{greetings} {user.firstName}
+                        </GreetingsMobile>
+                        {user &&
+                            <DisplayPattern>
+                                <WelcomeCard>
+                                    <div>
+                                        <h1>
+                                            {greetings} {user.firstName}
+                                        </h1>
+                                    </div>
+                                    <div>
+                                        <p>❝{newQuote.content}❞ </p>
+                                        <p>~ {newQuote.author} </p>
+                                        <img src={wmap} />
+                                    </div>
+                                </WelcomeCard>
 
-                        <UserCard>
-                            <div>
-                                <img className="w-28" src={user.pic} alt="profile" />
-                            </div>
-                            <div>
-                                <p>Level: {user.level}</p>
-                            </div>
-                            <div>
-                                <p>{user.firstName} {user.lastName}</p>
-                                <p><span>Faculty:</span> {user.faculty}</p>
-                                <p><span>Department:</span> {user.department}</p>
+                                <UserCard>
+                                    <div>
+                                        <img className="w-28" src={user.pic} alt="profile" />
+                                    </div>
+                                    <div>
+                                        <p>Level: {user.level}</p>
+                                    </div>
+                                    <div>
+                                        <p>{user.firstName} {user.lastName}</p>
+                                        <p><span>Faculty:</span> {user.faculty}</p>
+                                        <p><span>Department:</span> {user.department}</p>
 
-                                <button onClick={() => history.push('/profile')}>view profile</button>
-                            </div>
-                        </UserCard>
+                                        <button onClick={() => history.push('/profile')}>view profile</button>
+                                    </div>
+                                </UserCard>
+
+                                <div>
+                                    <CalendarBox>
+                                        <h1>Calender</h1>
+                                        <div>
+                                            <Calendar className="w-full" onChange={onChange} value={value} />
+                                        </div>
+                                    </CalendarBox>
+
+                                    <LessonBoxContainer>
+                                        <h1>My Classes Today</h1>
+                                        <div> {renderLessons} </div>
+                                    </LessonBoxContainer>
+                                </div>
+
+                                <NewsBoxContainer>
+                                    <h1>News</h1>
+                                    {isLoading && 'Loading...'}
+                                    {newsApi ? renderNews : "loading..."}
+                                </NewsBoxContainer>
+                            </DisplayPattern>
+                        }
+                    </>
+                ) :
+
+                    <AdminDashBoard>
+                        <h1 className="admin-welcome"> {greetings} <span>Admin</span>, Welcome!</h1>
 
                         <div>
-                            <CalendarBox>
-                                <h1>Calender</h1>
-                                <div>
-                                    <Calendar className="w-full" onChange={onChange} value={value} />
+                            <div>
+                                <div className="single-card">
+                                    <div><Student size={30} color="#e52e2e" weight="bold" /></div>
+                                    <div>
+                                        <h1>100</h1>
+                                        <p>Students</p>
+                                    </div>
                                 </div>
-                            </CalendarBox>
+                            </div>
+                            <div>
+                                <div className="single-card">
+                                    <div><UserSwitch size={30} color="#e52e2e" weight="bold" /></div>
+                                    <div>
+                                        <h1>50</h1>
+                                        <p>Lecturers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="single-card">
+                                    <div><UsersThree size={30} color="#e52e2e" weight="bold" /></div>
+                                    <div>
+                                        <h1>150</h1>
+                                        <p>Total Users</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <LessonBoxContainer>
-                                <h1>My Classes Today</h1>
-                                <div> {renderLessons} </div>
-                            </LessonBoxContainer>
                         </div>
-
-                        <NewsBoxContainer>
-                            <h1>News</h1>
-                            {isLoading && 'Loading...'}
-                            {newsApi ? renderNews : "loading..."}
-                        </NewsBoxContainer>
-                    </DisplayPattern>
+                        <div>
+                            <div>
+                                <TextEditor />
+                            </div>
+                            <div className="solado">
+                               {clockAnalog}
+                                <div>
+                                    <div>
+                                        <p>❝{newQuote.content}❞ </p>
+                                        <p>~ {newQuote.author} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </AdminDashBoard>
                 }
-
             </ContentContainer>
         </ContentWrapper>
 
     );
 };
 
-
+<script>
+    
+</script>
 
 const WelcomeCard = styled.div`
     background-color: #436583;
@@ -368,6 +484,53 @@ const LessonBox = styled.div`
 `
 const CalendarBox = styled.div`
     & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
+`
+
+
+
+
+const AdminDashBoard = styled.section`
+    
+    & > div:nth-of-type(1) { display: grid; grid-template-columns: repeat(3, 1fr) ; column-gap: 20px;
+        @media screen and (max-width: 1024px){
+            grid-template-columns: repeat(2, 1fr);
+            row-gap:20px ;
+            
+        }
+        @media screen and (max-width: 480px){
+          display:block ;
+            
+        }
+    }
+    & > div:nth-of-type(1) div:nth-of-type(1) {
+        margin:10px 0 ;
+    }
+
+
+
+    & > div:nth-of-type(1) div {  padding: 22px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 8px;
+        width:100% ;
+
+        @media screen and (max-width: 650px){ padding: 11px; }  }
+
+     & > div:nth-of-type(1) div:nth-of-type(3) {  
+        @media screen and (max-width: 1024px){
+            grid-column: span 2 / span 2; 
+        }
+       
+     }
+
+
+
+    & > div:nth-of-type(2) {  display: grid; grid-template-columns: repeat(2, 1fr) ; column-gap: 20px; 
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 8px;  margin-top: 20px ; padding: 22px; 
+    }
+
+    & > div:nth-of-type(2) div:first-child { border-top-right-radius: 8px; border-top-left-radius: 8px; }
+    & > div:nth-of-type(2) div:nth-of-type(2){ height: 300px }
+
 `
 
 export default Dashboard;

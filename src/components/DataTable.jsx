@@ -12,8 +12,8 @@ import Scorebtn from './Scorebtn';
 import { CSVLink } from 'react-csv'
 
 
-export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
-    const csvLink = { data: tableData, filename:"e-school.file.csv" }
+export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
+    const csvLink = { data: tableData, filename: "e-school.file.csv" }
     const history = useHistory();
     const fetchAllStudents = async () => {
         const config = {
@@ -25,7 +25,7 @@ export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchT
 
         try {
             const { data } = await axios.get(url, config);
-            if(user.role === 'teacher') {
+            if (user.role === 'teacher') {
                 const studentsToTeacher = data.filter(val => val.department === user.department)
                 setData(studentsToTeacher)
             } else {
@@ -73,7 +73,7 @@ export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchT
 
     ))
 
-       
+
 
     return (
         <TableWrapper>
@@ -81,13 +81,13 @@ export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchT
             <div className='flex justify-between items-center sm:p-2 p-0 py-2'>
                 <div className='flex'>
                     <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                    
+
                 </div>
                 <div className='flex sm:space-x-4 space-x-2'>
                     <button className='export-csv'><CSVLink {...csvLink}><span className='hide-export'>Export to </span>CSV</CSVLink></button>
                     <SortByOrder tableData={tableData} setData={setData} url={url} />
                 </div>
-                
+
             </div>
             <TableAdjustMobile>
                 <CustomTable>
@@ -97,7 +97,7 @@ export const DataTable = ({user, tableHeading, tableData, searchTerm, setSearchT
                         </tr>
                     </CustomTableHead>
                     <tbody className='w-full'>
-                        {tableData.length === 0 ?  <span className='text-center  pl-1'>No data available</span> : renderAllStudents}
+                        {tableData.length === 0 ? <span className='text-center  pl-1'>No data available</span> : renderAllStudents}
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>
@@ -176,7 +176,7 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                         </tr>
                     </CustomTableHead>
                     <tbody className='w-full'>
-                        {renderAllScores}
+                        {tableData.length === 0 ? <span className='text-center  pl-1'>No data available</span> : renderAllScores}
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>

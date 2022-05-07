@@ -11,16 +11,6 @@ const Courses = ({ user, setUser }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [buttonStatus, setButtonStatus] = useState('Add')
     const allCourses = user?.courses
-    // const renderAll = allCourses && allCourses.map((mycourse, i) => (
-    //     <div>
-    //         {i + 1} &nbsp;
-    //         {mycourse.code} &nbsp;
-    //         {mycourse.title} &nbsp;
-    //         {mycourse.score} &nbsp;
-    //         {mycourse.units}
-    //     </div>
-    // ))
-
 
     const renderRegCoursesHeading = tableAcademics.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
@@ -33,10 +23,95 @@ const Courses = ({ user, setUser }) => {
             <TableData className="title-field">{course.title}</TableData>
             <TableData className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}>{course.score}</TableData>
             <TableData>{course.units}</TableData>
+            <TableData >{qualityPoints(course)}</TableData>
         </CustomTableRow>
     ))
 
-    // console.log(allCourses.reduce((n, {score}) => n + Number(score), 0))
+    // const [keke, setKeke] = useState(qualityPoints(course))
+    // console.log(keke)
+
+    function qualityPoints(course) {
+
+        if (allCourses) {
+            const gradepoints =
+                (course.score >= 70) ? 5 :
+                (course.score >= 60 && course.score <= 69) ? 4 :
+                (course.score >= 50 && course.score <= 59) ? 3 :
+                (course.score >= 45 && course.score <= 49) ? 2 :
+                (course.score >= 40 && course.score <= 44) ? 1 :
+                (course.score < 40) ? 0 : null
+
+            const qp = gradepoints * course.units;
+
+            const tcu =  allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+
+            const bb = (qp/tcu).toFixed(1)
+            console.log(bb)
+
+
+
+
+
+
+
+            console.log(qp)
+            return bb
+        }
+        return 0;
+    }
+
+    // function totalCreditUnits() {
+    //     if (allCourses) {
+    //         const totalScore = allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+    //         return (totalScore);
+    //     }
+    //     return 0;
+    // }
+
+    // function cgpa (course) {
+    //     if(allCourses) {
+    //         const cgpaa =  qualityPoints(course) / totalCreditUnits()
+    //         return cgpaa
+    //     }
+    //     return 0;
+    // }
+
+    // function kkk() {
+    //     allCourses.forEach(course => {
+    //         if(course.score >= 40) {
+    //             return 24;
+    //         }
+    //     });
+    // }
+
+    function overallScore() {
+        if (allCourses) {
+            const totalScore = allCourses && allCourses.map((el) => el.score).reduce((a, b) => a + b);
+            return (totalScore);
+        }
+    }
+
+
+
+    function totalGradePoints() {
+        if (allCourses) {
+            const totalScore = allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+            return (totalScore);
+        }
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const getFaculty = facultyArr && facultyArr.find(val => val.faculty === user.faculty)
@@ -111,17 +186,17 @@ const Courses = ({ user, setUser }) => {
         <ContentWrapper>
             <ContentContainer>
                 <div className='flex items-center justify-between'>
-                    <h1>Courses</h1>
-                    <Button onClick={() => setIsModalOpen(!isModalOpen)} text={'Register Courses'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'4/12'} />
-                    {/* <button >Register Courses</button> */}
+                    <h1 className='profile-header'>Courses</h1>
+                    <button onClick={() => setIsModalOpen(!isModalOpen)}>Register Courses</button>
                 </div>
                 <div>
                     {isModalOpen &&
                         <E_Modal>
                             <FormBox>
                                 <TableWrapper>
+
+                                    <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
                                     <TableAdjustMobile>
-                                        <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
                                         <CustomTable>
                                             <CustomTableHead >
                                                 <tr>
@@ -140,6 +215,7 @@ const Courses = ({ user, setUser }) => {
                                     <button onClick={confirmCourseReg}>Done</button>
                                 </div>
                             </FormBox>
+
                         </E_Modal>
                     }
                     <TableWrapper>
@@ -155,6 +231,7 @@ const Courses = ({ user, setUser }) => {
                                 </tbody>
                             </CustomTable>
                         </TableAdjustMobile>
+                        {/* My CGPA is: &nbsp; {cgpa()} */}
                     </TableWrapper>
                 </div>
             </ContentContainer>
@@ -173,7 +250,6 @@ const E_Modal = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 210px;
     z-index: 9;
 
     & > h1 > span { color: cyan; }
@@ -182,10 +258,18 @@ const E_Modal = styled.div`
 
 const FormBox = styled.div`
     background: #19262F;
-    max-width: 600px;
+    max-width:620px;
+ 
+    /* overflow-x:auto ; */
     padding:20px;
     border-radius: 6px;
     color:#19262F;
+
+    
+    @media screen and (max-width: 650px) {
+      max-width:100% ;
+      margin:0 20px ;
+    }
 
     & > div {  margin-top:25px; display: flex; align-items: center; justify-content: space-between;}
     & > div > button { padding:3px 10px; border-radius: 6px; }
@@ -202,6 +286,8 @@ const TableWrapper = styled.section`
     border-radius: 10px;
     background-color: #fff;
     padding-bottom: 40px;
+    width:100% ;
+    overflow-x:auto ;
 `
 const CustomTable = styled.table`
     width: 100%;
