@@ -84,7 +84,7 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
 
                 </div>
                 <div className='flex sm:space-x-4 space-x-2'>
-                    <button className='export-csv'><CSVLink {...csvLink}><span className='hide-export'>Export to </span>CSV</CSVLink></button>
+                    <button className='export-csv'><CSVLink {...csvLink}><span className='hide-export'>Export to </span>CSV {`(${tableData && tableData.length})`}</CSVLink></button>
                     <SortByOrder tableData={tableData} setData={setData} url={url} />
                 </div>
 
@@ -161,10 +161,17 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                 </Formik>
             </TableData>
             <TableData>{course.units}</TableData>
+            <TableData>{bc(course)}</TableData>
 
         </CustomTableRow>
 
     ))
+
+    function bc(course) {
+        if(course.score > 70) {
+            alert('70 70')
+        }
+    }
 
     return (
         <TableWrapper>

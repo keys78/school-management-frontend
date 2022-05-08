@@ -22,6 +22,7 @@ import "aos/dist/aos.css"
 
 
 
+
 const App = () => {
   const [value, setValue] = useState(undefined)
   const [regno, setRegNo] = useState('')

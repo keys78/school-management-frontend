@@ -118,7 +118,7 @@ body {
 .admin-welcome { font-size: 20px; padding-bottom: 20px;}
 .admin-welcome > span { font-weight: bold;}
  .solado > div, .solado > div > div { box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; padding: 22px;}
-
+.solado > div { margin-bottom: 20px;} 
 
 
 
@@ -370,6 +370,8 @@ top: 95%;
   .auth-page-adjust { margin-top: -80px;}
   .hide-export { display: none;}
   .admin-welcome { font-size: 16px; padding-bottom: 5px; margin-top: 10px;}
+
+  .solado > div, .solado > div > div { padding: 11px; margin-bottom: 20px;}
 
   .single-card > div > h1 { font-size: 20px; }
 .single-card > div > p { font-size: 16px;}

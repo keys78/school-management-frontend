@@ -4,6 +4,7 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 import axios from 'axios';
 import { facultyArr, courseArr, tableRegisterCourses, tableAcademics } from '../../utils/data';
 import Button from '../../components/Button';
+import { X } from 'phosphor-react';
 
 
 
@@ -16,6 +17,7 @@ const Courses = ({ user, setUser }) => {
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
 
+
     const renderRegSubjects = allCourses && allCourses.map((course, i) => (
         <CustomTableRow key={i}>
             <TableData>{i + 1}</TableData>
@@ -23,73 +25,74 @@ const Courses = ({ user, setUser }) => {
             <TableData className="title-field">{course.title}</TableData>
             <TableData className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}>{course.score}</TableData>
             <TableData>{course.units}</TableData>
-            <TableData >{qualityPoints(course)}</TableData>
+            {/* <TableData >{setxy(qualityPoints(course))}</TableData> */}
         </CustomTableRow>
     ))
 
-    // const [keke, setKeke] = useState(qualityPoints(course))
-    // console.log(keke)
 
-    function qualityPoints(course) {
 
+    // function qualityPoints(course) {
+
+    //     if (allCourses) {
+    //         const gradepoints =
+    //             (course.score >= 70) ? 5 :
+    //             (course.score >= 60 && course.score <= 69) ? 4 :
+    //             (course.score >= 50 && course.score <= 59) ? 3 :
+    //             (course.score >= 45 && course.score <= 49) ? 2 :
+    //             (course.score >= 40 && course.score <= 44) ? 1 :
+    //             (course.score < 40) ? 0 : null
+
+    //         const qp = gradepoints * course.units;
+
+    //         const tcu =  allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+
+    //         const cgpa = (qp/tcu).toFixed(1)
+    //         // console.log(bb)
+
+
+    //         console.log(qp)
+    //         return cgpa
+    //     }
+    //     return 0;
+    // }
+
+
+
+
+
+    function cgpa() {
         if (allCourses) {
-            const gradepoints =
-                (course.score >= 70) ? 5 :
-                (course.score >= 60 && course.score <= 69) ? 4 :
-                (course.score >= 50 && course.score <= 59) ? 3 :
-                (course.score >= 45 && course.score <= 49) ? 2 :
-                (course.score >= 40 && course.score <= 44) ? 1 :
-                (course.score < 40) ? 0 : null
+            allCourses && allCourses.map((course) => {
+                const gradepoints =
+                    (course.score >= 70) ? 5 :
+                        (course.score >= 60 && course.score <= 69) ? 4 :
+                            (course.score >= 50 && course.score <= 59) ? 3 :
+                                (course.score >= 45 && course.score <= 49) ? 2 :
+                                    (course.score >= 40 && course.score <= 44) ? 1 :
+                                        (course.score < 40) ? 0 : null
 
-            const qp = gradepoints * course.units;
+                let sum = 0;
 
-            const tcu =  allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+                for (let i = 0; i < gradepoints.length; i++) {
+                    sum += gradepoints[i];
+                }
 
-            const bb = (qp/tcu).toFixed(1)
-            console.log(bb)
-
-
-
-
-
+                console.log(sum)
+            })
 
 
-            console.log(qp)
-            return bb
+
+
         }
         return 0;
     }
-
-    // function totalCreditUnits() {
+    // function cgpa() {
     //     if (allCourses) {
-    //         const totalScore = allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
+    //         const totalScore = allCourses && allCourses.map((el) => el.score).reduce((a, b) => a + b);
     //         return (totalScore);
     //     }
-    //     return 0;
+    //     return  0;
     // }
-
-    // function cgpa (course) {
-    //     if(allCourses) {
-    //         const cgpaa =  qualityPoints(course) / totalCreditUnits()
-    //         return cgpaa
-    //     }
-    //     return 0;
-    // }
-
-    // function kkk() {
-    //     allCourses.forEach(course => {
-    //         if(course.score >= 40) {
-    //             return 24;
-    //         }
-    //     });
-    // }
-
-    function overallScore() {
-        if (allCourses) {
-            const totalScore = allCourses && allCourses.map((el) => el.score).reduce((a, b) => a + b);
-            return (totalScore);
-        }
-    }
 
 
 
@@ -231,7 +234,7 @@ const Courses = ({ user, setUser }) => {
                                 </tbody>
                             </CustomTable>
                         </TableAdjustMobile>
-                        {/* My CGPA is: &nbsp; {cgpa()} */}
+                        My CGPA is: &nbsp; {cgpa()}
                     </TableWrapper>
                 </div>
             </ContentContainer>

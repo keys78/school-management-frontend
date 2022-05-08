@@ -8,6 +8,7 @@ import { lessons } from "../../utils/data";
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import { Ghost, Student, UserSwitch, UsersThree } from "phosphor-react";
 import TextEditor from "../../components/TextEditor";
+import axios from 'axios'
 
 
 const Dashboard = ({ user, error }) => {
@@ -17,6 +18,8 @@ const Dashboard = ({ user, error }) => {
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
 
+    const [teachersCount, setTeachersCount] = useState(null);
+    const [studentsCount, setStudentsCount] = useState(null)
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -29,37 +32,65 @@ const Dashboard = ({ user, error }) => {
 
         setGreetings(welcomeText)
 
+    }, []);
 
-
+    useEffect(() => {
+        const fetchData = async () => {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+            };
+    
+            try {
+                if (user.role === 'admin') {
+                    const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
+                    const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
+    
+                    console.log(studentCount, teacherCount)
+                    setTeachersCount(teacherCount)
+                    setStudentsCount(studentCount)
+    
+                }
+    
+            } catch (error) {
+                console.log(error)
+            }
+        };
+    
+        fetchData()
     }, []);
 
 
-        
-    function runTheClock() {
-        const HOURHAND = document.getElementById("hour");
-    const MINUTEHAND = document.getElementById("minute");
-    const SECONDHAND = document.getElementById("second");
-    
-      var date = new Date();
-    
-      let hr = date.getHours();
-      let min = date.getMinutes();
-      let sec = date.getSeconds();
-    
-      let hrPosition = (hr*360/12)+(min*(360/60)/12);
-      let minPosition = (min*360/60)+(sec*(360/60)/60);
-      let secPosition = sec*360/60;
 
-      hrPosition = hrPosition+(3/360);
-      minPosition = minPosition+(6/60);
-      secPosition = secPosition+6;
-    
-      HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
-      MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
-      SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
-    }
-    
-    var interval = setInterval(runTheClock,1000);
+
+
+    // function runTheClock() {
+    //     const HOURHAND = document.getElementById("hour");
+    //     const MINUTEHAND = document.getElementById("minute");
+    //     const SECONDHAND = document.getElementById("second");
+
+    //     var date = new Date();
+
+    //     let hr = date.getHours();
+    //     let min = date.getMinutes();
+    //     let sec = date.getSeconds();
+
+    //     let hrPosition = (hr * 360 / 12) + (min * (360 / 60) / 12);
+    //     let minPosition = (min * 360 / 60) + (sec * (360 / 60) / 60);
+    //     let secPosition = sec * 360 / 60;
+
+    //     hrPosition = hrPosition + (3 / 360);
+    //     minPosition = minPosition + (6 / 60);
+    //     secPosition = secPosition + 6;
+
+    //     HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
+    //     MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
+    //     SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
+    // }
+
+    // var interval = setInterval(runTheClock, 1000);
 
 
     const myNews = newsApi?.articles
@@ -81,41 +112,44 @@ const Dashboard = ({ user, error }) => {
         </LessonBox>
     ))
 
-    const clockAnalog = [
-        <main className="main">
-        <div className="clockbox">
-            <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 600 600">
-                <g id="face">
-                    <circle className="circle" cx="300" cy="300" r="253.9" />
-                    <path className="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6" />
-                    <circle className="mid-circle" cx="300" cy="300" r="16.2" />
-                </g>
-                <g id="hour">
-                    <path className="hour-arm" d="M300.5 298V142" strokeLinecap="round" />
-                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-                </g>
-                <g id="minute">
-                    <path className="minute-arm" d="M300.5 298V67" strokeLinecap="round" />
-                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-                </g>
-                <g id="second">
-                    <path className="second-arm" d="M300.5 350V55" strokeLinecap="round" />
-                    <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-                </g>
-            </svg>
-        </div>
-    </main>
-    ]
+    // const clockAnalog = [
+    //     <main className="main">
+    //         <div className="clockbox">
+    //             <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 600 600">
+    //                 <g id="face">
+    //                     <circle className="circle" cx="300" cy="300" r="253.9" />
+    //                     <path className="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6" />
+    //                     <circle className="mid-circle" cx="300" cy="300" r="16.2" />
+    //                 </g>
+    //                 <g id="hour">
+    //                     <path className="hour-arm" d="M300.5 298V142" strokeLinecap="round" />
+    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+    //                 </g>
+    //                 <g id="minute">
+    //                     <path className="minute-arm" d="M300.5 298V67" strokeLinecap="round" />
+    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+    //                 </g>
+    //                 <g id="second">
+    //                     <path className="second-arm" d="M300.5 350V55" strokeLinecap="round" />
+    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
+    //                 </g>
+    //             </svg>
+    //         </div>
+    //     </main>
+    // ]
 
 
+
+
+
+
+
+    // return error ? (
+    //     <span className="error-message">{error} <Link to="/login">Login</Link></span>
+    // ) : (
+
+    return user ? (
   
-
-
-
-
-    return error ? (
-        <span className="error-message">{error} <Link to="/login">Login</Link></span>
-    ) : (
         <ContentWrapper>
             <ContentContainer>
                 {user.role !== 'admin' ? (
@@ -186,7 +220,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><Student size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>100</h1>
+                                        <h1>{studentsCount ? studentsCount.length : 0}</h1>
                                         <p>Students</p>
                                     </div>
                                 </div>
@@ -195,7 +229,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UserSwitch size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>50</h1>
+                                        <h1>{teachersCount ? teachersCount.length : 0}</h1>
                                         <p>Lecturers</p>
                                     </div>
                                 </div>
@@ -204,7 +238,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UsersThree size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>150</h1>
+                                        <h1>{studentsCount && teachersCount ? studentsCount.length + teachersCount.length : 0}</h1>
                                         <p>Total Users</p>
                                     </div>
                                 </div>
@@ -216,11 +250,11 @@ const Dashboard = ({ user, error }) => {
                                 <TextEditor />
                             </div>
                             <div className="solado">
-                               {clockAnalog}
+                                {/* {clockAnalog} */}
                                 <div>
                                     <div>
                                         <p>❝{newQuote.content}❞ </p>
-                                        <p>~ {newQuote.author} </p>
+                                        <p style={{float: 'right',}}>~ {newQuote.author} </p>
                                     </div>
                                 </div>
                             </div>
@@ -229,13 +263,15 @@ const Dashboard = ({ user, error }) => {
                 }
             </ContentContainer>
         </ContentWrapper>
-
-    );
+          ) : ('Loading...');
 };
 
-<script>
-    
-</script>
+
+
+
+
+
+
 
 const WelcomeCard = styled.div`
     background-color: #436583;
@@ -492,28 +528,23 @@ const CalendarBox = styled.div`
 const AdminDashBoard = styled.section`
     
     & > div:nth-of-type(1) { display: grid; grid-template-columns: repeat(3, 1fr) ; column-gap: 20px;
-        @media screen and (max-width: 1024px){
-            grid-template-columns: repeat(2, 1fr);
-            row-gap:20px ;
-            
-        }
-        @media screen and (max-width: 480px){
-          display:block ;
-            
-        }
-    }
-    & > div:nth-of-type(1) div:nth-of-type(1) {
+        @media screen and (max-width: 1024px){ grid-template-columns: repeat(2, 1fr); row-gap:20px ;   }
+        @media screen and (max-width: 480px){ display:block ;   } }
+
+    /* & > div:nth-of-type(1) div:nth-of-type(1) {
+        
         margin:10px 0 ;
-    }
-
-
+    } */
 
     & > div:nth-of-type(1) div {  padding: 22px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 8px;
         width:100% ;
+        
 
-        @media screen and (max-width: 650px){ padding: 11px; }  }
+        @media screen and (max-width: 650px){ padding: 11px; }  
+        @media screen and (max-width: 480px){ margin:10px 0;}
+    }
 
      & > div:nth-of-type(1) div:nth-of-type(3) {  
         @media screen and (max-width: 1024px){
@@ -526,10 +557,15 @@ const AdminDashBoard = styled.section`
 
     & > div:nth-of-type(2) {  display: grid; grid-template-columns: repeat(2, 1fr) ; column-gap: 20px; 
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 8px;  margin-top: 20px ; padding: 22px; 
+
+        @media screen and (max-width: 991px){ display:grid ; grid-template-columns: 1fr ; }
+        @media screen and (max-width: 650px){ padding: 11px; }  
     }
 
     & > div:nth-of-type(2) div:first-child { border-top-right-radius: 8px; border-top-left-radius: 8px; }
-    & > div:nth-of-type(2) div:nth-of-type(2){ height: 300px }
+    & > div:nth-of-type(2) div:nth-of-type(2){ height: 300px;
+        @media screen and (max-width: 650px){ height:150px; }  
+    }
 
 `
 
