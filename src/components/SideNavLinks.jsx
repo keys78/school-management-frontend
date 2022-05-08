@@ -60,10 +60,6 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
 
         if (emptyDetails && navLink.title === 'Students' && user.role === 'teacher') {
             setAccessDenied(!accessDenied)
-
-            // setTimeout(() => {
-            //     setAccessDenied(false)
-            // }, 15000)
         }
 
         setActiveNavLinks(i)
@@ -86,6 +82,7 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         }
     }
 
+    // const kk = 
 
     const renderNavLinks = navLinks.map((navLink, i) => (
         navLink.role.includes(user.role)
@@ -97,9 +94,10 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         >
             <SingleNav
                 to={validateTeacherRouteAccess(navLink)}
-                // to={navLink.path}
                 onClick={() => navClick({ navLink, i })}
-                activeclassname={`${user.role === 'teacher' && navLink.title === 'Student' ? '' : 'active'} `}
+                activeClassName={emptyDetails && user.role === 'teacher' && navLink.path === '/students'  ? '' : 'routeActive'}
+              
+                
 
             >
                 {altIcon({ navLink, i })}

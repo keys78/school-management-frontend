@@ -23,7 +23,7 @@ const SideNav = ({ user, isNavOpen, setIsNavOpen }) => {
                                 <h6>{user.email}</h6>
                             </div>
                             <div className='absolute top-4 right-4'>
-                                <Notif>
+                                <Notif onClick={() => alert('You have no new notifications')}>
                                     <span>0</span>
                                     <img src={bell} alt="notif-icon" />
                                 </Notif>
@@ -80,6 +80,7 @@ const SideBarWrapper = styled(motion.section)`
 `
 const Notif = styled.div`
   position: relative;
+  cursor: pointer;
 
   & > span {
     position: absolute;

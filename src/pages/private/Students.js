@@ -24,7 +24,7 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
                 const { data } = await axios.get("http://localhost:4000/private/students", config);
                 if(user.role === 'teacher') {
                     const studentsToTeacher = data.filter(val => val.department === user.department)
-                    setData(studentsToTeacher)
+                    return setData(studentsToTeacher)
                 } else {
                     setData(data)
                     localStorage.setItem('SD', JSON.stringify(data));

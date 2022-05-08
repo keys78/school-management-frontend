@@ -36,7 +36,9 @@ body {
   position: absolute;
 }
 
-.active { background: #1a83ff; }
+.routeActive { background: #1a83ff; }
+.goro { background: rgb(255, 47, 47) !important;}
+
 .active-tab-s {border-bottom: 2px solid rgb(0, 0, 0);}
 
 .align-pad {padding: 0 100px;}
@@ -379,3 +381,4 @@ top: 95%;
   .single-card > div > h1 { font-size: 20px; }
 .single-card > div > p { font-size: 16px;}
 }
+
