@@ -98,6 +98,8 @@ body {
 .export-csv { all: unset; width: 100%; text-align: center; padding: 6px 10px; background:#11ea4b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 
 
+.flipui-btn { background: linear-gradient(to right, #59c173, #a17fe0, #5d26c1); color: #fff; font-weight: bold; padding:4px 6px; font-size: 14px; border-radius: 6px; margin-top: -20px;}
+
 .score-btn {color:#fff; font-size: 13px; white-space: nowrap; padding:4px 10px; border-radius: 5px; cursor: pointer;}
 .score-waiting { background:#6729e1 !important ;}
 .score-success { background: #06c729 !important;}
@@ -372,6 +374,7 @@ top: 95%;
   .admin-welcome { font-size: 16px; padding-bottom: 5px; margin-top: 10px;}
 
   .solado > div, .solado > div > div { padding: 11px; margin-bottom: 20px;}
+  .flipui-btn { display: none;}
 
   .single-card > div > h1 { font-size: 20px; }
 .single-card > div > p { font-size: 16px;}

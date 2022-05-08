@@ -18,6 +18,9 @@ const Dashboard = ({ user, error }) => {
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
 
+    const [flipUI, setFlipUI] = useState(true)
+
+
     const [teachersCount, setTeachersCount] = useState(null);
     const [studentsCount, setStudentsCount] = useState(null)
 
@@ -42,25 +45,25 @@ const Dashboard = ({ user, error }) => {
                     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             };
-    
+
             try {
                 if (user.role === 'admin') {
                     const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
                     const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
-    
+
                     console.log(studentCount, teacherCount)
                     setTeachersCount(teacherCount)
                     setStudentsCount(studentCount)
-    
+
                 }
-    
+
             } catch (error) {
                 console.log(error)
             }
         };
-    
+
         fetchData()
-    }, []);
+    }, [user, greetings, flipUI, value]);
 
 
 
@@ -149,13 +152,14 @@ const Dashboard = ({ user, error }) => {
     // ) : (
 
     return user ? (
-  
+
         <ContentWrapper>
             <ContentContainer>
-                {user.role !== 'admin' ? (
+                {user.role !== 'admin' === flipUI ? (
                     <>
                         <GreetingsMobile>
                             <Ghost size={20} color="#d51a1a" />&nbsp;{greetings} {user.firstName}
+                          
                         </GreetingsMobile>
                         {user &&
                             <DisplayPattern>
@@ -177,6 +181,7 @@ const Dashboard = ({ user, error }) => {
                                         <img className="w-28" src={user.pic} alt="profile" />
                                     </div>
                                     <div>
+                                          {user.role === 'admin' &&  <button className="flipui-btn" onClick={() => setFlipUI(!flipUI)}> Flip UI</button> }
                                         <p>Level: {user.level}</p>
                                     </div>
                                     <div>
@@ -213,7 +218,10 @@ const Dashboard = ({ user, error }) => {
                 ) :
 
                     <AdminDashBoard>
-                        <h1 className="admin-welcome"> {greetings} <span>Admin</span>, Welcome!</h1>
+                        <section className="flex items-center justify-between">
+                            <h1 className="admin-welcome"> {greetings} <span>Admin</span>, Welcome!</h1>
+                            <button className="flipui-btn" onClick={() => setFlipUI(!flipUI)}> Flip UI</button>
+                        </section>
 
                         <div>
                             <div>
@@ -254,7 +262,7 @@ const Dashboard = ({ user, error }) => {
                                 <div>
                                     <div>
                                         <p>❝{newQuote.content}❞ </p>
-                                        <p style={{float: 'right',}}>~ {newQuote.author} </p>
+                                        <p style={{ float: 'right', }}>~ {newQuote.author} </p>
                                     </div>
                                 </div>
                             </div>
@@ -263,7 +271,7 @@ const Dashboard = ({ user, error }) => {
                 }
             </ContentContainer>
         </ContentWrapper>
-          ) : ('Loading...');
+    ) : ('Loading...');
 };
 
 

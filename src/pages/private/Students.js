@@ -27,9 +27,8 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
                     setData(studentsToTeacher)
                 } else {
                     setData(data)
+                    localStorage.setItem('SD', JSON.stringify(data));
                 }
-                
-               
                 
             } catch (error) {
                 console.log(error)

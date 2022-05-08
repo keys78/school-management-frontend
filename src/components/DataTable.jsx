@@ -12,7 +12,7 @@ import Scorebtn from './Scorebtn';
 import { CSVLink } from 'react-csv'
 
 
-export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle }) => {
+export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle, data }) => {
     const csvLink = { data: tableData, filename: "e-school.file.csv" }
     const history = useHistory();
     const fetchAllStudents = async () => {
