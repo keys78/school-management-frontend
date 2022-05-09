@@ -35,8 +35,8 @@ const Courses = ({ user, setUser }) => {
 
     function cgpa() {
         if (allCourses) {
-            const totalQualitypoints = allCourses.map(item => item.qualitypoint).reduce((prev, curr) => prev + curr, 0);
-            const totalCreditUnits = allCourses.map(item => item.units).reduce((prev, curr) => prev + curr, 0);
+            const totalQualitypoints = allCourses.map(course => course.qualitypoint).reduce((prev, curr) => prev + curr, 0);
+            const totalCreditUnits = allCourses.map(course => course.units).reduce((prev, curr) => prev + curr, 0);
             const cgpa = totalQualitypoints / totalCreditUnits
             return cgpa.toFixed(1)
         }
