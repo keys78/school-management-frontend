@@ -51,7 +51,6 @@ const Dashboard = ({ user, error }) => {
                     const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
                     const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
 
-                    console.log(studentCount, teacherCount)
                     setTeachersCount(teacherCount)
                     setStudentsCount(studentCount)
 
@@ -63,7 +62,7 @@ const Dashboard = ({ user, error }) => {
         };
 
         fetchData()
-    }, [user, greetings, flipUI, value]);
+    }, [user]);
 
 
 

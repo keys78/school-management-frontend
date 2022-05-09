@@ -5,11 +5,13 @@ import axios from 'axios';
 import { facultyArr, courseArr, tableRegisterCourses, tableAcademics } from '../../utils/data';
 import Button from '../../components/Button';
 import { X } from 'phosphor-react';
+import Spreadsheet from '../../components/Spreadsheet';
 
 
 
 const Courses = ({ user, setUser }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isSpreadSheet, setIsSpreadSheet] = useState(false)
     const [buttonStatus, setButtonStatus] = useState('Add')
     const allCourses = user?.courses
 
@@ -25,88 +27,21 @@ const Courses = ({ user, setUser }) => {
             <TableData className="title-field">{course.title}</TableData>
             <TableData className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}>{course.score}</TableData>
             <TableData>{course.units}</TableData>
-            {/* <TableData >{setxy(qualityPoints(course))}</TableData> */}
         </CustomTableRow>
     ))
-
-
-
-    // function qualityPoints(course) {
-
-    //     if (allCourses) {
-    //         const gradepoints =
-    //             (course.score >= 70) ? 5 :
-    //             (course.score >= 60 && course.score <= 69) ? 4 :
-    //             (course.score >= 50 && course.score <= 59) ? 3 :
-    //             (course.score >= 45 && course.score <= 49) ? 2 :
-    //             (course.score >= 40 && course.score <= 44) ? 1 :
-    //             (course.score < 40) ? 0 : null
-
-    //         const qp = gradepoints * course.units;
-
-    //         const tcu =  allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
-
-    //         const cgpa = (qp/tcu).toFixed(1)
-    //         // console.log(bb)
-
-
-    //         console.log(qp)
-    //         return cgpa
-    //     }
-    //     return 0;
-    // }
-
 
 
 
 
     function cgpa() {
         if (allCourses) {
-            allCourses && allCourses.map((course) => {
-                const gradepoints =
-                    (course.score >= 70) ? 5 :
-                        (course.score >= 60 && course.score <= 69) ? 4 :
-                            (course.score >= 50 && course.score <= 59) ? 3 :
-                                (course.score >= 45 && course.score <= 49) ? 2 :
-                                    (course.score >= 40 && course.score <= 44) ? 1 :
-                                        (course.score < 40) ? 0 : null
-
-                let sum = 0;
-
-                for (let i = 0; i < gradepoints.length; i++) {
-                    sum += gradepoints[i];
-                }
-
-                console.log(sum)
-            })
-
-
-
-
+            const totalQualitypoints = allCourses.map(item => item.qualitypoint).reduce((prev, curr) => prev + curr, 0);
+            const totalCreditUnits = allCourses.map(item => item.units).reduce((prev, curr) => prev + curr, 0);
+            const cgpa = totalQualitypoints / totalCreditUnits
+            return cgpa.toFixed(1)
         }
         return 0;
     }
-    // function cgpa() {
-    //     if (allCourses) {
-    //         const totalScore = allCourses && allCourses.map((el) => el.score).reduce((a, b) => a + b);
-    //         return (totalScore);
-    //     }
-    //     return  0;
-    // }
-
-
-
-    function totalGradePoints() {
-        if (allCourses) {
-            const totalScore = allCourses && allCourses.map((el) => el.units).reduce((a, b) => a + b);
-            return (totalScore);
-        }
-        return 0;
-    }
-
-
-
-
 
 
 
@@ -234,7 +169,9 @@ const Courses = ({ user, setUser }) => {
                                 </tbody>
                             </CustomTable>
                         </TableAdjustMobile>
-                        My CGPA is: &nbsp; {cgpa()}
+                        cgpa: {cgpa()}
+                        <button className='p-2 bg-red-500' onClick={() => setIsSpreadSheet(!isSpreadSheet)}>View Spreadsheet</button>
+                        {isSpreadSheet && <Spreadsheet allCourses={allCourses} user={user}/>}
                     </TableWrapper>
                 </div>
             </ContentContainer>

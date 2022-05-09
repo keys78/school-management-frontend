@@ -122,7 +122,8 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
             <TableData>
                 <Formik
                     initialValues={{
-                        score: course.score
+                        score: course.score,
+                        units: course.units
                     }}
                     validationSchema={validateScore}
                     onSubmit={async (values) => {
@@ -161,17 +162,19 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                 </Formik>
             </TableData>
             <TableData>{course.units}</TableData>
-            <TableData>{bc(course)}</TableData>
 
         </CustomTableRow>
 
     ))
 
-    function bc(course) {
-        if(course.score > 70) {
-            alert('70 70')
-        }
-    }
+    // function bc(course) {
+    //     if(course.score >= 70) {
+    //         alert('A')
+    //     }
+    //     if(course.score >= 60 && course.score <= 69) {
+    //         alert('B')
+    //     }
+    // }
 
     return (
         <TableWrapper>

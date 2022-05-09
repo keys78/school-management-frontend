@@ -165,6 +165,15 @@ export const tableRegisterCourses = [
   { title: "Action" }
 ]
 
+export const spreadsheetHeader = [
+  { title: "Course Code" },
+  { title: "Credit Unit (CU)" },
+  { title: "Score" },
+  { title: "Letter Grade" },
+  { title: "Grade Point (GP)" },
+  { title: "Quality Point (QP) = CU x GP" },
+]
+
 export const homeContentData = [
   {
     title: 'Our Culture',
