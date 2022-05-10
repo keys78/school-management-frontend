@@ -64,7 +64,7 @@ const UserDetails = ({ user, setUser }) => {
 
 
     const renderProfile = (
-        <ProfileBox>
+        <ProfileBox key={+1}>
             <div>
                 <img className='w-20 h-20 rounded-full zoom-in' src={userDetails.pic} alt="Profile Image" onClick={() => setIsZoomed(!isZoomed)} />
                 <div>
@@ -92,7 +92,7 @@ const UserDetails = ({ user, setUser }) => {
 
     const renderAcademicRecords = [
         <AcadsBox>
-            <DataTableAcademics fetchAllStudents={fetchAllStudents} setUser={setUser} showBtn={true} tableHeading={tableAcademics} tableData={userDetails} />
+            <DataTableAcademics fetchAllStudents={fetchAllStudents} setUser={setUser} user={user} showBtn={true} tableHeading={tableAcademics} tableData={userDetails} />
         </AcadsBox>
 
     ]

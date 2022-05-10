@@ -12,13 +12,12 @@ import { Article } from 'phosphor-react';
 const Courses = ({ user, setUser }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isSpreadSheet, setIsSpreadSheet] = useState(false)
-    const [buttonStatus, setButtonStatus] = useState('Add')
     const allCourses = user?.courses
+
 
     const renderRegCoursesHeading = tableAcademics.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
-
 
     const renderRegSubjects = allCourses && allCourses.map((course, i) => (
         <CustomTableRow key={i}>
@@ -43,8 +42,14 @@ const Courses = ({ user, setUser }) => {
     }
 
 
-
-
+    function updateBtn(course) {
+        const id_Match = allCourses.find((val) => val.code === course.code)
+        if (id_Match) {
+            return 'Registered'
+        } else {
+            return 'Add'
+        }
+    }
 
 
     const getFaculty = facultyArr && facultyArr.find(val => val.faculty === user.faculty)
@@ -62,19 +67,14 @@ const Courses = ({ user, setUser }) => {
             <TableData>{course.code}</TableData>
             <TableData className="title-field">{course.title}</TableData>
             <TableData>{course.units}</TableData>
-            {/* <TableData>{course.status}</TableData> */}
             <TableData>
-                <div onClick={() => registerCourse(course)}> {buttonStatus}</div>
+                <button className={`add-course-btn ${updateBtn(course)} `} onClick={() => registerCourse(course)}> {updateBtn(course)}</button>
             </TableData>
         </CustomTableRow>
     ))
 
 
     const registerCourse = async (value) => {
-        // const t = allCourses.filter((val) => val.code === val.code) 
-        // if(t) {
-        //     setButtonStatus('rego')
-        // }
 
         const selectedCourse = {
             code: value.code,
@@ -88,8 +88,7 @@ const Courses = ({ user, setUser }) => {
 
         const checkDuplicate = allCourses.find(el => el.code === selectedCourse.code)
         if (checkDuplicate) {
-             alert('Already registered for this course')
-            // setButtonStatus('REG')
+            //  alert('Already registered for this course')
         } else {
 
             const config = {
@@ -100,9 +99,11 @@ const Courses = ({ user, setUser }) => {
             };
 
             try {
-                await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
+                const { data: regCourse } = await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
                 const { data } = await axios.get(`http://localhost:4000/private/user`, config);
-                alert('course has been registered')
+                if (regCourse) {
+                    alert('course has been registered')
+                }
                 setUser(data)
 
             } catch (error) {
@@ -170,11 +171,11 @@ const Courses = ({ user, setUser }) => {
                             </CustomTable>
                         </TableAdjustMobile>
                         {allCourses && allCourses.length !== 0 ?
-                         <div className='flex mt-4 items-center gap-4'>
-                            <span className='cgpa-table'>CGPA: {cgpa()}</span>
-                            <button className='view-sheet' onClick={() => setIsSpreadSheet(!isSpreadSheet)}> <Article size={16} color="#3e2d2d"  /> View Spreadsheet</button>
-                        </div>
-                          : <span className='p-4'>{user.firstName}, you have no courses registered yet</span> 
+                            <div className='flex mt-4 items-center gap-4'>
+                                <span className='cgpa-table'>CGPA: {cgpa()}</span>
+                                <button className='view-sheet' onClick={() => setIsSpreadSheet(!isSpreadSheet)}> <Article size={16} color="#3e2d2d" /> View Spreadsheet</button>
+                            </div>
+                            : <span className='p-4'>{user.firstName}, you have no courses registered yet</span>
                         }
                         <AnimatePresence>
                             {isSpreadSheet && <Spreadsheet allCourses={allCourses} user={user} setIsSpreadSheet={setIsSpreadSheet} />}
@@ -205,7 +206,7 @@ const E_Modal = styled.div`
 
 const FormBox = styled.div`
     background: #19262F;
-    max-width:620px;
+    max-width:820px;
  
     /* overflow-x:auto ; */
     padding:20px;

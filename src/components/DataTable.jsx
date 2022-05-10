@@ -7,9 +7,12 @@ import SortByOrder from './SortByOrder';
 import TextField from './TextField';
 import { Formik, Form } from 'formik';
 import { validateScore } from '../utils/validateForm';
-import { DotsThreeOutlineVertical } from 'phosphor-react'
+import { DotsThreeOutlineVertical, Article } from 'phosphor-react'
 import Scorebtn from './Scorebtn';
 import { CSVLink } from 'react-csv'
+import Spreadsheet from './Spreadsheet';
+import { AnimatePresence } from 'framer-motion'
+
 
 
 export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle, data }) => {
@@ -106,18 +109,23 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
 }
 
 
+// ACADEMICS TABLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, showBtn }) => {
+export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, showBtn, user }) => {
     const [status, setStatus] = useState(false)
+    const [isSpreadSheet, setIsSpreadSheet] = useState(false)
+
     const renderTableHeading = tableHeading.map((table, i) => (
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
+
 
     const renderAllScores = tableData && tableData.courses.map((course, i) => (
         <CustomTableRow key={i} className='no-pointer'>
             <TableData> {1 + i} </TableData>
             <TableData>{course.code}</TableData>
+            <TableData>{course.letterGrade}</TableData>
             <TableData className="title-field">{course.title}</TableData>
             <TableData>
                 <Formik
@@ -167,14 +175,7 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
 
     ))
 
-    // function bc(course) {
-    //     if(course.score >= 70) {
-    //         alert('A')
-    //     }
-    //     if(course.score >= 60 && course.score <= 69) {
-    //         alert('B')
-    //     }
-    // }
+
 
     return (
         <TableWrapper>
@@ -190,6 +191,16 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>
+            {tableData.courses && tableData.courses.length !== 0 ?
+                <div className='mt-4'>
+                    <button className='view-sheet' onClick={() => setIsSpreadSheet(!isSpreadSheet)}> <Article size={16} color="#3e2d2d" /> View {tableData.firstName}'s Spreadsheet</button>
+                </div>
+                : <span className='p-4'>{tableData.firstName} have no courses registered yet</span>
+            }
+            <AnimatePresence>
+                            {isSpreadSheet && <Spreadsheet allCourses={tableData.courses} user={user} setIsSpreadSheet={setIsSpreadSheet} />}
+                        </AnimatePresence>
+           
         </TableWrapper>
     )
 }
