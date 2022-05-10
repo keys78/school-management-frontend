@@ -2,10 +2,13 @@ import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { spreadsheetHeader } from '../utils/data'
 import { useReactToPrint } from "react-to-print";
-import { Printer } from 'phosphor-react';
+import { Printer, XCircle } from 'phosphor-react';
+import { sheetModalVariant } from '../utils/Animations';
+import { motion } from 'framer-motion';
 
 
-const Spreadsheet = ({ allCourses, user }) => {
+
+const Spreadsheet = ({ allCourses, user, setIsSpreadSheet }) => {
     const [deg, setDeg] = useState('')
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
@@ -19,7 +22,7 @@ const Spreadsheet = ({ allCourses, user }) => {
     const renderSheet = allCourses && allCourses.map((course, i) => (
         <CustomTableRow key={i} >
             <TableData> {course.code}</TableData>
-            <TableData> {course.title}</TableData>
+            <TableData style={{ minWidth: '300px' }}> {course.title}</TableData>
             <TableData> {course.units}  </TableData>
             <TableData> {course.score} </TableData>
             <TableData> {course.letterGrade} </TableData>
@@ -67,7 +70,12 @@ const Spreadsheet = ({ allCourses, user }) => {
     return (
         <SpreadSheetWrapper>
             <TableFluid>
-                <SheetWrapper ref={componentRef}>
+                <SheetWrapper
+                    variants={sheetModalVariant}
+                    initial="initial"
+                    animate="final"
+                    exit="exit"
+                    ref={componentRef}>
                     <div>
                         <div>
                             <SheetHead>
@@ -75,14 +83,17 @@ const Spreadsheet = ({ allCourses, user }) => {
                                 <h2>STUDENT TRANSCRIPT OF ACADEMIC RECORDS</h2>
 
                                 <PrintBtn onClick={handlePrint}>
-                                <Printer size={16} color="#072038"  />
+                                    <Printer size={16} color="#072038" />
                                     <span >Print Sheet</span>
                                 </PrintBtn>
+                                <Close onClick={() => setIsSpreadSheet(false)}>
+                                    <XCircle size={16} color="#3e2d2d" weight="bold" />
+                                </Close>
 
                             </SheetHead>
 
                             <StudentInfo>
-                                <p><span>MATRIC NUMBER:</span> {user._id}</p>
+                                <p><span>MATRIC NUMBER:</span> {`ES-${user._id}`}</p>
                                 <p><span>FIRSTNAME:</span> {user.firstName}</p>
                                 <p><span>LASTNAME:</span> {user.lastName}</p>
                                 <p><span>D.O.B:</span> {user.dob}</p>
@@ -115,12 +126,12 @@ const Spreadsheet = ({ allCourses, user }) => {
 }
 
 const SpreadSheetWrapper = styled.section`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background: #00000076;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,12 +139,33 @@ const SpreadSheetWrapper = styled.section`
     
 `
 
-const SheetWrapper = styled.div`
+const SheetWrapper = styled(motion.div)`
     background:#fff; ;
     border-radius:4px ;
     position:relative ;
     margin:0 15px ;
     overflow-x:auto ;
+    height:100vh ;
+    overflow-y:scroll ;
+
+   ::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+    }
+
+::-webkit-scrollbar {
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear, left bottom, left top,
+	color-stop(0.44, rgb(122,153,217)),
+	color-stop(0.72, #06090f),
+	color-stop(0.86, #1d1d1f));
+}
 
     
 
@@ -143,6 +175,10 @@ const SheetWrapper = styled.div`
         padding: 20px 40px 40px 40px;
         margin:10px ; border-radius:4px ;
         overflow-x:auto ;
+
+        @media screen and (max-width: 480px){
+            padding: 20px 15px 20px 15px;
+    }
 
     }
 `
@@ -156,7 +192,6 @@ const TableFluid = styled.div`
      overflow-x:auto ;
 `
 
-
 const TableHeads = styled.th`
     text-align: left;
     padding:8px 16px;
@@ -168,9 +203,9 @@ const TableHeads = styled.th`
 
 const CustomTable = styled.table`
     width: 100%;
-    /* tr:nth-of-type(even) {
+    tr:nth-of-type(even) {
         background:#f4f4f4 ;
-    } */
+    }
     border: 1px solid #000;
     margin: 20px 0;
 `
@@ -179,7 +214,7 @@ const CustomTableHead = styled.thead`
    
 `
 const CustomTableRow = styled.tr`
-    width: 100%; cursor:pointer ; border: 1px solid #95999b3c;
+    width: 100%;  border: 1px solid #95999b3c;
 
 `
 
@@ -196,13 +231,23 @@ const SheetHead = styled.div`
     color: #000;
     overflow-x:auto ;
 
+    
 
-    & > h1 { font-weight: bold; font-size: 40px;}
+
+    & > h1 { font-weight: bold; font-size: 40px;
+        @media screen and (max-width: 480px){
+        font-size: 32px;
+    }
+    }
     & > h2 { text-decoration: underline;}
 `
 
 const StudentInfo = styled.div`
-    & > p > span { font-weight: bold; font-size: 16px;}
+    & > p > span { font-weight: bold; font-size: 16px;
+        @media screen and (max-width: 480px){
+        font-size: 14px;
+    }
+    }
     & > p { font-size: 16px;}
 `
 
@@ -229,6 +274,13 @@ const PrintBtn = styled.button`
         background:#00000025 ;
         transition:0.4s ;
     }
+`
+
+const Close = styled.div`
+     position: absolute ;
+    top:20px ;
+    left:20px;
+    cursor: pointer;
 `
 
 export default Spreadsheet;

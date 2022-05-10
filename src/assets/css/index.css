@@ -203,7 +203,12 @@ body {
 
 
 
-
+.cgpa-table { font-weight: bold; font-size: 18px;}
+.view-sheet { padding: 4px 8px; border: 1px solid rgba(0, 0, 0, 0.256); font-size: 16px; transition:0.4s ; background: #fff; border-radius: 5px; display: flex; align-items: center; column-gap: 5px;}
+.view-sheet:hover {
+    background:#00000025 ;
+    transition:0.4s ;
+}
 .hamburger { cursor: pointer;}
 .hamburger .line{
   width: 35px;

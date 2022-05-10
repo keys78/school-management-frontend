@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import axios from 'axios';
 import { facultyArr, courseArr, tableRegisterCourses, tableAcademics } from '../../utils/data';
-import Button from '../../components/Button';
-import { X } from 'phosphor-react';
 import Spreadsheet from '../../components/Spreadsheet';
+import { AnimatePresence } from 'framer-motion'
+import { Article } from 'phosphor-react';
 
 
 
@@ -62,6 +62,7 @@ const Courses = ({ user, setUser }) => {
             <TableData>{course.code}</TableData>
             <TableData className="title-field">{course.title}</TableData>
             <TableData>{course.units}</TableData>
+            {/* <TableData>{course.status}</TableData> */}
             <TableData>
                 <div onClick={() => registerCourse(course)}> {buttonStatus}</div>
             </TableData>
@@ -70,6 +71,10 @@ const Courses = ({ user, setUser }) => {
 
 
     const registerCourse = async (value) => {
+        // const t = allCourses.filter((val) => val.code === val.code) 
+        // if(t) {
+        //     setButtonStatus('rego')
+        // }
 
         const selectedCourse = {
             code: value.code,
@@ -83,7 +88,8 @@ const Courses = ({ user, setUser }) => {
 
         const checkDuplicate = allCourses.find(el => el.code === selectedCourse.code)
         if (checkDuplicate) {
-            return alert('Already registered for this course')
+             alert('Already registered for this course')
+            // setButtonStatus('REG')
         } else {
 
             const config = {
@@ -163,9 +169,16 @@ const Courses = ({ user, setUser }) => {
                                 </tbody>
                             </CustomTable>
                         </TableAdjustMobile>
-                        cgpa: {cgpa()}
-                        <button className='p-2 bg-red-500' onClick={() => setIsSpreadSheet(!isSpreadSheet)}>View Spreadsheet</button>
-                        {isSpreadSheet && <Spreadsheet allCourses={allCourses} user={user}/>}
+                        {allCourses && allCourses.length !== 0 ?
+                         <div className='flex mt-4 items-center gap-4'>
+                            <span className='cgpa-table'>CGPA: {cgpa()}</span>
+                            <button className='view-sheet' onClick={() => setIsSpreadSheet(!isSpreadSheet)}> <Article size={16} color="#3e2d2d"  /> View Spreadsheet</button>
+                        </div>
+                          : <span className='p-4'>{user.firstName}, you have no courses registered yet</span> 
+                        }
+                        <AnimatePresence>
+                            {isSpreadSheet && <Spreadsheet allCourses={allCourses} user={user} setIsSpreadSheet={setIsSpreadSheet} />}
+                        </AnimatePresence>
                     </TableWrapper>
                 </div>
             </ContentContainer>

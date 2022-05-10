@@ -36,8 +36,8 @@ export const courseArr = [
   {
     department: 'Engineering',
     courses: [
-      { code: 'ENG101', title: "Introduction To English Oliophogsis and Satuaraton", score: 0, units: 5 },
-      { code: 'ENG102', title: "Eng-2", score: 0, units: 5 }
+      { code: 'ENG101', title: "Introduction To English Oliophogsis and Satuaraton", score: 0, units: 5, status: false },
+      { code: 'ENG102', title: "Eng-2", score: 0, units: 5, status: false }
     ]
   },
   {
