@@ -167,6 +167,7 @@ export const tableRegisterCourses = [
 
 export const spreadsheetHeader = [
   { title: "Course Code" },
+  { title: "Course Title"},
   { title: "Credit Unit (CU)" },
   { title: "Score" },
   { title: "Letter Grade" },

@@ -25,6 +25,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
     "react-scroll": "^1.8.4",
+    "react-to-print": "^2.14.7",
     "styled-components": "^5.3.3",
     "swiper": "^8.0.7",
     "web-vitals": "^2.1.0",

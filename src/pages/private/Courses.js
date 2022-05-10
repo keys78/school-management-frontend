@@ -32,7 +32,6 @@ const Courses = ({ user, setUser }) => {
 
 
 
-
     function cgpa() {
         if (allCourses) {
             const totalQualitypoints = allCourses.map(course => course.qualitypoint).reduce((prev, curr) => prev + curr, 0);
@@ -42,10 +41,6 @@ const Courses = ({ user, setUser }) => {
         }
         return 0;
     }
-
-
-
-
 
 
 
@@ -70,7 +65,6 @@ const Courses = ({ user, setUser }) => {
             <TableData>
                 <div onClick={() => registerCourse(course)}> {buttonStatus}</div>
             </TableData>
-            {/* <TableData> <div className='cursor-pointer' onClick={() => registerCourse(course)}>{buttonStatus}</div> </TableData> */}
         </CustomTableRow>
     ))
 
