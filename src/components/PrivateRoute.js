@@ -1,13 +1,33 @@
 import { useState, useEffect } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import Layout from "../pages/private/Layout";
 import axios from "axios";
 import styled from 'styled-components'
+import jwt_decode from "jwt-decode";
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const [user, setUser] = useState({})
     const [error, setError] = useState('')
     const [searchTerm, setSearchTerm] = useState('')
+    const history = useHistory();
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken')
+
+        const refresh =
+            setInterval(() => {
+                if (token) {
+                    localStorage.removeItem('authToken')
+                    history.push('/login')
+                }
+                alert('Session Expired')
+
+            }, 600000)
+        return () => clearInterval(refresh);
+
+    }, [])
 
 
     const fetchPrivateData = async () => {
@@ -35,7 +55,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     }, []);
 
 
-    
+
 
 
 
@@ -46,7 +66,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 render={(props) =>
                     localStorage.getItem("authToken") ? (
                         <>
-                            <Layout user={user} 
+                            <Layout user={user}
                             />
 
                             <Component

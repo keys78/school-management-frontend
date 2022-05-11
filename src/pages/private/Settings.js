@@ -19,10 +19,11 @@ const Settings = ({ user, error, setError }) => {
                 initialValues={{
                     password: '',
                     newPassword: '',
+                    confirmPassword:''
 
                 }}
                 validationSchema={validateChangePassword}
-                onSubmit={async (values, { resetForm }) => {
+                onSubmit={async (values,{setSubmitting, resetForm}) => {
 
                     const config = {
                         header: {
@@ -34,10 +35,7 @@ const Settings = ({ user, error, setError }) => {
                         await axios.post(`http://localhost:4000/auth/changepassword/${user._id} `, { ...values, }, config);
                         alert(`password is updated`)
                     } catch (error) {
-                        setError(error.response.data.error);
-                        setTimeout(() => {
-                            setError("");
-                        }, 5000);
+                        alert(error.response.data.error)
                     }
                     resetForm();
                 }}
@@ -56,6 +54,9 @@ const Settings = ({ user, error, setError }) => {
                             <div>
                                 <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
                             </div>
+                            {/* <div>
+                                <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
+                            </div> */}
                             <div>
                                 <button type='submit'>Change Password</button>
                             </div>

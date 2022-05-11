@@ -9,6 +9,8 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 import { Ghost, Student, UserSwitch, UsersThree } from "phosphor-react";
 import TextEditor from "../../components/TextEditor";
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
+
 
 
 const Dashboard = ({ user, error }) => {
@@ -23,6 +25,9 @@ const Dashboard = ({ user, error }) => {
 
     const [teachersCount, setTeachersCount] = useState(null);
     const [studentsCount, setStudentsCount] = useState(null)
+
+
+
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -114,6 +119,9 @@ const Dashboard = ({ user, error }) => {
         </LessonBox>
     ))
 
+
+   
+
     // const clockAnalog = [
     //     <main className="main">
     //         <div className="clockbox">
@@ -187,8 +195,7 @@ const Dashboard = ({ user, error }) => {
                                         <p>{user.firstName} {user.lastName}</p>
                                         <p><span>Faculty:</span> {user.faculty}</p>
                                         <p><span>Department:</span> {user.department}</p>
-
-                                        <button onClick={() => history.push('/profile')}>view profile</button>
+                                        <button className="border border-gray-300 rounded-xl  px-2 py-1" onClick={() => history.push('/profile')}>view profile</button>
                                     </div>
                                 </UserCard>
 
@@ -270,7 +277,7 @@ const Dashboard = ({ user, error }) => {
                 }
             </ContentContainer>
         </ContentWrapper>
-    ) : ('Loading...');
+    ) : {error};
 };
 
 

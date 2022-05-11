@@ -131,6 +131,10 @@ export const Close = styled.div`
    top:20px;
    right:20px; 
    cursor: pointer;
+
+   @media screen and (max-width: 480px){
+    background:#000 ;
+    }
 `
 export const ImageBox = styled(motion.div)`
   max-width:960px ;

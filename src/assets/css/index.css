@@ -90,6 +90,7 @@ body {
 
 .cursor-copy { cursor: copy;}
 .settings-links > a { color: blue;}
+.error-messaage { color:#000; font-size: 18px;}
 
 .Registered { background: #4e4545; cursor:not-allowed;}
 .Add {  background: green;}
@@ -100,6 +101,7 @@ body {
 .cancel-btn { all: unset; width: 100%; text-align: center; padding: 6px 0; background:#fa0b0b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 .export-csv { all: unset; width: 100%; text-align: center; padding: 6px 10px; background:#11ea4b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 
+.button-gen { padding:4px 8px; border-radius: 5px; border: 1px solid black; width: 100%;}
 
 .flipui-btn { background: linear-gradient(to right, #59c173, #a17fe0, #5d26c1); color: #fff; font-weight: bold; padding:4px 6px; font-size: 14px; border-radius: 6px; margin-top: -20px;}
 

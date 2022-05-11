@@ -11,6 +11,8 @@ import axios from 'axios';
 import { facultyArr, tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
 import Button from '../../components/Button';
+import BtnControls from '../../components/BtnControls';
+import { PlusCircle } from 'phosphor-react';
 
 
 
@@ -56,8 +58,9 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
             <ContentContainer>
                 <div>
                     <div className='flex items-center justify-end'>
-                        <button ></button>
-                        <Button type="submit" text={'Register Lecturer'} background={'#04131D'} padding={'p-2'} color={'text-white'} onClick={() => setIsOpen(!isOpen)} />
+                        <div className=''>
+                            <BtnControls type={'submit'} icon={<PlusCircle size={20} color="#61f5eb" weight="bold" />} text={'Register Lecturer'} onClick={() => setIsOpen(!isOpen)} />
+                        </div>
                     </div>
                     <div>
                         <Formik
@@ -68,10 +71,10 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                 password: '',
                                 gender: '',
 
-                                phone:'',
-                                address:'',
-                                soo:'',
-                                dob:'',
+                                phone: '',
+                                address: '',
+                                soo: '',
+                                dob: '',
 
                             }}
                             validationSchema={validate}

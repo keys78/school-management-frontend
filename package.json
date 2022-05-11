@@ -12,6 +12,7 @@
     "axios": "^0.24.0",
     "formik": "^2.2.9",
     "framer-motion": "5.0.0",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "phosphor-react": "^1.4.1",
     "photoswipe": "^5.2.4",

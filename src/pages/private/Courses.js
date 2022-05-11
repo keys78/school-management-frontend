@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
+import { ContentContainer, ContentWrapper, Close } from "../../assets/css/GlobalStyled";
 import axios from 'axios';
 import { facultyArr, courseArr, tableRegisterCourses, tableAcademics } from '../../utils/data';
 import Spreadsheet from '../../components/Spreadsheet';
-import { AnimatePresence } from 'framer-motion'
-import { Article } from 'phosphor-react';
+import { AnimatePresence, motion } from 'framer-motion'
+import { Article, PlusCircle, X } from 'phosphor-react';
+import BtnControls from '../../components/BtnControls';
+import { modalVariantsVertical } from '../../utils/Animations';
 
 
 
@@ -88,7 +90,7 @@ const Courses = ({ user, setUser }) => {
 
         const checkDuplicate = allCourses.find(el => el.code === selectedCourse.code)
         if (checkDuplicate) {
-            //  alert('Already registered for this course')
+           
         } else {
 
             const config = {
@@ -113,50 +115,57 @@ const Courses = ({ user, setUser }) => {
 
     }
 
-    const confirmCourseReg = () => {
-        alert('Course Successfully Registered')
-        setIsModalOpen(!isModalOpen)
-    }
-
-
-
+ 
 
     return (
         <ContentWrapper>
             <ContentContainer>
-                <div className='flex items-center justify-between'>
-                    <h1 className='profile-header'>Courses</h1>
-                    <button onClick={() => setIsModalOpen(!isModalOpen)}>Register Courses</button>
+                <div className='flex items-center justify-between mb-4'>
+                    <h1 className='profile-header -mb-2'>Courses</h1>
+                    <div >
+                        <BtnControls type={'submit'} icon={<PlusCircle size={20} color="#61f5eb" weight="bold" />} text={'Register Courses'} onClick={() => setIsModalOpen(!isModalOpen)} />
+                    </div>
                 </div>
                 <div>
-                    {isModalOpen &&
-                        <E_Modal>
-                            <FormBox>
-                                <TableWrapper>
+                    <AnimatePresence>
+                        {isModalOpen &&
+                            <E_Modal>
+                                 <Close>
+                                        <X size={30} color="#e8eaed" weight="bold" onClick={() => setIsModalOpen(!isModalOpen)} />
+                                    </Close>
+                                <FormBox
+                                    variants={modalVariantsVertical}
+                                    initial="initial"
+                                    animate="final"
+                                    exit="exit"
+                                >
+                                   
+                                    <TableWrapper>
 
-                                    <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
-                                    <TableAdjustMobile>
-                                        <CustomTable>
-                                            <CustomTableHead >
-                                                <tr>
-                                                    {renderTableHeading}
-                                                </tr>
+                                        <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>
+                                        <TableAdjustMobile>
+                                            <CustomTable>
+                                                <CustomTableHead >
+                                                    <tr>
+                                                        {renderTableHeading}
+                                                    </tr>
 
-                                            </CustomTableHead>
-                                            <tbody className='w-full'>
-                                                {renderSubjects}
-                                            </tbody>
-                                        </CustomTable>
-                                    </TableAdjustMobile>
-                                </TableWrapper>
-                                <div>
-                                    <button onClick={() => setIsModalOpen(!isModalOpen)}>Cancel</button>
-                                    <button onClick={confirmCourseReg}>Done</button>
-                                </div>
-                            </FormBox>
+                                                </CustomTableHead>
+                                                <tbody className='w-full'>
+                                                    {renderSubjects}
+                                                </tbody>
+                                            </CustomTable>
+                                        </TableAdjustMobile>
+                                    </TableWrapper>
+                                    {/* <div>
+                                        <button >Cancel</button>
+                                        <button onClick={confirmCourseReg}>Done</button>
+                                    </div> */}
+                                </FormBox>
 
-                        </E_Modal>
-                    }
+                            </E_Modal>
+                        }
+                    </AnimatePresence>
                     <TableWrapper>
                         <TableAdjustMobile>
                             <CustomTable>
@@ -204,7 +213,7 @@ const E_Modal = styled.div`
     
 `
 
-const FormBox = styled.div`
+const FormBox = styled(motion.div)`
     background: #19262F;
     max-width:820px;
  
@@ -217,6 +226,7 @@ const FormBox = styled.div`
     @media screen and (max-width: 650px) {
       max-width:100% ;
       margin:0 20px ;
+      padding:10px ;
     }
 
     & > div {  margin-top:25px; display: flex; align-items: center; justify-content: space-between;}

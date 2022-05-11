@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
@@ -6,8 +6,9 @@ import { Formik, Form } from 'formik';
 import { validate } from '../../utils/validateForm';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-import { HandPointing } from "phosphor-react";
+import { HandPointing, FileArrowUp } from "phosphor-react";
 import ImageUpload from '../../components/ImageUpload';
+import BtnControls from '../../components/BtnControls';
 
 
 
@@ -63,7 +64,10 @@ const Profile = ({ user, setUser, setError, error }) => {
                     <Form>
                       <div className='flex items-center justify-between'>
                         <ImageUpload user={user} setUser={setUser} />
-                        <button type='submit'>Update</button>
+                        {/* <button type='submit'>Update</button> */}
+                        <div className='max-w-sm'>
+                        <BtnControls icon={<FileArrowUp size={20} color="#61f5eb" weight="bold" />} type={'submit'} text={'Update'}/>
+                        </div>
                       </div>
                       <FieldsWrapper>
                         <div>
