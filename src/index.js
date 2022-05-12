@@ -7,6 +7,7 @@ import { store } from './app/store'
 import App from './App';
 import 'react-calendar/dist/Calendar.css';
 import 'react-quill/dist/quill.snow.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>

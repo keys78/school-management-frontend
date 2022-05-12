@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
+import Toast from '../../components/Toast';
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
@@ -79,6 +80,7 @@ const Login = () => {
                 <div  className='text-center text-gray-200 text-sm'>
                   Are you a new student? <span onClick={() => history.push('/confirm-regno')}>Register Here</span>
                 </div>
+                <Toast />
               </ItemsWrapper>
             )}
           </Formik>
