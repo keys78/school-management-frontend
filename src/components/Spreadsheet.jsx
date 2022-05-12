@@ -96,7 +96,8 @@ const Spreadsheet = ({ allCourses, user, setIsSpreadSheet }) => {
                                 <p><span>MATRIC NUMBER:</span> {`ES-${user._id}`}</p>
                                 <p><span>FIRSTNAME:</span> {user.firstName}</p>
                                 <p><span>LASTNAME:</span> {user.lastName}</p>
-                                <p><span>D.O.B:</span> {user.dob}</p>
+                                <p><span>FACULTY:</span> {user.faculty}</p>
+                                <p><span>DEPARTMENT:</span> {user.department}</p>
                                 <p><span>NO. OF CREDITS:</span> {allCourses.length}</p>
                             </StudentInfo>
                         </div>

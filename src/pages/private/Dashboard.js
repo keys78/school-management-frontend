@@ -9,7 +9,7 @@ import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled"
 import { Ghost, Student, UserSwitch, UsersThree } from "phosphor-react";
 import TextEditor from "../../components/TextEditor";
 import axios from 'axios'
-import jwt_decode from "jwt-decode";
+import CountUp from 'react-countup'
 
 
 
@@ -18,7 +18,7 @@ const Dashboard = ({ user, error }) => {
     const history = useHistory();
     const [value, onChange] = useState(new Date());
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
-    const { data: newsApi, fetchError, isLoading } = useAxiosFetch('https://newsapi.org/v2/everything?q=tesla&from=2022-02-10&sortBy=publishedAt&apiKey=1698a7a28ec7488e86f2904e98f596e8')
+    const { data: newsApi, fetchError, isLoading } = useAxiosFetch('')
 
     const [flipUI, setFlipUI] = useState(true)
 
@@ -72,34 +72,6 @@ const Dashboard = ({ user, error }) => {
 
 
 
-
-    // function runTheClock() {
-    //     const HOURHAND = document.getElementById("hour");
-    //     const MINUTEHAND = document.getElementById("minute");
-    //     const SECONDHAND = document.getElementById("second");
-
-    //     var date = new Date();
-
-    //     let hr = date.getHours();
-    //     let min = date.getMinutes();
-    //     let sec = date.getSeconds();
-
-    //     let hrPosition = (hr * 360 / 12) + (min * (360 / 60) / 12);
-    //     let minPosition = (min * 360 / 60) + (sec * (360 / 60) / 60);
-    //     let secPosition = sec * 360 / 60;
-
-    //     hrPosition = hrPosition + (3 / 360);
-    //     minPosition = minPosition + (6 / 60);
-    //     secPosition = secPosition + 6;
-
-    //     HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
-    //     MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
-    //     SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
-    // }
-
-    // var interval = setInterval(runTheClock, 1000);
-
-
     const myNews = newsApi?.articles
     const renderNews = myNews && myNews.map((news, i) => (
         <NewsBox key={i}>
@@ -120,36 +92,52 @@ const Dashboard = ({ user, error }) => {
     ))
 
 
-   
+    function clock() {
+        const hours = document.querySelector(".hours");
+        const minutes = document.querySelector(".minutes");
+        const seconds = document.querySelector(".seconds");
+      
+        hours.textContent = new Date().getHours();
+        minutes.textContent = new Date().getMinutes();
+        seconds.textContent = new Date().getSeconds();
+      
+        if (minutes.textContent.toString().length == 1) {
+          minutes.textContent = "0" + minutes.textContent;
+        }
+      
+        if (seconds.textContent.toString().length == 1) {
+          seconds.textContent = "0" + seconds.textContent;
+        }
+      
+        if (hours.textContent.toString().length == 1) {
+          hours.textContent = "0" + hours.textContent;
+        }
+      }
+      
+      const interval = setInterval(clock, 1000);
+      
 
-    // const clockAnalog = [
-    //     <main className="main">
-    //         <div className="clockbox">
-    //             <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 600 600">
-    //                 <g id="face">
-    //                     <circle className="circle" cx="300" cy="300" r="253.9" />
-    //                     <path className="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6" />
-    //                     <circle className="mid-circle" cx="300" cy="300" r="16.2" />
-    //                 </g>
-    //                 <g id="hour">
-    //                     <path className="hour-arm" d="M300.5 298V142" strokeLinecap="round" />
-    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-    //                 </g>
-    //                 <g id="minute">
-    //                     <path className="minute-arm" d="M300.5 298V67" strokeLinecap="round" />
-    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-    //                 </g>
-    //                 <g id="second">
-    //                     <path className="second-arm" d="M300.5 350V55" strokeLinecap="round" />
-    //                     <circle className="sizing-box" cx="300" cy="300" r="253.9" />
-    //                 </g>
-    //             </svg>
-    //         </div>
-    //     </main>
-    // ]
+        
+   const clockAnalog = [
+    <div className="container">
+    <div className="clock">
+      <div>
+        <p className="hours">00</p>
+        <p>H</p>
+      </div>
+      <div>
+        <p className="minutes">00</p>
+        <p>M</p>
+      </div>
+      <div>
+        <p className="seconds">00</p>
+        <p>S</p>
+      </div>
+    </div>
+  </div>
+   ]
 
-
-
+  
 
 
 
@@ -195,7 +183,8 @@ const Dashboard = ({ user, error }) => {
                                         <p>{user.firstName} {user.lastName}</p>
                                         <p><span>Faculty:</span> {user.faculty}</p>
                                         <p><span>Department:</span> {user.department}</p>
-                                        <button className="border border-gray-300 rounded-xl  px-2 py-1" onClick={() => history.push('/profile')}>view profile</button>
+
+                                        <button className="sm:border border-gray-300 rounded-xl  sm:px-2" onClick={() => history.push('/profile')}>view profile</button>
                                     </div>
                                 </UserCard>
 
@@ -216,7 +205,7 @@ const Dashboard = ({ user, error }) => {
                                 <NewsBoxContainer>
                                     <h1>News</h1>
                                     {isLoading && 'Loading...'}
-                                    {newsApi ? renderNews : "loading..."}
+                                    {newsApi.length < 0 ? renderNews : "No news available, Your news activities would show up here when you have one"}
                                 </NewsBoxContainer>
                             </DisplayPattern>
                         }
@@ -234,7 +223,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><Student size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>{studentsCount ? studentsCount.length : 0}</h1>
+                                        <h1><CountUp end={studentsCount ? studentsCount.length : 0} duration={2} /></h1>
                                         <p>Students</p>
                                     </div>
                                 </div>
@@ -243,7 +232,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UserSwitch size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>{teachersCount ? teachersCount.length : 0}</h1>
+                                        <h1><CountUp end={teachersCount ? teachersCount.length : 0} duration={2} /> </h1>
                                         <p>Lecturers</p>
                                     </div>
                                 </div>
@@ -252,7 +241,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UsersThree size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1>{studentsCount && teachersCount ? studentsCount.length + teachersCount.length : 0}</h1>
+                                        <h1><CountUp end={studentsCount && teachersCount ? studentsCount.length + teachersCount.length : 0} duration={2} /> </h1>
                                         <p>Total Users</p>
                                     </div>
                                 </div>
@@ -264,7 +253,7 @@ const Dashboard = ({ user, error }) => {
                                 <TextEditor />
                             </div>
                             <div className="solado">
-                                {/* {clockAnalog} */}
+                                {clockAnalog}
                                 <div>
                                     <div>
                                         <p>❝{newQuote.content}❞ </p>
@@ -577,8 +566,9 @@ const AdminDashBoard = styled.section`
     }
 
     & > div:nth-of-type(2) div:first-child { border-top-right-radius: 8px; border-top-left-radius: 8px; }
-    & > div:nth-of-type(2) div:nth-of-type(2){ height: 300px;
-        @media screen and (max-width: 650px){ height:150px; }  
+    & > div:nth-of-type(2) div:nth-of-type(2){ 
+        /* height: 300px; */
+        @media screen and (max-width: 650px){ height:50px; }  
     }
 
 `

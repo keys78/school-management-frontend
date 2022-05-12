@@ -64,10 +64,10 @@ const ForgotPassword = () => {
                   <div className='mt-6'>
                     <TextField label={'Email'} name={'email'} type={'email'} />
                   </div>
-                  <Button type="submit" text={'Send Reset Instructions'} padding={'py-2'} margin={'my-4'} color={'text-white'} />
+                  <Button type="submit" text={'Send Reset Instructions'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'}/>
                 </Form>
 
-                <p className='cursor-pointer text-center' onClick={() => history.push('/login')}> <span>Login</span></p>
+                <p className='cursor-pointer text-right' onClick={() => history.push('/login')}> <span>~ login </span></p>
               </ItemsWrapper>
             )}
           </Formik>

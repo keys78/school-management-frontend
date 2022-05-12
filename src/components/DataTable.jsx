@@ -198,7 +198,7 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                 : <span className='p-4'>{tableData.firstName} have no courses registered yet</span>
             }
             <AnimatePresence>
-                            {isSpreadSheet && <Spreadsheet allCourses={tableData.courses} user={user} setIsSpreadSheet={setIsSpreadSheet} />}
+                            {isSpreadSheet && <Spreadsheet allCourses={tableData.courses} user={tableData} setIsSpreadSheet={setIsSpreadSheet} />}
                         </AnimatePresence>
            
         </TableWrapper>

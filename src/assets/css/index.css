@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap');
 
 
 :root {
@@ -46,7 +47,7 @@ body {
 .no-pointer { cursor: default !important;}
 
 
-.private { display: block;}
+/* .private { display: block;} */
 .react-calendar { width: 100% !important; font-family: inherit !important; max-width: 100% !important;}
 .profile-header { font-size: 20px; font-weight: bold; padding-bottom: 16px;}
 .zoom-in {cursor: zoom-in;}
@@ -128,90 +129,55 @@ body {
 .solado > div { margin-bottom: 20px;} 
 
 
+.clock {display: flex; align-items: center; justify-content: center; gap: 3px; font-family: 'Orbitron', sans-serif;}
+.clock div { position: relative;}
 
-
-/* Layout */
-.main {
+.clock div p {
+  position: relative;
   display: flex;
+  width: 100px;
+  height: 70px;
   justify-content: center;
-  align-items: middle;
+  align-items: center;
+  background-color: #180f47;
+  color:rgb(55, 255, 252);
+  z-index: 1;
+  font-size: 40px;
+  border: none;
+  box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.368);
+  background-image: url('https://images.pexels.com/photos/5244261/pexels-photo-5244261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 }
 
-.clockbox,
-#clock {
-  width: 100%;
-  height: 160px;
+.clock div p:first-child {
+  border-radius: 10px 10px 0 0;
 }
 
-/* Clock styles */
-.circle {
-  fill: none;
-  stroke: none;
-  stroke-width: 3;
-  stroke-miterlimit: 10;
+.clock div p:last-child {
+  font-size: 30px;
+  height: 40px;
+  background-color: #10428e;
+  background-image: url('https://images.pexels.com/photos/1693095/pexels-photo-1693095.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  border-radius: 0 0 20px 20px;
 }
 
-.mid-circle {
-  fill: #444;
-}
-.hour-marks {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 3;
-  stroke-miterlimit: 10;
+.clock div:last-child p {
+  background-color: #512b58;
+  color: white;
 }
 
-.hour-arm {
-  fill: none;
-  stroke: #444;
-  stroke-width: 9;
-  stroke-miterlimit: 10;
-}
-
-.minute-arm {
-  fill: none;
-  stroke: #444;
-  stroke-width: 6;
-  stroke-miterlimit: 10;
-}
-
-.second-arm {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 3;
-  stroke-miterlimit: 10;
-}
-
-/* Transparent box ensuring arms center properly. */
-.sizing-box {
-  fill: none;
-}
-
-/* Make all arms rotate around the same center point. */
-/* Optional: Use transition for animation. */
-#hour,
-#minute,
-#second {
-  transform-origin: 300px 300px;
-  transition: transform .5s ease-in-out;
+.clock div:last-child p:last-child {
+  background-color: #2c003e;
+  color: white;
 }
 
 
 
 
-
-
-
-
-
-
-
+/* cgpa table */
 .cgpa-table { font-weight: bold; font-size: 18px;}
 .view-sheet { padding: 4px 8px; border: 1px solid rgba(0, 0, 0, 0.256); font-size: 16px; transition:0.4s ; background: #fff; border-radius: 5px; display: flex; align-items: center; column-gap: 5px;}
-.view-sheet:hover {
-    background:#00000025 ;
-    transition:0.4s ;
-}
+.view-sheet:hover { background:#00000025 ; transition:0.4s ;}
+
 .hamburger { cursor: pointer;}
 .hamburger .line{
   width: 35px;

@@ -6,20 +6,59 @@ import {
 
 export const facultyArr = [
   {
-    faculty: "Science",
+    faculty: "Clinical Sciences",
     departments: [
-      { department: 'Medicine', },
-      { department: 'Engineering', },
-      { department: 'Pharmacy', }
+      { department: 'Mental Health', },
+      { department: 'Surgery', },
+      { department: 'Paediatrics and Child Health', },
+      { department: 'Nursing', },
+      { department: 'Internal Medicine', },
+      { department: 'Obstetrics & Gynaecology', },
     ]
   },
 
   {
-    faculty: "Arts",
+    faculty: "Engineering",
     departments: [
-      { department: 'Law', },
-      { department: 'Theater Arts', },
-      { department: 'Wood Works', },
+      { department: 'Computer Engineering', },
+      { department: 'Chemical Engineering', },
+      { department: 'Gas Engineering', },
+      { department: 'Environmental Engineering', },
+      { department: 'Mechanical Engineering', },
+    
+    ]
+  },
+
+  {
+    faculty: "Pharmaceutical Sciences",
+    departments: [
+      { department: 'Clinical Pharmacy and Management', },
+      { department: 'Pharmaceutical and Medicinal Chemistry', },
+      { department: 'Pharmaceutical Microbiology and Biotechnology', },
+      { department: 'Experimental Pharmacology and Toxicology', },
+    ]
+  },
+
+  {
+    faculty:"Law",
+    departments: [
+      { department: 'Public Law', },
+      { department: 'Private Law', },
+      { department: 'Commercial and Industrial Law', },
+      { department: 'Jurisprudence and International', },
+     
+    ]
+  },
+
+  {
+    faculty:"Management Sciences",
+    departments: [
+      { department: 'Accounting', },
+      { department: 'Finance and Banking', },
+      { department: 'Management', },
+      { department: 'Marketing', },
+      { department: 'Hospitality Management and Tourism', },
+     
     ]
   },
 
@@ -27,10 +66,15 @@ export const facultyArr = [
 
 export const courseArr = [
   {
-    department: 'Medicine',
+    department: 'Mental Health',
     courses: [
-      { code: 'MED101', title: "Med-1", score: 0, units: 5 },
-      { code: 'MED102', title: "Med-2", score: 0, units: 5 }
+      { code: 'MNT101', title: "Suicide Prevention", score: 0, units: 4 },
+      { code: 'MNT102', title: "Mental and Physical Self Care", score: 0, units: 4 },
+      { code: 'MNT103', title: "Phycological First Aid", score: 0, units: 3 },
+      { code: 'PSY107', title: "The Science Of Well-Beign", score: 0, units: 3 },
+      { code: 'PSY106', title: "Physcology", score: 0, units: 3 },
+      { code: 'PSY104', title: "Introduction to Add-Physcology", score: 0, units: 3 },
+      { code: 'PSY104', title: "The Addicted Brain", score: 0, units: 2 },
     ]
   },
   {

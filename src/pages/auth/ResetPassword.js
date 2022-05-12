@@ -40,12 +40,13 @@ const ForgotPassword = ({ match }) => {
 
               try {
                 const { data } = await axios.put(
-                  `/api/auth/passwordreset/${match.params.resetToken}`,
+                  `/auth/resetpassword/${match.params.resetToken}`,
                   { ...values },
                   config
                 );
 
                 setSuccess(data.data);
+                alert(data.data)
               } catch (error) {
                 setError(error.response.data.error);
                 setTimeout(() => {
@@ -73,7 +74,7 @@ const ForgotPassword = ({ match }) => {
                   <div>
                     <TextField label={'Confirm Password'} name={'confirmPassword'} type={'password'} />
                   </div>
-                  <Button type="submit" text={'Send Email'} padding={'py-2'} margin={'my-4'} color={'text-white'} />
+                  <Button type="submit" text={'RESET'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'}/>
                 </Form>
               </ItemsWrapper>
             )}
