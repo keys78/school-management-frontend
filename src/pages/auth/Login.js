@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
 import Toast from '../../components/Toast';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
@@ -29,6 +30,7 @@ const Login = () => {
 
   return (
     <AuthWrapper>
+      <ToastContainer />
       <div className='auth-page-adjust'>
         <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
         <AuthContainer>
@@ -55,10 +57,8 @@ const Login = () => {
                 localStorage.setItem("authToken", data.token);
                 history.push("/dashboard");
               } catch (error) {
-                setError(error.response.data.error);
-                setTimeout(() => {
-                  setError("");
-                }, 5000);
+                toast.error(error.response.data.error);
+               
               }
             }}
           >
