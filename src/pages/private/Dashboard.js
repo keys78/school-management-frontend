@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import useAxiosFetch from "../../utils/useAxiosFetch";
 import wmap from "../../assets/images/wmap.png"
@@ -52,7 +52,7 @@ const Dashboard = ({ user, error }) => {
             };
 
             try {
-                if (user.role === 'admin') {
+                if (user.role === 'admin' || user.role === 'student') {
                     const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
                     const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
 
@@ -70,7 +70,8 @@ const Dashboard = ({ user, error }) => {
     }, [user]);
 
 
-
+    // const renderMyLetcurers = teachersCount && teachersCount.filter(val => val.department === user.department)
+    // console.log(renderMyLetcurers)
 
     const myNews = newsApi?.articles
     const renderNews = myNews && myNews.map((news, i) => (
@@ -91,53 +92,56 @@ const Dashboard = ({ user, error }) => {
         </LessonBox>
     ))
 
+    let [hours, setHours] = useState(0.0)
+    let [minutes, setMinutes] = useState(0.0)
+    let [seconds, setSeconds] = useState(0.0)
 
     function clock() {
-        const hours = document.querySelector(".hours");
-        const minutes = document.querySelector(".minutes");
-        const seconds = document.querySelector(".seconds");
       
-        hours.textContent = new Date().getHours();
-        minutes.textContent = new Date().getMinutes();
-        seconds.textContent = new Date().getSeconds();
-      
-        if (minutes.textContent.toString().length == 1) {
-          minutes.textContent = "0" + minutes.textContent;
-        }
-      
-        if (seconds.textContent.toString().length == 1) {
-          seconds.textContent = "0" + seconds.textContent;
-        }
-      
-        if (hours.textContent.toString().length == 1) {
-          hours.textContent = "0" + hours.textContent;
-        }
-      }
-      
-      const interval = setInterval(clock, 1000);
-      
+        // const hours = document.querySelector(".hours");
+        // const minutes = document.querySelector(".minutes");
+        // const seconds = document.querySelector(".seconds");
+        setHours(new Date().getHours())
+        setMinutes(new Date().getMinutes())
+        setSeconds(new Date().getSeconds())
 
-        
-   const clockAnalog = [
-    <div className="container">
-    <div className="clock">
-      <div>
-        <p className="hours">00</p>
-        <p>H</p>
-      </div>
-      <div>
-        <p className="minutes">00</p>
-        <p>M</p>
-      </div>
-      <div>
-        <p className="seconds">00</p>
-        <p>S</p>
-      </div>
-    </div>
-  </div>
-   ]
+        if (minutes.toString().length === 1) {
+            minutes = "0" + minutes;
+        }
 
-  
+        if (seconds.toString().length === 1) {
+            seconds = "0" + seconds;
+        }
+
+        if (hours.toString().length === 1) {
+            hours = "0" + hours;
+        }
+    }
+
+    const interval = setInterval(clock, 1000);
+
+
+
+    const clockAnalog = [
+        <div className="container">
+            <div className="clock">
+                <div>
+                    <p className="hours">{hours}</p>
+                    <p>H</p>
+                </div>
+                <div>
+                    <p className="minutes">{minutes}</p>
+                    <p>M</p>
+                </div>
+                <div>
+                    <p className="seconds">{seconds}</p>
+                    <p>S</p>
+                </div>
+            </div>
+        </div>
+    ]
+
+
 
 
 
@@ -154,7 +158,7 @@ const Dashboard = ({ user, error }) => {
                     <>
                         <GreetingsMobile>
                             <Ghost size={20} color="#d51a1a" />&nbsp;{greetings} {user.firstName}
-                          
+
                         </GreetingsMobile>
                         {user &&
                             <DisplayPattern>
@@ -176,7 +180,7 @@ const Dashboard = ({ user, error }) => {
                                         <img className="w-28" src={user.pic} alt="profile" />
                                     </div>
                                     <div>
-                                          {user.role === 'admin' &&  <button className="flipui-btn" onClick={() => setFlipUI(!flipUI)}> Flip UI</button> }
+                                        {user.role === 'admin' && <button className="flipui-btn" onClick={() => setFlipUI(!flipUI)}> Flip UI</button>}
                                         <p>Level: {user.level}</p>
                                     </div>
                                     <div>
@@ -266,7 +270,7 @@ const Dashboard = ({ user, error }) => {
                 }
             </ContentContainer>
         </ContentWrapper>
-    ) : {error};
+    ) : { error };
 };
 
 

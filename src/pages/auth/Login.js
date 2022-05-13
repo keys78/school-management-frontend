@@ -6,12 +6,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
-import Toast from '../../components/Toast';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
   const history = useHistory();
 
 
@@ -30,7 +28,6 @@ const Login = () => {
 
   return (
     <AuthWrapper>
-      <ToastContainer />
       <div className='auth-page-adjust'>
         <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
         <AuthContainer>
@@ -53,19 +50,18 @@ const Login = () => {
                   { ...values },
                   config
                 );
-
+                toast.success('Login Successful', {autoClose:2000});
                 localStorage.setItem("authToken", data.token);
                 history.push("/dashboard");
+                
               } catch (error) {
                 toast.error(error.response.data.error);
-               
               }
             }}
           >
             {formik => (
               <ItemsWrapper>
                 {loading && 'Loading...'}
-                {error && <span className="error-message">{error}</span>}
                 <h1>Login</h1>
                 <Form>
                   <div>
@@ -80,7 +76,6 @@ const Login = () => {
                 <div  className='text-center text-gray-200 text-sm'>
                   Are you a new student? <span onClick={() => history.push('/confirm-regno')}>Register Here</span>
                 </div>
-                <Toast />
               </ItemsWrapper>
             )}
           </Formik>

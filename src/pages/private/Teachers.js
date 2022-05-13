@@ -3,25 +3,24 @@ import styled from 'styled-components';
 import { ContentContainer, ContentWrapper, CustomSelect } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
 import { Formik, Form, Field } from 'formik';
-import { validate } from '../../utils/validateForm';
+import { validateCreateTeacher } from '../../utils/validateForm';
 import { modalVariantsVertical } from '../../utils/Animations';
 import { AnimatePresence, motion } from 'framer-motion'
-import { useHistory, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
 import Button from '../../components/Button';
 import BtnControls from '../../components/BtnControls';
 import { PlusCircle } from 'phosphor-react';
+import { toast } from 'react-toastify';
 
 
 
-const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
-    const history = useHistory()
+const Teachers = ({ searchTerm, setSearchTerm }) => {
     const [data, setData] = useState([])
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
     const [isOpen, setIsOpen] = useState(false)
@@ -77,7 +76,7 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                 dob: '',
 
                             }}
-                            validationSchema={validate}
+                            validationSchema={validateCreateTeacher}
                             onSubmit={async (values, { resetForm }) => {
 
                                 const config = {
@@ -99,23 +98,15 @@ const Teachers = ({ setUser, searchTerm, setSearchTerm }) => {
                                         , config);
                                     fetchData();
 
-
-
-
                                     if (data.success === true) {
-                                        // const { data: data_1 } = await axios.get(`http://localhost:4000/private/admin/teachers`, config);
-                                        alert(`${data?.data} is now a staff`)
+                                        toast.success(`${data?.data} is now a staff`)
                                         setIsOpen(false)
 
                                     }
 
-                                    // setUser(data_1)
 
                                 } catch (error) {
-                                    setError(error.response.data.error);
-                                    setTimeout(() => {
-                                        setError("");
-                                    }, 5000);
+                                    toast.error(error.response.data.error);
                                 }
                                 resetForm();
                             }}

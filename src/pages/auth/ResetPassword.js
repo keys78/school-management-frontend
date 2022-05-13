@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
+import { toast } from 'react-toastify';
 
 const ForgotPassword = ({ match }) => {
-  const [error, setError] = useState(false)
   const history = useHistory();
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
 
 
   const validate = Yup.object({
@@ -45,20 +45,17 @@ const ForgotPassword = ({ match }) => {
                   config
                 );
 
-                setSuccess(data.data);
+                toast.success(data.data)
+                setSuccess(!success)
                 alert(data.data)
               } catch (error) {
-                setError(error.response.data.error);
-                setTimeout(() => {
-                  setError("");
-                }, 5000);
+                toast.error(error.response.data.error);
               }
               resetForm();
             }}
           >
             {formik => (
               <ItemsWrapper>
-                {error && <span className="error-message">{error} </span>}
                 {success && (
                   <span className="success-message">
                     {success} <Link to="/login">Login</Link>

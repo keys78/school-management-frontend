@@ -3,26 +3,21 @@ import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
-import { validate } from '../../utils/validateForm';
-import { useHistory, Link } from 'react-router-dom';
+import { validateProfile } from '../../utils/validateForm';
 import axios from 'axios';
 import { HandPointing, FileArrowUp } from "phosphor-react";
 import ImageUpload from '../../components/ImageUpload';
 import BtnControls from '../../components/BtnControls';
+import { toast } from 'react-toastify';
 
 
 
-const Profile = ({ user, setUser, setError, error }) => {
-  const history = useHistory()
+const Profile = ({ user, setUser,}) => {
 
-  return error ? (
-    <span className="error-message">{error} <Link to="/login">Login</Link></span>
-  ) : (
+  return (
     <ContentWrapper>
       <ContentContainer>
         <ProfileBox>
-
-
           <Formik
             initialValues={{
               firstName: user.firstName,
@@ -35,7 +30,7 @@ const Profile = ({ user, setUser, setError, error }) => {
               soo: user.soo,
 
             }}
-            validationSchema={validate}
+            validationSchema={validateProfile}
             onSubmit={async (values) => {
 
               const config = {
@@ -48,10 +43,11 @@ const Profile = ({ user, setUser, setError, error }) => {
               try {
                 await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
                 const { data } = await axios.get("http://localhost:4000/private/user", config);
-                alert('user has been updatd')
+                toast.success('Profile Updated');
                 setUser(data)
               } catch (error) {
                 console.log(error)
+                toast.error(error);
               }
             }}
           >
@@ -64,7 +60,6 @@ const Profile = ({ user, setUser, setError, error }) => {
                     <Form>
                       <div className='flex items-center justify-between'>
                         <ImageUpload user={user} setUser={setUser} />
-                        {/* <button type='submit'>Update</button> */}
                         <div className='max-w-sm'>
                         <BtnControls icon={<FileArrowUp size={20} color="#61f5eb" weight="bold" />} type={'submit'} text={'Update'}/>
                         </div>

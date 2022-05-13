@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import TextField from '../../components/TextField';
 import axios from 'axios';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { facultyArr, } from '../../utils/data';
 import { validate } from '../../utils/validateForm';
 import { AuthContainer, AuthWrapper, ItemsWrapper, CustomSelect } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const history = useHistory();
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
@@ -55,21 +55,17 @@ const SignUp = () => {
 
                                     , config);
                                 localStorage.setItem("authToken", data.token);
+                                toast.success('Sign In Success', {autoClose:2000});
                                 history.push("/dashboard");
 
                             } catch (error) {
-                                setError(error.response.data.error);
-                                setTimeout(() => {
-                                    setError("");
-                                }, 5000);
+                                toast.error(error.response.data.error);
                             }
-                            console.log(values)
                         }}
                     >
                         {formik => (
                             <ItemsWrapper>
                                 {loading && 'Loading...'}
-                                {error && <span className="error-message">{error}</span>}
                                 <h1 className="">Registration Form</h1>
                                 <Form>
                                     <FieldsWrapper>
@@ -83,7 +79,7 @@ const SignUp = () => {
                                             <TextField label={'Email'} name={'email'} type={'email'} />
                                         </div>
                                         <div>
-                                            <TextField label={'Phone Number'} name={'phone'} type={'text'} />
+                                            <TextField label={'Phone Number'} name={'phone'} type={'number'} />
                                         </div>
                                         <div>
                                             <TextField label={'Date OF Birth'} name={'dob'} type={'date'} />
@@ -96,7 +92,8 @@ const SignUp = () => {
                                         </div>
                                         <section className="gender-class-s">
                                             <label className='gender-label' htmlFor="gender">Gender</label>
-                                            <Field label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
+                                            <Field required label='Gender' component="select" name="gender" className="gender-class" placeholder={'Select Options'}>
+                                                <option disabled value="">Select Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </Field>
@@ -104,7 +101,7 @@ const SignUp = () => {
 
                                         <div className='faculdep flex sm:gap-8 gap-4'>
                                             <label className='select-label' htmlFor="faculty">Faculty
-                                                <CustomSelect name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
+                                                <CustomSelect required name="faculty" onChange={(e) => { const x = e.target.value; setFacu(x) }}>
                                                     <option value="">Select Faculty</option>
                                                     {facultyArr.map(faculty =>
                                                         <option value={faculty.faculty}>{faculty.faculty}</option>
@@ -113,8 +110,8 @@ const SignUp = () => {
                                             </label>
 
                                             <label className='select-label' htmlFor="dept">Department
-                                                <CustomSelect name="dept" onChange={(e) => { setDep(e.target.value) }}  >
-                                                    <option value="">Select Department</option>
+                                                <CustomSelect required name="dept" onChange={(e) => { setDep(e.target.value) }}  >
+                                                    <option disabled value="">Select Department</option>
                                                     {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
                                                         <option value={depts.department}>{depts.department}</option>
                                                     )}

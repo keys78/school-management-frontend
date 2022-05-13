@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { CloudArrowUp, X, UploadSimple } from 'phosphor-react';
 import styled from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { zoomOutVariants } from '../utils/Animations';
 import { FullDisplay, ImageBox, Close } from '../assets/css/GlobalStyled';
 import BtnControls from './BtnControls';
+import { toast } from 'react-toastify';
 
 
 const ImageUpload = ({ user, setUser }) => {
@@ -30,7 +31,7 @@ const ImageUpload = ({ user, setUser }) => {
     const uploadImage = async (e) => {
         e.preventDefault()
         if (singleFile === "") {
-            alert('You need to select a file')
+            toast.warn('You need to select a file', {autoClose:1500})
         } else {
             const data = new FormData()
             data.append('file', singleFile)
@@ -44,7 +45,7 @@ const ImageUpload = ({ user, setUser }) => {
             try {
                 await axios.post(`http://localhost:4000/private/upload-photo/${user._id}`, data, config);
                 axios.get("http://localhost:4000/private/user", config).then((res) => { setUser(res.data) })
-                alert('photo upadted')
+                toast.success('Profile Image Updated');
             } catch (error) {
                 console.log(error)
             }

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
+import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
   const [error, setError] = useState(false)
@@ -42,22 +43,17 @@ const ForgotPassword = () => {
                   config
                 );
 
-                setSuccess(data.data);
+                toast.success(data.data);
               } catch (error) {
-                setError(error.response.data.error);
-                setTimeout(() => {
-                  setError("");
-                }, 5000);
+                toast.error(error.response.data.error);
               }
               resetForm();
             }}
           >
             {formik => (
               <ItemsWrapper>
-                {error && <span className="error-message">{error}</span>}
-                {success && <span className="success-message">{success}</span>}
                 <h1>Request Pasword Reset</h1>
-                <span className="text-xs mb-12">
+                <span style={{lineHeight:'17px'}} className="text-xs mb-12">
                   Please enter the email address you registered your account with. You will recieve a password reset confirmation
                 </span>
                 <Form>

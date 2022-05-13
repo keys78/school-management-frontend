@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import SideNav from '../../components/SideNav'
-import axios from 'axios'
+
 
 const Layout = ({ children, user }) => {
 

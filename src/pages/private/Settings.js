@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
-import { validate, validateChangePassword } from '../../utils/validateForm';
-import { useHistory } from 'react-router-dom';
+import {  validateChangePassword } from '../../utils/validateForm';
 import axios from 'axios';
-import { facultyArr, courseArr } from '../../utils/data';
 import Tabs from '../../components/Tabs';
+import { toast } from 'react-toastify';
 
 
 
-const Settings = ({ user, error, setError }) => {
+const Settings = ({ user }) => {
 
     const securityTab = [
         <ChangePasswordWrapper>
@@ -33,17 +32,15 @@ const Settings = ({ user, error, setError }) => {
 
                     try {
                         await axios.post(`http://localhost:4000/auth/changepassword/${user._id} `, { ...values, }, config);
-                        alert(`password is updated`)
+                        toast.success(`password is updated`)
                     } catch (error) {
-                        alert(error.response.data.error)
+                        toast.error(error.response.data.error)
                     }
                     resetForm();
                 }}
             >
                 {formik => (
                     <div>
-                        {error && <span className="error-message">{error}</span>}
-
                         <Form>
                             <div>
                                 <TextField label={'Old password'} name={'password'} type={'password'} />
@@ -54,13 +51,9 @@ const Settings = ({ user, error, setError }) => {
                             <div>
                                 <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
                             </div>
-                            {/* <div>
-                                <TextField label={'Confirm new password'} name={'confirmPassword'} type={'password'} />
-                            </div> */}
                             <div>
                                 <button type='submit'>Change Password</button>
                             </div>
-
                         </Form>
                     </div>
                 )}

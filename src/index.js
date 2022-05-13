@@ -8,12 +8,17 @@ import App from './App';
 import 'react-calendar/dist/Calendar.css';
 import 'react-quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
+// import { BrowserRouter as Router } from "react-router-dom";
+
+
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <Router> */}
     <Provider store={store}>
         <App />
     </Provider>
+    {/* </Router> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

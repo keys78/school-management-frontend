@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Article, PlusCircle, X } from 'phosphor-react';
 import BtnControls from '../../components/BtnControls';
 import { modalVariantsVertical } from '../../utils/Animations';
+import { toast } from 'react-toastify';
 
 
 
@@ -104,7 +105,7 @@ const Courses = ({ user, setUser }) => {
                 const { data: regCourse } = await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
                 const { data } = await axios.get(`http://localhost:4000/private/user`, config);
                 if (regCourse) {
-                    alert('course has been registered')
+                    toast.info('Course registered', {autoClose:1000})
                 }
                 setUser(data)
 

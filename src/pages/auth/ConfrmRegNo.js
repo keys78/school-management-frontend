@@ -21,6 +21,7 @@ const ConfrmRegNo = ({ value, regno, setRegNo, setValue }) => {
     const copyLink = () => {
         if (navigator.clipboard.writeText(regno)) {
             setcopyRegNo(<Check size={20} color="#46ecd8" weight="bold" />)
+            setValue(val => regno)
         }
         setTimeout(() => {
             setcopyRegNo(<Copy size={20} color="#46ecd8" weight="bold" />)
@@ -63,7 +64,7 @@ const ConfrmRegNo = ({ value, regno, setRegNo, setValue }) => {
                             <button className='cursor-copy' onClick={copyLink}> {copyRegNo}  </button>
                         </div>
                         <form onSubmit={(e) => verifyRegNo(e)}>
-                            <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} />
+                            <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder={'enter regno'} required />
                             <Button type="submit" text={'Proceed'} padding={'py-2'} margin={'my-4'} color={'text-white'} width={'w-full'} />
                         </form>
                         <Link to="signup"></Link>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
@@ -15,6 +15,9 @@ import Students from "./pages/private/Students";
 import Teachers from "./pages/private/Teachers";
 import Settings from "./pages/private/Settings";
 import UserDetails from "./pages/private/UserDetails";
+import { ToastContainer } from 'react-toastify';
+import { AnimatePresence } from 'framer-motion'
+
 
 import AOS from 'aos'
 import "aos/dist/aos.css"
@@ -23,6 +26,7 @@ import "aos/dist/aos.css"
 
 
 const App = () => {
+  // const location = useLocation()
   const [value, setValue] = useState(undefined)
   const [regno, setRegNo] = useState('')
 
@@ -35,8 +39,10 @@ const App = () => {
   })
 
   return (
-      <Router>
-        <Switch>
+    <Router>
+      <ToastContainer limit={3} />
+        <Switch 
+        >
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/courses" component={Courses} />
@@ -57,7 +63,7 @@ const App = () => {
           <Redirect from="*" to="/" />
 
         </Switch>
-      </Router>
+    </Router>
   );
 };
 
