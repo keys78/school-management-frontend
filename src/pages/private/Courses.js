@@ -9,6 +9,7 @@ import { Article, PlusCircle, X } from 'phosphor-react';
 import BtnControls from '../../components/BtnControls';
 import { modalVariantsVertical } from '../../utils/Animations';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
@@ -91,7 +92,7 @@ const Courses = ({ user, setUser }) => {
 
         const checkDuplicate = allCourses.find(el => el.code === selectedCourse.code)
         if (checkDuplicate) {
-           
+
         } else {
 
             const config = {
@@ -105,7 +106,7 @@ const Courses = ({ user, setUser }) => {
                 const { data: regCourse } = await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
                 const { data } = await axios.get(`http://localhost:4000/private/user`, config);
                 if (regCourse) {
-                    toast.info('Course registered', {autoClose:1000})
+                    toast.info('Course registered', { autoClose: 1000 })
                 }
                 setUser(data)
 
@@ -116,11 +117,16 @@ const Courses = ({ user, setUser }) => {
 
     }
 
- 
+
 
     return (
         <ContentWrapper>
-            <ContentContainer>
+            <ContentContainer
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
                 <div className='flex items-center justify-between mb-4'>
                     <h1 className='profile-header -mb-2'>Courses</h1>
                     <div >
@@ -131,16 +137,16 @@ const Courses = ({ user, setUser }) => {
                     <AnimatePresence>
                         {isModalOpen &&
                             <E_Modal>
-                                 <Close>
-                                        <X size={30} color="#e8eaed" weight="bold" onClick={() => setIsModalOpen(!isModalOpen)} />
-                                    </Close>
+                                <Close>
+                                    <X size={30} color="#e8eaed" weight="bold" onClick={() => setIsModalOpen(!isModalOpen)} />
+                                </Close>
                                 <FormBox
                                     variants={modalVariantsVertical}
                                     initial="initial"
                                     animate="final"
                                     exit="exit"
                                 >
-                                   
+
                                     <TableWrapper>
 
                                         <HeaderTitle>Courses Outlined for {user.department} Students </HeaderTitle>

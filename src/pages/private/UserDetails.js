@@ -9,6 +9,7 @@ import { ArrowLeft, X } from "phosphor-react";
 import { motion, AnimatePresence } from 'framer-motion'
 import { tableAcademics } from '../../utils/data';
 import { zoomOutVariants } from '../../utils/Animations';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
@@ -125,7 +126,12 @@ const UserDetails = ({ user, setUser }) => {
 
     return (
         <ContentWrapper>
-            <ContentContainer>
+            <ContentContainer
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
                 <div className='details-adjust'>
                     <div className='flex items-center justify-between py-3'>
                         <button onClick={() => history.goBack()}><ArrowLeft size={20} color="#08546d" weight="bold" /></button>
@@ -160,7 +166,7 @@ const UserDetails = ({ user, setUser }) => {
                     </Tabs>
                 </div>
             </ContentContainer>
-            
+
             <AnimatePresence>
                 {isZoomed &&
                     <FullDisplay >

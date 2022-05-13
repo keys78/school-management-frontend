@@ -9,6 +9,7 @@ import { validate } from '../../utils/validateForm';
 import { AuthContainer, AuthWrapper, ItemsWrapper, CustomSelect } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
@@ -22,7 +23,13 @@ const SignUp = () => {
         <AuthWrapper className="signup-adjust">
             <div>
                 <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8' src={'e-school.png'} alt="logo" />
-                <AuthContainer large>
+                <AuthContainer 
+                large
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                >
                     <Formik
                         initialValues={{
                             firstName: '',

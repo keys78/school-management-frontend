@@ -16,7 +16,7 @@ export const ContentWrapper = styled(motion.section)`
     }
 `
 
-export const ContentContainer = styled.section`
+export const ContentContainer = styled(motion.section)`
     width: 90%;
     margin-top: 90px;
     margin-bottom: 10px;
@@ -36,7 +36,7 @@ export const ContentContainer = styled.section`
     }
 `
 
-export const AuthWrapper = styled.section`
+export const AuthWrapper = styled(motion.section)`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@ export const AuthWrapper = styled.section`
     height: 100vh;
 `
 
-export const AuthContainer = styled.section`
+export const AuthContainer = styled(motion.section)`
     padding:15px 20px;
     width: ${({large}) => (large ? '800px' : '400px')} ;
     border-radius: 6px;

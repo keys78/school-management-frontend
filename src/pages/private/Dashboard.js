@@ -10,6 +10,7 @@ import { Ghost, Student, UserSwitch, UsersThree } from "phosphor-react";
 import TextEditor from "../../components/TextEditor";
 import axios from 'axios'
 import CountUp from 'react-countup'
+import { pageAnimation } from "../../utils/Animations";
 
 
 
@@ -21,8 +22,6 @@ const Dashboard = ({ user, error }) => {
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('')
 
     const [flipUI, setFlipUI] = useState(true)
-
-
     const [teachersCount, setTeachersCount] = useState(null);
     const [studentsCount, setStudentsCount] = useState(null)
 
@@ -97,10 +96,7 @@ const Dashboard = ({ user, error }) => {
     let [seconds, setSeconds] = useState(0.0)
 
     function clock() {
-      
-        // const hours = document.querySelector(".hours");
-        // const minutes = document.querySelector(".minutes");
-        // const seconds = document.querySelector(".seconds");
+
         setHours(new Date().getHours())
         setMinutes(new Date().getMinutes())
         setSeconds(new Date().getSeconds())
@@ -142,18 +138,15 @@ const Dashboard = ({ user, error }) => {
     ]
 
 
-
-
-
-
-    // return error ? (
-    //     <span className="error-message">{error} <Link to="/login">Login</Link></span>
-    // ) : (
-
     return user ? (
 
         <ContentWrapper>
-            <ContentContainer>
+            <ContentContainer
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
                 {user.role !== 'admin' === flipUI ? (
                     <>
                         <GreetingsMobile>

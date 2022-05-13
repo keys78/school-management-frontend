@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
 
-const Students = ({user, error, searchTerm, setSearchTerm }) => {
+const Students = ({ user, error, searchTerm, setSearchTerm }) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -22,14 +23,14 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
 
             try {
                 const { data } = await axios.get("http://localhost:4000/private/students", config);
-                if(user.role === 'teacher') {
+                if (user.role === 'teacher') {
                     const studentsToTeacher = data.filter(val => val.department === user.department)
                     return setData(studentsToTeacher)
                 } else {
                     setData(data)
                     localStorage.setItem('SD', JSON.stringify(data));
                 }
-                
+
             } catch (error) {
                 console.log(error)
             }
@@ -42,20 +43,25 @@ const Students = ({user, error, searchTerm, setSearchTerm }) => {
         <span className="error-message">{error} <Link to="/login">Login</Link></span>
     ) : (
         <>
-        <ContentWrapper>
-            <ContentContainer>
-                <DataTable tableHeading={tableHeading}
-                    user={user}
-                    tableData={data}
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    data={data}
-                    setData={setData}
-                    url={"http://localhost:4000/private/students"}
-                    tableTitle={'Students'}
-                />
-            </ContentContainer>
-        </ContentWrapper>
+            <ContentWrapper>
+                <ContentContainer
+                    variants={pageAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                >
+                    <DataTable tableHeading={tableHeading}
+                        user={user}
+                        tableData={data}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        data={data}
+                        setData={setData}
+                        url={"http://localhost:4000/private/students"}
+                        tableTitle={'Students'}
+                    />
+                </ContentContainer>
+            </ContentWrapper>
 
         </>
     )

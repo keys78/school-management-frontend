@@ -9,14 +9,20 @@ import { HandPointing, FileArrowUp } from "phosphor-react";
 import ImageUpload from '../../components/ImageUpload';
 import BtnControls from '../../components/BtnControls';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
-const Profile = ({ user, setUser,}) => {
+const Profile = ({ user, setUser, }) => {
 
   return (
     <ContentWrapper>
-      <ContentContainer>
+      <ContentContainer
+        variants={pageAnimation}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <ProfileBox>
           <Formik
             initialValues={{
@@ -61,7 +67,7 @@ const Profile = ({ user, setUser,}) => {
                       <div className='flex items-center justify-between'>
                         <ImageUpload user={user} setUser={setUser} />
                         <div className='max-w-sm'>
-                        <BtnControls icon={<FileArrowUp size={20} color="#61f5eb" weight="bold" />} type={'submit'} text={'Update'}/>
+                          <BtnControls icon={<FileArrowUp size={20} color="#61f5eb" weight="bold" />} type={'submit'} text={'Update'} />
                         </div>
                       </div>
                       <FieldsWrapper>

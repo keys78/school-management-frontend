@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 const ForgotPassword = () => {
   const [error, setError] = useState(false)
@@ -20,10 +21,15 @@ const ForgotPassword = () => {
 
 
   return (
-    <AuthWrapper>
+    <AuthWrapper >
       <div>
         <img onClick={() => history.push('/')} className='w-48 mx-auto mb-8 cursor-pointer' src={'e-school.png'} alt="logo" />
-        <AuthContainer>
+        <AuthContainer
+         variants={pageAnimation}
+         initial="hidden"
+         animate="visible"
+         exit="exit"
+        >
           <Formik
             initialValues={{
               email: '',

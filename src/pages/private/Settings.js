@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { ContentContainer, ContentWrapper } from "../../assets/css/GlobalStyled";
 import TextField from '../../components/TextField';
 import { Formik, Form } from 'formik';
-import {  validateChangePassword } from '../../utils/validateForm';
+import { validateChangePassword } from '../../utils/validateForm';
 import axios from 'axios';
 import Tabs from '../../components/Tabs';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
@@ -18,11 +19,11 @@ const Settings = ({ user }) => {
                 initialValues={{
                     password: '',
                     newPassword: '',
-                    confirmPassword:''
+                    confirmPassword: ''
 
                 }}
                 validationSchema={validateChangePassword}
-                onSubmit={async (values,{setSubmitting, resetForm}) => {
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
 
                     const config = {
                         header: {
@@ -79,7 +80,12 @@ const Settings = ({ user }) => {
 
     return (
         <ContentWrapper>
-            <ContentContainer>
+            <ContentContainer
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
                 <div>
                     <h1 className="profile-header">Settings</h1>
                     <Tabs>

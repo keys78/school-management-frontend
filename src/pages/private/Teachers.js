@@ -14,6 +14,7 @@ import Button from '../../components/Button';
 import BtnControls from '../../components/BtnControls';
 import { PlusCircle } from 'phosphor-react';
 import { toast } from 'react-toastify';
+import { pageAnimation } from '../../utils/Animations';
 
 
 
@@ -54,7 +55,12 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
         <span className="error-message">{error} <Link to="/login">Login</Link></span>
     ) : (
         <ContentWrapper>
-            <ContentContainer>
+            <ContentContainer
+            variants={pageAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            >
                 <div>
                     <div className='flex items-center justify-end'>
                         <div className=''>
