@@ -12,7 +12,6 @@ export const validate = Yup.object({
         .test("DOB", "You must be above 10 years", (value) => { return moment().diff(moment(value), "years") >= 1; }),
     address: Yup.string().required('address is required'),
     soo: Yup.string().required('field cannot be empty'),
-
     password: Yup.string().min(6, 'Password must be at least 6 charaters').required('password is required'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('confirm password is required'),
 })
