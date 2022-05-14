@@ -103,8 +103,8 @@ const Courses = ({ user, setUser }) => {
             };
 
             try {
-                const { data: regCourse } = await axios.post(`http://localhost:4000/private/register-course/${user._id}`, selectedCourse, config);
-                const { data } = await axios.get(`http://localhost:4000/private/user`, config);
+                const { data: regCourse } = await axios.post(`https://my-e-school-api.herokuapp.com/private/register-course/${user._id}`, selectedCourse, config);
+                const { data } = await axios.get(`https://my-e-school-api.herokuapp.com/private/user`, config);
                 if (regCourse) {
                     toast.info('Course registered', { autoClose: 1000 })
                 }

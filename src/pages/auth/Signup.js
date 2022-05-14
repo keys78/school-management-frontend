@@ -53,7 +53,7 @@ const SignUp = () => {
                             }
 
                             try {
-                                const { data } = await axios.post("http://localhost:4000/auth/register",
+                                const { data } = await axios.post("https://my-e-school-api.herokuapp.com/auth/register",
                                     {
                                         ...values,
                                         faculty: faculty,

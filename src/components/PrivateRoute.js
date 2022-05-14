@@ -3,7 +3,6 @@ import { Redirect, Route, useHistory } from "react-router-dom";
 import Layout from "../pages/private/Layout";
 import axios from "axios";
 import styled from 'styled-components'
-import jwt_decode from "jwt-decode";
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -40,7 +39,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
         try {
 
-            const { data } = await axios.get("http://localhost:4000/private/user", config);
+            const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/user", config);
             setUser(data);
 
             console.log(data)

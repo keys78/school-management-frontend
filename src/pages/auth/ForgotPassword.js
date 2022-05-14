@@ -44,7 +44,7 @@ const ForgotPassword = () => {
 
               try {
                 const { data } = await axios.post(
-                  "http://localhost:4000/auth/forgotpassword",
+                  "https://my-e-school-api.herokuapp.com/auth/forgotpassword",
                   { ...values },
                   config
                 );

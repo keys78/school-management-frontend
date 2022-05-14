@@ -43,8 +43,8 @@ const ImageUpload = ({ user, setUser }) => {
             };
 
             try {
-                await axios.post(`http://localhost:4000/private/upload-photo/${user._id}`, data, config);
-                axios.get("http://localhost:4000/private/user", config).then((res) => { setUser(res.data) })
+                await axios.post(`https://my-e-school-api.herokuapp.com/private/upload-photo/${user._id}`, data, config);
+                axios.get("https://my-e-school-api.herokuapp.com/private/user", config).then((res) => { setUser(res.data) })
                 toast.success('Profile Image Updated');
             } catch (error) {
                 console.log(error)

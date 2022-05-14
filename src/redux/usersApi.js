@@ -7,7 +7,7 @@ const usersHeaders = {
     'authorization': `Bearer ${localStorage.getItem("authToken")}`
 };
 
-const baseUrl = 'http://localhost:4000/private';
+const baseUrl = '/private';
 
 const createRequest = (url) => ({ url, headers: usersHeaders})
 

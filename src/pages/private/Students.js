@@ -22,7 +22,7 @@ const Students = ({ user, error, searchTerm, setSearchTerm }) => {
             };
 
             try {
-                const { data } = await axios.get("http://localhost:4000/private/students", config);
+                const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/students", config);
                 if (user.role === 'teacher') {
                     const studentsToTeacher = data.filter(val => val.department === user.department)
                     return setData(studentsToTeacher)
@@ -57,7 +57,7 @@ const Students = ({ user, error, searchTerm, setSearchTerm }) => {
                         setSearchTerm={setSearchTerm}
                         data={data}
                         setData={setData}
-                        url={"http://localhost:4000/private/students"}
+                        url={"https://my-e-school-api.herokuapp.com/private/students"}
                         tableTitle={'Students'}
                     />
                 </ContentContainer>

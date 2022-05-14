@@ -177,7 +177,7 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                         };
 
                         try {
-                            const { data } = await axios.put(`http://localhost:4000/private/update-score/${course._id}`, { ...values }, config);
+                            const { data } = await axios.put(`/private/update-score/${course._id}`, { ...values }, config);
                             fetchAllStudents();
                             data.status && setStatus(value => !value)
 

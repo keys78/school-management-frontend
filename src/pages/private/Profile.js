@@ -47,8 +47,8 @@ const Profile = ({ user, setUser, }) => {
               };
 
               try {
-                await axios.post("http://localhost:4000/private/profile", { ...values, user }, config);
-                const { data } = await axios.get("http://localhost:4000/private/user", config);
+                await axios.post("https://my-e-school-api.herokuapp.com/private/profile", { ...values, user }, config);
+                const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/user", config);
                 toast.success('Profile Updated');
                 setUser(data)
               } catch (error) {

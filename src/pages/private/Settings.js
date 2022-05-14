@@ -32,7 +32,7 @@ const Settings = ({ user }) => {
                     }
 
                     try {
-                        await axios.post(`http://localhost:4000/auth/changepassword/${user._id} `, { ...values, }, config);
+                        await axios.post(`https://my-e-school-api.herokuapp.com/auth/changepassword/${user._id} `, { ...values, }, config);
                         toast.success(`password is updated`)
                     } catch (error) {
                         toast.error(error.response.data.error)

@@ -35,7 +35,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
         };
 
         try {
-            const { data } = await axios.get("http://localhost:4000/private/admin/teachers", config);
+            const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/admin/teachers", config);
             return setData(data);
         } catch (error) {
             console.log(error)
@@ -93,7 +93,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                                 }
 
                                 try {
-                                    const { data } = await axios.post("http://localhost:4000/auth/register-teacher",
+                                    const { data } = await axios.post("/auth/register-teacher",
                                         {
                                             ...values,
                                             level: `${department} lecturer`,
@@ -195,7 +195,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                     <DataTable
                         tableData={data}
                         tableHeading={tableHeading}
-                        url={"http://localhost:4000/private/admin/teachers"}
+                        url={"https://my-e-school-api.herokuapp.com/private/admin/teachers"}
                         searchTerm={searchTerm}
                         setSearchTerm={setSearchTerm}
                         data={data}

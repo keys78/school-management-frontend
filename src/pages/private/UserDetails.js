@@ -37,8 +37,8 @@ const UserDetails = ({ user, setUser }) => {
 
         try {
             let endpoints = [
-                "http://localhost:4000/private/students",
-                "http://localhost:4000/private/admin/teachers"
+                "https://my-e-school-api.herokuapp.com/private/students",
+                "https://my-e-school-api.herokuapp.com/private/admin/teachers"
             ];
 
             axios.all(endpoints.map((endpoint) => axios.get(endpoint, config))).then(
@@ -113,7 +113,7 @@ const UserDetails = ({ user, setUser }) => {
         };
 
         try {
-            const { data } = await axios.delete(`http://localhost:4000/private/admin/delete-user/${userDetails._id}`, config);
+            const { data } = await axios.delete(`https://my-e-school-api.herokuapp.com/private/admin/delete-user/${userDetails._id}`, config);
             if (data.success === true) {
                 alert(data.data)
                 history.goBack();

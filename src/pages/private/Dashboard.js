@@ -53,8 +53,8 @@ const Dashboard = ({ user, error }) => {
 
             try {
                 if (user.role === 'admin') {
-                    const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
-                    const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
+                    const { data: teacherCount } = await axios.get("https://my-e-school-api.herokuapp.com/private/admin/teachers", config);
+                    const { data: studentCount } = await axios.get("https://my-e-school-api.herokuapp.com/private/students", config);
 
                     setTeachersCount(teacherCount)
                     setStudentsCount(studentCount)
@@ -62,7 +62,7 @@ const Dashboard = ({ user, error }) => {
                 }
 
                 if (user.role === 'student') {
-                    const { data: myLecturers } = await axios.get("http://localhost:4000/private/get-teacher-info", config);
+                    const { data: myLecturers } = await axios.get("https://my-e-school-api.herokuapp.com/private/get-teacher-info", config);
                     setMyLecturers(myLecturers)
                 }
 
