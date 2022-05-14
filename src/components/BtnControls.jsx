@@ -1,5 +1,4 @@
 import React from 'react'
-import { UploadSimple } from 'phosphor-react'
 import styled from 'styled-components'
 
 const BtnControls = ({ onClick, text, icon, type }) => {

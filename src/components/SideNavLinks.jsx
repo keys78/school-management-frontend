@@ -6,7 +6,7 @@ import { IconContext, X, Prohibit } from "phosphor-react";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AnimatePresence, motion } from 'framer-motion'
 import { modalVariants } from '../utils/Animations';
-
+import { toast } from 'react-toastify'
 
 const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
     const [activeNavLink, setActiveNavLinks] = useState('');
@@ -60,6 +60,7 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
 
         if (emptyDetails && navLink.title === 'Students' && user.role === 'teacher') {
             setAccessDenied(!accessDenied)
+            window.innerWidth < 1280 && toast.warn(`Hi ${user.firstName},  You need to update your profile first.`)
         }
 
         setActiveNavLinks(i)

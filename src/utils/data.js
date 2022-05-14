@@ -1,4 +1,4 @@
-import dashboardIcon from '../assets/images/ic-dashboard.png'
+
 import {
   Books, Timer, Binoculars, TreeEvergreen,
   User, Student, Book, Users, Gear, ChalkboardSimple, SignOut
@@ -65,6 +65,7 @@ export const facultyArr = [
 ]
 
 export const courseArr = [
+  // clinical sciences
   {
     department: 'Mental Health',
     courses: [
@@ -75,6 +76,131 @@ export const courseArr = [
       { code: 'PSY106', title: "Physcology", score: 0, units: 3 },
       { code: 'PSY104', title: "Introduction to Add-Physcology", score: 0, units: 3 },
       { code: 'PSY104', title: "The Addicted Brain", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Surgery',
+    courses: [
+      { code: 'MBS101', title: "Basic Surgical Skills (Intercollegiate BSS)", score: 0, units: 4 },
+      { code: 'MBS102', title: "Advanced Trauma Life Support", score: 0, units: 4 },
+      { code: 'MBS103', title: "3D for Medicine and Orthopedic Surgery", score: 0, units: 5 },
+      { code: 'NUT107', title: "Nutrition Science", score: 0, units: 3 },
+      { code: 'MBS106', title: "Acute Surgical Care PGCerty", score: 0, units: 3 },
+      { code: 'MBS114', title: "Orthopaedics", score: 0, units: 3 },
+      { code: 'MBS104', title: "Minor Injuries", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Paediatrics and Child Health',
+    courses: [
+      { code: 'PCH101', title: "Basic Child Health", score: 0, units: 4 },
+      { code: 'PCH102', title: "Mum and Baby", score: 0, units: 4 },
+      { code: 'PCH103', title: "The EMT Specialist", score: 0, units: 5 },
+      { code: 'TUT107', title: "Pregnancy Emergency", score: 0, units: 3 },
+      { code: 'PCH106', title: "Hearing Loss In Children", score: 0, units: 3 },
+      { code: 'PCH114', title: "Understanding Adolesencts", score: 0, units: 3 },
+      { code: 'PCH104', title: "Anatomy of Chest, Neck, Abdomen and Pelvis", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Nursing',
+    courses: [
+      { code: 'NUR101', title: "Avoiding Nurse Eliza 101", score: 0, units: 4 },
+      { code: 'NUR102', title: "The Body and Vital Signs", score: 0, units: 4 },
+      { code: 'NUR103', title: "Infecton Prevention In Nursing Homes", score: 0, units: 5 },
+      { code: 'GST107', title: "Introduction to Integrative Nursing", score: 0, units: 3 },
+      { code: 'NUR106', title: "Essentials In Clinical Simlations", score: 0, units: 3 },
+      { code: 'NUR114', title: "Anatomy and Beyond", score: 0, units: 3 },
+      { code: 'NUR104', title: "Clinical Terminologies  for International Students", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Internal Medicine',
+    courses: [
+      { code: 'ITM101', title: "Introducton To Internal Medicine", score: 0, units: 4 },
+      { code: 'ITM102', title: "Useful Vs Dangerous Chemicals", score: 0, units: 4 },
+      { code: 'ITM103', title: "The Covid Sage", score: 0, units: 5 },
+      { code: 'GEN113', title: "Musculoskeletal course ", score: 0, units: 3 },
+      { code: 'ITM106', title: "Medical NueroScience", score: 0, units: 3 },
+      { code: 'ITM114', title: "Foundaton ForInternational Psychiatry", score: 0, units: 3 },
+      { code: 'ITM104', title: "Chinese Medicine", score: 0, units: 2 },
+      { code: 'ITM119', title: "Renal & Endocrine Course", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Obstetrics & Gynaecology',
+    courses: [
+      { code: 'OBG101', title: "Understanding Obstetrics & Gynaecology", score: 0, units: 4 },
+      { code: 'OBG102', title: "Cellular and Molecular Immunology", score: 0, units: 4 },
+      { code: 'OBG103', title: "Family Planning", score: 0, units: 5 },
+      { code: 'GEN113', title: "Urogynecology Advanced Elective", score: 0, units: 3 },
+      { code: 'OBG106', title: "Reproductive Endocrinology", score: 0, units: 3 },
+      { code: 'OBG114', title: "Foundaton ForInternational Psychiatry", score: 0, units: 3 },
+      { code: 'OBG104', title: "Antepartum Obstetrics", score: 0, units: 2 },
+      { code: 'OBG119', title: "Clinical Obstetrics and Gynecology", score: 0, units: 2 },
+    ]
+  },
+
+  // Engineering.. 
+
+  {
+    department: 'Computer Engineering',
+    courses: [
+      { code: 'CEG101', title: "Introduction To Computer Engineering", score: 0, units: 4 },
+      { code: 'CEG102', title: "Artificial Intelligence", score: 0, units: 4 },
+      { code: 'CEG103', title: "Programming and Data Structures", score: 0, units: 5 },
+      { code: 'GEN113', title: "Computing Data Warehousing and Data Mining", score: 0, units: 3 },
+      { code: 'CEG106', title: "Design and Analysis of Algorithms", score: 0, units: 3 },
+      { code: 'CEG114', title: "Advanced Computer Architecture", score: 0, units: 3 },
+      { code: 'CEG104', title: "Computer Networking", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Chemical Engineering',
+    courses: [
+      { code: 'CHE101', title: "Introduction To Bioengineering", score: 0, units: 4 },
+      { code: 'CHE102', title: "Introduction To Biotechnology", score: 0, units: 4 },
+      { code: 'CHE103', title: "Materials Science", score: 0, units: 5 },
+      { code: 'QWP193', title: "Microelectronics", score: 0, units: 3 },
+      { code: 'CHE106', title: "Understanding Nanotechnology", score: 0, units: 3 },
+      { code: 'CHE114', title: "Engineering mechanics", score: 0, units: 3 },
+      { code: 'CHE104', title: "Process Dynamics", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Gas Engineering',
+    courses: [
+      { code: 'GAE101', title: "Fundamentals Of Oil And Gas", score: 0, units: 4 },
+      { code: 'GAE102', title: "Advanced Well and Wireline Test", score: 0, units: 4 },
+      { code: 'GAE103', title: "Applied Drillng", score: 0, units: 5 },
+      { code: 'MOY113', title: "Cathodic Protection System", score: 0, units: 3 },
+      { code: 'GAE106', title: "Clastic Reservoir Characterization", score: 0, units: 3 },
+      { code: 'GAE114', title: "Control & Safety In Oil and Gas Complex", score: 0, units: 3 },
+      { code: 'GAE104', title: "Energy Optimization in Wells", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Environmental Engineering',
+    courses: [
+      { code: 'EVE101', title: "Global Environmental Management", score: 0, units: 4 },
+      { code: 'EVE102', title: "Introduction To Sustainability", score: 0, units: 4 },
+      { code: 'EVE103', title: "Exploring Renewable Energy Schemes", score: 0, units: 5 },
+      { code: 'KNY113', title: "Science & Engineering Of Climate Change", score: 0, units: 3 },
+      { code: 'EVE106', title: "Global Warming I", score: 0, units: 3 },
+      { code: 'EVE114', title: "Global Warming II", score: 0, units: 3 },
+      { code: 'EVE104', title: "GIS Data Formats, Design and Quality", score: 0, units: 2 },
+    ]
+  },
+  {
+    department: 'Mechanical Engineering',
+    courses: [
+      { code: 'MCE101', title: "Introduction To Engineering Mechanics", score: 0, units: 4 },
+      { code: 'MCE102', title: "Introduction To Thermodynamics", score: 0, units: 4 },
+      { code: 'MCE103', title: "Fundamentals Of Fluid Power", score: 0, units: 5 },
+      { code: '00P113', title: "MATLAB Programming", score: 0, units: 3 },
+      { code: 'MCE106', title: "Machine Design Part I", score: 0, units: 3 },
+      { code: 'MCE114', title: "Machine Design Part II", score: 0, units: 3 },
+      { code: 'MCE104', title: "Material Behaviour", score: 0, units: 2 },
     ]
   },
     // pharmaceutical sciences
@@ -240,41 +366,6 @@ export const courseArr = [
     ]
   },
 
-  {
-    department: 'Engineering',
-    courses: [
-      { code: 'ENG101', title: "Introduction To English Oliophogsis and Satuaraton", score: 0, units: 5, status: false },
-      { code: 'ENG102', title: "Eng-2", score: 0, units: 5, status: false }
-    ]
-  },
-  {
-    department: 'Pharmacy',
-    courses: [
-      { code: 'PHRM-101', title: "Pharm-1", score: 0, units: 5 },
-      { code: 'PHRM-102', title: "Pharm-2", score: 0, units: 5 }
-    ]
-  },
-  {
-    department: 'Law',
-    courses: [
-      { code: 'LAW-101', title: "Law-1", score: 0, units: 5 },
-      { code: 'LAW-102', title: "Law-2", score: 0, units: 5 }
-    ]
-  },
-  {
-    department: 'Accounts',
-    courses: [
-      { code: 'ACC-101', title: "Accounts-1", score: 0, units: 5 },
-      { code: 'ACC-102', title: "Accounts-2", score: 0, units: 5 }
-    ]
-  },
-  {
-    department: 'Theater Arts',
-    courses: [
-      { code: 'TRT-101', title: "Theater-1", score: 0, units: 5 },
-      { code: 'TRT-102', title: "Theater-2", score: 0, units: 5 }
-    ]
-  },
 ]
 
 
