@@ -82,7 +82,6 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         }
     }
 
-    // const kk = 
 
     const renderNavLinks = navLinks.map((navLink, i) => (
         navLink.role.includes(user.role)
@@ -90,15 +89,12 @@ const SideNavLinks = ({ user, isNavOpen, setIsNavOpen }) => {
         <motion.div key={i}
             initial={{ opacity: 0, translateY: -50 }}
             animate={{ opacity: 1, translateY: 0 }}
-            transition={{ duration: 0.1, delay: i * 0.2 }}
+            transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.2 }}
         >
             <SingleNav
                 to={validateTeacherRouteAccess(navLink)}
                 onClick={() => navClick({ navLink, i })}
                 activeClassName={emptyDetails && user.role === 'teacher' && navLink.path === '/students'  ? '' : 'routeActive'}
-              
-                
-
             >
                 {altIcon({ navLink, i })}
                 {navLink.title}

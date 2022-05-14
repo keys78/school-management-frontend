@@ -100,7 +100,7 @@ body {
 .danger-btn { all:unset; background:#df4759 !important; border-radius: 5px; padding:6px 20px; color:#fff; cursor: pointer;}
 .reset-btn { all: unset; width: 100%; padding: 7px 0; text-align: center; background: #6729e1 !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 .cancel-btn { all: unset; width: 100%; text-align: center; padding: 6px 0; background:#fa0b0b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
-.export-csv { all: unset; width: 100%; text-align: center; padding: 6px 10px; background:#11ea4b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
+.export-csv { all: unset; width: 100%; white-space: nowrap; text-align: center; padding: 6px 10px; background:#11ea4b !important;  font-size: 16px; border-radius: 5px; color:#fff; font-family: 'Statoshi-regular'; cursor: pointer;}
 
 .button-gen { padding:4px 8px; border-radius: 5px; border: 1px solid black; width: 100%;}
 
@@ -337,7 +337,7 @@ top: 95%;
   .gender-label { margin-bottom: 0; }
   .soo-adjust { margin-top: 7px;}
   .dept-teacher-adjust { margin-top: -20px;}
-  .export-csv { font-size: 13px; padding: 6px;}
+  .export-csv { font-size: 13px; padding: 4px;}
  
 
 }

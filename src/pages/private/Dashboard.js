@@ -24,6 +24,7 @@ const Dashboard = ({ user, error }) => {
     const [flipUI, setFlipUI] = useState(true)
     const [teachersCount, setTeachersCount] = useState(null);
     const [studentsCount, setStudentsCount] = useState(null)
+    const [myLecturers, setMyLecturers] = useState([])
 
 
 
@@ -51,13 +52,18 @@ const Dashboard = ({ user, error }) => {
             };
 
             try {
-                if (user.role === 'admin' || user.role === 'student') {
+                if (user.role === 'admin') {
                     const { data: teacherCount } = await axios.get("http://localhost:4000/private/admin/teachers", config);
                     const { data: studentCount } = await axios.get("http://localhost:4000/private/students", config);
 
                     setTeachersCount(teacherCount)
                     setStudentsCount(studentCount)
 
+                }
+
+                if (user.role === 'student') {
+                    const { data: myLecturers } = await axios.get("http://localhost:4000/private/get-teacher-info", config);
+                    setMyLecturers(myLecturers)
                 }
 
             } catch (error) {
@@ -69,8 +75,13 @@ const Dashboard = ({ user, error }) => {
     }, [user]);
 
 
-    // const renderMyLetcurers = teachersCount && teachersCount.filter(val => val.department === user.department)
-    // console.log(renderMyLetcurers)
+    const renderMyLetcurers = myLecturers && myLecturers.filter(val => val.department === user.department)
+    const lecturerList = renderMyLetcurers.map((val, i) => (
+        <div key={i}>
+            <p> {val.firstName}  {val.lastName} </p>
+        </div>
+    ))
+
 
     const myNews = newsApi?.articles
     const renderNews = myNews && myNews.map((news, i) => (
@@ -200,9 +211,17 @@ const Dashboard = ({ user, error }) => {
                                 </div>
 
                                 <NewsBoxContainer>
-                                    <h1>News</h1>
-                                    {isLoading && 'Loading...'}
-                                    {newsApi.length < 0 ? renderNews : "No news available, Your news activities would show up here when you have one"}
+                                    <div>
+                                        <h1>News</h1>
+                                        {isLoading && 'Loading...'}
+                                        {newsApi.length < 0 ? renderNews : "No news available, Your news activities would show up here when you have one"}
+                                    </div>
+                                    {user.role === "student" &&
+                                        <div>
+                                            <h1>My Lecturers</h1>
+                                            {myLecturers.length === 0 ? 'No Lecturer(s) assigned to your courses yet' : lecturerList}
+                                        </div>
+                                    }
                                 </NewsBoxContainer>
                             </DisplayPattern>
                         }
@@ -468,6 +487,7 @@ const DisplayPattern = styled.div`
 
         @media screen and (max-width: 400px){
             margin-top:10px ;
+            min-height:0 ;
         }
     }
 `
@@ -492,7 +512,16 @@ const NewsBox = styled.div`
 `
 
 const NewsBoxContainer = styled.div`
+    display:flex ;
+    & > div:nth-of-type(2) { min-width:300px; border-left: 1px solid #ECECEC; padding: 0 10px 10px 10px !important;
+        @media screen and (max-width: 600px){ border: none;}; margin: 12px 0 ;
+    }
+    & > div:nth-of-type(2) div p { padding:4px; background: #F5F5F5; border-radius: 5px; margin-bottom: 4px; }
     & > h1 { font-weight: 500; font-size: 18px; padding-bottom: 5px;}
+
+    @media screen and (max-width: 600px){
+        flex-direction: column-reverse;
+ }
 `
 
 const LessonBoxContainer = styled.div`

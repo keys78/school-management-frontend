@@ -11,12 +11,28 @@ import { DotsThreeOutlineVertical, Article } from 'phosphor-react'
 import Scorebtn from './Scorebtn';
 import { CSVLink } from 'react-csv'
 import Spreadsheet from './Spreadsheet';
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import Pagination from './Pagination';
 
 
 
 export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle, data }) => {
     const csvLink = { data: tableData, filename: "e-school.file.csv" }
+    const [currentPage, setCurrentPage] = useState(1);
+    const [usersPerPage, setUsersPerPage] = useState(10);
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = tableData && tableData.slice(indexOfFirstUser, indexOfLastUser)
+    const totalPages = tableData && tableData.length / usersPerPage
+
+    const prev = () => {
+        currentPage <= 1 ? setCurrentPage(currentPage) : setCurrentPage(currentPage - 1)
+    }
+
+    const next = () => {
+        currentPage < totalPages && setCurrentPage(currentPage + 1)
+    }
+
     const history = useHistory();
     const fetchAllStudents = async () => {
         const config = {
@@ -64,8 +80,16 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
         <TableHeads key={i}>{table.title}</TableHeads>
     ))
 
-    const renderAllStudents = tableData && tableData.map((val, i) => (
-        <CustomTableRow onClick={() => moreDetails(val)} key={i}>
+    const renderAllStudents = tableData && currentUsers.map((val, i) => (
+        <CustomTableRow
+            onClick={() => moreDetails(val)}
+            key={i}
+            initial={{ opacity: 0, translateX: -50 }}
+            animate={{ opacity: 1, translateX: 0 }}
+            transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.1 }}
+            
+
+        >
             <TableData> {1 + i} </TableData>
             <TableData> {val.firstName} </TableData>
             <TableData> {val.lastName}  </TableData>
@@ -104,6 +128,15 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>
+            <Pagination
+                usersPerPage={usersPerPage}
+                totalUsers={tableData && tableData.length}
+                currentPage={currentPage}
+                first={indexOfFirstUser}
+                last={indexOfLastUser}
+                previousPage={prev}
+                nextPage={next}
+            />
         </TableWrapper>
     )
 }
@@ -198,9 +231,9 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
                 : <span className='p-4'>{tableData.firstName} have no courses registered yet</span>
             }
             <AnimatePresence>
-                            {isSpreadSheet && <Spreadsheet allCourses={tableData.courses} user={tableData} setIsSpreadSheet={setIsSpreadSheet} />}
-                        </AnimatePresence>
-           
+                {isSpreadSheet && <Spreadsheet allCourses={tableData.courses} user={tableData} setIsSpreadSheet={setIsSpreadSheet} />}
+            </AnimatePresence>
+
         </TableWrapper>
     )
 }
@@ -216,7 +249,6 @@ const TableWrapper = styled.section`
 
     @media screen and (max-width: 640px){
         box-shadow: none;
-        /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
     }
 
 `
@@ -241,7 +273,7 @@ const CustomTableHead = styled.thead`
     background: #072038;
    
 `
-const CustomTableRow = styled.tr`
+const CustomTableRow = styled(motion.tr)`
     width: 100%; cursor:pointer ; border-bottom: 1px solid #95999b3c;
 
 `
