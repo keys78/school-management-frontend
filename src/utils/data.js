@@ -451,6 +451,7 @@ export const tableAcademics = [
   { title: "S/N" },
   { title: "Code" },
   { title: "Title" },
+  { title: "Letter Grade" },
   { title: "Score", show: false, },
   { title: "Units" }
 ]

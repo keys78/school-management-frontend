@@ -52,7 +52,9 @@ const SignUp = () => {
                                 },
                             }
 
+                            const id = toast.loading("Signing In...")
                             try {
+                                
                                 const { data } = await axios.post("https://my-e-school-api.herokuapp.com/auth/register",
                                     {
                                         ...values,
@@ -62,11 +64,11 @@ const SignUp = () => {
 
                                     , config);
                                 localStorage.setItem("authToken", data.token);
-                                toast.success('Sign In Success', {autoClose:2000});
+                                toast.update(id, {render: "Sign In Success", type: "success", isLoading: false, autoClose: 2000});
                                 history.push("/dashboard");
 
                             } catch (error) {
-                                toast.error(error.response.data.error);
+                                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
                             }
                         }}
                     >

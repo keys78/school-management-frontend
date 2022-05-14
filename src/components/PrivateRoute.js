@@ -42,7 +42,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/user", config);
             setUser(data);
 
-            console.log(data)
         } catch (error) {
             localStorage.removeItem("authToken");
             setError(`session expired please `);

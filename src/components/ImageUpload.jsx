@@ -72,7 +72,8 @@ const ImageUpload = ({ user, setUser }) => {
                 <input id='input-file' accept="image/*" type='file' onChange={(e) => imageHandler(e)} />
             </div>
 
-            <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={uploadImage} text={'Save'} />
+            {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} /> */}
+            <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={() => toast.info('Cloudinary Update, Try again later')} text={'Save'} />
             <br/>
 
             <AnimatePresence>

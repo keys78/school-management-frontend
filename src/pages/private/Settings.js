@@ -31,11 +31,13 @@ const Settings = ({ user }) => {
                         },
                     }
 
+                    const id = toast.loading('Updating...')
                     try {
                         await axios.post(`https://my-e-school-api.herokuapp.com/auth/changepassword/${user._id} `, { ...values, }, config);
-                        toast.success(`password is updated`)
+                        toast.update(id, { render:'password is updated', type:"success", isLoading: false, autoClose: 1000} );
+
                     } catch (error) {
-                        toast.error(error.response.data.error)
+                        toast.update(id, { render: error.response.data.error, type:"error", isLoading: false, autoClose: 1000} );
                     }
                     resetForm();
                 }}

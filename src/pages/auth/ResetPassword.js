@@ -44,18 +44,18 @@ const ForgotPassword = ({ match }) => {
                 },
               };
 
+              const id = toast.loading("Logging data...")
               try {
                 const { data } = await axios.put(
-                  `/auth/resetpassword/${match.params.resetToken}`,
+                  `https://my-e-school-api.herokuapp.com/auth/resetpassword/${match.params.resetToken}`,
                   { ...values },
                   config
                 );
 
-                toast.success(data.data)
-                setSuccess(!success)
-                alert(data.data)
+                toast.update(id, {render: data.data, type: "success", isLoading: false, autoClose: 2000});
+                history.push('/login')
               } catch (error) {
-                toast.error(error.response.data.error);
+                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
               }
               resetForm();
             }}

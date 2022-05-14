@@ -28,6 +28,7 @@ const Courses = ({ user, setUser }) => {
             <TableData>{i + 1}</TableData>
             <TableData>{course.code}</TableData>
             <TableData className="title-field">{course.title}</TableData>
+            <TableData>{course.letterGrade}</TableData>
             <TableData className={`${course.score >= 70 ? 'score-green' : (course.score >= 60) ? 'score-blue' : (course.score <= 45) ? 'score-red' : ''}`}>{course.score}</TableData>
             <TableData>{course.units}</TableData>
         </CustomTableRow>
@@ -88,7 +89,7 @@ const Courses = ({ user, setUser }) => {
             status: true
         }
 
-        console.log(selectedCourse)
+        // console.log(selectedCourse)
 
         const checkDuplicate = allCourses.find(el => el.code === selectedCourse.code)
         if (checkDuplicate) {
@@ -164,10 +165,6 @@ const Courses = ({ user, setUser }) => {
                                             </CustomTable>
                                         </TableAdjustMobile>
                                     </TableWrapper>
-                                    {/* <div>
-                                        <button >Cancel</button>
-                                        <button onClick={confirmCourseReg}>Done</button>
-                                    </div> */}
                                 </FormBox>
 
                             </E_Modal>

@@ -20,7 +20,6 @@ export const ContentContainer = styled(motion.section)`
     width: 90%;
     margin-top: 90px;
     margin-bottom: 10px;
-    border:2px solid red;
 
     @media screen and (max-width: 1280px){
       margin-top: 115px;

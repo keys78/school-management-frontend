@@ -219,7 +219,7 @@ const Dashboard = ({ user, error }) => {
                                     {user.role === "student" &&
                                         <div>
                                             <h1>My Lecturers</h1>
-                                            {myLecturers.length === 0 ? 'No Lecturer(s) assigned to your courses yet' : lecturerList}
+                                            {lecturerList.length <= 0 ? 'No Lecturer(s) assigned to your courses yet' : lecturerList}
                                         </div>
                                     }
                                 </NewsBoxContainer>

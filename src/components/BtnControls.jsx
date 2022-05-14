@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const BtnControls = ({ onClick, text, icon, type }) => {
+const BtnControls = ({ onClick, text, icon, type, disabled }) => {
     return (
-        <ButtonCtrl type={type} onClick={onClick} className="space-x-2">
+        <ButtonCtrl disabled={disabled} type={type} onClick={onClick} className="space-x-2">
             <span>{icon}</span>
             <span>{text}</span>
         </ButtonCtrl>

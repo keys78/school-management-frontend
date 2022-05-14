@@ -91,9 +91,10 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                                     },
                                 }
-
+                                 
+                                const id = toast.loading('Registering...')
                                 try {
-                                    const { data } = await axios.post("/auth/register-teacher",
+                                    const { data } = await axios.post("https://my-e-school-api.herokuapp.com/auth/register-teacher",
                                         {
                                             ...values,
                                             level: `${department} lecturer`,
@@ -105,14 +106,14 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                                     fetchData();
 
                                     if (data.success === true) {
-                                        toast.success(`${data?.data} is now a staff`)
+                                        toast.success()
+                                        toast.update(id, {render: `${data?.data} is now a staff`, type: "success", isLoading: false, autoClose: 2000});
                                         setIsOpen(false)
 
                                     }
 
-
                                 } catch (error) {
-                                    toast.error(error.response.data.error);
+                                    toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
                                 }
                                 resetForm();
                             }}

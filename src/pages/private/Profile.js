@@ -46,14 +46,18 @@ const Profile = ({ user, setUser, }) => {
                 },
               };
 
+              const id = toast.loading("Updating...")
               try {
+               
                 await axios.post("https://my-e-school-api.herokuapp.com/private/profile", { ...values, user }, config);
                 const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/user", config);
-                toast.success('Profile Updated');
                 setUser(data)
+                toast.update(id, { render:'Profile Updated', type:"success", isLoading: false, autoClose: 1000} );
+                
               } catch (error) {
                 console.log(error)
-                toast.error(error);
+                toast.update(id, {render: error, type: "error", isLoading: false, autoClose: 2000});
+
               }
             }}
           >
@@ -96,9 +100,6 @@ const Profile = ({ user, setUser, }) => {
                           <TextField profile editIcon={<HandPointing size={20} color="#08546d" />} label={'Address'} name={'address'} type={'text'} />
                         </div>
                       </FieldsWrapper>
-                      {/* <ButtonHolder className='w-100 mx-auto text-right border'>
-                        <Button type='submit' text={'Update Profile'} color={'text-white'} padding={'py-2'} width={'w-4/12'} />
-                      </ButtonHolder> */}
                     </Form>
                   </div>
                 </UpdateProfile>

@@ -10,9 +10,7 @@ import { toast } from 'react-toastify';
 import { pageAnimation } from '../../utils/Animations';
 
 const ForgotPassword = () => {
-  const [error, setError] = useState(false)
   const history = useHistory();
-  const [success, setSuccess] = useState("");
 
 
   const validate = Yup.object({
@@ -42,6 +40,7 @@ const ForgotPassword = () => {
                 },
               };
 
+              const id = toast.loading("Connecting...")
               try {
                 const { data } = await axios.post(
                   "https://my-e-school-api.herokuapp.com/auth/forgotpassword",
@@ -49,9 +48,9 @@ const ForgotPassword = () => {
                   config
                 );
 
-                toast.success(data.data);
+                toast.update(id, {render: data.data, type: "success", isLoading: false, autoClose: 2000});
               } catch (error) {
-                toast.error(error.response.data.error);
+                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 6000});
               }
               resetForm();
             }}

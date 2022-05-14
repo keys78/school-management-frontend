@@ -50,18 +50,19 @@ const Login = () => {
                 },
               };
 
+              const id = toast.loading("Logging data...")
               try {
                 const { data } = await axios.post(
                   "https://my-e-school-api.herokuapp.com/auth/login",
                   { ...values },
                   config
                 );
-                toast.success('Login Successful', {autoClose:2000});
+                toast.update(id, {render: "Logging Successful", type: "success", isLoading: false, autoClose: 2000});
                 localStorage.setItem("authToken", data.token);
                 history.push("/dashboard");
                 
               } catch (error) {
-                toast.error(error.response.data.error);
+                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
               }
             }}
           >

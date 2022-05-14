@@ -5,14 +5,17 @@ import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/Globa
 import Button from '../../components/Button';
 import { Copy, Check} from 'phosphor-react';
 import { pageAnimation } from '../../utils/Animations';
+import { toast } from 'react-toastify'
 
 const ConfrmRegNo = ({ value, regno, setRegNo, setValue }) => {
     const [copyRegNo, setcopyRegNo] = useState(<Copy size={20} color="#46ecd8" weight="bold" />)
     const history = useHistory()
 
     const verifyRegNo = (e) => {
+
         if (regno.toString() === value) {
             history.push("/signup");
+            toast.success('Verification Success', { autoClose: 500})
         } else {
             alert('Sorry, Reg No does not exist!')
             history.push("/");

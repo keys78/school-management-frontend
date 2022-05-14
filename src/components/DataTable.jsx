@@ -158,8 +158,8 @@ export const DataTableAcademics = ({ fetchAllStudents, tableData, tableHeading, 
         <CustomTableRow key={i} className='no-pointer'>
             <TableData> {1 + i} </TableData>
             <TableData>{course.code}</TableData>
-            <TableData>{course.letterGrade}</TableData>
             <TableData className="title-field">{course.title}</TableData>
+            <TableData>{course.letterGrade}</TableData>
             <TableData>
                 <Formik
                     initialValues={{
