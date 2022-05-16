@@ -71,9 +71,12 @@ const ImageUpload = ({ user, setUser }) => {
                 </label>
                 <input id='input-file' accept="image/*" type='file' onChange={(e) => imageHandler(e)} />
             </div>
-
-            {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} /> */}
-            <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={() => toast.info('Cloudinary Update, Try again later')} text={'Save'} />
+ {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} /> */}
+            {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={() => toast.info('Cloudinary Update, Try again later')} text={'Save'} /> */}
+            <TestBtn className="space-x-3" onClick={() => toast.info('Cloudinary Update, Try again later')}>
+                {<UploadSimple size={20} color="#61f5eb" weight="bold" />}
+                <span>Save</span>
+            </TestBtn>
             <br/>
 
             <AnimatePresence>
@@ -109,6 +112,36 @@ const DisplayImage = styled.div`
     @media screen and (max-width: 600px){
         width:80px; height:80px;
     }
+`
+
+const TestBtn = styled.div`
+     background: -webkit-linear-gradient(to right, #606c88, #3f4c6b); 
+    background: linear-gradient(to right, #606c88, #3f4c6b); 
+    padding: 5px 17px;
+    color:#fff;
+    border: 1px solid #b6b6b66e;
+    transition:0.4s ;
+    border-radius:5px ;
+    display:flex ;
+    align-items: center;
+    justify-content:center ;
+    width:100% ;
+    cursor: pointer;
+
+    & > span:nth-of-type(1) {
+        transition: 0.4s ;
+    }
+
+    &:hover {
+        background: linear-gradient(to right, #2c4683, #262931);
+        transition:0.4s ;
+
+        & > span:nth-of-type(1) {
+            transform: scale(1.2);
+            transition:0.4s ;
+        }
+    }
+
 `
 
 export default ImageUpload;
