@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className='flex items-center gap-8 pt-8 pb-4'>
                     <h1>CONNECT WITH US</h1>
                     <div className='flex gap-6 opactity-40' >
-                        <a href='https://twitter.com/Emmy31087589' target={'_blank'} referrerPolicy={'no-referrer'}><TwitterLogo size={22} color="#ededed" weight="bold" /></a>
+                        <a ref={'no_refferrer'} href='https://twitter.com/Emmy31087589' target={'_blank'} referrerPolicy={'no-referrer'}><TwitterLogo size={22} color="#ededed" weight="bold" /></a>
                         <a href='https://github.com/Em-codes/school-management-frontend' target={'_blank'} referrerPolicy={'no-referrer'}><GithubLogo size={22} color="#ededed" weight="bold" /></a>
                         <a href='https://www.linkedin.com/in/tochi-emma-904b71220/' target={'_blank'} referrerPolicy={'no-referrer'}><LinkedinLogo size={22} color="#ededed" weight="bold" /></a>
                     </div>
