@@ -6,7 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import { validateCreateTeacher } from '../../utils/validateForm';
 import { modalVariantsVertical } from '../../utils/Animations';
 import { AnimatePresence, motion } from 'framer-motion'
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { facultyArr, tableHeading } from '../../utils/data';
 import { DataTable } from '../../components/DataTable';
@@ -23,6 +23,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
     const [faculty, setFacu] = useState('')
     const [department, setDep] = useState('')
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -35,9 +36,13 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
         };
 
         try {
+            setLoading(true)
             const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/admin/teachers", config);
+            setLoading(false)
             return setData(data);
+           
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     };
@@ -56,10 +61,10 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
     ) : (
         <ContentWrapper>
             <ContentContainer
-            variants={pageAnimation}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
             >
                 <div>
                     <div className='flex items-center justify-end'>
@@ -91,7 +96,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                                     },
                                 }
-                                 
+
                                 const id = toast.loading('Registering...')
                                 try {
                                     const { data } = await axios.post("https://my-e-school-api.herokuapp.com/auth/register-teacher",
@@ -107,13 +112,13 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
 
                                     if (data.success === true) {
                                         toast.success()
-                                        toast.update(id, {render: `${data?.data} is now a staff`, type: "success", isLoading: false, autoClose: 2000});
+                                        toast.update(id, { render: `${data?.data} is now a staff`, type: "success", isLoading: false, autoClose: 2000 });
                                         setIsOpen(false)
 
                                     }
 
                                 } catch (error) {
-                                    toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
+                                    toast.update(id, { render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000 });
                                 }
                                 resetForm();
                             }}
@@ -202,6 +207,7 @@ const Teachers = ({ searchTerm, setSearchTerm }) => {
                         data={data}
                         setData={setData}
                         tableTitle={'Lecturers'}
+                        loading={loading}
                     />
                 </div>
             </ContentContainer>

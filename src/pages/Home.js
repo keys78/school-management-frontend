@@ -22,8 +22,8 @@ const Home = () => {
 
   return (
     <>
-      {isPageLoader ?
-        <LoadingScreen /> : (
+      {/* {isPageLoader ?
+        <LoadingScreen /> : ( */}
           <BodyContainer>
             <PublicNav />
             <Hero />
@@ -31,7 +31,7 @@ const Home = () => {
             <Footer />
 
           </BodyContainer>
-        )}
+        {/* )} */}
     </>
   )
 }

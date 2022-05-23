@@ -11,6 +11,7 @@ import { pageAnimation } from '../../utils/Animations';
 
 const Students = ({ user, error, searchTerm, setSearchTerm }) => {
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,6 +23,7 @@ const Students = ({ user, error, searchTerm, setSearchTerm }) => {
             };
 
             try {
+                setLoading(true)
                 const { data } = await axios.get("https://my-e-school-api.herokuapp.com/private/students", config);
                 if (user.role === 'teacher') {
                     const studentsToTeacher = data.filter(val => val.department === user.department)
@@ -30,8 +32,10 @@ const Students = ({ user, error, searchTerm, setSearchTerm }) => {
                     setData(data)
                     localStorage.setItem('SD', JSON.stringify(data));
                 }
+                setLoading(false)
 
             } catch (error) {
+                setData(false)
                 console.log(error)
             }
         };
@@ -59,6 +63,7 @@ const Students = ({ user, error, searchTerm, setSearchTerm }) => {
                         setData={setData}
                         url={"https://my-e-school-api.herokuapp.com/private/students"}
                         tableTitle={'Students'}
+                        loading={loading}
                     />
                 </ContentContainer>
             </ContentWrapper>

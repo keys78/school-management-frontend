@@ -16,7 +16,7 @@ import Pagination from './Pagination';
 
 
 
-export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle, data }) => {
+export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearchTerm, setData, url, tableTitle, data, loading }) => {
     const csvLink = { data: tableData, filename: "e-school.file.csv" }
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(10);
@@ -87,7 +87,7 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
             initial={{ opacity: 0, translateX: -50 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.1 }}
-            
+
 
         >
             <TableData> {1 + i} </TableData>
@@ -124,7 +124,8 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
                         </tr>
                     </CustomTableHead>
                     <tbody className='w-full'>
-                        {tableData.length === 0 ? <span className='text-center  pl-1'>No data available</span> : renderAllStudents}
+                        {loading && <span className='text-center  pl-3'> loading... </span>}
+                        {!loading && tableData.length === 0 ? <span className='text-center  pl-1'>No data available</span> : renderAllStudents}
                     </tbody>
                 </CustomTable>
             </TableAdjustMobile>
