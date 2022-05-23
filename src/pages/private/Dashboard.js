@@ -239,7 +239,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><Student size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1><CountUp end={studentsCount ? studentsCount.length : 0} duration={2} /></h1>
+                                        <h1><CountUp end={studentsCount ? studentsCount.length : 0} duration={0.5} /></h1>
                                         <p>Students</p>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UserSwitch size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1><CountUp end={teachersCount ? teachersCount.length : 0} duration={2} /> </h1>
+                                        <h1><CountUp end={teachersCount ? teachersCount.length : 0} duration={0.5} /> </h1>
                                         <p>Lecturers</p>
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@ const Dashboard = ({ user, error }) => {
                                 <div className="single-card">
                                     <div><UsersThree size={30} color="#e52e2e" weight="bold" /></div>
                                     <div>
-                                        <h1><CountUp end={studentsCount && teachersCount ? studentsCount.length + teachersCount.length : 0} duration={2} /> </h1>
+                                        <h1><CountUp end={studentsCount && teachersCount ? studentsCount.length + teachersCount.length : 0} duration={0.5} /> </h1>
                                         <p>Total Users</p>
                                     </div>
                                 </div>

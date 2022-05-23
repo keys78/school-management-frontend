@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useLocation, matchPath } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
@@ -21,7 +21,7 @@ import { AnimatePresence } from 'framer-motion'
 
 
 
-const App = () => {
+const App = ({matchPath}) => {
   const location = useLocation()
   const [value, setValue] = useState(undefined)
   const [regno, setRegNo] = useState('')
@@ -29,15 +29,15 @@ const App = () => {
 
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
-        <ToastContainer limit={3} />
-        <Switch location={location} key={location.path}
+      <AnimatePresence exitBeforeEnter={false} >
+        <ToastContainer limit={1} />
+        <Switch location={location} key={matchPath}
         >
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute exact path="/courses" component={Courses} />
           <PrivateRoute exact path="/students" component={Students} />
-          <PrivateRoute path="/students/student/:id" component={UserDetails} />
+          <PrivateRoute exact path="/students/student/:id" component={UserDetails} />
           <PrivateRoute exact path="/lecturers" component={Teachers} />
           <PrivateRoute path="/lecturers/lecturer/:id" component={UserDetails} />
           <PrivateRoute exact path="/settings" component={Settings} />

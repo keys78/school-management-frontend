@@ -119,7 +119,7 @@ const SignUp = () => {
                                             </label>
 
                                             <label className='select-label' htmlFor="dept">Department
-                                                <CustomSelect required name="dept" onChange={(e) => { setDep(e.target.value) }}  >
+                                                <CustomSelect defaultValue={department === undefined ? '' : department} required name="dept" onChange={(e) => { setDep(e.target.value) }}  >
                                                     <option disabled value="">Select Department</option>
                                                     {faculty && facultyArr.find(y => y.faculty === faculty).departments.map(depts =>
                                                         <option value={depts.department}>{depts.department}</option>
