@@ -48,9 +48,9 @@ const ForgotPassword = () => {
                   config
                 );
 
-                toast.update(id, {render: data.data, type: "success", isLoading: false, autoClose: 2000});
+                toast.update(id, {render: data.data, type: "success", isLoading: false, autoClose: 6000});
               } catch (error) {
-                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 6000});
+                toast.update(id, {render: error.response.data.error, type: "error", isLoading: false, autoClose: 2000});
               }
               resetForm();
             }}

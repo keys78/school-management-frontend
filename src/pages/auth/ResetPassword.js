@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form } from 'formik';
 import TextField from '../../components/TextField';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContainer, AuthWrapper, ItemsWrapper } from '../../assets/css/GlobalStyled';
 import Button from '../../components/Button';
@@ -12,7 +11,6 @@ import { pageAnimation } from '../../utils/Animations';
 
 const ForgotPassword = ({ match }) => {
   const history = useHistory();
-  const [success, setSuccess] = useState(false);
 
 
   const validate = Yup.object({
@@ -47,7 +45,7 @@ const ForgotPassword = ({ match }) => {
               const id = toast.loading("Logging data...")
               try {
                 const { data } = await axios.put(
-                  `https://my-e-school-api.herokuapp.com/auth/resetpassword/${match.params.resetToken}`,
+                  `/auth/resetpassword/${match.params.resetToken}`,
                   { ...values },
                   config
                 );
@@ -62,11 +60,6 @@ const ForgotPassword = ({ match }) => {
           >
             {formik => (
               <ItemsWrapper>
-                {success && (
-                  <span className="success-message">
-                    {success} <Link to="/login">Login</Link>
-                  </span>
-                )}
                 <h1>Reset Password</h1>
                 <span className="text-xs mb-12">
                 </span>
