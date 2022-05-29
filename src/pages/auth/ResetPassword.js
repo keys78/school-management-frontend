@@ -45,7 +45,7 @@ const ForgotPassword = ({ match }) => {
               const id = toast.loading("Logging data...")
               try {
                 const { data } = await axios.put(
-                  `/auth/resetpassword/${match.params.resetToken}`,
+                  `https://my-e-school-api.herokuapp.com/auth/resetpassword/${match.params.resetToken}`,
                   { ...values },
                   config
                 );
