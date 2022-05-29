@@ -113,6 +113,7 @@ const Initials = styled.div`
   text-align:center ;
   min-width:34px ;
   border-radius: 5px;
+  text-transform: uppercase ;
 `
 const RoleTag = styled.div`
   padding:4px 10px;

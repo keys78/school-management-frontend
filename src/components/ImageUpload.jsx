@@ -34,19 +34,24 @@ const ImageUpload = ({ user, setUser }) => {
             toast.warn('You need to select a file', {autoClose:1500})
         } else {
             const data = new FormData()
-            data.append('file', singleFile)
+            data.append('profileImage', singleFile)
             const config = {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             };
-
+            
+            const id = toast.loading("uploading...")
             try {
+                
                 await axios.post(`https://my-e-school-api.herokuapp.com/private/upload-photo/${user._id}`, data, config);
                 axios.get("https://my-e-school-api.herokuapp.com/private/user", config).then((res) => { setUser(res.data) })
-                toast.success('Profile Image Updated');
+
+                toast.update(id, {render: "Profile image upload successful", type: "success", isLoading: false, autoClose: 2000});
+
             } catch (error) {
+                toast.update(id, {render: error.response, type: "error", isLoading: false, autoClose: 2000});
                 console.log(error)
             }
         }
@@ -71,12 +76,12 @@ const ImageUpload = ({ user, setUser }) => {
                 </label>
                 <input id='input-file' accept="image/*" type='file' onChange={(e) => imageHandler(e)} />
             </div>
- {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} /> */}
+ <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} />
             {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={() => toast.info('Cloudinary Update, Try again later')} text={'Save'} /> */}
-            <TestBtn className="space-x-3" onClick={() => toast.info('Cloudinary Update, Try again later')}>
+            {/* <TestBtn className="space-x-3" onClick={() => toast.info('Cloudinary Update, Try again later')}>
                 {<UploadSimple size={20} color="#61f5eb" weight="bold" />}
                 <span>Save</span>
-            </TestBtn>
+            </TestBtn> */}
             <br/>
 
             <AnimatePresence>
