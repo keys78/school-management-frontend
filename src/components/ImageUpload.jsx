@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
-import { CloudArrowUp, X, UploadSimple } from 'phosphor-react';
+import {  X, UploadSimple, Camera } from 'phosphor-react';
 import styled from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 import { zoomOutVariants } from '../utils/Animations';
@@ -27,11 +27,10 @@ const ImageUpload = ({ user, setUser }) => {
     };
 
 
-
     const uploadImage = async (e) => {
         e.preventDefault()
         if (singleFile === "") {
-            toast.warn('You need to select a file', {autoClose:1500})
+            toast.warn('You need to select a file', { autoClose: 1500 })
         } else {
             const data = new FormData()
             data.append('profileImage', singleFile)
@@ -41,17 +40,17 @@ const ImageUpload = ({ user, setUser }) => {
                     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             };
-            
+
             const id = toast.loading("uploading...")
             try {
-                
+
                 await axios.post(`https://my-e-school-api.herokuapp.com/private/upload-photo/${user._id}`, data, config);
                 axios.get("https://my-e-school-api.herokuapp.com/private/user", config).then((res) => { setUser(res.data) })
 
-                toast.update(id, {render: "Profile image upload successful", type: "success", isLoading: false, autoClose: 2000});
+                toast.update(id, { render: "Profile image upload successful", type: "success", isLoading: false, autoClose: 2000 });
 
             } catch (error) {
-                toast.update(id, {render: error.response, type: "error", isLoading: false, autoClose: 2000});
+                toast.update(id, { render: error.response, type: "error", isLoading: false, autoClose: 2000 });
                 console.log(error)
             }
         }
@@ -67,22 +66,18 @@ const ImageUpload = ({ user, setUser }) => {
     return (
         <ImageUploadWrapper>
 
-            <DisplayImage  className='mt-4'>
+            <DisplayImage className='mt-4'>
                 <img src={profileImg} alt="Profile Image" onClick={() => setIsZoomed(!isZoomed)} />
             </DisplayImage>
             <div className='file'>
                 <label htmlFor='input-file'>
-                    <CloudArrowUp size={20} color="#1f5fe0" weight="bold" />
+                    <Camera size={20} color="#1f5fe0" />
                 </label>
                 <input id='input-file' accept="image/*" type='file' onChange={(e) => imageHandler(e)} />
             </div>
- <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} />
-            {/* <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={() => toast.info('Cloudinary Update, Try again later')} text={'Save'} /> */}
-            {/* <TestBtn className="space-x-3" onClick={() => toast.info('Cloudinary Update, Try again later')}>
-                {<UploadSimple size={20} color="#61f5eb" weight="bold" />}
-                <span>Save</span>
-            </TestBtn> */}
-            <br/>
+            <BtnControls icon={<UploadSimple size={20} color="#61f5eb" weight="bold" />} onClick={(e) => uploadImage(e)} text={'Save'} />
+
+            <br />
 
             <AnimatePresence>
                 {isZoomed &&

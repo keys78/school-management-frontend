@@ -22,11 +22,11 @@ const Hero = () => {
             logo: true,
             text: 'Welcome To E-School',
             subText: 'Where great minds achieve wonders',
-            img:'https://images.pexels.com/photos/137618/pexels-photo-137618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            img:'https://images.pexels.com/photos/4916258/pexels-photo-4916258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
         },
         {
             text:'Explore the power of knowledge',
-            img:'https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            img:'https://images.pexels.com/photos/8514600/pexels-photo-8514600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
         },
         {
             text:'We believe in excellence',
@@ -49,9 +49,9 @@ const Hero = () => {
             <Swiper
                 spaceBetween={10}
                 centeredSlides={true}
-                pagination={{
-                    type: "progressbar",
-                }}
+                // pagination={{
+                //     type: "progressbar",
+                // }}
                 speed={3000}
                 loop={true}
                 autoplay={{

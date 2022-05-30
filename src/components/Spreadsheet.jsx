@@ -149,6 +149,11 @@ const SheetWrapper = styled(motion.div)`
     height:100vh ;
     overflow-y:scroll ;
 
+    @media screen and (max-width: 480px){
+            margin:auto 15px ;
+            height:95vh ;
+    }
+
    ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;

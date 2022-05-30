@@ -48,7 +48,8 @@ const PublicNav = () => {
 
 const PublicNavContainer = styled.div`
   width: 100%;
-  background: #021532;
+  /* background: #021532; */
+  background: linear-gradient(to right, #141e30, #243b55);
   position: sticky;
   top:0;
   left:0;
