@@ -14,6 +14,7 @@ const Navbar = ({ user, setIsNavOpen, isNavOpen }) => {
         <NavbarRedo>
           <img onClick={() => history.push('/')} className='sm:w-40 w-28 cursor-pointer' src={'e-school.png'} alt="logo" />
           <RoleTag className="private-two">{user.role === 'teacher' ? 'lecturer' : user.role}</RoleTag>
+          <div className='text-white'> {user.activeStatus === true ? 'user active' : 'user inactive'}</div>
           <CustomHamburger isActiveBurger={isNavOpen} setIsActiveBurger={setIsNavOpen} />
         </NavbarRedo>
 

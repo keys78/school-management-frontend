@@ -444,6 +444,7 @@ export const tableHeading = [
   { title: "Last Name" },
   { title: "Gender" },
   { title: "Email" },
+  { title: "User Activity" },
   { title: "Actions" }
 ]
 

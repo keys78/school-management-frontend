@@ -11,15 +11,18 @@ import TextEditor from "../../components/TextEditor";
 import axios from 'axios'
 import CountUp from 'react-countup'
 import { pageAnimation } from "../../utils/Animations";
+import { useActive } from "../../hooks/useActive";
 
 
 
-const Dashboard = ({ user, error }) => {
+const Dashboard = ({ user, setUser, error }) => {
     const [greetings, setGreetings] = useState('')
     const history = useHistory();
     const [value, onChange] = useState(new Date());
     const { data: newQuote } = useAxiosFetch('https://api.quotable.io/random')
     const { data: newsApi, fetchError, isLoading } = useAxiosFetch('')
+
+    const active = useActive(500)
 
     const [flipUI, setFlipUI] = useState(true)
     const [teachersCount, setTeachersCount] = useState(null);
@@ -27,7 +30,7 @@ const Dashboard = ({ user, error }) => {
     const [myLecturers, setMyLecturers] = useState([])
 
 
-
+  
 
     useEffect(() => {
         const hour = new Date().getHours();
@@ -73,6 +76,9 @@ const Dashboard = ({ user, error }) => {
 
         fetchData()
     }, [user]);
+
+
+   
 
 
     const renderMyLetcurers = myLecturers && myLecturers.filter(val => val.department === user.department)
@@ -161,7 +167,7 @@ const Dashboard = ({ user, error }) => {
                 {user.role !== 'admin' === flipUI ? (
                     <>
                         <GreetingsMobile>
-                            <Ghost size={20} color="#d51a1a" />&nbsp;{greetings} {user.firstName}
+                            <Ghost size={20} color="#d51a1a" />&nbsp;{greetings} {user.firstName} &nbsp;
 
                         </GreetingsMobile>
                         {user &&

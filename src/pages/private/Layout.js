@@ -16,6 +16,8 @@ const Layout = ({ children, user }) => {
     window.addEventListener("resize", handleResize)
   })
 
+  
+
   return (
     <>
       {user ? (

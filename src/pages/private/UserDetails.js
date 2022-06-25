@@ -23,10 +23,14 @@ const UserDetails = ({ user, setUser }) => {
     const history = useHistory();
 
     useEffect(() => {
-
-        fetchAllStudents();
+        // const WAIT_TIME = 20000;
+        // const id = setInterval(() => {
+            fetchAllStudents();
+        // }, WAIT_TIME)
+        // return () => clearInterval(id);
     }, []);
 
+    
     const fetchAllStudents = async () => {
         const config = {
             headers: {
@@ -84,6 +88,7 @@ const UserDetails = ({ user, setUser }) => {
                 <p><span>Current Address: </span> {userDetails.address}</p>
                 <p><span>D.O.B: </span> {userDetails.dob}</p>
                 <p><span>State Of Origin: </span> {userDetails.soo}</p>
+                <p><span>activeStatus: </span> {userDetails.activeStatus === true ? 'true' : 'false'}</p>
                 {userDetails.role == 'student' && <p><span>Number Of Courses Registered: </span> {userDetails && userDetails.courses.length}</p>}
                 {userDetails.role == 'teacher' && <p><span>{`Lecturer ${userDetails.firstName}'s Courses`}: </span> {`${userDetails.department}`} </p>}
             </div>

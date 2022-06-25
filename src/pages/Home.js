@@ -37,7 +37,7 @@ const Home = () => {
 }
 
 const BodyContainer = styled.div`
-  max-width:1600px;
+  max-width:1920px;
   margin:0 auto ;
 `
 
