@@ -95,6 +95,7 @@ export const DataTable = ({ user, tableHeading, tableData, searchTerm, setSearch
             <TableData> {val.lastName}  </TableData>
             <TableData> {val.gender}  </TableData>
             <TableData> {val.email}  </TableData>
+            <TableData> {val.activeStatus === true ?<span className='status-btn'><img className='green-img' src="green-btn.png" /> online</span> : <span className='status-btn'><img src="red-btn.png" /> offline</span>}  </TableData>
             <TableData><button> <DotsThreeOutlineVertical size={20} color="#494949dc" weight="bold" /> </button></TableData>
         </CustomTableRow>
 
